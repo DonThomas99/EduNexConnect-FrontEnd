@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+*{
+    box-sizing: border-box;
+}
+body{
+    margin :0;
+    font-family:sans-serif;
+}
+a{
+    text-decoration: none;
+}
