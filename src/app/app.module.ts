@@ -9,6 +9,9 @@ import { SidebarComponent } from './components/tenants/sidebar/sidebar.component
 import { TenantSignUpComponent } from './components/tenants/pages/tenant-sign-up/tenant-sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { reducers } from './states/app.state';
+
 
 @NgModule({
   declarations: [
@@ -16,14 +19,18 @@ import { StoreModule } from '@ngrx/store';
     HomeComponent,
     HeaderComponent,
     SidebarComponent,
-    TenantSignUpComponent
+    TenantSignUpComponent,
+ 
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
+    NgModule,
+    HttpClientModule,
     // FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({reducers}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]

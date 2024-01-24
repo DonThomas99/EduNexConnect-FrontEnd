@@ -33,5 +33,9 @@ export const mobileValidators = [
     Validators.pattern(mobileRegex)
 ]
 
+export const addressValidators =[
+    Validators.required,
+    Validators.pattern(nameRegex)
+]
 export const requiredValidators = [Validators.required]
 
