@@ -1,3 +1,5 @@
 <div *ngIf="isSubmitted && mobileControl && mobileControl.errors">
-<div *ngIf="mobileControl.errors['pattern']"></div>
+    <div *ngIf="mobileControl.errors['required']">please provide mobile number</div>
+
+<div *ngIf="mobileControl.errors['pattern']">please provide an appropriate number</div>
 </div>

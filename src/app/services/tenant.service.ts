@@ -7,10 +7,23 @@ import { IApiRes,IApiTenantRes } from '../Models/tenants';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TenantService {
-  getTenantDetails(TenantId: string) {
-      throw new Error('Method not implemented.');
+  constructor(
+    private readonly http:HttpClient
+  ) { }
+  getTenantDetails(TenantId: string):Observable<IApiTenantRes> {
+      return this.http.get<IApiTenantRes>(`tenant/${TenantId}`)
   }
 
-  constructor() { }
+  
+
+  saveTenantTemp(TenantData: any){
+    return this.http.post<IApiTenantRes>(`tenant/signup`,{TenantData})
+  }
+
+  verifyOtp(otp:number){
+   return this.http.post<IApiTenantRes>(`tenant/verifyOtp`,{otp})
+  }
 }
+

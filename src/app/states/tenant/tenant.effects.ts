@@ -1,6 +1,6 @@
-import {type TenantService} from 'src/app/services/tenant.service'
+import { TenantService} from 'src/app/services/tenant.service'
 import { Injectable } from '@angular/core'
-import { type Actions,createEffect,ofType } from '@ngrx/effects'
+import { Actions,createEffect,ofType } from '@ngrx/effects'
 import { fetchTenantData,saveTenantOnStore } from './tenant.actions'
 import { map,switchMap } from 'rxjs'
 
@@ -15,9 +15,9 @@ export class TenantEffects{
     fetchTenantData$ = createEffect(()=>{
         return this.actions$.pipe(
             ofType(fetchTenantData),
-            switchMap((action:{TenantId:string})=>{
+            switchMap((action:{tenantId:string})=>{
                 console.log(action,'action from tenant effects fetch tenant data');
-                return this.tenantService.getTenantDetails(action.TenantId).pipe(
+                return this.tenantService.getTenantDetails(action.tenantId).pipe(
                     map(tenantRes =>saveTenantOnStore({tenantDetails:tenantRes.data}))
 
                 )

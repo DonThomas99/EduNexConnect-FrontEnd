@@ -1,0 +1,4 @@
+<div class="email" *ngIf="isSubmitted && emailControl && emailControl.errors">
+<div *ngIf="emailControl.errors['required']">Please provide  email</div>
+<div *ngIf="emailControl.errors['pattern']">Please provide appropriate email</div>
+</div>

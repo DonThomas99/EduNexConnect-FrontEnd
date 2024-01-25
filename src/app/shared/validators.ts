@@ -29,8 +29,19 @@ export const zipValidators =[
     Validators.pattern(ZipRegex)
 ]
 
+export const cityValidators =[
+    Validators.required,
+    Validators.pattern(nameRegex)
+]
+
 export const mobileValidators = [
+    Validators.required,
     Validators.pattern(mobileRegex)
+]
+
+export const stateValidators = [
+    Validators.required,
+    Validators.pattern(nameRegex)
 ]
 
 export const addressValidators =[

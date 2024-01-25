@@ -9,6 +9,7 @@ import { IApiTenantAuthRes, ITenantAuth } from 'src/app/Models/tenants';
 import { MAX_OTP_LIMIT, OTP_RESEND_MAX_TIME, OTP_TIMER } from 'src/app/shared/constants';
 import { formatTime } from 'src/app/helpers/timer';
 import Swal from 'sweetalert2';
+import { TenantService } from 'src/app/services/tenant.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class TenantSignUpComponent implements OnInit {
     @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
     @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
-    @Inject(Store) private readonly store:Store
+    @Inject(Store) private readonly store:Store,
+    @Inject(TenantService) private readonly tenantService:TenantService
   ){}
   ngOnInit(): void {
     this.form=this.formBuilder.group({
@@ -90,7 +92,7 @@ this.isSubmitted =true
 console.log(this.form.invalid,this.form.get('confirmPassword'),this.form.get('name'));
 if(!this.form.invalid && !this.showOtpField){
   const tenant = this.form.getRawValue()
-  this.http.post('tenant/signup',tenant).subscribe({
+  this.tenantService.saveTenantTemp(tenant).subscribe({
     next:(res:any)=>{
       localStorage.setItem('tenantAuthToken',res.token)
       this.showOtpField = true
@@ -111,8 +113,8 @@ if(!this.form.invalid && !this.showOtpField){
   console.log(tenant);
   console.log(tenant.otp);
   const otp = tenant.otp
-this.http.post<IApiTenantAuthRes>('tenant/verifyOtp',{otp}).subscribe({
-  next:(res:IApiTenantAuthRes)=>{
+this.tenantService.verifyOtp(otp).subscribe({
+  next:(res:any)=>{
     localStorage.removeItem('tenantAuthToken')
       void this.router.navigate(['/tenant/login'])
   }
@@ -125,6 +127,9 @@ else{
   
 }
 
+}
+BackHome(){
+  this.router.navigate([''])
 }
 
 }

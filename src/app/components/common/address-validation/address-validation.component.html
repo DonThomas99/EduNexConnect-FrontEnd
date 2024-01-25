@@ -1,1 +1,4 @@
-<p>address-validation works!</p>
+<div class="address" *ngIf="isSubmitted && addressControl && addressControl.errors">
+<div *ngIf="addressControl.errors['required']">Please provide an address</div>
+<div *ngIf="addressControl.errors['pattern']">Please provide a valid address</div>
+</div>

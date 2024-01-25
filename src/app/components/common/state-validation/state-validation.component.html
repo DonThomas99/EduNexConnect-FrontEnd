@@ -1,1 +1,4 @@
-<p>state-validation works!</p>
+<div class="state" *ngIf="stateControl && stateControl.errors && isSubmitted">
+<div *ngIf="stateControl.errors['required']"> Please provide State</div>
+<div *ngIf="stateControl.errors['pattern']">Please provide an appropriate state</div>
+</div>

@@ -1,1 +1,4 @@
-<p>zip-validation works!</p>
+<div class="zip" *ngIf="zipControl && isSubmitted && zipControl.errors">
+<div *ngIf="zipControl.errors['required']">Please provide a zip code</div>
+<div *ngIf="zipControl.errors['pattern']">Please provide a valid zip code</div>
+</div>

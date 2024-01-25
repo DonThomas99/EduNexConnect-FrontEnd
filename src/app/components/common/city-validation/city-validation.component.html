@@ -1,0 +1,4 @@
+<div class="city" *ngIf="isSubmitted && cityControl && cityControl.errors">
+<div *ngIf="cityControl.errors['required']">Please provide a city</div>
+<div *ngIf="cityControl.errors['pattern']">Please provide a valid city</div>
+</div>

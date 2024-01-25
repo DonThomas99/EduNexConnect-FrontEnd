@@ -1,18 +1,4 @@
-<!-- <app-header></app-header> -->
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
+
 <div class="">
 
     <form [formGroup]="form" (ngSubmit)="onsubmit()" class="p-6">
@@ -28,6 +14,7 @@
                 <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <div class="mt-2">
                   <input type="text" formControlName="name" name="full-name" id="full-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"> </app-name-validation>
                 </div>
               </div>
       
@@ -45,14 +32,16 @@
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Enter your mobile number"
                     >
+                    <app-mobile-validation [mobileControl]="form.get('mobile')" [isSubmitted]="isSubmitted"></app-mobile-validation>
                 </div>
             </div>
             
       
               <div class="sm:col-span-4">
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Name of the school</label>
+                <label for="schoolName" class="block text-sm font-medium leading-6 text-gray-900">Name of the school</label>
                 <div class="mt-2">
                   <input id="schoolName" formControlName="schoolName" name="schoolName" type="schoolName"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
                 </div>
               </div>
 
@@ -60,6 +49,7 @@
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                 <div class="mt-2">
                   <input placeholder="Email" formControlName="email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
                 </div>
               </div>
       
@@ -69,6 +59,7 @@
                 <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">School address</label>
                 <div class="mt-2">
                   <input type="text" formControlName="address" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <app-address-validation [addressControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-address-validation>
                 </div>
               </div>
       
@@ -76,6 +67,7 @@
                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                 <div class="mt-2">
                   <input type="text" name="city" id="city" formControlName="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+               <app-city-validation [cityControl]="form.get('city')" [isSubmitted]="isSubmitted"></app-city-validation>
                 </div>
               </div>
       
@@ -83,6 +75,7 @@
                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
                 <div class="mt-2">
                   <input type="text" formControlName="state" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <app-state-validation [stateControl]="form.get('state')" [isSubmitted]="isSubmitted"></app-state-validation>
                 </div>
               </div>
       
@@ -90,6 +83,7 @@
                 <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
                 <div class="mt-2">
                   <input type="text" formControlName="zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation>
                 </div>
               </div>
             </div>
@@ -100,14 +94,16 @@
               <div class="sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div class="mt-2">
-                  <input  type="password" p formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input  type="password"  formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted" ></app-password-validation>
                 </div>
               </div>
     
               <div class="sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
                 <div class="mt-2">
                   <input type="text" formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" autocomplete="confirmPassword" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <app-confirm-password-validation [confirmPasswordControl]="form.get('confirmPassword')" [isSubmitted]="isSubmitted"></app-confirm-password-validation>
                 </div>
               </div>
           </div>
@@ -116,8 +112,8 @@
         </div>
               
         <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm font-semibold leading-6 text-gray-900 hover:bg-black hover:text-white px-4 py-2 transition duration-300 ease-in-out">Back</button>
-            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+            <button type="button" (click)="BackHome()" class="text-sm font-semibold leading-6 text-gray-900 hover:bg-black hover:text-white px-4 py-2 transition duration-300 ease-in-out">Back</button>
+            <button type="submit"  (click)="onsubmit()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
         </div>
         
       </form>
