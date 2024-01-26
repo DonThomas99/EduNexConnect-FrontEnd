@@ -13,7 +13,7 @@
               <div class="sm:col-span-3">
                 <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <div class="mt-2">
-                  <input type="text" formControlName="name" name="full-name" id="full-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input type="text" formControlName="name" name="full-name" id="full-name" autocomplete="full-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter your full name">
                   <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"> </app-name-validation>
                 </div>
               </div>
@@ -40,7 +40,7 @@
               <div class="sm:col-span-4">
                 <label for="schoolName" class="block text-sm font-medium leading-6 text-gray-900">Name of the school</label>
                 <div class="mt-2">
-                  <input id="schoolName" formControlName="schoolName" name="schoolName" type="schoolName"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input id="schoolName" formControlName="schoolName" name="schoolName" type="schoolName"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter name of the school">
                   <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
                 </div>
               </div>
@@ -58,7 +58,7 @@
               <div class="col-span-full">
                 <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">School address</label>
                 <div class="mt-2">
-                  <input type="text" formControlName="address" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input type="text" formControlName="address" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Make sure the address is limited to 20 characters">
                   <app-address-validation [addressControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-address-validation>
                 </div>
               </div>
@@ -66,7 +66,7 @@
               <div class="sm:col-span-2 sm:col-start-1">
                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                 <div class="mt-2">
-                  <input type="text" name="city" id="city" formControlName="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input placeholder="city" type="text" name="city" id="city" formControlName="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                <app-city-validation [cityControl]="form.get('city')" [isSubmitted]="isSubmitted"></app-city-validation>
                 </div>
               </div>
@@ -74,7 +74,7 @@
               <div class="sm:col-span-2">
                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
                 <div class="mt-2">
-                  <input type="text" formControlName="state" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input type="text" placeholder="State" formControlName="state" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <app-state-validation [stateControl]="form.get('state')" [isSubmitted]="isSubmitted"></app-state-validation>
                 </div>
               </div>
@@ -82,7 +82,7 @@
               <div class="sm:col-span-2">
                 <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
                 <div class="mt-2">
-                  <input type="text" formControlName="zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input placeholder="PIN CODE" type="text" formControlName="zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation>
                 </div>
               </div>
@@ -94,7 +94,7 @@
               <div class="sm:col-span-3">
                 <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div class="mt-2">
-                  <input  type="password"  formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input  type="password" placeholder="Password should contain one uppercase letter, one lowercase letter and one digit" formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                   <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted" ></app-password-validation>
                 </div>
               </div>
@@ -102,7 +102,7 @@
               <div class="sm:col-span-3">
                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
                 <div class="mt-2">
-                  <input type="text" formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" autocomplete="confirmPassword" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <input type="password" placeholder="Please enter the password again" formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" autocomplete="confirmPassword" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 <app-confirm-password-validation [confirmPasswordControl]="form.get('confirmPassword')" [isSubmitted]="isSubmitted"></app-confirm-password-validation>
                 </div>
               </div>

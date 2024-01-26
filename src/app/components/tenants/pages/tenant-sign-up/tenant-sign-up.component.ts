@@ -2,7 +2,7 @@ import { Component,Inject,OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { validateBytrimming } from 'src/app/helpers/validations';
+import { passwordMatchValidator, validateBytrimming } from 'src/app/helpers/validations';
 import { emailValidators, nameValidators, otpValidators, passwordValidators,addressValidators, zipValidators, mobileValidators } from 'src/app/shared/validators';
 import {Store}  from '@ngrx/store';
 import { IApiTenantAuthRes, ITenantAuth } from 'src/app/Models/tenants';
@@ -45,15 +45,11 @@ export class TenantSignUpComponent implements OnInit {
       password:['',[validateBytrimming(passwordValidators)]],
       confirmPassword:['',],
       otp:[{value:'',disabled:true}, [validateBytrimming(otpValidators)]]
-    }, {validators: this.passwordMatchValidator}  
+    }, {validators: passwordMatchValidator}  
     );
 
   }
 
-passwordMatchValidator(control:AbstractControl){
-  return control.get('password')?.value === control.get('confirmPassword')?.value? null: {mismatch: true};
-
-}
 
 startTimer():void{
   this.remainingTime = OTP_TIMER

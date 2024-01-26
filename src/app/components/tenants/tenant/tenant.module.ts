@@ -18,6 +18,8 @@ import { StateValidationComponent } from "../../common/state-validation/state-va
 import { PasswordValidationComponent } from "../../common/password-validation/password-validation.component";
 import { ZipValidationComponent } from "../../common/zip-validation/zip-validation.component";
 import { ConfirmPasswordValidationComponent } from "../../common/confirm-password-validation/confirm-password-validation.component";
+import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
+
 
 
 
@@ -28,6 +30,9 @@ import { ConfirmPasswordValidationComponent } from "../../common/confirm-passwor
         SidebarComponent,
         HomeComponent,
         HeaderComponent,
+        TenantLogInComponent,
+        
+
     ],
     imports: [
         CommonModule,

@@ -8,6 +8,8 @@ import { reducers } from './states/app.state';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { hydrationMetaReducer } from './states/hydration.reducer';
 import { AdminLoginComponent } from './components/superAdmin/admin-login/admin-login.component';
+import { TenantVerifyOtpComponent } from './components/tenants/pages/tenant-verify-otp/tenant-verify-otp.component';
+import { ForgotPasswordComponent } from './components/tenants/forgot-password/forgot-password.component';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
 
@@ -15,6 +17,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
   declarations: [
     AppComponent,
     AdminLoginComponent,
+    TenantVerifyOtpComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     HttpClientModule,
