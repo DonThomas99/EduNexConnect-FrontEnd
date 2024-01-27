@@ -19,6 +19,8 @@ import { PasswordValidationComponent } from "../../common/password-validation/pa
 import { ZipValidationComponent } from "../../common/zip-validation/zip-validation.component";
 import { ConfirmPasswordValidationComponent } from "../../common/confirm-password-validation/confirm-password-validation.component";
 import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
+import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-enter-email.component';
+
 
 
 
@@ -31,6 +33,7 @@ import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.compo
         HomeComponent,
         HeaderComponent,
         TenantLogInComponent,
+        TenantEnterEmailComponent,
         
 
     ],
@@ -49,7 +52,9 @@ import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.compo
         StateValidationComponent,
         PasswordValidationComponent,
         ZipValidationComponent,
-        ConfirmPasswordValidationComponent
+        ConfirmPasswordValidationComponent,
+       
+
     ]
 })
 export class TenantModule { }

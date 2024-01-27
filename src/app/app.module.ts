@@ -7,24 +7,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { reducers } from './states/app.state';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { hydrationMetaReducer } from './states/hydration.reducer';
-import { AdminLoginComponent } from './components/superAdmin/admin-login/admin-login.component';
-import { TenantVerifyOtpComponent } from './components/tenants/pages/tenant-verify-otp/tenant-verify-otp.component';
+
+import { TenantVerifyOtpComponent } from './components/common/tenant-verify-otp/tenant-verify-otp.component';
 import { ForgotPasswordComponent } from './components/tenants/forgot-password/forgot-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLoginComponent,
+    
     TenantVerifyOtpComponent,
     ForgotPasswordComponent,
+    
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot(reducers, { metaReducers }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
