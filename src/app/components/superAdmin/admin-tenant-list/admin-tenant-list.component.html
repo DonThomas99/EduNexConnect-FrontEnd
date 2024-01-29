@@ -1,0 +1,37 @@
+<p>admin-user-list works!</p>
+<app-admin-sidebar></app-admin-sidebar>
+<div class="p-4 sm:ml-64">
+   <table class="table-fixed">
+      <thead>
+         <tr>
+           <th class="w-1/2 px-4 py-2">Name</th>
+           <th class="w-1/2 px-4 py-2"> School</th>
+           <th class="w-1/4 px-4 py-2">Info</th>
+           <th class="w-1/4 px-4 py-2">Status</th>
+         </tr>
+       </thead>
+      <tbody>
+         <ng-container *ngFor="let tenant of tenantList"> 
+
+            <tr>
+              <td class="border px-4 py-2">{{tenant.name}}</td>
+              <td class="border px-4 py-2">{{tenant.school}}</td>
+              <td class="border px-4 py-2">
+               <i class="fa-solid fa-circle-info"></i>
+              </td>
+
+              <td class="border px-4 py-2">
+                <button *ngIf="tenant.isBlocked">
+                   <i class="fa-solid fa-lock"></i>
+                </button>
+                <button *ngIf="!tenant.isBlocked">
+                   <i class="fa-solid fa-lock-open"></i>
+                </button>
+              </td>
+            </tr>
+         </ng-container>
+     
+      
+      </tbody>
+    </table>
+</div>

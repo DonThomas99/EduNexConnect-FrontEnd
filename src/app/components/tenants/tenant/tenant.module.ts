@@ -20,6 +20,7 @@ import { ZipValidationComponent } from "../../common/zip-validation/zip-validati
 import { ConfirmPasswordValidationComponent } from "../../common/confirm-password-validation/confirm-password-validation.component";
 import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
 import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-enter-email.component';
+import { OtpValidationComponent } from "../../common/otp-validation/otp-validation.component";
 
 
 
@@ -34,8 +35,6 @@ import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-en
         HeaderComponent,
         TenantLogInComponent,
         TenantEnterEmailComponent,
-        
-
     ],
     imports: [
         CommonModule,
@@ -53,8 +52,7 @@ import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-en
         PasswordValidationComponent,
         ZipValidationComponent,
         ConfirmPasswordValidationComponent,
-       
-
+        OtpValidationComponent
     ]
 })
 export class TenantModule { }

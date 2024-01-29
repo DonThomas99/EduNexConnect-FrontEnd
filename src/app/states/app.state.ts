@@ -5,6 +5,6 @@ export interface RootState{
 }
 
 export const reducers={
-    tenant:fromTenant.tenantReducer,
+    Tenant:fromTenant.tenantReducer,
     
 }

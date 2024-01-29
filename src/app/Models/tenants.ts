@@ -19,6 +19,7 @@ export interface ITenantRes{
     name:string
     email:string
     password?:string
+    school:string
     mobile:number
     zip:string
     address:string

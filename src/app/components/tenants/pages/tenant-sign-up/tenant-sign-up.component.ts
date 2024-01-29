@@ -90,6 +90,8 @@ if(!this.form.invalid && !this.showOtpField){
   const tenant = this.form.getRawValue()
   this.tenantService.saveTenantTemp(tenant).subscribe({
     next:(res:any)=>{
+      console.log('htkf');
+      
       localStorage.setItem('tenantAuthToken',res.token)
       this.showOtpField = true
       this.form.get('name')?.disable()
@@ -104,7 +106,7 @@ if(!this.form.invalid && !this.showOtpField){
 
     }
   })
-} else if(!this.form.invalid && this.showOtpField){
+} else if(!this.form.invalid && this.showOtpField){ // Write otp field in html
   const tenant = this.form.getRawValue()
   console.log(tenant);
   console.log(tenant.otp);
@@ -112,8 +114,15 @@ if(!this.form.invalid && !this.showOtpField){
 this.tenantService.verifyOtp(otp).subscribe({
   next:(res:any)=>{
     localStorage.removeItem('tenantAuthToken')
-      void this.router.navigate(['/tenant/login'])
+    console.log("idhisd");
+    
+      void this.router.navigate(['/tenant/signin'])
+  },
+  error:(err)=>{
+    console.log(err);
+    
   }
+
 })  
   
 }

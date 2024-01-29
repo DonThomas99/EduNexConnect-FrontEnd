@@ -12,15 +12,24 @@
                 <li>
                     <a href="#" routerLink="/contactus">Contact Us</a>
                 </li>
-                <li>
-                    <a href="#" routerLink="/tenant/signup">Sign-up</a>
-                </li>
-                <li>
-                    <a href="#" routerLink="/tenant/signin">Sign-in</a>
-                </li>
-                <li>
-                    <a href="#" routerLink="/tenant/signout">Sign-out</a>
-                </li>
+                <ng-container *ngIf="!tenantName">
+
+                    <li>
+                        <a href="#" routerLink="/tenant/signup">Sign-up</a>
+                    </li>
+                    <li>
+                        <a href="#" routerLink="/tenant/signin">Sign-in</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="tenantName">
+
+                        <li>
+                            <a href="#" routerLink="/tenant/profile">{{tenantName}}</a>
+                        </li>
+                    <li>
+                        <a href="#" (click)="signOut()">Sign-out</a>
+                    </li>
+                </ng-container>
             </ul>
         </nav>
     </div>

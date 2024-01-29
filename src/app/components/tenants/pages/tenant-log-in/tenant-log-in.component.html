@@ -1,15 +1,16 @@
 <div class="flex justify-center items-center h-screen bg-indigo-600">
-  <form action="">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="w-96 p-6 shadow-lg bg-white roudned-md">
       <h1 class="text-3xl block text-center font-semibold">Login</h1>
       <hr class="mt-3">
       <div class="mt-3">
         <label for="Email" class="block text-base mb-2">Email</label>
-        <input type="email" id="email" class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Enter Email...">
+        <input type="email" formControlName="email" id="email" class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Enter Email...">
+        
       </div>
       <div class="mt-3">
         <label for="password" class="block text-base mb-2">Password</label>
-        <input type="password" id="password" class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Enter Password...">
+        <input formControlName="password" type="password" id="password" class="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Enter Password...">
       </div>
       <div class="mt-3 flex justify-between items-center ">
         <div>
