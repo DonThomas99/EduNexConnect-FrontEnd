@@ -4,6 +4,7 @@ import { TenantSignUpComponent } from '../pages/tenant-sign-up/tenant-sign-up.co
 import { HomeComponent } from '../pages/home/home.component';
 import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
 import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-enter-email.component';
+import { TenantDashboardComponent } from '../dashboard/tenant-dashboard/tenant-dashboard.component';
 
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {path:'signin',component:TenantLogInComponent},
-  {path:'enter-email',component:TenantEnterEmailComponent}
+  {path:'enter-email',component:TenantEnterEmailComponent},
+  {path:'dashboard',component:TenantDashboardComponent}
 ];
 
 @NgModule({

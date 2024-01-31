@@ -9,8 +9,10 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { hydrationMetaReducer } from './states/hydration.reducer';
 
 import { TenantVerifyOtpComponent } from './components/common/tenant-verify-otp/tenant-verify-otp.component';
-import { ForgotPasswordComponent } from './components/tenants/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './components/tenants/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
@@ -21,6 +23,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     
     TenantVerifyOtpComponent,
     ForgotPasswordComponent,
+   
     
   ],
   imports: [
@@ -28,7 +31,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

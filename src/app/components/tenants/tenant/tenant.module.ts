@@ -21,6 +21,13 @@ import { ConfirmPasswordValidationComponent } from "../../common/confirm-passwor
 import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
 import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-enter-email.component';
 import { OtpValidationComponent } from "../../common/otp-validation/otp-validation.component";
+import { TenantEditProfileComponent } from '../dashboard/tenant-edit-profile/tenant-edit-profile.component';
+import { TenantDashboardComponent } from '../dashboard/tenant-dashboard/tenant-dashboard.component';
+import { DashboardSidebarComponent } from '../dashboard/dashboard-sidebar/dashboard-sidebar.component';
+import { DashboardNavbarComponent } from '../dashboard/dashboard-navbar/dashboard-navbar.component';
+import { TopWidgetsComponent } from '../dashboard/top-widgets/top-widgets.component';
+import { MainComponent } from '../dashboard/main/main.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -34,7 +41,15 @@ import { OtpValidationComponent } from "../../common/otp-validation/otp-validati
         HomeComponent,
         HeaderComponent,
         TenantLogInComponent,
-        TenantEnterEmailComponent,
+        TenantEnterEmailComponent,   
+         TenantEditProfileComponent,
+         TenantDashboardComponent,
+         DashboardSidebarComponent,
+         DashboardNavbarComponent,
+          TopWidgetsComponent,
+          MainComponent, 
+
+
     ],
     imports: [
         CommonModule,
@@ -52,7 +67,8 @@ import { OtpValidationComponent } from "../../common/otp-validation/otp-validati
         PasswordValidationComponent,
         ZipValidationComponent,
         ConfirmPasswordValidationComponent,
-        OtpValidationComponent
+        OtpValidationComponent,
+        FontAwesomeModule
     ]
 })
 export class TenantModule { }

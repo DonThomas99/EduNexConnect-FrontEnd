@@ -1,0 +1,28 @@
+.nav-items {
+    padding-top: 40px;
+}
+
+.nav-item {
+    padding: 25px 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+
+    &:hover {
+        background-color: rgb(1, 38, 69);
+    }
+
+    fa-icon,
+    i {
+        margin-right: 20px;
+        font-size: 22px;
+    }
+
+    span {
+        display: inline;
+        margin-left: 10px; /* Add margin between icon and text */
+    }
+
+
+}
