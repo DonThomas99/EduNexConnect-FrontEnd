@@ -1,18 +1,24 @@
 <div class="nav-items">
     <div class="nav-item">
         <fa-icon [icon]="faDashboard"></fa-icon>
-        <span>Dashboard</span>
+        <a href="" routerLink="/tenant/dashboard">
+            <span>Dashboard</span>
+
+        </a>
     </div>
     <div class="nav-item">
-            <i class="fa-regular fa-user"></i>
-        <span>Profile</span>
+        <i class="fa-regular fa-user"></i>
+        <a href="" routerLink="/tenant/editProfile">
+            <span>Profile</span>
+        </a>
     </div>
 
     <div class="nav-item">
-        
-
         <i class="fa-solid fa-money-bill-transfer"></i>
+        <a href="" routerLink="/tenant/transactions">
+
             <span>Transactions</span>
+        </a>
         
     </div>
 

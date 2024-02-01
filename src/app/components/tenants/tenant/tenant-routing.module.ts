@@ -5,6 +5,9 @@ import { HomeComponent } from '../pages/home/home.component';
 import { TenantLogInComponent } from '../pages/tenant-log-in/tenant-log-in.component';
 import { TenantEnterEmailComponent } from '../pages/tenant-enter-email/tenant-enter-email.component';
 import { TenantDashboardComponent } from '../dashboard/tenant-dashboard/tenant-dashboard.component';
+import { TransactionsComponent } from '../dashboard/transactions/transactions.component';
+import { ExistingPlansComponent } from '../dashboard/existing-plans/existing-plans.component';
+import { TenantEditProfileComponent } from '../dashboard/tenant-edit-profile/tenant-edit-profile.component';
 
 
 
@@ -17,7 +20,10 @@ const routes: Routes = [
   },
   {path:'signin',component:TenantLogInComponent},
   {path:'enter-email',component:TenantEnterEmailComponent},
-  {path:'dashboard',component:TenantDashboardComponent}
+  {path:'dashboard',component:TenantDashboardComponent},
+  {path:'transactions',component:TransactionsComponent},
+  {path:'existingPlans',component:ExistingPlansComponent},
+  {path:'editProfile',component:TenantEditProfileComponent}
 ];
 
 @NgModule({

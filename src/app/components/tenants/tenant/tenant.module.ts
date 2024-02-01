@@ -28,6 +28,8 @@ import { DashboardNavbarComponent } from '../dashboard/dashboard-navbar/dashboar
 import { TopWidgetsComponent } from '../dashboard/top-widgets/top-widgets.component';
 import { MainComponent } from '../dashboard/main/main.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TransactionsComponent } from '../dashboard/transactions/transactions.component';
+import { ExistingPlansComponent } from '../dashboard/existing-plans/existing-plans.component';
 
 
 
@@ -48,6 +50,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
          DashboardNavbarComponent,
           TopWidgetsComponent,
           MainComponent, 
+          TransactionsComponent,
+          ExistingPlansComponent,
 
 
     ],
