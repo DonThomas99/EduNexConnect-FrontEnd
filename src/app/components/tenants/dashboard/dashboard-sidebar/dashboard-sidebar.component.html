@@ -1,25 +1,28 @@
 <div class="nav-items">
-    <div class="nav-item">
+    <div class="nav-item" routerLink="/tenant/dashboard">
         <fa-icon [icon]="faDashboard"></fa-icon>
-        <a href="" routerLink="/tenant/dashboard">
+        
             <span>Dashboard</span>
 
-        </a>
+        
     </div>
-    <div class="nav-item">
+    <div class="nav-item" routerLink="/tenant/editProfile">
         <i class="fa-regular fa-user"></i>
-        <a href="" routerLink="/tenant/editProfile">
+        
             <span>Profile</span>
-        </a>
+        
     </div>
 
-    <div class="nav-item">
+    <div class="nav-item"  routerLink="/tenant/transactions">
         <i class="fa-solid fa-money-bill-transfer"></i>
-        <a href="" routerLink="/tenant/transactions">
 
             <span>Transactions</span>
-        </a>
         
+    </div>
+
+    <div class="nav-item" routerLink="/tenant/existingPlans">
+        <i class="fa-solid fa-ticket-simple"></i>
+        <span>Subscription</span>
     </div>
 
     <div class="nav-item">

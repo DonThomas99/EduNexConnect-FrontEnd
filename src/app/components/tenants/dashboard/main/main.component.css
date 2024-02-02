@@ -1,0 +1,14 @@
+/* tenant-dashboard.component.scss */
+
+mat-card-title{
+    justify-items:stretch;
+    justify-content: space-between;
+}
+
+mat-card-content{
+    /* display:; */
+    justify-content: space-around;
+    padding: 16px; /* Adjust the padding as needed */
+    white-space: pre-line; /* Preserve line breaks */
+  }
+  

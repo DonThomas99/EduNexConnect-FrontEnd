@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { reducers } from './states/app.state';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { hydrationMetaReducer } from './states/hydration.reducer';
-
+import {MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TenantVerifyOtpComponent } from './components/common/tenant-verify-otp/tenant-verify-otp.component';
 import { ForgotPasswordComponent } from './components/tenants/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,14 +20,14 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
 @NgModule({
   declarations: [
     AppComponent,
-    
     TenantVerifyOtpComponent,
     ForgotPasswordComponent,
-
-   
+    
+    
     
   ],
   imports: [
+    MatSlideToggleModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

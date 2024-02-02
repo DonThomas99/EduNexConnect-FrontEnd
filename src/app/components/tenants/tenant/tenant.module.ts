@@ -30,7 +30,8 @@ import { MainComponent } from '../dashboard/main/main.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TransactionsComponent } from '../dashboard/transactions/transactions.component';
 import { ExistingPlansComponent } from '../dashboard/existing-plans/existing-plans.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatCardModule } from '@angular/material/card'
 
 
 
@@ -56,6 +57,8 @@ import { ExistingPlansComponent } from '../dashboard/existing-plans/existing-pla
 
     ],
     imports: [
+        MatCardModule,
+    MatSlideToggleModule,
         CommonModule,
         TenantRoutingModule,
         HttpClientModule,
