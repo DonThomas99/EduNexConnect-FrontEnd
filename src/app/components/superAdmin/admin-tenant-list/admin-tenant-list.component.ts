@@ -17,7 +17,6 @@ export class AdminUserListComponent implements OnInit {
   ngOnInit(): void {
 this.superAdminService.TenantList().subscribe({
   next:(res)=>{
-    console.log(res);
     
     this.tenantList=res.data.arr
     this.TenantLen= res.data.len

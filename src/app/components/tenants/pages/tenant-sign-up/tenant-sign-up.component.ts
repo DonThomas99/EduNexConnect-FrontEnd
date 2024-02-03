@@ -38,7 +38,7 @@ export class TenantSignUpComponent implements OnInit {
       email: ['',[validateBytrimming(emailValidators)]],
       mobile:['',[validateBytrimming(mobileValidators)]],
       state:['',[validateBytrimming(nameValidators)]],
-      schoolName:['',[validateBytrimming(nameValidators)]],
+      school:['',[validateBytrimming(nameValidators)]],
       city:['',[validateBytrimming(nameValidators)]],
       address:['',[validateBytrimming(addressValidators)]],
       zip:['',[validateBytrimming(zipValidators)]],

@@ -3,13 +3,13 @@ import { type ITenantRes } from "src/app/Models/tenants";
 import { deleteTenantFromStore,saveTenantOnStore } from "./tenant.actions";
 
 export interface TenantState{
-    tenantDetails: any;
-    userDetails:ITenantRes|null
+    tenantDetails: ITenantRes|null;
+    // userDetails:
 }
 
 export const initialTenantState: TenantState = {
     tenantDetails: null,
-    userDetails: null
+    // userDetails: null
 }
 
 export const tenantReducer = createReducer(

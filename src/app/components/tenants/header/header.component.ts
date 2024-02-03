@@ -24,7 +24,10 @@ constructor(
   ngOnInit(): void {
     this.tenantData$.subscribe(tenant =>{
     // this.tenantId=tenant._id
-    this.tenantName = tenant.name
+    if(tenant){
+
+      this.tenantName = tenant.name
+    }
   })
   }
 

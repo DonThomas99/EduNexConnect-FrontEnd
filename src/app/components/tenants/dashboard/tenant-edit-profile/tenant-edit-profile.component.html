@@ -3,8 +3,115 @@
     <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
     <div class="main-container">
         <div class="sidebar"><app-dashboard-sidebar></app-dashboard-sidebar></div>
-    kjjh
-        <div class="edit-Profile"></div>
+    
+        <div class="edit-Profile justify-evenly  m-16">
+            <button class="m-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/tenant/changePassword">Change Password</button>
+            <div class="mt-6">
+              <button type="button" (click)="toggleForm()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                {{ isFormDisabled ? 'Enable Form' : 'Disable Form' }}
+              </button>
+            </div>
+            
+
+<!-- copy-paste -->
+
+<form [formGroup]="form" (ngSubmit)="submit()" action="#">
+
+  <div class="border-b border-gray-900/10 pb-12 mt-8">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Tenant School Administrator Information</h2>
+      <!-- <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p> -->
+  
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+          <div class="mt-2">
+            <input type="text" formControlName="name"  name="full-name" id="full-name" autocomplete="full-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter your full name">
+            <app-name-validation [nameControl]="form.get('name')"  [isSubmitted]="isSubmitted"> </app-name-validation>
+          </div>
+        </div>
+  
+    
+  
+        <div   class="sm:col-span-4">
+          <label for="mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
+          <div class="mt-2">
+              <input
+                formControlName="mobile"
+                  type="tel"
+                  formControlName="mobile"
+                  name="mobile"
+                  id="mobile"
+                  autocomplete="tel"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Enter your mobile number"
+              >
+              <app-mobile-validation [mobileControl]="form.get('mobile')" [isSubmitted]="isSubmitted"></app-mobile-validation>
+          </div>
+      </div>
+      
+  
+        <div class="sm:col-span-4">
+          <div class="mt-2">
+            <label for="schoolName"  class="block text-sm font-medium leading-6 text-gray-900">Name of the school</label>
+            <input id="schoolName" formControlName="school" name="school" type="text"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter name of the school">
+            <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
+          </div>
+        </div>
+  
+        <div class="sm:col-span-4">
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <div class="mt-2">
+            <input placeholder="Email" [value]="tenant.email" formControlName="email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
+          </div>
+        </div>
+  
+   
+  
+        <div   class="col-span-full">
+          <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">School address</label>
+          <div class="mt-2">
+            <input type="text" formControlName="address" [value]="tenant.address" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Make sure the address is limited to 20 characters">
+            <app-address-validation [addressControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-address-validation>
+          </div>
+        </div>
+  
+        <div   class="sm:col-span-2 sm:col-start-1">
+          <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+          <div class="mt-2">
+            <input placeholder="city"  formControlName="city"  type="text" name="city" [value]="tenant.city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+         <app-city-validation [cityControl]="form.get('city')" [isSubmitted]="isSubmitted"></app-city-validation>
+          </div>
+        </div>
+  
+        <div   class="sm:col-span-2">
+          <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
+          <div class="mt-2">
+            <input type="text" placeholder="State" formControlName="state" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          <app-state-validation [stateControl]="form.get('state')" [isSubmitted]="isSubmitted"></app-state-validation>
+          </div>
+        </div>
+  
+        <div   class="sm:col-span-2">
+          <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
+          <div class="mt-2">
+            <input placeholder="PIN CODE" type="text" formControlName="zip" [value]="tenant.zip"  name="zip" id="zip" autocomplete="zip" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+
+
+
+<!-- copy-paste -->
+
+
+
+        </div>
        
     </div>
 </div>

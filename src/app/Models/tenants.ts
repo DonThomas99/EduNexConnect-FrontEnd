@@ -7,6 +7,7 @@ export interface ITenantAuth{
     school:string
     address:string
     state:string   
+    city:string
     zip:string
 }
 export interface ITenantSocialAuth{
@@ -20,6 +21,8 @@ export interface ITenantRes{
     email:string
     password?:string
     school:string
+    state:string
+    city:string
     mobile:number
     zip:string
     address:string
