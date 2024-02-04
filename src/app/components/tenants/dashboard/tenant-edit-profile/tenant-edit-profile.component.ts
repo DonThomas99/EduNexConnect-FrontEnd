@@ -42,8 +42,7 @@ toggleForm(){
   }
 }
 ngOnInit(): void {
-  this.form = this.formBuilder.group(
-    {
+  this.form = this.formBuilder.group({
       name:['',[validateBytrimming(nameValidators)]],
       email: ['',[validateBytrimming(emailValidators)]],
       mobile:['',[validateBytrimming(mobileValidators)]],
@@ -52,8 +51,7 @@ ngOnInit(): void {
       city:['',[validateBytrimming(nameValidators)]],
       address:['',[validateBytrimming(addressValidators)]],
       zip:['',[validateBytrimming(zipValidators)]],
-    }
-    )
+    })
     this.toggleForm()
     this.tenantData$.subscribe(t=>{
 if(t){
@@ -61,8 +59,8 @@ if(t){
   console.log(this.isFormDisabled);
   
   this.tenant = t
-  this.mobile=t.mobile
-  this.schoolName = t.school
+  // this.mobile=t.mobile
+  // this.schoolName = t.school
 
   this.form.get('name')?.setValue(t.name)
   this.form.get('school')?.setValue(t.school)
@@ -81,9 +79,7 @@ if(t){
     })
   }
 
-submit(){
-
-  
+submit(){ 
 }
 
 

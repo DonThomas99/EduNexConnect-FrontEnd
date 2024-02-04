@@ -33,6 +33,7 @@ import { ExistingPlansComponent } from './dashboard/existing-plans/existing-plan
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCardModule } from '@angular/material/card';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component'
+import {MatTable, MatTableModule} from '@angular/material/table'
 
 
 
@@ -59,6 +60,7 @@ import { ChangePasswordComponent } from './dashboard/change-password/change-pass
 
     ],
     imports: [
+        MatTableModule,
         MatCardModule,
     MatSlideToggleModule,
         CommonModule,

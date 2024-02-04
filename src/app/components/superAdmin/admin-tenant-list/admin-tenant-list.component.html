@@ -21,12 +21,11 @@
               </td>
 
               <td class="border px-4 py-2">
-                <button *ngIf="tenant.isBlocked">
-                   <i class="fa-solid fa-lock"></i>
+               <button (click)="toggleStatus(tenant)">
+                  <i [ngClass]="{'fa-solid fa-lock': tenant.isBlocked, 'fa-solid fa-eye': !tenant.isBlocked}"></i>
+                  {{ tenant.isBlocked ? 'Unblock' : 'Block' }}
                 </button>
-                <button *ngIf="!tenant.isBlocked">
-                   <i class="fa-solid fa-lock-open"></i>
-                </button>
+                
               </td>
             </tr>
          </ng-container>

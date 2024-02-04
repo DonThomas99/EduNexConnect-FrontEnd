@@ -21,8 +21,6 @@ export class TenantService {
       return this.http.get<IApiTenantRes>(`${this.backendURL}/tenant/${TenantId}`)
   }
 
-  
-
   saveTenantTemp(tenantData: any){
     return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signup`,{tenantData})
   }
@@ -33,5 +31,13 @@ export class TenantService {
   login(email:string,password:string){
 return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,password})
   }
+
+  updateTenantDetails(tenantData:any){
+    return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/updateProfile`,{tenantData})
+  }
+  updatePassword(data:any){
+    return this.http.put<IApiTenantRes>(`${this.backendURL}/tenant/updatePassword`,{data})
+  }
+  
 }
 

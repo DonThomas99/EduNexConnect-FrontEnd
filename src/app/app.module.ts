@@ -12,6 +12,7 @@ import { TenantVerifyOtpComponent } from './components/common/tenant-verify-otp/
 import { ForgotPasswordComponent } from './components/tenants/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatTooltipModule} from '@angular/material/tooltip'
 
 
 
@@ -27,6 +28,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     
   ],
   imports: [
+    MatTooltipModule,
     MatSlideToggleModule,
     HttpClientModule,
     BrowserModule,

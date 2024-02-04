@@ -16,5 +16,10 @@ export class SuperAdminService {
   TenantList(){
     return this.http.get<any>(`${this.backendURL}/super-admin/tenantList`)
   }
+  toggleTenantStatus(id:any){
+    console.log('in toggle tenant');
+    
+    return this.http.put<any>(`${this.backendURL}/super-admin/blockTenant`,{id})
+  }
 
 }
