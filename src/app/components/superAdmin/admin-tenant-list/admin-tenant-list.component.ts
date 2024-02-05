@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITenantRes } from 'src/app/Models/tenants';
 import { SuperAdminService } from 'src/app/services/super-admin.service';
 import Swal from 'sweetalert2';
@@ -12,7 +13,8 @@ export class AdminUserListComponent implements OnInit {
  tenantList:ITenantRes[]=[]
  TenantLen:number =0 
  constructor(
-    private readonly superAdminService:SuperAdminService
+    private readonly superAdminService:SuperAdminService,
+    private readonly router:Router
   ){
   }
   ngOnInit(): void {
@@ -23,6 +25,12 @@ this.superAdminService.TenantList().subscribe({
     this.TenantLen= res.data.len
   }
 })
+  }
+  sendId(id:string){
+ const queryParams = {
+  id:id
+ }
+ this.router.navigate(['/super-admin/tenantDetails'],{queryParams})
   }
   
   toggleStatus(tenant: ITenantRes): void {

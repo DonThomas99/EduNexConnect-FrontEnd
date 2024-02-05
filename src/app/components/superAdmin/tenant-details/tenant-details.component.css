@@ -1,0 +1,20 @@
+
+
+mat-card-title{
+    justify-items:stretch;
+    justify-content: space-between;
+}
+
+mat-card-content{
+    /* display:; */
+    justify-content: space-around;
+    padding: 16px; /* Adjust the padding as needed */
+    white-space: pre-line; /* Preserve line breaks */
+  }
+
+  .details{
+    margin-left: 350px;
+    margin-right:350px;
+    padding: 0;
+    font-family: sans-serif;
+  }

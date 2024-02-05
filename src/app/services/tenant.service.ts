@@ -39,5 +39,6 @@ return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,p
     return this.http.put<IApiTenantRes>(`${this.backendURL}/tenant/updatePassword`,{data})
   }
   
+  
 }
 

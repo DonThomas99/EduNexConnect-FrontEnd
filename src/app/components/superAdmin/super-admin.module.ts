@@ -7,7 +7,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { AdminUserListComponent } from './admin-tenant-list/admin-tenant-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatTooltipModule } from '@angular/material/tooltip'
+import {MatTooltipModule } from '@angular/material/tooltip';
+import { TenantDetailsComponent } from './tenant-details/tenant-details.component'
+import { MatCardModule } from '@angular/material/card';
+import { SubscriptionPlansComponent } from './subscription-plans/subscription-plans.component';
 
 
 
@@ -19,10 +22,13 @@ import {MatTooltipModule } from '@angular/material/tooltip'
     AdminDashboardComponent,
     AdminSidebarComponent,
     AdminUserListComponent,
+    TenantDetailsComponent,
+    SubscriptionPlansComponent,
 
 
     ],
   imports: [
+    MatCardModule,
     MatTooltipModule,
     CommonModule,
     SuperAdminRoutingModule,

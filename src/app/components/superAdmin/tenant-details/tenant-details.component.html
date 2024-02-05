@@ -1,0 +1,38 @@
+
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="details  my-16">
+      <button  class="m-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/super-admin/tenantList"> Back</button>  
+
+        <mat-card class=" p-8">
+            <mat-card-title>
+                <div class="flex justify-between pb-0 px-5 py-5">
+    
+                    <div class="title pb-0" >
+                    Tenant Details
+                    </div>
+                    
+                </div>
+    
+    
+            </mat-card-title>
+            <mat-card-content class="whitespace-pre-line px-4 pt-2" >
+        Name : {{tenantData.name}}
+        <br> 
+        <br>
+        School: {{tenantData.school}}
+        <br>
+        <br>
+        Address:  {{tenantData.address}}
+        <br>
+        <br>
+        City: {{tenantData.city}}
+        <br>
+        <br>
+        State: {{tenantData.state}}
+        <br>
+        <br>
+        PIN: {{tenantData.zip}}
+    
+            </mat-card-content>
+          </mat-card>
+    </div>

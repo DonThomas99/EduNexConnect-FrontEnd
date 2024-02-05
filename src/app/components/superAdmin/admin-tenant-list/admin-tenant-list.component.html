@@ -1,4 +1,3 @@
-<p>admin-user-list works!</p>
 <app-admin-sidebar></app-admin-sidebar>
 <div class="p-4 sm:ml-64">
    <table class="table-fixed">
@@ -17,19 +16,27 @@
               <td class="border px-4 py-2">{{tenant.name}}</td>
               <td class="border px-4 py-2">{{tenant.school}}</td>
               <td class="border px-4 py-2">
-               <i class="fa-solid fa-circle-info"></i>
+                <button (click)="sendId(tenant._id)">
+                  <i class="fa-solid fa-circle-info"></i>
+                </button>
               </td>
 
               <td class="border px-4 py-2">
-               <button (click)="toggleStatus(tenant)">
-                  <i [ngClass]="{'fa-solid fa-lock': tenant.isBlocked, 'fa-solid fa-eye': !tenant.isBlocked}"></i>
+                
+                <button (click)="toggleStatus(tenant)">
+                  <div *ngIf="tenant.isBlocked">
+                   <i class="fa-regular fa-eye-slash"></i>
+                  </div>
+                  <div *ngIf="!tenant.isBlocked">
+                    <i class="fa-regular fa-eye"></i>
+                   </div>
                   {{ tenant.isBlocked ? 'Unblock' : 'Block' }}
                 </button>
                 
               </td>
             </tr>
          </ng-container>
-     
+         
       
       </tbody>
     </table>
