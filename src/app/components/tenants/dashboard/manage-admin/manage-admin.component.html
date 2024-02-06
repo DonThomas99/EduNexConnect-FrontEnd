@@ -1,0 +1,45 @@
+<div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
+<div class="main-container">
+    <div class="sidebar"><app-dashboard-sidebar></app-dashboard-sidebar></div>
+
+    <div class="p-4 sm:ml-64">
+
+        <button class="m-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/tenant/createAdmin">Add School Admin</button>
+
+        <table class="table-fixed">
+           <thead>
+              <tr>
+                <th class="w-1/2 px-4 py-2">Admin</th>
+                <th class="w-1/2 px-4 py-2">Password</th>
+                
+                <th class="w-1/4 px-4 py-2">Status</th>
+              </tr>
+            </thead>
+           <tbody>
+              <!-- <ng-container *ngFor="let tenant of adminList">  -->
+     
+                 <tr>
+                   <td class="border px-4 py-2"></td>
+                   <td class="border px-4 py-2"></td>     
+                   
+
+                   <td class="border px-4 py-2">
+                     
+                     <button>
+                       <div>
+                        <i class="fa-regular fa-eye-slash"></i>
+                       </div>
+                       <div>
+                         <i class="fa-regular fa-eye"></i>
+                        </div>
+                     </button>
+                     
+                   </td>
+                 </tr>
+              <!-- </ng-container> -->
+              
+           
+           </tbody>
+         </table>
+     </div>
+</div>

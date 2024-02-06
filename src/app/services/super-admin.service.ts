@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
-import { IApiTenantRes } from '../Models/tenants';
+import { IApiTenantRes, ITenantSocialAuth } from '../Models/tenants';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'

@@ -15,6 +15,14 @@ export interface ITenantSocialAuth{
     password:string
 }
 
+export interface ITenantTransaction{
+    transactionType: string,
+    method:string,
+    amount: number,
+    date:Date
+}
+
+
 export interface ITenantRes{
     _id:string
     name:string
@@ -27,7 +35,8 @@ export interface ITenantRes{
     zip:string
     address:string
     isBlocked:boolean
-    transactions:[] | []
+    transactions: ITenantTransaction[]
+    
 }
 
 export interface IApiTokenRes {

@@ -9,6 +9,8 @@ import { TransactionsComponent } from './dashboard/transactions/transactions.com
 import { ExistingPlansComponent } from './dashboard/existing-plans/existing-plans.component';
 import { TenantEditProfileComponent } from './dashboard/tenant-edit-profile/tenant-edit-profile.component';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
+import { ManageAdminComponent } from './dashboard/manage-admin/manage-admin.component';
+import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component';
 
 
 
@@ -25,7 +27,9 @@ const routes: Routes = [
   {path:'transactions',component:TransactionsComponent},
   {path:'existingPlans',component:ExistingPlansComponent},
   {path:'editProfile',component:TenantEditProfileComponent},
-  {path:'changePassword',component:ChangePasswordComponent  }
+  {path:'changePassword',component:ChangePasswordComponent},
+  {path:'manageAdmins',component:ManageAdminComponent},
+  {path:'createAdmin',component:CreateAdminComponent}
 ];
 
 @NgModule({

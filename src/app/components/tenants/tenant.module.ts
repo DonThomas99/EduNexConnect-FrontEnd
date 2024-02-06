@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { TenantRoutingModule } from './tenant-routing.module';
 import { TenantSignUpComponent } from './pages/tenant-sign-up/tenant-sign-up.component';
 import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
@@ -33,7 +32,9 @@ import { ExistingPlansComponent } from './dashboard/existing-plans/existing-plan
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatCardModule } from '@angular/material/card';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component'
-import {MatTable, MatTableModule} from '@angular/material/table'
+import {MatTable, MatTableModule} from '@angular/material/table';
+import { ManageAdminComponent } from './dashboard/manage-admin/manage-admin.component';
+import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component'
 
 
 
@@ -42,7 +43,6 @@ import {MatTable, MatTableModule} from '@angular/material/table'
 @NgModule({
     declarations: [
         TenantSignUpComponent,
-        SidebarComponent,
         HomeComponent,
         HeaderComponent,
         TenantLogInComponent,
@@ -56,6 +56,8 @@ import {MatTable, MatTableModule} from '@angular/material/table'
           TransactionsComponent,
           ExistingPlansComponent,
           ChangePasswordComponent,
+          ManageAdminComponent,
+          CreateAdminComponent,
 
 
     ],

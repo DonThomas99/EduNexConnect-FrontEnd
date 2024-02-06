@@ -38,6 +38,9 @@ return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,p
   updatePassword(data:any){
     return this.http.put<IApiTenantRes>(`${this.backendURL}/tenant/updatePassword`,{data})
   }
+  createSchoolAdmin(TenantId:string,id:string,password:string,repeatPassword:string){
+    return this.http.post<any>(`${this.backendURL}/tenant/saveAdmin`,{TenantId,id,password,repeatPassword})
+  }
   
   
 }

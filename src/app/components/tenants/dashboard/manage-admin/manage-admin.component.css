@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Exo:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+    /* margin: 0; */
+    /* padding: 0; */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Exo", sans-serif;
+    background-color: #d8d8d8;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a6d5fb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #012645;
+}
+
+.total-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    flex: 0 0 auto;
+    
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 200px;
+    min-width: 230px;
+    min-height: calc(100vh);
+    background-color: #113c60;
+    color: #fff;
+    box-shadow: 5px 5px 5px #939393;
+    /* @media only screen and (max-width: 1300px) {
+        width: 100px;
+        min-width: 100px;
+    } */
+}
+
+
+.main-container{
+    display: flex;
+}
+
+.main {
+    flex: 1;
+    padding: 30px;
+}
