@@ -18,6 +18,8 @@ export class CreateAdminComponent implements OnInit {
   tenantData$=this.store.pipe(select(selectTenantDetails))
 
   adminForm!:FormGroup
+ errorMessage:string =''
+ isSubmitted = false
   constructor(
     @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
@@ -26,6 +28,7 @@ export class CreateAdminComponent implements OnInit {
     @Inject(TenantService) private readonly tenantService:TenantService
   ){}
   ngOnInit(): void { 
+
     this.tenantData$.subscribe((tenant)=>{
       if(tenant)
     this.TenantId = tenant._id
@@ -44,6 +47,10 @@ export class CreateAdminComponent implements OnInit {
         next:(res)=>{
           console.log('hehe',res);
           
+        }, error:(err)=>{
+          if(err.status === 401){
+            this.errorMessage = 'ID already Exists'
+          }
         }
       })
     }

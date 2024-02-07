@@ -8,20 +8,30 @@
             
 
 <form (ngSubmit)="submit()" [formGroup]="adminForm" class="max-w-sm mx-auto">
+  <div *ngIf="errorMessage" class="error-message text-red-500">{{ errorMessage }}!!!</div>
 
     <div class="mb-5">
         <label for="userid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">AdminId</label>
         <input formControlName="userid" type="text" id="userid" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
       </div>
-  
+      <app-password-validation [passwordControl]="adminForm.get('userid')" [isSubmitted]="isSubmitted" ></app-password-validation>
+
     <div class="mb-5">
       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
       <input formControlName="password" type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
     </div>
+
+    <app-password-validation [passwordControl]="adminForm.get('password')" [isSubmitted]="isSubmitted" ></app-password-validation>
+
+
     <div class="mb-5">
       <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
       <input formControlName="repeatPassword" type="password" id="repeatPassword" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
     </div>
+
+    <app-confirm-password-validation [confirmPasswordControl]="adminForm.get('confirmPassword')" [isSubmitted]="isSubmitted"></app-confirm-password-validation>
+
+
     <div class="flex items-start mb-5">
 
     </div>
