@@ -1,4 +1,5 @@
 import { type IApiRes } from "./common"
+import { IschoolAdminRes } from "./schoolAdmin"
 
 export interface ITenantAuth{
     name:string
@@ -23,6 +24,7 @@ export interface ITenantTransaction{
 }
 
 
+
 export interface ITenantRes{
     _id:string
     name:string
@@ -35,6 +37,7 @@ export interface ITenantRes{
     zip:string
     address:string
     isBlocked:boolean
+    schoolAdmins:IschoolAdminRes[]
     transactions: ITenantTransaction[]
     
 }

@@ -9,34 +9,41 @@
         <table class="table-fixed">
            <thead>
               <tr>
-                <th class="w-1/2 px-4 py-2">Admin</th>
-                <th class="w-1/2 px-4 py-2">Password</th>
-                
+                <th class="w-1/4 px-4 py-2">Admin</th>
+                <th class="w-1/4 px-4 py-2">Password</th>
+                <th class="w-1/4 px-4 py-2">Actions</th>
                 <th class="w-1/4 px-4 py-2">Status</th>
+                
               </tr>
             </thead>
            <tbody>
-              <!-- <ng-container *ngFor="let tenant of adminList">  -->
+              <ng-container *ngFor="let admins of schoolAdminList"> 
      
                  <tr>
-                   <td class="border px-4 py-2"></td>
-                   <td class="border px-4 py-2"></td>     
+                   <td class="border px-4 py-2">{{admins.adminId}}</td>
+                   <td class="border px-4 py-2">{{admins.password}}</td>     
+                   <td class="border px-4 py-2"><button class="px-7"><i class="fa-solid fa-pen-to-square"></i></button>
+                  <br>
+                Edit Details
+                </td>     
                    
 
                    <td class="border px-4 py-2">
                      
-                     <button>
-                       <div>
-                        <i class="fa-regular fa-eye-slash"></i>
+                    <button (click)="toggleStatus(admins)">
+                      <div *ngIf="admins.is_Blocked">
+                       <i class="fa-regular fa-eye-slash"></i>
+                      </div>
+                      <div *ngIf="!admins.is_Blocked">
+                        <i class="fa-regular fa-eye"></i>
                        </div>
-                       <div>
-                         <i class="fa-regular fa-eye"></i>
-                        </div>
-                     </button>
+                      {{ admins.is_Blocked ? 'Unblock' : 'Block' }}
+                    </button>
+                    
                      
                    </td>
                  </tr>
-              <!-- </ng-container> -->
+              </ng-container>
               
            
            </tbody>
