@@ -40,6 +40,7 @@ import { CreateAdminComponent } from './dashboard/create-admin/create-admin.comp
 
 
 
+
 @NgModule({
     declarations: [
         TenantSignUpComponent,
@@ -58,6 +59,7 @@ import { CreateAdminComponent } from './dashboard/create-admin/create-admin.comp
           ChangePasswordComponent,
           ManageAdminComponent,
           CreateAdminComponent,
+
 
 
     ],

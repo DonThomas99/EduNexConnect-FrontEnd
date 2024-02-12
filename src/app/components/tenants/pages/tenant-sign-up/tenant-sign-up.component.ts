@@ -1,4 +1,4 @@
-import { Component,Inject,OnInit } from '@angular/core';
+import { Component,Inject,OnDestroy,OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,21 +17,28 @@ import { TenantService } from 'src/app/services/tenant.service';
   templateUrl: './tenant-sign-up.component.html',
   styleUrls: ['./tenant-sign-up.component.css']
 })
-export class TenantSignUpComponent implements OnInit {
+export class TenantSignUpComponent implements OnInit, OnDestroy {
   form!:FormGroup
+  message!:string
   isSubmitted = false
   showOtpField = false
   remainingTime = 0
-  formattedTime: string ='03:00'
+  formattedTime: string ='01:00'
   otpResendCount:number =0
   showOTPResend: boolean = true
+  timer = setTimeout(()=>{},0)
   constructor(
     @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
     @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
     @Inject(Store) private readonly store:Store,
-    @Inject(TenantService) private readonly tenantService:TenantService
-  ){}
+    @Inject(TenantService) private readonly tenantService:TenantService,
+  
+  ){
+  }
+  ngOnDestroy(): void {
+      clearInterval(this.timer)
+  }
   ngOnInit(): void {
     this.form=this.formBuilder.group({
       name:['',[validateBytrimming(nameValidators)]],
@@ -53,12 +60,14 @@ export class TenantSignUpComponent implements OnInit {
 
 startTimer():void{
   this.remainingTime = OTP_TIMER
-  const timer = setInterval(()=>{
+  this.timer = setInterval(()=>{
 
     this.remainingTime--;
+    console.log('remaining time : ', this.remainingTime);
+    
     if(this.remainingTime <=0){
-      clearInterval(timer);
-      console.log(timer);
+      clearInterval(this.timer);
+      console.log(this.timer);
     console.log('OTP expired');
         
     }
@@ -71,7 +80,9 @@ resendOTP():void{
     this.http.get('tenant/resendOtp').subscribe({
       next:()=>{
         console.log('otp successfully resent');
-        void Swal.fire('OTP sent','Check your mail for OTP', 'success')
+        void Swal.fire('OTP sent','Check your mail for OTP', 'success');
+        this.startTimer()
+        this.otpResendCount++
       }
     })
   } else {
@@ -90,7 +101,7 @@ if(!this.form.invalid && !this.showOtpField){
   const tenant = this.form.getRawValue()
   this.tenantService.saveTenantTemp(tenant).subscribe({
     next:(res:any)=>{
-      console.log('htkf');
+      console.log(res);
       
       localStorage.setItem('tenantAuthToken',res.token)
       this.showOtpField = true
@@ -104,6 +115,11 @@ if(!this.form.invalid && !this.showOtpField){
         this.showOTPResend = false
       },OTP_RESEND_MAX_TIME)
 
+    },
+    error:(err)=>
+    {
+      console.log(err);
+      
     }
   })
 } else if(!this.form.invalid && this.showOtpField){ // Write otp field in html
@@ -120,6 +136,10 @@ this.tenantService.verifyOtp(otp).subscribe({
   },
   error:(err)=>{
     console.log(err);
+    if(err.status === 409){
+
+      this.message ='Email ID Already Exists' 
+    }
     
   }
 

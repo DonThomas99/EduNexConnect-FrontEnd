@@ -1,5 +1,5 @@
 import {environments} from 'src/environments/environment'
-export const OTP_TIMER = 60 * 3// 3 min in seconds
+export const OTP_TIMER = 60 * 1// 1 min in seconds
 export const OTP_RESEND_MAX_TIME = 1000 * 60 * 10// 10 min in milliseconds
 export const MAX_OTP_LIMIT = 3
 

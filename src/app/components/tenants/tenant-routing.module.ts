@@ -11,6 +11,7 @@ import { TenantEditProfileComponent } from './dashboard/tenant-edit-profile/tena
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
 import { ManageAdminComponent } from './dashboard/manage-admin/manage-admin.component';
 import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component';
+import { SchoolhomeComponent } from '../school/schoolhome/schoolhome.component';
 
 
 
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'editProfile',component:TenantEditProfileComponent},
   {path:'changePassword',component:ChangePasswordComponent},
   {path:'manageAdmins',component:ManageAdminComponent},
-  {path:'createAdmin',component:CreateAdminComponent}
+  {path:'createAdmin',component:CreateAdminComponent},
+  // {path:':schoolName',component:SchoolhomeComponent}
 ];
 
 @NgModule({

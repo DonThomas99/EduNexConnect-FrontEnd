@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
@@ -11,5 +11,12 @@ import { AbstractControl } from '@angular/forms';
 })
 export class OtpValidationComponent {
 @Input() otpControl:AbstractControl|null = null
-@Input() isSubmitted:boolean = false
+@Input() isSubmitted:boolean = false 
+@Input() timerStr ='01:00'
+@Input() showOTPResend = false
+@Output() OTPResend = new EventEmitter()
+
+resendOTP ():void{
+  this.OTPResend.emit()
+}
 }
