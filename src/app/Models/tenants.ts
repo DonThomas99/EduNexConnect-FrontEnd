@@ -22,7 +22,10 @@ export interface ITenantTransaction{
     amount: number,
     date:Date
 }
-
+export interface Isample{
+    status:number,
+    message:boolean
+}
 
 
 export interface ITenantRes{

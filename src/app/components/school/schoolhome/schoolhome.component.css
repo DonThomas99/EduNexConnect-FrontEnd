@@ -1,0 +1,17 @@
+.form-container{
+ position: absolute;
+ top: 50%;
+ left:50%;
+ transform: translate(-50%,-50%);
+}
+
+.buttons {
+    text-align: center; /* Center the buttons horizontally */
+    padding-top: 170px; /* Add padding to the top to bring the buttons down */
+  }
+  
+  .buttons button {
+    width: 50%; /* Set button width to half */
+    margin-bottom: 10px; /* Add bottom margin for vertical spacing */
+  }
+  

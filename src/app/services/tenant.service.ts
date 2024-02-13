@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IApiRes,IApiTenantRes } from '../Models/tenants';
+import { IApiRes,IApiTenantRes, Isample } from '../Models/tenants';
 import { environments } from 'src/environments/environment';
 // import {IApiRes} from '../Models/common'
 
@@ -23,6 +23,9 @@ export class TenantService {
 
   saveTenantTemp(tenantData: any){
     return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signup`,{tenantData})
+  }
+  resendOtp(){
+    return this.http.get<Isample>(`${this.backendURL}/tenant/resendOtp`)
   }
 
   verifyOtp(otp:number){

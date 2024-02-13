@@ -31,8 +31,8 @@ export class SchoolhomeComponent {
     this.authService.extractUrl(this.schoolName.toUpperCase()).subscribe({
       next: (res) => {
         console.log(res);
-        // this.tenantId = res as unknown as string
-        console.log(this.tenantId);
+        this.tenantId = res as unknown as string
+        console.log("tenantId",this.tenantId);
         
         // Handle the response as needed
       },

@@ -20,6 +20,7 @@ import { TenantService } from 'src/app/services/tenant.service';
 export class TenantSignUpComponent implements OnInit, OnDestroy {
   form!:FormGroup
   message!:string
+  resendOtp!:boolean
   isSubmitted = false
   showOtpField = false
   remainingTime = 0
@@ -33,16 +34,17 @@ export class TenantSignUpComponent implements OnInit, OnDestroy {
     @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
     @Inject(Store) private readonly store:Store,
     @Inject(TenantService) private readonly tenantService:TenantService,
-  
-  ){
-  }
-  ngOnDestroy(): void {
+    
+    ){
+    }
+    ngOnDestroy(): void {
       clearInterval(this.timer)
-  }
-  ngOnInit(): void {
-    this.form=this.formBuilder.group({
-      name:['',[validateBytrimming(nameValidators)]],
-      email: ['',[validateBytrimming(emailValidators)]],
+    }
+    ngOnInit(): void {
+      this.resendOtp = true
+      this.form=this.formBuilder.group({
+        name:['',[validateBytrimming(nameValidators)]],
+        email: ['',[validateBytrimming(emailValidators)]],
       mobile:['',[validateBytrimming(mobileValidators)]],
       state:['',[validateBytrimming(nameValidators)]],
       school:['',[validateBytrimming(nameValidators)]],
@@ -76,9 +78,11 @@ startTimer():void{
 } 
 
 resendOTP():void{
+this.resendOtp = false
   if(this.otpResendCount < MAX_OTP_LIMIT){
-    this.http.get('tenant/resendOtp').subscribe({
+    this.tenantService.resendOtp().subscribe({
       next:()=>{
+        this.resendOtp =true
         console.log('otp successfully resent');
         void Swal.fire('OTP sent','Check your mail for OTP', 'success');
         this.startTimer()
@@ -87,6 +91,7 @@ resendOTP():void{
     })
   } else {
     void Swal.fire('Oops!','Maximum resend attempts reached','warning')
+    this.showOtpField = false
   }
 }
 
