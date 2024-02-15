@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IApiRes,IApiTenantRes, Isample } from '../Models/tenants';
 import { environments } from 'src/environments/environment';
+import { IApiadminList, IschoolAdminRes } from '../Models/schoolAdmin';
 // import {IApiRes} from '../Models/common'
 
 @Injectable({
@@ -44,7 +45,9 @@ return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,p
   createSchoolAdmin(TenantId:string,id:string,password:string,repeatPassword:string){
     return this.http.post<any>(`${this.backendURL}/tenant/saveAdmin`,{TenantId,id,password,repeatPassword})
   }
-  
+  fetchAdminList(id:string){
+    return this.http.get<IApiadminList>(`${this.backendURL}/tenant/adminList?id=${id}`)
+  }
   
 }
 

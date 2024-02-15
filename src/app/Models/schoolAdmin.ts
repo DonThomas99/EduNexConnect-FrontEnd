@@ -4,5 +4,11 @@ export interface IschoolAdminRes {
     _id:string
     adminId:string
     password:string
-    is_Blocked:boolean
+    isBlocked:boolean
 } 
+export interface IApiadminList{
+    status:number
+    message:string
+    data :IschoolAdminRes[]
+}
+export interface IApiadminList extends Array<IschoolAdminRes[]>{}

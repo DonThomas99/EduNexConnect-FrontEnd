@@ -58,6 +58,17 @@ export interface IApiTenantAuthRes{
     token: string
     // refreshToken: string 
 }
+export interface IApiTenantList{
+    status:number
+    message:string
+    data :{
+       arr: ITenantRes[]
+       len:number
+    }
+        
+    token: string
+    // refreshToken: string 
+}
 export interface  IApiTenantRes extends IApiRes<ITenantRes>{}
 export interface IApiTenantsRes extends IApiRes<ITenantRes[]>{}
 

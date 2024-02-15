@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { NgModel } from '@angular/forms';
+
 
 @Component({
   selector: 'app-schoolhome',
@@ -9,7 +9,7 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./schoolhome.component.css']
 })
 export class SchoolhomeComponent {
-  public schoolName!: string;
+  public schoolName: string = '';
   public tenantId!: string;
 
   constructor(

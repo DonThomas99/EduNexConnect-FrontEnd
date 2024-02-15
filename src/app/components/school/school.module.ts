@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SchoolRoutingModule } from './school-routing.module';
 import { SchoolhomeComponent } from './schoolhome/schoolhome.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     FormsModule,
     CommonModule,
-    SchoolRoutingModule
+    SchoolRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class SchoolModule { }

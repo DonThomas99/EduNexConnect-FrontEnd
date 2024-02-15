@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { reducers } from './states/app.state';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { hydrationMetaReducer } from './states/hydration.reducer';
@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './components/tenants/reset-password/res
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatTooltipModule} from '@angular/material/tooltip'
+import { TenantInterceptorInterceptor } from './interceptors/tenant-interceptor.interceptor';
 
 
 
@@ -37,7 +38,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     BrowserAnimationsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TenantInterceptorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

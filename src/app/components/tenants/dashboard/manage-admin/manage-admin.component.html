@@ -31,13 +31,13 @@
                    <td class="border px-4 py-2">
                      
                     <button (click)="toggleStatus(admins)">
-                      <div *ngIf="admins.is_Blocked">
+                      <div *ngIf="admins.isBlocked">
                        <i class="fa-regular fa-eye-slash"></i>
                       </div>
-                      <div *ngIf="!admins.is_Blocked">
+                      <div *ngIf="!admins.isBlocked">
                         <i class="fa-regular fa-eye"></i>
                        </div>
-                      {{ admins.is_Blocked ? 'Unblock' : 'Block' }}
+                      {{ admins.isBlocked ? 'Unblock' : 'Block' }}
                     </button>
                     
                      

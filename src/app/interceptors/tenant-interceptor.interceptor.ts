@@ -13,6 +13,20 @@ export class TenantInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+   const tenantToken = localStorage.getItem('tenantJwt')
+   
+   if(tenantToken){
+console.log("tenanttoken:",tenantToken);
+
+    const newRequest = request.clone({
+      headers: request.headers.set('Authorization','Bearer ' + tenantToken)
+    })
+    console.log(newRequest.url);
+    
+    return next.handle(newRequest)
+   }
+   return next.handle(request);
+   
+   
   }
 }

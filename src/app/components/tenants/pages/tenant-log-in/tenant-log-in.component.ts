@@ -39,7 +39,7 @@ export class TenantLogInComponent implements OnInit{
           
           console.log('res saving on store');
           this.store.dispatch(saveTenantOnStore({tenantDetails: res.data.emailDb}))
-          localStorage.setItem('tenantJwt',res.data.jwt)
+          localStorage.setItem('tenantJwt',res.data.accessToken)
           console.log('redirecting to  home');
           
           void this.router.navigate(['/tenant'])
