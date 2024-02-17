@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SchoolRoutingModule } from './school-routing.module';
 import { SchoolhomeComponent } from './schoolhome/schoolhome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { StoreModule } from '@ngrx/store';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     CommonModule,
     SchoolRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // StoreModule
   ]
 })
 export class SchoolModule { }

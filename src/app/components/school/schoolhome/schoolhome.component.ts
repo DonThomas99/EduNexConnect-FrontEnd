@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth.service';
+import { saveTenantIdOnStore } from 'src/app/states/school/school.actions';
 
 
 @Component({
@@ -14,7 +16,8 @@ export class SchoolhomeComponent {
 
   constructor(
     private authService: AuthService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly store: Store
   ) {}
 
   ngOnInit() {
@@ -32,8 +35,8 @@ export class SchoolhomeComponent {
       next: (res) => {
         console.log(res);
         this.tenantId = res as unknown as string
-        console.log("tenantId",this.tenantId);
-        
+        console.log("tenantId frm component.ts",this.tenantId);
+        this.store.dispatch(saveTenantIdOnStore({tenantId:this.tenantId}))
         // Handle the response as needed
       },
       error: (error) => {
