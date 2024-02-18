@@ -21,12 +21,13 @@ backendURL = environments.backendURL
   ngOnInit(): void {
 
   }
-  login(name:string,password:string,tenantId:string){
-    console.log(
-     tenantId, 'jee'
-    );
-    
+  login(name:string,password:string,tenantId:string){    
 return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login`,{name,password})
+  }
+  addTeachers(name:string,tenantId:string){
+    console.log('dsjd');
+    
+    return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/addTeachers`,{})
   }
 }
 

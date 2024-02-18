@@ -31,9 +31,7 @@ tenantId$= this.store.select(pipe(selectTenantId))
     })
 
 
-    this.tenantId$.subscribe((id)=>{
-      console.log(id,'sdofknsoikd');
-      
+    this.tenantId$.subscribe((id)=>{    
       if(id)
         this.tenantId = id
       })
