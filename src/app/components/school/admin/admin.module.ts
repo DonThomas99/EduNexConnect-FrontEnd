@@ -5,19 +5,29 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { SideNavComponent } from './adminDashboard/side-nav/side-nav.component';
 import { HeaderComponent } from './adminDashboard/header/header.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './adminDashboard/dashboard/dashboard.component';
+import { RouterModule } from '@angular/router';
+import { TeachersComponent } from './adminDashboard/teachers/teachers.component';
+
+
 
 
 @NgModule({
   declarations: [
     AdminLoginComponent,
     SideNavComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent,
+    TeachersComponent
 
   ],
   imports: [
+    FormsModule,
+
     ReactiveFormsModule,
     CommonModule,
+    RouterModule.forChild([]),
     AdminRoutingModule
   ]
 })

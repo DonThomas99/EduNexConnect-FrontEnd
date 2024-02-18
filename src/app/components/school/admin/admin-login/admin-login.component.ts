@@ -48,6 +48,7 @@ tenantId$= this.store.select(pipe(selectTenantId))
       this.schoolAdminService.login(data.name,data.password,this.tenantId).subscribe({
         next:()=>{
           console.log('hee');
+          this.router.navigate(['school/admin/dashboard'])
           
         }
         
