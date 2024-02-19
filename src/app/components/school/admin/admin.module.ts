@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './adminDashboard/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { TeachersComponent } from './adminDashboard/teachers/teachers.component';
+import { SubjectsComponent } from './adminDashboard/subjects/subjects.component';
+import { ClassComponent } from './adminDashboard/class/class.component';
 
 
 
@@ -19,7 +21,9 @@ import { TeachersComponent } from './adminDashboard/teachers/teachers.component'
     SideNavComponent,
     HeaderComponent,
     DashboardComponent,
-    TeachersComponent
+    TeachersComponent,
+    SubjectsComponent,
+    ClassComponent
 
   ],
   imports: [

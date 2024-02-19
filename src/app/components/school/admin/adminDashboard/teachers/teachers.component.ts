@@ -7,6 +7,8 @@ import { nameValidators, passwordValidators } from 'src/app/shared/validators';
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
+import { IApiRes } from 'src/app/Models/common';
+import { subjects } from 'src/app/Models/subject';
 
 @Component({
   selector: 'app-teachers',
@@ -40,7 +42,7 @@ constructor(
 }
 
 submit(){
-console.log('hee');
+
 
   this.isSubmitted = true
   if(this.form.valid){
@@ -48,8 +50,12 @@ console.log('hee');
     console.log(data);
     
     this.schoolAdminService.addTeachers(data.name,this.tenantId).subscribe({
-next:()=>{
-  console.log('dsds');
+next:(res)=>{
+  console.log('kopp',
+
+    res.data
+  );
+   
   
 }
     })

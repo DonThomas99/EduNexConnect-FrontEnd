@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
+import { IApiRes } from 'src/app/Models/common';
 import { IApiadminList } from 'src/app/Models/schoolAdmin';
+import { classSubjects, classes, subjects } from 'src/app/Models/subject';
 import { selectTenantId } from 'src/app/states/school/school.selector';
 // import { selectTenantDetails } from 'src/app/states/tenant/tenant.selector';
 import { environments } from 'src/environments/environment';
@@ -28,6 +30,12 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
     console.log('dsjd');
     
     return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/addTeachers`,{})
+  }
+  addSubjects(classNumber:string,subject:string,tenantId:string){
+    return this.http.post<subjects>(`${this.backendURL}/${tenantId}/admin/addSubjects`,{classNumber,subject})
+  }
+  fetchClasses(tenantId:string){
+    return this.http.get<classes>(`${this.backendURL}/${tenantId}/admin/fetchClasses`)
   }
 }
 

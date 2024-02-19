@@ -1,0 +1,57 @@
+<div class="flex">
+    <div>
+        <app-side-nav></app-side-nav>
+      </div>
+
+      <div class="fixed  right-px p-4  justify-around">
+          <label  for="my_modal_6" class="btn">Add Subject</label>
+        </div>
+      
+      <div class="fixed top-32 right-64 p-4  justify-around">
+       <ng-container>
+
+           <div class="flex">
+              <div class="card w-96 bg-base-100 shadow-xl">
+                  <div class="card-body">
+                    <h2 class="card-title">class : 10</h2>
+                    <p>Physics</p>
+                    <p>Chemistry</p>
+                  </div>
+                </div>
+          </div>
+       </ng-container>
+</div>
+
+
+
+
+
+      
+<!-- The button to open modal -->
+<div class="fixed top-32 right-32 p-4  justify-around">
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my_modal_6" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box">
+  <form  [formGroup]="form" (ngSubmit)="submit()">
+
+      <label class="input input-bordered flex items-center gap-2">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <input formControlName="class" type="text" class="grow" placeholder="Class" />
+      </label>
+      <label class="input input-bordered flex items-center gap-2">
+          <i class="fa-solid fa-book"></i>
+        <input formControlName="subject" type="text" class="grow" placeholder="Subject" />
+      </label>
+    
+      <div class="modal-action">
+          <button for="my_modal_6" type="submit" class="btn">Submit</button>
+          <label for="my_modal_6" class="btn">Close!</label>
+        </div> 
+    </form> 
+  </div>
+</div>
+    </div>
+  </div>
+  
