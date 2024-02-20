@@ -1,26 +1,49 @@
-<div class="flex">
-    <div>
-        <app-side-nav></app-side-nav>
-      </div>
+<div class="flex flex-row">
+  <div class="">
+    <app-side-nav></app-side-nav>
+  </div>
 
-      <div class="fixed  right-px p-4  justify-around">
-          <label  for="my_modal_6" class="btn">Add Subject</label>
-        </div>
-      
-      <div class="fixed top-32 right-64 p-4  justify-around">
-       <ng-container>
-
-           <div class="flex">
-              <div class="card w-96 bg-base-100 shadow-xl">
-                  <div class="card-body">
-                    <h2 class="card-title">class : 10</h2>
-                    <p>Physics</p>
-                    <p>Chemistry</p>
-                  </div>
-                </div>
+  <div class="fixed  right-px p-4  justify-around">
+    <label for="my_modal_6" class="btn">Add Subject</label>
+  </div>
+<!-- 
+  <div class="my-12 top-32 right-64 p-4  justify-around">
+    <ng-container *ngIf="classNsubjects">
+      <div class="card-container flex flex-row mx-4">
+        <div *ngFor="let classSubject of classNsubjects" class="card-item">
+          <div class="card w-96 bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
+              <p *ngFor="let subject of classSubject.subjects">{{ subject }}</p>
+            </div>
           </div>
-       </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div> -->
+        
+  <div class=" my-12 top-32 right p-4  justify-around">
+
+  <ng-container  *ngIf="classNsubjects">
+
+    <div class=" card-container flex flex-row mx-4">
+      <div *ngFor="let classSubject of classNsubjects" class="card-item">
+
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
+            <p *ngFor="let subject of classSubject.subjects">{{ subject }}</p>
+          </div>
+        </div>
+        
+      </div>
+   
+ 
 </div>
+</ng-container>
+
+</div>
+
 
 
 

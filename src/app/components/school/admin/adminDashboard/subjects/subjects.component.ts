@@ -17,13 +17,13 @@ import { classSubjects, classes } from 'src/app/Models/subject';
   styleUrls: ['./subjects.component.css']
 })
 export class SubjectsComponent implements OnInit {
-  subjects!:classSubjects[];
+  classNsubjects!:classSubjects[];
   form!:FormGroup
   isSubmitted:boolean = false
   tenantId!:string
   isModalOpen:boolean = false
   tenantId$= this.store.select(pipe(selectTenantId))
-
+  
 constructor(
   private readonly formBuilder:FormBuilder,
   private schoolAdminService:SchoolAdminService,
@@ -43,9 +43,9 @@ constructor(
       
 
       this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
-        next:(res:classes)=>{
-          console.log('kopp',res.data);
+        next:(res:classSubjects[])=>{
           
+          this.classNsubjects= res
         }
       })
     

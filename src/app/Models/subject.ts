@@ -6,13 +6,23 @@ export interface subjects {
 }
 
 export interface classSubjects{
-classNumber:number
-subjects:string[]|[]
+classNumber:string
+subjects:string[]
 }
 
 export interface classes{
-    status:number,
-    data:{
-        array:classSubjects[]
-    }
+    
+    
+    array:classSubjects[]
+    
 }
+
+export  interface Subject {
+    class: string;
+    subjects: SubjectName[];
+  }
+  
+  export interface SubjectName {
+    name: string;
+  }
+  
