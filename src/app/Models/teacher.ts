@@ -4,3 +4,12 @@ export interface TeacherData {
     class: string;
     subject: string;
   }
+  export interface  IteacherData{
+    email:string;
+    name:string;
+    password:string;
+    classNsub:[{
+      classNum:string;
+      subject:string[];
+    }]
+  }

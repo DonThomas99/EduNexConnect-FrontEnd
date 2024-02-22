@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SchoolRoutingModule } from './school-routing.module';
 import { SchoolhomeComponent } from './schoolhome/schoolhome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import { StoreModule } from '@ngrx/store';
 
 
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   ],
   imports: [
+    FontAwesomeModule,
     FormsModule,
     CommonModule,
     SchoolRoutingModule,

@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { TeachersComponent } from './adminDashboard/teachers/teachers.component';
 import { SubjectsComponent } from './adminDashboard/subjects/subjects.component';
 import { ClassComponent } from './adminDashboard/class/class.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -28,7 +29,7 @@ import { ClassComponent } from './adminDashboard/class/class.component';
   ],
   imports: [
     FormsModule,
-
+    FontAwesomeModule,
     ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild([]),

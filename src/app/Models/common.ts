@@ -5,3 +5,8 @@ export interface IApiRes <T> {
  message:string
  data:T
 }
+
+export interface Res {
+    status:number,
+    message:string
+}

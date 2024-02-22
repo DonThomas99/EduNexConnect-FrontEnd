@@ -5,40 +5,37 @@
     </div>
     <div class="flex-grow m-4 justify-center">
         <div class="m-200  w-full p-8"> <!-- Apply margin and padding directly to the table container -->
-            <table class="table">
-                <!-- head -->
-                <thead>
+         <div class="overflow-x-auto">
+                <table class="table">
+                  <!-- head -->
+                  <thead>
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Password</th>
+                      <th>Status</th>
+                      <th></th>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- row 1 -->
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                    </tr>
-                    <!-- row 2 -->
-                    <tr>
-                        <th>2</th>
-                        <td>Hart Hagerty</td>
-                        <td>Desktop Support Technician</td>
-                        <td>Purple</td>
-                    </tr>
-                    <!-- row 3 -->
-                    <tr>
-                        <th>3</th>
-                        <td>Brice Swyre</td>
-                        <td>Tax Accountant</td>
-                        <td>Red</td>
-                    </tr>
-                </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let teacher of teacherData; let i= index ">
+                        <tr>
+                            <th>{{i+1}}</th>
+                            <td>{{teacher.name}}</td>
+                            <td>{{teacher.email}}</td>
+                            <td>{{teacher.password}}</td>
+                            <td> (click)="sendId(teacher.email)" 
+                                <div class="tooltip" data-tip="details">
+                                    <button class="btn">Details</button>
+                                  </div>
+                            </td>
+                          </tr>
+                    </ng-container>
+                   
+                  </tbody>
+                </table>
+              </div>
         </div>
     </div>
     <!-- The button to open modal -->

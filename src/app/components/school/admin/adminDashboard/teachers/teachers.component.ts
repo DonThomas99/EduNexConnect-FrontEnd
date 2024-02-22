@@ -7,8 +7,10 @@ import { emailValidators, nameValidators, passwordValidators } from 'src/app/sha
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
-import { IApiRes } from 'src/app/Models/common';
+import { IApiRes, Res } from 'src/app/Models/common';
 import { classSubjects, subjects } from 'src/app/Models/subject';
+import Swal from 'sweetalert2';
+import { IteacherData } from 'src/app/Models/teacher';
 
 @Component({
   selector: 'app-teachers',
@@ -16,6 +18,7 @@ import { classSubjects, subjects } from 'src/app/Models/subject';
   styleUrls: ['./teachers.component.css']
 })
 export class TeachersComponent implements OnInit {
+  teacherData!:IteacherData[];
   isClassDropdownOpen: boolean = false;
   form!:FormGroup
 isSubmitted:boolean= false
@@ -36,15 +39,20 @@ constructor(
   this.form = this.formBuilder.group({
     email:['',validateBytrimming(emailValidators)],
     name :['',validateBytrimming(nameValidators)],
-    
-
   })
+  
 
   this.tenantId$.subscribe((id)=>{    
     if(id)
       this.tenantId = id
     })
-
+    this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
+      next:(res:IteacherData[])=>{
+        this.teacherData =res
+        console.log(this.teacherData);
+        
+      }
+    })
 
     this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
       next:(res:classSubjects[])=>{
@@ -93,17 +101,37 @@ submit() {
     
     
     this.schoolAdminService.addTeachers(dataToSave, this.tenantId).subscribe({
-      next: (res: any) => {
-        console.log('Response:', res);
-        // Handle response as needed
+      next: (res) => {
+        console.log(res);
+        
+        void Swal.fire({
+          icon:'success',
+          title:res,
+        }).then(()=>{
+    
+          window.location.reload()
+        }
+        )
+        
       },
-      error: (error: any) => {
-        console.error('Error:', error);
-        // Handle error
+      error: (error) => {
+        console.log(error);
+        
+        void Swal.fire({
+          icon:'error',
+          title:error.error,
+        }).then(()=>{
+          window.location.reload()
+        }
+        )
+        
       }
     });
   }
 }
 
+sendId(id:string){
+
+}
 
 }
