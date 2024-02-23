@@ -48,6 +48,7 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
       })
     );
   }
+  deletSubject(){}
 
   fetchTeacherData(tenantId:string):Observable<IteacherData[]>{
     return this.http.get<IteacherData[]>(`${this.backendURL}/${tenantId}/admin/fetchTeacherData`)

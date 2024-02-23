@@ -7,10 +7,9 @@ import { emailValidators, nameValidators, passwordValidators } from 'src/app/sha
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
-import { IApiRes, Res } from 'src/app/Models/common';
-import { classSubjects, subjects } from 'src/app/Models/subject';
 import Swal from 'sweetalert2';
 import { IteacherData } from 'src/app/Models/teacher';
+import { classSubjects } from 'src/app/Models/subject';
 
 @Component({
   selector: 'app-teachers',
@@ -18,120 +17,108 @@ import { IteacherData } from 'src/app/Models/teacher';
   styleUrls: ['./teachers.component.css']
 })
 export class TeachersComponent implements OnInit {
+  hideRest:boolean = false;
   teacherData!:IteacherData[];
   isClassDropdownOpen: boolean = false;
   form!:FormGroup
-isSubmitted:boolean= false
-tenantId!:string
-tenantId$= this.store.select(pipe(selectTenantId))
+  isSubmitted:boolean= false
+  tenantId!:string
+  tenantId$= this.store.select(pipe(selectTenantId))
   classNsubjects!: classSubjects[];
   selectedClassSubjects: string[] = [];
   selectedClass: string = '';
   selectedSubject: string = '';
 
-constructor(
-  private readonly formBuilder:FormBuilder,
-  private schoolAdminService:SchoolAdminService,
-  private readonly router:Router,
-  private readonly store:Store
-){}
-  ngOnInit(): void {
-  this.form = this.formBuilder.group({
-    email:['',validateBytrimming(emailValidators)],
-    name :['',validateBytrimming(nameValidators)],
-  })
-  
+  constructor(
+    private readonly formBuilder:FormBuilder,
+    private schoolAdminService:SchoolAdminService,
+    private readonly router:Router,
+    private readonly store:Store
+  ) {}
 
-  this.tenantId$.subscribe((id)=>{    
-    if(id)
-      this.tenantId = id
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      email:['',validateBytrimming(emailValidators)],
+      name :['',validateBytrimming(nameValidators)],
     })
+
+    this.tenantId$.subscribe((id)=>{    
+      if(id)
+        this.tenantId = id
+    })
+    
     this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
       next:(res:IteacherData[])=>{
-        this.teacherData =res
+        this.teacherData = res
         console.log(this.teacherData);
-        
       }
     })
 
     this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
       next:(res:classSubjects[])=>{
-        
-        this.classNsubjects= res
+        this.classNsubjects = res
       }
     })
-  
-
-}
-selectClass(classNumber: string) {
-  console.log('ufff');
-  
-  // Find the selected class in the classNsubjects array
-  const selectedClass = this.classNsubjects.find(c => c.classNumber === classNumber);
-  if (selectedClass) {
-    // Populate the subjects dropdown with subjects from the selected class
-    this.selectedClassSubjects = selectedClass.subjects;
-    this.selectedClass = classNumber;
   }
-}
 
-selectedSubj(classNumber:string){
-  console.log('duhhh');
-  
-}
+  selectClass(classNumber: string) {
+    const selectedClass = this.classNsubjects.find(c => c.classNumber === classNumber);
+    if (selectedClass) {
+      this.selectedClassSubjects = selectedClass.subjects;
+      this.selectedClass = classNumber;
+    }
+  }
 
-
-toggleClassDropdown() {
+  toggleClassDropdown() {
     this.isClassDropdownOpen = !this.isClassDropdownOpen;
-}
-
-submit() {
-
-  console.log(this.form.valid);
-  
-  this.isSubmitted = true;
-  if (this.form.valid && this.selectedClass && this.selectedSubject) {
-    const formData = this.form.getRawValue();
-    const dataToSave = {
-      email: formData.email,
-      name: formData.name,
-      class: this.selectedClass,
-      subject: this.selectedSubject
-    };
-    
-    
-    this.schoolAdminService.addTeachers(dataToSave, this.tenantId).subscribe({
-      next: (res) => {
-        console.log(res);
-        
-        void Swal.fire({
-          icon:'success',
-          title:res,
-        }).then(()=>{
-    
-          window.location.reload()
-        }
-        )
-        
-      },
-      error: (error) => {
-        console.log(error);
-        
-        void Swal.fire({
-          icon:'error',
-          title:error.error,
-        }).then(()=>{
-          window.location.reload()
-        }
-        )
-        
-      }
-    });
   }
-}
 
-sendId(id:string){
+  submit() {
+    this.isSubmitted = true;
+    if (this.form.valid && this.selectedClass && this.selectedSubject) {
+      const formData = this.form.getRawValue();
+      const dataToSave = {
+        email: formData.email,
+        name: formData.name,
+        class: this.selectedClass,
+        subject: this.selectedSubject
+      };
+      
+      this.schoolAdminService.addTeachers(dataToSave, this.tenantId).subscribe({
+        next: (res) => {
+          console.log(res);
+          void Swal.fire({
+            icon:'success',
+            title:res,
+          }).then(() => {
+            window.location.reload();
+          });
+        },
+        error: (error) => {
+          console.log(error);
+          void Swal.fire({
+            icon:'error',
+            title:error.error,
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      });
+    }
+  }
 
-}
+  sendId(id:string) {}
 
+  hideIt() {
+    this.hideRest=!this.hideRest
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
+
+  deleteSubject(email:string,subject:string){
+console.log(email,subject);
+
+  }
 }
