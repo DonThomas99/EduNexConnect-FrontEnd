@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherLoginComponent } from './teacher-login/teacher-login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { TeacherLoginComponent } from './teacher-login/teacher-login.component';
     TeacherLoginComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     TeacherRoutingModule
   ]

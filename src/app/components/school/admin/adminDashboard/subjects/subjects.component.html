@@ -6,45 +6,41 @@
   <div class="fixed  right-px p-4  justify-around">
     <label for="my_modal_6" class="btn">Add Subject</label>
   </div>
-<!-- 
-  <div class="my-12 top-32 right-64 p-4  justify-around">
-    <ng-container *ngIf="classNsubjects">
-      <div class="card-container flex flex-row mx-4">
-        <div *ngFor="let classSubject of classNsubjects" class="card-item">
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
-              <p *ngFor="let subject of classSubject.subjects">{{ subject }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div> -->
+
         
-  <div class=" my-12 top-32 right p-4  justify-around">
-
-  <ng-container  *ngIf="classNsubjects">
-
-    <div class=" card-container flex flex-row mx-4">
+ <div class=" my-12 top-32 right p-4  justify-around">
+  <ng-container *ngIf="classNsubjects">
+    <div class="card-container flex flex-row mx-4">
       <div *ngFor="let classSubject of classNsubjects" class="card-item">
-
         <div class="card w-96 bg-base-100 shadow-xl">
           <div class="card-body">
             <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
-            <p *ngFor="let subject of classSubject.subjects">{{ subject }}</p>
+            <p *ngFor="let subject of classSubject.subjects">
+              {{ subject }}     
+              <!-- Add a click event to open the modal and pass the subject -->
+              <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.classNumber, subject)"></i>
+            </p>
           </div>
         </div>
-        
       </div>
-   
- 
-</div>
-</ng-container>
-
+    </div>
+  </ng-container>
 </div>
 
-
+<!-- Confirmation Modal -->
+<dialog id="confirmation_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Confirm Deletion</h3>
+    <!-- Display the confirmation message -->
+    <p class="py-4">Are you sure you want to delete {{ selectedSubject }} from class {{ selectedClass }}?</p>
+    <div class="modal-action">
+      <!-- Use ngIf to display the submit button only if a subject is selected -->
+      <button *ngIf="selectedClass && selectedSubject" class="btn" (click)="deleteSubject()">Submit</button>
+      <!-- Close the modal without deletion -->
+      <button class="btn" (click)="closeConfirmationModal()">Cancel</button>
+    </div>
+  </div>
+</dialog>
 
 
 

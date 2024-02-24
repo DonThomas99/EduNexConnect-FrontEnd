@@ -1,1 +1,25 @@
-<p>teacher-login works!</p>
+
+<div class="relative flex flex-col justify-center h-screen overflow-hidden">
+    <div class="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
+        <h1 class="text-3xl font-semibold text-center text-gray-700"> <i class="fa-solid fa-person-chalkboard"></i>  Teacher Login</h1>
+        <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+            <div>
+                <label class="label">
+                    <span class="text-base label-text">Email</span>
+                </label>
+                <input formControlName="email" type="text" placeholder="Email Address" class="w-full input input-bordered" />
+            </div>
+            <div>
+                <label class="label">
+                    <span  class="text-base label-text">Password</span>
+                </label>
+                <input formControlName="password" type="password" placeholder="Enter Password"
+                    class="w-full input input-bordered"/>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-block">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
