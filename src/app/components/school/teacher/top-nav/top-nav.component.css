@@ -1,0 +1,4 @@
+#content {
+    padding-left: 0; /* Adjust this value based on your layout */
+    transition: padding-left 0.3s ease; /* Add transition for smooth animation */
+}

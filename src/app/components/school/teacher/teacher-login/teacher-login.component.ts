@@ -50,6 +50,7 @@ tenantId$= this.store.select(pipe(selectTenantId))
           
 void Swal.fire({
   icon:'success',
+  // text:res
 
 })
 this.router.navigate(['school/teacher/dashboard'])
