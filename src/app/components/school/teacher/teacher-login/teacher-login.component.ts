@@ -9,6 +9,7 @@ import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-teacher-login',
@@ -24,7 +25,8 @@ tenantId$= this.store.select(pipe(selectTenantId))
     private readonly formBuilder:FormBuilder,
     private TeacherService:TeacherServiceService,
     private readonly router:Router,
-    private readonly store:Store
+    private readonly store:Store,
+    
   ){}
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -36,23 +38,19 @@ tenantId$= this.store.select(pipe(selectTenantId))
       if(id)
         this.tenantId = id
       })
-
-
-
   }
-
 
   submit(){
     if(this.form.valid){
       const data = this.form.getRawValue()
       this.TeacherService.teacherLogin(this.tenantId,data.email,data.password).subscribe({
         next:(res)=>{
-          
-void Swal.fire({
-  icon:'success',
-  // text:res
 
-})
+          
+    void Swal.fire({
+      icon:'success',
+      title:'Successfully Logged In !!!'
+      })
 this.router.navigate(['school/teacher/dashboard'])
 
         }

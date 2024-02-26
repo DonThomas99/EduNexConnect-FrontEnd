@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatTooltipModule} from '@angular/material/tooltip'
 import { TenantInterceptorInterceptor } from './interceptors/tenant-interceptor.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -29,6 +30,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     
   ],
   imports: [
+    ToastrModule.forRoot(),
     MatTooltipModule,
     MatSlideToggleModule,
     HttpClientModule,
