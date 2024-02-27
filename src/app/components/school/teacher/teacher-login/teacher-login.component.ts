@@ -9,7 +9,8 @@ import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
+import { setTeacherEmail } from 'src/app/states/school/school.actions';
+
 
 @Component({
   selector: 'app-teacher-login',
@@ -45,8 +46,7 @@ tenantId$= this.store.select(pipe(selectTenantId))
       const data = this.form.getRawValue()
       this.TeacherService.teacherLogin(this.tenantId,data.email,data.password).subscribe({
         next:(res)=>{
-
-          
+          this.store.dispatch(setTeacherEmail({teacherEmail:data.email}))          
     void Swal.fire({
       icon:'success',
       title:'Successfully Logged In !!!'
