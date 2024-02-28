@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IteacherData } from 'src/app/Models/teacher';
+import { selectTeacherData } from 'src/app/states/school/school.selector';
 import {Sidenav,initTE} from 'tw-elements';
 
 @Component({
@@ -7,27 +10,21 @@ import {Sidenav,initTE} from 'tw-elements';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent {
+  teacherData!:IteacherData
   open = false
   toggleOpen(){
     this.open = !this.open
   }
-  constructor() { }
+  constructor(
+    private store:Store
+  ) { }
 
   ngOnInit(): void {
-    // Initialize TW Elements
-    initTE({ Sidenav });
-
-    // Add event listener for slim toggler button if the element exists
-    const slimToggler = document.getElementById('slim-toggler');
-    if (slimToggler) {
-      slimToggler.addEventListener('click', () => {
-        const sidenav = document.getElementById('sidenav-4');
-        if (sidenav) {
-          const instance = Sidenav.getInstance(sidenav);
-          instance.toggleSlim();
-        }
-      });
-    }
+    this.store.select(selectTeacherData).subscribe(data=>{
+      if(data){
+        this.teacherData = data
+      }
+        })
   }
 
 }

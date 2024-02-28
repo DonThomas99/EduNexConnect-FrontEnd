@@ -1,3 +1,19 @@
+.card{
+  margin-top: 7.25rem ;
+  margin-left: 1.25rem;
+}
+
+body{
+  padding-top: 7rem;
+}
+
+
+
+
+
+
+
+
 .sidenav{
     z-index:9;
 }

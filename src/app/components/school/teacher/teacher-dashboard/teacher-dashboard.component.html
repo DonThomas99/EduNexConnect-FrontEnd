@@ -4,25 +4,24 @@
 
         
         
-        <div class="grid grid-cols-3 gap-6">
+        <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6">
             
-            <ng-container>
-                <div class="max-w-xs  overflow-hidden transition-transform hover:scale-100 cursor-pointer shadow-lg hover:shadow-slate-500 rounded-lg">
-                    <div class="h-32  overflow-hidden">
-                        <figure>
-                            <span></span>
-                            <img class="w-full " src="https://v1.tailwindcss.com/img/card-top.jpg"alt="Sunset in the mountains">
-                        </figure>
+            <ng-container *ngIf="teacherData">
+                <div *ngFor="let classData of teacherData.classNsub" class="max-w-xs overflow-hidden transition-transform hover:scale-100 cursor-pointer shadow-lg hover:shadow-slate-500 rounded-lg">
+                  <div class="h-32 overflow-hidden">
+                    <figure>
+                      <span></span>
+                      <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
+                    </figure>
+                  </div>
+                  <div class="px-4 py-4 h-60">
+                    <div class="font-bold text-xl mb-2">Class: {{ classData.classNum }}</div>
+                    <div *ngFor="let subject of classData.subject" class="text-gray-700 text-base">
+                      <p>{{ subject }}</p>
                     </div>
-                    <div class="px-4 py-4 h-60">
-                        <div class="font-bold text-xl mb-2">Class:</div>
-                        <p class="text-gray-700 text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
-                            perferendis eaque, exercitationem praesentium nihil.
-                        </p>
-                    </div>
-                    
+                  </div>
                 </div>
-            </ng-container>
+              </ng-container>
+              
             </div>
         </div>

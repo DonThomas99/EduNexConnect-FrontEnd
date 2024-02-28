@@ -3,29 +3,34 @@
     <app-side-nav></app-side-nav>
   </div>
 
-  <div class="fixed  right-px p-4  justify-around">
+  <div class="fixed  right-px p-1  justify-around">
     <label for="my_modal_6" class="btn">Add Subject</label>
   </div>
 
-        
- <div class=" my-12 top-32 right p-4  justify-around">
-  <ng-container *ngIf="classNsubjects">
-    <div class="card-container flex flex-row mx-4">
-      <div *ngFor="let classSubject of classNsubjects" class="card-item">
-        <div class="card w-96 bg-base-100 shadow-xl">
+  <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6">
+    <ng-container *ngIf="classNsubjects">
+      <div *ngFor="let classSubject of classNsubjects" >
+
+        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+          
           <div class="card-body">
-            <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
+            <h2 class="card-title">class:{{classSubject.classNumber}}</h2>
             <p *ngFor="let subject of classSubject.subjects">
-              {{ subject }}     
-              <!-- Add a click event to open the modal and pass the subject -->
-              <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.classNumber, subject)"></i>
+                {{subject}}
+                <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.classNumber, subject)"></i>
             </p>
+            <div class="card-actions justify-end">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
-</div>
+    </ng-container>
+
+    
+
+  </div>
+        
+ 
 
 <!-- Confirmation Modal -->
 <dialog id="confirmation_modal" class="modal">

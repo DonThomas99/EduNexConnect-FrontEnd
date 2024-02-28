@@ -9,7 +9,8 @@ import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import Swal from 'sweetalert2';
-import { setTeacherEmail } from 'src/app/states/school/school.actions';
+import { SaveTeacherData, setTeacherEmail } from 'src/app/states/school/school.actions';
+import { IteacherData } from 'src/app/Models/teacher';
 
 
 @Component({
@@ -39,6 +40,8 @@ tenantId$= this.store.select(pipe(selectTenantId))
       if(id)
         this.tenantId = id
       })
+
+      
   }
 
   submit(){
@@ -51,6 +54,12 @@ tenantId$= this.store.select(pipe(selectTenantId))
       icon:'success',
       title:'Successfully Logged In !!!'
       })
+      this.TeacherService.fetchTeacherData(this.tenantId, data.email).subscribe({
+        next: (res: IteacherData) => {
+          console.log(res);
+          this.store.dispatch(SaveTeacherData({teacherData:res}))
+        }
+      });
 this.router.navigate(['school/teacher/dashboard'])
 
         }
