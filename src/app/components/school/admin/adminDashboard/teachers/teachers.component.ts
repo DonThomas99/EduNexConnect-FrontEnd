@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Renderer2,ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -24,6 +24,7 @@ export class TeachersComponent implements OnInit {
   isSubmitted:boolean= false
   tenantId!:string
   tenantId$= this.store.select(pipe(selectTenantId))
+  currentTeacherDetails: IteacherData | null = null;
   classNsubjects!: classSubjects[];
   selectedClassSubjects: string[] = [];
   selectedClass: string = '';
@@ -33,7 +34,9 @@ export class TeachersComponent implements OnInit {
     private readonly formBuilder:FormBuilder,
     private schoolAdminService:SchoolAdminService,
     private readonly router:Router,
-    private readonly store:Store
+    private readonly store:Store,
+    private renderer:Renderer2,
+    private el:ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +63,17 @@ export class TeachersComponent implements OnInit {
       }
     })
   }
+
+
+viewDetails(index: number) {
+ this.currentTeacherDetails = this.teacherData[index];
+ // Assuming my_modal_2 is the ID of your modal element
+ const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+ if (modal) {
+    modal.showModal();
+ }
+}
+
 
   selectClass(classNumber: string) {
     const selectedClass = this.classNsubjects.find(c => c.classNumber === classNumber);
@@ -121,4 +135,58 @@ export class TeachersComponent implements OnInit {
 console.log(email,subject);
 
   }
+
+  openAddSubjectModal() {
+    const modal = document.getElementById('add-subject-modal') as HTMLDialogElement;
+    if (modal) {
+       modal.showModal();
+    }
+   }
+
+   openAddClassModal() {
+    const modal = document.getElementById('add-class-modal') as HTMLDialogElement;
+    if (modal) {
+       modal.showModal();
+    }
+   }
+   
+
+   closeModal(modalId: string) {
+    // this.form.reset();
+    this.selectedClass='';
+    this.selectedSubject ='';
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+       modal.close();
+    }
+}
+
+addNewClass(){
+
+}
+
+
+expandModal() {
+  const modal = this.el.nativeElement.querySelector('.modal');
+    this.renderer.addClass(modal, 'modal-expanded');
+ }
+ 
+ collapseModal() {
+  const modal = this.el.nativeElement.querySelector('.modal');
+  this.renderer.removeClass(modal, 'modal-expanded');
+ }
+
+
+ onDropdownToggle(event: Event) {
+  const details = event.target as HTMLDetailsElement;
+  const modal = this.el.nativeElement.querySelector('.modal')
+  if (details.open) {
+     // Dropdown is open, expand the modal
+     this.renderer.addClass(modal,'modal-expanded');
+  } else {
+     // Dropdown is closed, return modal to normal size
+     this.renderer.removeClass(modal,'modal-expanded');
+  }
+ }
+
 }

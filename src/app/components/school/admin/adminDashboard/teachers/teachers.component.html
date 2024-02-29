@@ -1,44 +1,10 @@
-<div class="flex">
+<!-- <div class="flex"> -->
   <div>
       <app-side-nav></app-side-nav>
   </div>
-  <div class="my-12 top-32 right p-4  justify-around">
 
-    <div class=" my-12 top-32 right p-4  justify-around">
-
-        <ng-container  *ngIf="classNsubjects">
-      
-          <div class=" card-container flex flex-row mx-4">
-            <div *ngFor="let classSubject of classNsubjects" class="card-item">
-      
-              <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                  <h2 class="card-title">class: {{ classSubject.classNumber }}</h2>
-                  <p *ngFor="let subject of classSubject.subjects">{{ subject }}</p>
-                </div>
-              </div>
-              
-            </div>
-         
-       
-      </div>
-      </ng-container>
-      
-      </div>
-      
-      <div class="card card-compact w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
-  </div>
       <!-- The button to open modal -->
 <div *ngIf="!hideRest">
-
   <label for="my_modal_6" class="btn absolute top-3 right-2 mr-4 ">Add Teacher</label>
 </div>
 
@@ -101,42 +67,110 @@
       </div>
 
 
-      <div *ngIf="hideRest">
-  <label (click)="reloadPage()" for="my_modal_6" class="btn absolute top-3 right-2 mr-4 ">Back</label>
+      
+  <!-- <label (click)="reloadPage()" for="my_modal_6" class="btn absolute top-3 right-2 mr-4 ">Back</label> -->
 
-  <div *ngFor="let teacher of teacherData; let i = index">
-    <div class="absolute top-3 right-96 mr-4">
+  <!-- <div *ngFor="let teacher of teacherData; let i = index"> -->
+    <div class="py-20 grid grid-cols-1">
 
         
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>view subjects</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let teacher of teacherData; let j = index">
+            <tr>
+              <td>{{j+1}}</td>
+              <td>{{ teacher.name}}</td>
+              <td>
+                <button class="btn" (click)="viewDetails(j)">view Details</button>
+
+        </td>
+        <td>
+
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Class</th>
-                <th>Subjects</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let classSubject of teacher.classNsub; let j = index">
-                <tr>
-                  <td>{{ classSubject.classNum }}</td>
-                  <td>
-                    <ul>
-                      <li *ngFor="let subject of classSubject.subject">
-                        {{ subject }}
-                    </li>
-                </ul>
-            </td>
-            <td>
-  
-                  </td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-        </div>
         
-      </div>
+        
+      
 
+<!-- </div> -->
+
+
+<!-- Open the modal using ID.showModal() method -->
+
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box">
+     <h3 class="font-bold text-lg">Teacher Details</h3>
+     <div *ngIf="currentTeacherDetails">
+       <p>Name: {{currentTeacherDetails.name}}</p>
+       <ul>
+         <li *ngFor="let classDetail of currentTeacherDetails.classNsub">
+           <strong>Class:</strong> {{classDetail.classNum}}
+           <ul>
+             <li *ngFor="let subject of classDetail.subject">
+               {{subject}}
+             </li>
+           </ul>
+         </li>
+       </ul>
+     </div>
+     <div class="modal-action">
+      <button class="btn" (click)="openAddClassModal()">Add New Class</button>
+    
+
+       <form method="dialog">
+         <button class="btn">Close</button>
+       </form>
+     </div>
+  </div>
+ </dialog>
+
+
+ <!-- Add Class Modal -->
+<dialog id="add-class-modal" class="modal">
+<div class=" flex">
+
+  <div class="modal-box ">
+     <h3 class="font-bold text-lg">Add New Class</h3>
+     <form (submit)="addNewClass()">
+       <label for="className">Class Name:</label>
+       <details class="dropdown" (toggle)="onDropdownToggle($event)" (toggle)="expandModal()" (toggle)="collapseModal()">
+        <summary class="m-1 btn">{{ selectedClass ? selectedClass : 'Select Class' }}</summary>
+        <ul
+            class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 max-h-40 overflow-hidden ">
+            <li *ngFor="let classSubject of classNsubjects" (click)="selectClass(classSubject.classNumber)">
+                <a>{{ classSubject.classNumber }}</a>
+            </li>
+        </ul>
+    </details>
+       <!-- <input type="text" id="className" [(ngModel)]="newClassName" name="className"> -->
+       <label for="newSubjectName">Subject Name:</label>
+       <details class="dropdown" [open]="isClassDropdownOpen">
+        <summary class="m-1 btn">{{ selectedSubject ? selectedSubject : 'Select Subject' }}</summary>
+        <ul
+            class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 max-h-40 overflow-hidden">
+            <li *ngFor="let subject of selectedClassSubjects" (click)="selectedSubject = subject">
+                <a>{{ subject }}</a>
+            </li>
+        </ul>
+    </details>
+       <!-- <input type="text" id="newSubjectName" [(ngModel)]="newSubjectName" name="newSubjectName"> -->
+       <button class="btn" type="submit">Add Class</button>
+       <button class=" mx-2 btn" type="button" (click)="closeModal('add-class-modal')">Cancel</button>
+     </form>
+  </div>
 </div>
+ </dialog>
+ 
+ 

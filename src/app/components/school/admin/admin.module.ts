@@ -12,6 +12,7 @@ import { TeachersComponent } from './adminDashboard/teachers/teachers.component'
 import { SubjectsComponent } from './adminDashboard/subjects/subjects.component';
 import { ClassComponent } from './adminDashboard/class/class.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StudentsComponent } from './adminDashboard/students/students.component';
 
 
 
@@ -24,7 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DashboardComponent,
     TeachersComponent,
     SubjectsComponent,
-    ClassComponent
+    ClassComponent,
+    StudentsComponent
 
   ],
   imports: [

@@ -19,3 +19,15 @@
     width: calc(33.33% - 16px); /* Adjust width as needed */
     margin-bottom: 16px; /* Adjust margin between cards */
   }
+
+  .modal {
+    /* Your existing modal styles */
+    transition: max-height 0.3s ease-out; /* Add a transition for smooth animation */
+  }
+  
+  .modal-expanded {
+    max-height: none; /* Increase the max-height to allow the modal to expand */
+    height: auto; /* Set height to auto to adjust according to content */
+  }
+  
+
