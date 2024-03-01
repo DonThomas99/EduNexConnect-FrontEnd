@@ -79,6 +79,8 @@
           <tr>
             <th></th>
             <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
             <th>view subjects</th>
             <th>Action</th>
           </tr>
@@ -88,6 +90,8 @@
             <tr>
               <td>{{j+1}}</td>
               <td>{{ teacher.name}}</td>
+              <td>{{teacher.email}}</td>
+              <td>{{teacher.password}}</td>
               <td>
                 <button class="btn" (click)="viewDetails(j)">view Details</button>
 
@@ -114,6 +118,7 @@
      <h3 class="font-bold text-lg">Teacher Details</h3>
      <div *ngIf="currentTeacherDetails">
        <p>Name: {{currentTeacherDetails.name}}</p>
+
        <ul>
          <li *ngFor="let classDetail of currentTeacherDetails.classNsub">
            <strong>Class:</strong> {{classDetail.classNum}}
@@ -143,7 +148,9 @@
 
   <div class="modal-box ">
      <h3 class="font-bold text-lg">Add New Class</h3>
-     <form (submit)="addNewClass()">
+     <form (submit)="addNewClass('add-class-modal')">
+      <input type="hidden" id="teacherEmail" value="{{currentTeacherDetails?.email}}" [(ngModel)]="teacherEmail" name="teacherEmail">
+
        <label for="className">Class Name:</label>
        <details class="dropdown" (toggle)="onDropdownToggle($event)" (toggle)="expandModal()" (toggle)="collapseModal()">
         <summary class="m-1 btn">{{ selectedClass ? selectedClass : 'Select Class' }}</summary>

@@ -55,6 +55,10 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
   fetchTeacherData(tenantId:string):Observable<IteacherData[]>{
     return this.http.get<IteacherData[]>(`${this.backendURL}/${tenantId}/admin/fetchTeacherData`)
 }
+
+addSubToTeacher(teacherEmail:string,classNum:string,subject:string,tenantId:string){
+  return this.http.patch<Res>(`${this.backendURL}/${tenantId}/admin/addSubToTeacher`,{teacherEmail,classNum,subject})
+}
 }
 
 

@@ -10,6 +10,7 @@ import { selectTenantId } from 'src/app/states/school/school.selector';
 import Swal from 'sweetalert2';
 import { IteacherData } from 'src/app/Models/teacher';
 import { classSubjects } from 'src/app/Models/subject';
+import { Res } from 'src/app/Models/common';
 
 @Component({
   selector: 'app-teachers',
@@ -29,6 +30,7 @@ export class TeachersComponent implements OnInit {
   selectedClassSubjects: string[] = [];
   selectedClass: string = '';
   selectedSubject: string = '';
+  teacherEmail:string ='';
 
   constructor(
     private readonly formBuilder:FormBuilder,
@@ -161,9 +163,48 @@ console.log(email,subject);
     }
 }
 
-addNewClass(){
+addNewClass(modalId:string) {
+  const teacherEmail = (document.getElementById('teacherEmail') as HTMLInputElement).value;
+  this.teacherEmail = teacherEmail;
+  this.schoolAdminService.addSubToTeacher(this.teacherEmail,this.selectedClass,this.selectedSubject,this.tenantId).subscribe({
+    next:(res:Res)=>{
+      void Swal.fire({
+        icon:'success',
+        title:res,
+      }).then(() => {
+        window.location.reload();
+      });            
+      this.selectedClass='';
+      this.selectedSubject ='';
+      const modal = document.getElementById(modalId) as HTMLDialogElement;
+      if (modal) {
+         modal.close();
+      }
+    },
+    
+    error: (error) => {
+      console.log(error);
+      void Swal.fire({
+        icon:'error',
+        title:error.error,
+      }).then(() => {
+        window.location.reload();
+      });
+      this.selectedClass='';
+      this.selectedSubject ='';
+      const modal = document.getElementById(modalId) as HTMLDialogElement;
+      if (modal) {
+         modal.close();
+      }
+    }
 
-}
+    
+
+  });
+  
+
+ }
+ 
 
 
 expandModal() {
