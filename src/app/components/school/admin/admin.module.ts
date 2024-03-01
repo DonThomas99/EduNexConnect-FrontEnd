@@ -13,6 +13,9 @@ import { SubjectsComponent } from './adminDashboard/subjects/subjects.component'
 import { ClassComponent } from './adminDashboard/class/class.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StudentsComponent } from './adminDashboard/students/students.component';
+import { EmailValidationComponent } from '../../common/email-validation/email-validation.component';
+import { NameValidationComponent } from '../../common/name-validation/name-validation.component';
+import { MobileValidationComponent } from '../../common/mobile-validation/mobile-validation.component';
 
 
 
@@ -26,8 +29,8 @@ import { StudentsComponent } from './adminDashboard/students/students.component'
     TeachersComponent,
     SubjectsComponent,
     ClassComponent,
-    StudentsComponent
-
+    StudentsComponent,
+   
   ],
   imports: [
     FormsModule,
@@ -35,7 +38,10 @@ import { StudentsComponent } from './adminDashboard/students/students.component'
     ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild([]),
-    AdminRoutingModule
+    AdminRoutingModule,
+    EmailValidationComponent,
+    NameValidationComponent,
+    MobileValidationComponent
   ]
 })
 export class AdminModule { }
