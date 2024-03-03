@@ -8,6 +8,7 @@ import { classValidators, emailValidators, mobileValidators, nameValidators } fr
 import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
 import { StudentInfo } from 'src/app/Models/student';
+import { classSubjects, classes } from 'src/app/Models/subject';
 
 @Component({
   selector: 'app-students',
@@ -20,8 +21,18 @@ export class StudentsComponent implements OnInit{
  studentData!:StudentInfo[]
  tenantId!:string
  tenantId$= this.store.select(pipe(selectTenantId))
+//  groupedStudents:string[]=[]
+// groupedStudents: Record<string, StudentInfo[]> = {}; 
+students!
+:StudentInfo[]
+modalTitle!:string
+modalContent!:string
+isSubmitted=false;
+classNsubjects!: classSubjects[];
+filteredStudents!:StudentInfo[];
+classNumber!:string;
+selectedOption: string ='Select Class' ;
 
- isSubmitted=false;
 constructor(
   private readonly formBuilder:FormBuilder,
   private schoolAdminService:SchoolAdminService,
@@ -37,22 +48,35 @@ constructor(
       if(id)
       this.tenantId = id
   })
-  this.schoolAdminService.fetchStudents(this.tenantId).subscribe({
-    next:(res:StudentInfo[])=>{
-console.log(res);
 
+  this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
+    next: (res: classSubjects[]) => {
+      console.log(res);
+      const sortedRes = res.sort((a:classSubjects, b:classSubjects) => +a.classNumber - +b.classNumber);
+
+      this.classNsubjects = sortedRes;
     }
-  })
+  });
+  
+this.schoolAdminService.fetchStudents(this.tenantId).subscribe({
+ next: (res: StudentInfo[]) => {
+this.students = res
+console.log(this.students[0]);
+
+ }
+})
 
 this.form=this.formBuilder.group({
       email:['',validateBytrimming(emailValidators)],
       name :['',validateBytrimming(nameValidators)],
       gaurdianName:['',validateBytrimming(nameValidators)],
-      classNum:['',classValidators],
+      classNum: [this.selectedOption || '', classValidators],
       mobile:['',validateBytrimming(mobileValidators)]
     })
   }
   submit(){
+    console.log(this.form);
+    
     this.isSubmitted = true
     if(this.form.valid){
       const student = this.form.getRawValue()
@@ -79,9 +103,27 @@ this.form=this.formBuilder.group({
     this.form.reset()
     this.isSubmitted= false
   }
-  openModal(){
-    this.form.reset()
-    // this.isSubmitted=false;
-  }
- 
+
+   openModalWithClassNumber(classNumber: string){
+    this.classNumber = classNumber
+    this.filteredStudents =  this.students.filter(student => student.classNum === classNumber)
+    
+    this.showModal('my_modal_1')
 }
+showModal(id:string){
+  const modal = document.getElementById(id) as HTMLDialogElement  ;
+  if (modal) {
+     modal.showModal();
+  }
+ }
+
+ 
+
+ updateSelectedOption(option: string) {
+    this.form.get('classNum')!.setValue(option);
+  this.selectedOption = option;
+}
+
+}
+
+

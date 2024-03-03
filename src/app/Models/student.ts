@@ -1,8 +1,8 @@
 export interface StudentInfo {
-    studentName: string;
-    parentName: string;
-    studentEmail: string;
-    guardianMobile: string;
-    classNumber: string;
+    name: string;
+    gaurdianName: string;
+    email: string;
+    mobile: string;
+    classNum: string;
    }
    
