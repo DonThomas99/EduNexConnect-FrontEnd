@@ -9,12 +9,15 @@
 
     <div   class="  px-20 mt-28  grid lg:grid-cols-3 ">
            <!-- Open the modal using ID.showModal() method -->
-   <button class="btn" (click)="openModalWithClassNumber(class.classNumber)">class:{{class.classNumber}}</button>
+   <button class="btn" (click)="openModalWithClassNumber(class.classNumber)">Class: {{class.classNumber}}</button>
    </div>
 </div>
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
     <h3 class="font-bold text-lg"> Class: {{classNumber}}</h3>
+    <div *ngIf="filteredStudents.length ==0">
+      <h3 class="font-mono text-red-800 text-3xl"> Please Add Students !!!</h3>
+    </div>
     <div *ngFor="let student of filteredStudents let j = index">
 
         <div class="overflow-x-auto">
@@ -27,6 +30,7 @@
                   <th>email</th>
                   <th>Gaurdian Name</th>
                   <th>Mobile</th>
+                  <th>Password</th>
                 </tr>
               </thead>
               <tbody>
@@ -37,6 +41,7 @@
                   <td>{{student.email}}</td>
                   <td>{{student.gaurdianName}}</td>
                   <td>{{student.mobile}}</td>
+                  <td>{{student.password}}</td>
                 </tr>
               </tbody>
             </table>
@@ -108,7 +113,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
                 </button>
-                <input  formControlName="classNum" type="text" name="classNumber" id="classNumber"  value="{{selectedOption}}" required />
+                <input hidden formControlName="classNum" type="text" name="classNumber" id="classNumber"  value="{{selectedOption}}" required />
 
                           <!-- Dropdown menu -->
         <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">

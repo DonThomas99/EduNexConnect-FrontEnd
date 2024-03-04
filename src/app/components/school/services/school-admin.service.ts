@@ -10,7 +10,7 @@ import { selectTenantId } from 'src/app/states/school/school.selector';
 // import { selectTenantDetails } from 'src/app/states/tenant/tenant.selector';
 import { environments } from 'src/environments/environment';
 import { IteacherData, TeacherData } from 'src/app/Models/teacher';
-import { StudentInfo } from 'src/app/Models/student';
+import { IStudent, StudentInfo } from 'src/app/Models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,7 @@ addStudent(student:StudentInfo,tenantId:string){
 }
 
 fetchStudents(tenantId:string){
-  const array:StudentInfo[]=[]
+  const array:IStudent[]=[]
   return this.http.get<typeof array>(`${this.backendURL}/${tenantId}/admin/fetchStudents`)
 }
 

@@ -7,7 +7,7 @@ import { validateBytrimming } from 'src/app/helpers/validations';
 import { classValidators, emailValidators, mobileValidators, nameValidators } from 'src/app/shared/validators';
 import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
-import { StudentInfo } from 'src/app/Models/student';
+import { IStudent, StudentInfo } from 'src/app/Models/student';
 import { classSubjects, classes } from 'src/app/Models/subject';
 
 @Component({
@@ -23,13 +23,12 @@ export class StudentsComponent implements OnInit{
  tenantId$= this.store.select(pipe(selectTenantId))
 //  groupedStudents:string[]=[]
 // groupedStudents: Record<string, StudentInfo[]> = {}; 
-students!
-:StudentInfo[]
+students!:IStudent[]
 modalTitle!:string
 modalContent!:string
 isSubmitted=false;
 classNsubjects!: classSubjects[];
-filteredStudents!:StudentInfo[];
+filteredStudents!:IStudent[];
 classNumber!:string;
 selectedOption: string ='Select Class' ;
 
@@ -59,9 +58,9 @@ constructor(
   });
   
 this.schoolAdminService.fetchStudents(this.tenantId).subscribe({
- next: (res: StudentInfo[]) => {
+ next: (res: IStudent[]) => {
 this.students = res
-console.log(this.students[0]);
+console.log(this.students[0].password);
 
  }
 })

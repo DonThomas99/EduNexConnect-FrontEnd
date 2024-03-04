@@ -66,44 +66,52 @@
           </div>
       </div>
 
+        <ng-container *ngIf="teacherDataLength == 0">
+          <div class="py-20 px-80 ">
+            <h3 class="font-mono text-red-800 text-3xl"> Please Add Teacher!!!</h3>
+          </div>
+        </ng-container>
+<ng-container *ngIf="teacherDataLength>0">
 
-      
-  <!-- <label (click)="reloadPage()" for="my_modal_6" class="btn absolute top-3 right-2 mr-4 ">Back</label> -->
-
-  <!-- <div *ngFor="let teacher of teacherData; let i = index"> -->
-    <div class="py-20 grid grid-cols-1">
+  <div  class="py-20 grid grid-cols-1">
 
         
-      <table class="table">
-        <thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>view subjects</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let teacher of teacherData; let j = index">
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>view subjects</th>
-            <th>Action</th>
+            <td>{{j+1}}</td>
+            <td>{{ teacher.name}}</td>
+            <td>{{teacher.email}}</td>
+            <td>{{teacher.password}}</td>
+            <td>
+              <button class="btn" (click)="viewDetails(j)">view Details</button>
+
+      </td>
+      <td>
+
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let teacher of teacherData; let j = index">
-            <tr>
-              <td>{{j+1}}</td>
-              <td>{{ teacher.name}}</td>
-              <td>{{teacher.email}}</td>
-              <td>{{teacher.password}}</td>
-              <td>
-                <button class="btn" (click)="viewDetails(j)">view Details</button>
+        </ng-container>
+      </tbody>
+    </table>
 
-        </td>
-        <td>
 
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+  </div>
+
+</ng-container>
+        
+
         
         
       
