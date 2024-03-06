@@ -7,27 +7,30 @@
     <label for="my_modal_6" class="btn">Add Subject</label>
   </div>
 
-  <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6">
-    <ng-container *ngIf="classNsubjects">
+  <div class="grid lg:grid-cols-3 sm:grid-cols-1">
+
+      <ng-container *ngIf="classNsubjects.length ==0">
+      <h3 class="font-mono text-red-800 text-3xl"> Please Add Students !!!</h3>
+      </ng-container>
+
+    <ng-container *ngIf="classNsubjects.length>0">
       <div *ngFor="let classSubject of classNsubjects" >
 
-        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+        <div class="card card-compact w-96 bg-base-100 shadow-xl hover:shadow-slate-700 transition-transform hover:scale-105 my-6">
           
           <div class="card-body">
             <h2 class="card-title">class:{{classSubject.classNumber}}</h2>
             <p *ngFor="let subject of classSubject.subjects">
                 {{subject}}
+                
                 <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.classNumber, subject)"></i>
-            </p>
+              </p>
             <div class="card-actions justify-end">
             </div>
           </div>
         </div>
       </div>
     </ng-container>
-
-    
-
   </div>
         
  

@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatTooltipModule} from '@angular/material/tooltip'
 import { TenantInterceptorInterceptor } from './interceptors/tenant-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { ClassNumValidationComponent } from './components/common/class-num-validation/class-num-validation.component';
 
 
 
@@ -25,6 +26,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     AppComponent,
     TenantVerifyOtpComponent,
     ForgotPasswordComponent,
+    ClassNumValidationComponent,
     
     
     

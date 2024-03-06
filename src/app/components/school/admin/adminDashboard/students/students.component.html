@@ -1,1 +1,137 @@
 <app-side-nav></app-side-nav>
+
+
+
+
+
+<!-- Student List Button and  Modal Begins  -->
+<div *ngFor="let class of classNsubjects"> 
+
+    <div   class="  px-20 mt-28  grid lg:grid-cols-3 ">
+           <!-- Open the modal using ID.showModal() method -->
+   <button class="btn" (click)="openModalWithClassNumber(class.classNumber)">Class: {{class.classNumber}}</button>
+   </div>
+</div>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <h3 class="font-bold text-lg"> Class: {{classNumber}}</h3>
+    <div *ngIf="filteredStudents.length ==0">
+      <h3 class="font-mono text-red-800 text-3xl"> Please Add Students !!!</h3>
+    </div>
+    <div *ngFor="let student of filteredStudents let j = index">
+
+        <div class="overflow-x-auto">
+            <table class="table table-zebra">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>email</th>
+                  <th>Gaurdian Name</th>
+                  <th>Mobile</th>
+                  <th>Password</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                  <th>{{j+1}}</th>
+                  <td>{{student.name}}</td>
+                  <td>{{student.email}}</td>
+                  <td>{{student.gaurdianName}}</td>
+                  <td>{{student.mobile}}</td>
+                  <td>{{student.password}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>   
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+<!-- Student List Button and Modal Ends -->
+
+<!-- Enroll Form Button and Modal Begins -->
+
+<!-- Modal toggle -->
+<button  data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" fixed btn  top-3 right-2 mr-4" type="button">
+    Add Student
+  </button>
+  
+  <!-- Main modal -->
+  <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+         <!-- Modal content -->
+         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+             <!-- Modal header -->
+             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Student Details
+                 </h3>
+                 <button (onclick)="this.closeModal()" type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span  class="sr-only">Close modal</span>
+                 </button>
+             </div>
+             <!-- Modal body -->
+             <div class="p-4 md:p-5">
+                 <form [formGroup]="form" class="space-y-4" (ngSubmit)="submit()">
+                    <div>
+                         <label for="studentName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student Name</label>
+                         <input formControlName="name" type="text" name="studentName" id="studentName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter Student Name" required />
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"> </app-name-validation>
+                    
+                    </div>
+                    <div>
+                         <label for="parentName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Parent/Guardian's Name</label>
+                         <input formControlName="gaurdianName" type="text" name="parentName" id="parentName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter Parent/Guardian's Name" required />
+                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"> </app-name-validation>
+                   
+                    </div>
+                    <div>
+                         <label for="studentEmail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student Email</label>
+                         <input formControlName="email" type="email" name="studentEmail" id="studentEmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@example.com" required />
+                  <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
+                        </div>
+                        <div>
+                            <label for="guardianMobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Guardian's Mobile</label>
+                            <input formControlName="mobile" type="tel" name="guardianMobile" id="guardianMobile" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter Mobile Number" required />
+                            <app-mobile-validation [mobileControl]="form.get('mobile')" [isSubmitted]="isSubmitted"></app-mobile-validation>
+                    </div>
+                    <!-- <div>
+                    </div> -->
+                    <label for="classNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose Class</label>
+                    <button id="dropdownRadioBgHoverButton" data-dropdown-toggle="dropdownRadioBgHover" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">{{selectedOption}} <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <input hidden formControlName="classNum" type="text" name="classNumber" id="classNumber"  value="{{selectedOption}}" required />
+
+                          <!-- Dropdown menu -->
+        <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+            <ul *ngFor="let class of classNsubjects" class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioBgHoverButton">
+              <li>
+                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <input id="default-radio-4" [value]="class.classNumber"  type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" (change)="updateSelectedOption(class.classNumber)">
+                    <label for="default-radio-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{class.classNumber}}</label>
+                </div>
+              </li>            
+            </ul>
+        </div>
+
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                 </form>
+             </div>
+         </div>
+    </div>
+   </div>
+<!-- Enroll Form Button and Modal Ends -->   
+   

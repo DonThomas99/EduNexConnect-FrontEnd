@@ -31,6 +31,7 @@ export class TeachersComponent implements OnInit {
   selectedClass: string = '';
   selectedSubject: string = '';
   teacherEmail:string ='';
+  teacherDataLength=0
 
   constructor(
     private readonly formBuilder:FormBuilder,
@@ -55,7 +56,8 @@ export class TeachersComponent implements OnInit {
     this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
       next:(res:IteacherData[])=>{
         this.teacherData = res
-        console.log(this.teacherData);
+        this.teacherDataLength= this.teacherData.length
+
       }
     })
 
