@@ -1,1 +1,25 @@
-<p>student-dashboard works!</p>
+<app-student-side-nav></app-student-side-nav>
+<div class="flex px-20 mt-28">
+    <!-- <div class=" grid grid-cols-1 lg:grid-cols-3"> -->
+
+        
+        <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6">          
+            <ng-container >
+                <div *ngFor="let class of classData" class="max-w-xs overflow-hidden transition-transform hover:scale-100 cursor-pointer shadow-lg hover:shadow-slate-500 rounded-lg">
+                  <div class="h-32 overflow-hidden">
+                    <figure>
+                      <span></span>
+                      <img class="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains">
+                    </figure>
+                  </div>
+                  <div class="px-4 py-4 h-60">
+                    <div class="font-bold text-xl mb-2">Class: </div>
+                    <div  class="text-gray-700 text-base">
+                      <p>{{ class.name }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              
+            </div>
+        </div>

@@ -26,3 +26,8 @@ export  interface Subject {
     name: string;
   }
   
+  export interface SubjectsDoc{
+    _id:string,
+    name:string
+  }
+  

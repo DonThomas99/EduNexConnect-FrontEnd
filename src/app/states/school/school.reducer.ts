@@ -62,6 +62,10 @@ export const initialTenantState: IdState = {
     tenantId: null,    
 }
 
+export const initialStudentState:StudentState={
+    email:null
+}
+
 export const IdReducer = createReducer(
     initialTenantState,
     on(saveTenantIdOnStore,(state,{tenantId})=>{
@@ -101,6 +105,8 @@ export const teacherDataReducer = createReducer(
         return {...state,teacherData:null}
     })
 )
+
+
 
 export const studentDataReducer = createReducer(
     initialStudentDataState,
