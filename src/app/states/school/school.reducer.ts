@@ -17,7 +17,8 @@ export interface TeacherDataState{
     classNsub:[{
       classNum:string;
       subject:string[];
-    }]
+    }];
+    isBlocked:boolean;
 }
 
 
@@ -43,6 +44,7 @@ export const initialTeacherDataState:TeacherDataState ={
             classNum:'',
             subject:[]
         }],
+        isBlocked:false
 }
 
 export const initialStudentDataState:StudentDataState={

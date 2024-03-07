@@ -16,6 +16,8 @@ import {MatTooltipModule} from '@angular/material/tooltip'
 import { TenantInterceptorInterceptor } from './interceptors/tenant-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ClassNumValidationComponent } from './components/common/class-num-validation/class-num-validation.component';
+import { ConfirmationDialogComponent } from './components/common/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -27,11 +29,13 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     TenantVerifyOtpComponent,
     ForgotPasswordComponent,
     ClassNumValidationComponent,
+    ConfirmationDialogComponent,
     
     
     
   ],
   imports: [
+    MatDialogModule,
     ToastrModule.forRoot(),
     MatTooltipModule,
     MatSlideToggleModule,

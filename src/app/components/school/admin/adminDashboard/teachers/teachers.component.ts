@@ -11,6 +11,9 @@ import Swal from 'sweetalert2';
 import { IteacherData } from 'src/app/Models/teacher';
 import { classSubjects } from 'src/app/Models/subject';
 import { Res } from 'src/app/Models/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-teachers',
@@ -31,15 +34,19 @@ export class TeachersComponent implements OnInit {
   selectedClass: string = '';
   selectedSubject: string = '';
   teacherEmail:string ='';
-  teacherDataLength=0
+  teacherDataLength=0;
+   status!:string;
+
 
   constructor(
+    private dialog:MatDialog,
     private readonly formBuilder:FormBuilder,
     private schoolAdminService:SchoolAdminService,
     private readonly router:Router,
     private readonly store:Store,
     private renderer:Renderer2,
-    private el:ElementRef
+    private el:ElementRef,
+    private toastr:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -230,6 +237,33 @@ expandModal() {
      // Dropdown is closed, return modal to normal size
      this.renderer.removeClass(modal,'modal-expanded');
   }
+ }
+confirmToggleBlock(email:string,name:string,isBlocked:boolean){
+  if(isBlocked){
+    this.status = 'Unblock'
+  }else{
+    this.status = 'Block'
+  }
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+    data:{message:`Are you sure you want to ${this.status} ${name}`}
+  })
+dialogRef.afterClosed().subscribe(result =>{
+  if(result){
+    this.toggleBlock(email)
+  }
+})
+
+}
+ toggleBlock(email:string){
+    console.log('block action confirmed');
+    this.schoolAdminService.toggleBlock(email,this.tenantId).subscribe({
+      next:(res=>{
+        const mes = res as unknown as string
+        
+        this.toastr.success(mes)
+        window.location.reload()
+      })
+    })
  }
 
 }

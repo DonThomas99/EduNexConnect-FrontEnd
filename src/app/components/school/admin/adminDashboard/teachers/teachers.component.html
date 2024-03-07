@@ -99,7 +99,10 @@
 
       </td>
       <td>
-
+        <button class="btn " [ngClass]="{'bg-red-500 hover:bg-red-700': teacher.isBlocked, 'bg-green-500 hover:bg-green-700': !teacher.isBlocked}" 
+        (click)="confirmToggleBlock(teacher.email,teacher.name,teacher.isBlocked)">
+  {{teacher.isBlocked ? 'Unblock' : 'Block'}}
+</button>
             </td>
           </tr>
         </ng-container>

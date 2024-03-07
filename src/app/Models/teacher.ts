@@ -11,5 +11,6 @@ export interface TeacherData {
     classNsub:[{
       classNum:string;
       subject:string[];
-    }]
+    }];
+    isBlocked:boolean;
   }

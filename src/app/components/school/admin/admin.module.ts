@@ -16,6 +16,7 @@ import { StudentsComponent } from './adminDashboard/students/students.component'
 import { EmailValidationComponent } from '../../common/email-validation/email-validation.component';
 import { NameValidationComponent } from '../../common/name-validation/name-validation.component';
 import { MobileValidationComponent } from '../../common/mobile-validation/mobile-validation.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -33,6 +34,9 @@ import { MobileValidationComponent } from '../../common/mobile-validation/mobile
    
   ],
   imports: [
+    ToastrModule.forRoot({
+      positionClass:'toast-bottom-right'
+    }),
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,

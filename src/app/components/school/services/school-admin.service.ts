@@ -11,6 +11,7 @@ import { selectTenantId } from 'src/app/states/school/school.selector';
 import { environments } from 'src/environments/environment';
 import { IteacherData, TeacherData } from 'src/app/Models/teacher';
 import { IStudent, StudentInfo } from 'src/app/Models/student';
+import { faLaptopHouse } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root'
@@ -76,7 +77,11 @@ fetchStudents(tenantId:string){
   const array:IStudent[]=[]
   return this.http.get<typeof array>(`${this.backendURL}/${tenantId}/admin/fetchStudents`)
 }
-
+toggleBlock(email:string,tenantId:string){
+  console.log('tenantId:',tenantId);
+  console.log('email:',email);  
+  return this.http.post<Res>(`${this.backendURL}/${tenantId}/admin/toggleBlock`,{email})
+}
 }
 
 

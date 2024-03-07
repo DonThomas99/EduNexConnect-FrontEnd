@@ -52,9 +52,7 @@ submit(){
   console.log(this.form);
   
   if(this.form.valid){
-    const data = this.form.getRawValue()
-    console.log('kindi');
-    
+    const data = this.form.getRawValue()    
     this.studentService.studentLogin(this.tenantId,data.email,data.password).subscribe({
       next:(res:Res )=>{ 
 // this.store.dispatch(setStudentEmail(this.studentEmail))
