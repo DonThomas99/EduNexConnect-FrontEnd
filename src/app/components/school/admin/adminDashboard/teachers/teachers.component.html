@@ -1,12 +1,15 @@
 <!-- <div class="flex"> -->
-  <div>
-      <app-side-nav></app-side-nav>
-  </div>
+        <app-side-nav></app-side-nav>
+  
 
-      <!-- The button to open modal -->
-<div *ngIf="!hideRest">
-  <label for="my_modal_6" class="btn absolute top-3 right-2 mr-4 ">Add Teacher</label>
-</div>
+ 
+  <!-- The button to open modal -->
+  <div class="z-20 fixed  right-px p-1  justify-around">
+    <div *ngIf="!hideRest">
+      <label  for="my_modal_6" class="btn  ">Add Teacher</label>
+    </div>
+  </div>
+ 
 
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my_modal_6" class="modal-toggle" />

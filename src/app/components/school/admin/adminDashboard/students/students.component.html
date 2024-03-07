@@ -2,16 +2,18 @@
 
 
 
+<div class="flex flex-row flex-wrap justify-center px-8 mt-28">
+  <div *ngFor="let class of classNsubjects"> 
 
-
-<!-- Student List Button and  Modal Begins  -->
-<div *ngFor="let class of classNsubjects"> 
-
-    <div   class="  px-20 mt-28  grid lg:grid-cols-3 ">
+    <div   class="p-8">
            <!-- Open the modal using ID.showModal() method -->
-   <button class="btn" (click)="openModalWithClassNumber(class.classNumber)">Class: {{class.classNumber}}</button>
+   <button class="btn bg-blue-600 hover:bg-blue-700 px-14 w-44 text-white" (click)="openModalWithClassNumber(class.classNumber)">Class: {{class.classNumber}}</button>
    </div>
 </div>
+</div>
+
+<!-- Student List Button and  Modal Begins  -->
+
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box w-11/12 max-w-5xl">
     <h3 class="font-bold text-lg"> Class: {{classNumber}}</h3>
@@ -60,9 +62,11 @@
 <!-- Enroll Form Button and Modal Begins -->
 
 <!-- Modal toggle -->
-<button  data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" fixed btn  top-3 right-2 mr-4" type="button">
+ <div>
+  <button   data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" z-20 fixed btn  top-3 right-2 mr-4" type="button">
     Add Student
   </button>
+</div>
   
   <!-- Main modal -->
   <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
