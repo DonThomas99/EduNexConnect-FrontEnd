@@ -19,11 +19,11 @@
         <div class="card card-compact w-96 bg-base-100 shadow-xl hover:shadow-slate-700 transition-transform hover:scale-105 my-6">
           
           <div class="card-body">
-            <h2 class="card-title">class:{{classSubject.classNumber}}</h2>
+            <h2 class="card-title">class:{{classSubject.class}}</h2>
             <p *ngFor="let subject of classSubject.subjects">
-                {{subject}}
+                {{subject.name}}
                 
-                <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.classNumber, subject)"></i>
+                <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.class, subject.name)"></i>
               </p>
             <div class="card-actions justify-end">
             </div>

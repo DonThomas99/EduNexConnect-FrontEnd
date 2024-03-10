@@ -6,8 +6,8 @@ export interface subjects {
 }
 
 export interface classSubjects{
-classNumber:string
-subjects:string[]
+class:string
+subjects:SubjectsDoc[]
 }
 
 export interface classes{

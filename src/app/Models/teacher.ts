@@ -1,8 +1,11 @@
+import { SubjectsDoc } from "./subject";
+
 export interface TeacherData {
     email:string;
     name: string;
     class: string;
-    subject: string;
+    subjectId: string;
+    subjectName:string;
   }
   export interface  IteacherData{
     email:string;
@@ -10,7 +13,13 @@ export interface TeacherData {
     password:string;
     classNsub:[{
       classNum:string;
-      subject:string[];
+      subject:SubjectsDoc[];
     }];
     isBlocked:boolean;
+  }
+
+  export interface subjectsNclass{
+    _id:string,
+    name:string,
+    classNum:string
   }

@@ -1,6 +1,7 @@
 import { createReducer,on } from "@ngrx/store";
 import { type ITenantRes } from "src/app/Models/tenants";
 import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData } from "./school.actions";
+import { SubjectsDoc } from "src/app/Models/subject";
 
 export interface IdState{
     tenantId: string|null;
@@ -16,7 +17,7 @@ export interface TeacherDataState{
     password:string;
     classNsub:[{
       classNum:string;
-      subject:string[];
+      subject:SubjectsDoc[];
     }];
     isBlocked:boolean;
 }

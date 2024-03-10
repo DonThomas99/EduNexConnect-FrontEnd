@@ -53,7 +53,7 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
     
     //Teacher CRUD operations 
     addTeachers(data:TeacherData,tenantId:string):Observable<Res>{    
-      console.log(data);
+      // console.log(data);
       return this.http.post<Res>(`${this.backendURL}/${tenantId}/admin/addTeachers`,{data}).pipe(
         tap(res => console.log('Received response:', res))
       );
@@ -63,8 +63,8 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
     return this.http.get<IteacherData[]>(`${this.backendURL}/${tenantId}/admin/fetchTeacherData`)
 }
 
-addSubToTeacher(teacherEmail:string,classNum:string,subject:string,tenantId:string){
-  return this.http.patch<Res>(`${this.backendURL}/${tenantId}/admin/addSubToTeacher`,{teacherEmail,classNum,subject})
+addSubToTeacher(teacherEmail:string,classNum:string,subjectId:string,subjectName:string,tenantId:string){
+  return this.http.patch<Res>(`${this.backendURL}/${tenantId}/admin/addSubToTeacher`,{teacherEmail,classNum,subjectName,subjectId})
 }
 
 

@@ -9,7 +9,7 @@ import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
 import Swal from 'sweetalert2';
 import { IteacherData } from 'src/app/Models/teacher';
-import { classSubjects } from 'src/app/Models/subject';
+import { SubjectsDoc, classSubjects } from 'src/app/Models/subject';
 import { Res } from 'src/app/Models/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
@@ -30,13 +30,14 @@ export class TeachersComponent implements OnInit {
   tenantId$= this.store.select(pipe(selectTenantId))
   currentTeacherDetails: IteacherData | null = null;
   classNsubjects!: classSubjects[];
-  selectedClassSubjects: string[] = [];
+  selectedClassSubjects: SubjectsDoc[] = [];
   selectedClass: string = '';
   selectedSubject: string = '';
   teacherEmail:string ='';
   teacherDataLength=0;
    status!:string;
-
+  selectedSubjectId!:string;
+  classSubArray!:SubjectsDoc[]; 
 
   constructor(
     private dialog:MatDialog,
@@ -60,21 +61,37 @@ export class TeachersComponent implements OnInit {
         this.tenantId = id
     })
     
-    this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
-      next:(res:IteacherData[])=>{
-        this.teacherData = res
-        this.teacherDataLength= this.teacherData.length
 
-      }
-    })
 
     this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
-      next:(res:classSubjects[])=>{
+      next:(res:classSubjects[])=>{        
         this.classNsubjects = res
+        this.fetchTeacherData()
       }
     })
   }
 
+
+  fetchTeacherData(){
+    this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
+      next:(res:IteacherData[])=>{
+        console.log(res);
+        
+        this.teacherData = res
+        this.teacherDataLength= this.teacherData.length
+          
+      }
+    })
+
+    this.classNsubjects.map(subject =>{
+      
+    })
+
+this.swapId(this.teacherData,this.classNsubjects)
+  }
+swapId(teacher:IteacherData[],subjectsData:classSubjects[]){
+
+}
 
 viewDetails(index: number) {
  this.currentTeacherDetails = this.teacherData[index];
@@ -87,7 +104,7 @@ viewDetails(index: number) {
 
 
   selectClass(classNumber: string) {
-    const selectedClass = this.classNsubjects.find(c => c.classNumber === classNumber);
+    const selectedClass = this.classNsubjects.find(c => c.class === classNumber);
     if (selectedClass) {
       this.selectedClassSubjects = selectedClass.subjects;
       this.selectedClass = classNumber;
@@ -106,7 +123,8 @@ viewDetails(index: number) {
         email: formData.email,
         name: formData.name,
         class: this.selectedClass,
-        subject: this.selectedSubject
+        subjectId: this.selectedSubjectId,
+        subjectName:this.selectedSubject
       };
       
       this.schoolAdminService.addTeachers(dataToSave, this.tenantId).subscribe({
@@ -175,7 +193,7 @@ console.log(email,subject);
 addNewClass(modalId:string) {
   const teacherEmail = (document.getElementById('teacherEmail') as HTMLInputElement).value;
   this.teacherEmail = teacherEmail;
-  this.schoolAdminService.addSubToTeacher(this.teacherEmail,this.selectedClass,this.selectedSubject,this.tenantId).subscribe({
+  this.schoolAdminService.addSubToTeacher(this.teacherEmail,this.selectedClass,this.selectedSubjectId,this.selectedSubject,this.tenantId).subscribe({
     next:(res:Res)=>{
       void Swal.fire({
         icon:'success',
@@ -185,6 +203,7 @@ addNewClass(modalId:string) {
       });            
       this.selectedClass='';
       this.selectedSubject ='';
+      this.selectedSubjectId ='';
       const modal = document.getElementById(modalId) as HTMLDialogElement;
       if (modal) {
          modal.close();

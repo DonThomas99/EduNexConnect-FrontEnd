@@ -51,7 +51,7 @@ constructor(
   this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
     next: (res: classSubjects[]) => {
       console.log(res);
-      const sortedRes = res.sort((a:classSubjects, b:classSubjects) => +a.classNumber - +b.classNumber);
+      const sortedRes = res.sort((a:classSubjects, b:classSubjects) => +a.class - +b.class);
 
       this.classNsubjects = sortedRes;
     }

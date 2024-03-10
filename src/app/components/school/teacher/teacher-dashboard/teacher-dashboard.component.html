@@ -6,8 +6,8 @@
         
         <div class="grid lg:grid-cols-3 sm:grid-cols-1 gap-6">
             
-            <ng-container *ngIf="teacherData">
-                <div *ngFor="let classData of teacherData.classNsub" class="max-w-xs overflow-hidden transition-transform hover:scale-100 cursor-pointer shadow-lg hover:shadow-slate-500 rounded-lg">
+            <ng-container *ngIf="teacherData" >
+                <div *ngFor="let classData of subjects" (click)="Openclass(classData._id,classData.classNum)" class="max-w-xs overflow-hidden transition-transform hover:scale-100 cursor-pointer shadow-lg hover:shadow-slate-500 rounded-lg">
                   <div class="h-32 overflow-hidden">
                     <figure>
                       <span></span>
@@ -16,9 +16,9 @@
                   </div>
                   <div class="px-4 py-4 h-60">
                     <div class="font-bold text-xl mb-2">Class: {{ classData.classNum }}</div>
-                    <div *ngFor="let subject of classData.subject" class="text-gray-700 text-base">
-                      <p>{{ subject }}</p>
-                    </div>
+                   
+                      <p>{{ classData.name }} </p>
+                    
                   </div>
                 </div>
               </ng-container>

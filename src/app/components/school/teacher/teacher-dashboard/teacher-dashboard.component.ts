@@ -5,8 +5,9 @@ import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
 import { selectTeacherData, selectTeacherEmail, selectTeacherState, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
-import { IteacherData } from 'src/app/Models/teacher';
+import { IteacherData, subjectsNclass } from 'src/app/Models/teacher';
 import { SaveTeacherData } from 'src/app/states/school/school.actions';
+import { SubjectsDoc, classSubjects } from 'src/app/Models/subject';
  
 @Component({
   selector: 'app-teacher-dashboard',
@@ -15,6 +16,8 @@ import { SaveTeacherData } from 'src/app/states/school/school.actions';
 })
 export class TeacherDashboardComponent implements OnInit {
   // form!:FormGroup
+  classNsubjects!:classSubjects[]
+  subjects!:subjectsNclass[]
   teacherData!:IteacherData
   teacherEmail!:string
   tenantId!:string
@@ -41,9 +44,23 @@ tenantId$ = this.store.select(pipe(selectTenantId))
   this.store.select(selectTeacherData).subscribe(data=>{
 if(data){
   this.teacherData = data
+  this.classNsubjects = this.teacherData.classNsub.map(classData => ({
+    class: classData.classNum,
+    subjects: classData.subject
+   }));
+   
+   this.subjects = this.classNsubjects.flatMap(subjectsI =>
+    subjectsI.subjects.map(subject => ({
+      _id: subject._id,
+      name: subject.name,
+      classNum: subjectsI.class // Assuming classNum is obtained from subjectsI
+    }))
+  );   
 }
   })
+  }
 
-  
+  Openclass(subjectId:string,classNum:string){
+
   }
 }
