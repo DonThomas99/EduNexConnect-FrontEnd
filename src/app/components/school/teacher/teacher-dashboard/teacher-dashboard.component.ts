@@ -63,7 +63,7 @@ if(data){
   Openclass(subjectId:string,classNum:string){
 
     
-    this.router.navigate(['school/teacher/subjectLanding'])
+    this.router.navigate(['school/teacher/stream'])
 
   }
 }

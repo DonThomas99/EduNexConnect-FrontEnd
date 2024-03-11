@@ -10,3 +10,4 @@ export const deleteTeacherData = createAction('[TeacherData] Delete Teacher Data
 export const setStudentEmail = createAction('[Student] Set Email',props<{studentEmail:string}>())
 export const saveStudentData = createAction('[StudentData Save Student Data on Store',props<{studentData:IStudent}>())
 export const deleteStudentData = createAction('[StudentData] Delete Student Data From Store')
+export const saveSubjectId = createAction('[SubjectId] Save subjectId on Store',props<{subjectId:string}>())

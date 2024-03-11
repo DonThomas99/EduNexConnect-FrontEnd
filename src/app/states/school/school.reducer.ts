@@ -1,10 +1,14 @@
 import { createReducer,on } from "@ngrx/store";
 import { type ITenantRes } from "src/app/Models/tenants";
-import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData } from "./school.actions";
+import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData, saveSubjectId } from "./school.actions";
 import { SubjectsDoc } from "src/app/Models/subject";
 
 export interface IdState{
     tenantId: string|null;
+}
+
+export interface subjectIdState{
+    subjectId:string|null
 }
 
 export interface TeacherState{
@@ -57,6 +61,9 @@ export const initialStudentDataState:StudentDataState={
     password:''
 }
 
+export const initialSubjectIdState:subjectIdState ={
+    subjectId:null
+}
 
 
 export const initialTeacherState:TeacherState ={
@@ -81,6 +88,14 @@ export const IdReducer = createReducer(
     on(deleteTenantFromStore,(state)=>{
         return {...state,tenantId:null}
     })
+)
+
+export const subjectIdReducer = createReducer(
+initialSubjectIdState,
+on(saveSubjectId,(state,{subjectId})=>{
+    console.log(subjectId,'subjectId');
+    return {...state,subjectId}
+})
 )
 
 export const teacherReducer = createReducer(

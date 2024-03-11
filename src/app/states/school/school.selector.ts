@@ -1,5 +1,5 @@
 import { createFeatureSelector,createSelector } from "@ngrx/store"
-import {TeacherState, type IdState, TeacherDataState, StudentDataState, StudentState} from './school.reducer'
+import {TeacherState, type IdState, TeacherDataState, StudentDataState, StudentState, subjectIdState} from './school.reducer'
 
 export const selectTenantState = createFeatureSelector<IdState>('TenantId')
 export const selectTenantId = createSelector(
@@ -50,6 +50,15 @@ export const selectStudentData = createSelector(
   selectStudentDataState,
   (state:StudentDataState)=>{
     console.log(state,'student data state');
+    return state
+  }
+)
+
+export const selectSubjectIdState = createFeatureSelector<subjectIdState>('SubjectId')
+export const selectSubjectId = createSelector(
+  selectSubjectIdState,
+  (state:subjectIdState)=>{
+    console.log(state,'subject Id state');
     return state
   }
 )

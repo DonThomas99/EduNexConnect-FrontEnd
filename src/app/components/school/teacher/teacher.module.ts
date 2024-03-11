@@ -8,6 +8,10 @@ import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { TeacherLandingPageComponent } from './teacher-landing-page/teacher-landing-page.component';
+import { TeacherClassworkComponent } from './teacher-classwork/teacher-classwork.component';
+import { TeacherPeopleComponent } from './teacher-people/teacher-people.component';
+import { TeacherGradesComponent } from './teacher-grades/teacher-grades.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -16,9 +20,13 @@ import { TeacherLandingPageComponent } from './teacher-landing-page/teacher-land
     TeacherDashboardComponent,
     SideNavComponent,
     TopNavComponent,
-    TeacherLandingPageComponent
+    TeacherLandingPageComponent,
+    TeacherClassworkComponent,
+    TeacherPeopleComponent,
+    TeacherGradesComponent
   ],
   imports: [
+    MatCardModule,
     ReactiveFormsModule,
     CommonModule,
     TeacherRoutingModule
