@@ -24,7 +24,7 @@ export interface TeacherDataState{
 
 
 export interface StudentState{
-    email:string|null
+    studentEmail:string|null
 }
 
 
@@ -57,6 +57,8 @@ export const initialStudentDataState:StudentDataState={
     password:''
 }
 
+
+
 export const initialTeacherState:TeacherState ={
     email:null,
 }
@@ -66,7 +68,7 @@ export const initialTenantState: IdState = {
 }
 
 export const initialStudentState:StudentState={
-    email:null
+    studentEmail:null
 }
 
 export const IdReducer = createReducer(
@@ -91,11 +93,11 @@ export const teacherReducer = createReducer(
 )
 
 export const studentReducer = createReducer(
-    initialTeacherState,
+    initialStudentState,
     on(setStudentEmail,(state,{studentEmail})=>{
-        console.log(studentEmail,'teacherEmail');
+        console.log(studentEmail,'studentEmail');
         
-        return {...state,email:studentEmail}
+        return {...state,studentEmail:studentEmail}
     })
 )
 
@@ -103,6 +105,8 @@ export const studentReducer = createReducer(
 export const teacherDataReducer = createReducer(
     initialTeacherDataState,
     on(SaveTeacherData,(state,{teacherData})=>{
+        console.log('reducer teacherData',{...state, ...teacherData});
+        
         return { ...state, ...teacherData };
     }),on(deleteTeacherData,(state)=>{
         return {...state,teacherData:null}
@@ -113,10 +117,13 @@ export const teacherDataReducer = createReducer(
 
 export const studentDataReducer = createReducer(
     initialStudentDataState,
-    on(saveStudentData,(state,{studentData})=>{
-        return{...state, ...studentData}
-    }),on(deleteStudentData,(state)=>{
-        return {...state,studentData:null}
-    })
+    on(saveStudentData, (state, { studentData }) => {
+        console.log('reducer studentData',{...state,...studentData});
+        
+        return { ...state, ...studentData };
 
-)
+    }),
+    on(deleteStudentData, (state) => {
+        return { ...state, studentData: null };
+    })
+);

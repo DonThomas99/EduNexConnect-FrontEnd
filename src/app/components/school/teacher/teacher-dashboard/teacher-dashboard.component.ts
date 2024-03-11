@@ -62,5 +62,8 @@ if(data){
 
   Openclass(subjectId:string,classNum:string){
 
+    
+    this.router.navigate(['school/teacher/subjectLanding'])
+
   }
 }

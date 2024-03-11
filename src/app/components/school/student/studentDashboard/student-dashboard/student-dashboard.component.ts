@@ -19,7 +19,7 @@ studentEmail!:string
 tenantId!:string
 classNum!:string
 classData!:SubjectsDoc[]
-studentEmail$ = this.store.select(pipe(selectStudentEmail))
+// studentEmail$ = this.store.select(pipe(selectStudentEmail))
 tenantId$=this.store.select(pipe(selectTenantId))
 
 constructor(
@@ -31,7 +31,6 @@ constructor(
 ngOnInit():void{
   this.store.select(selectStudentEmail).subscribe(email =>{
     if(email){
-      // console.log('email:',email);
       this.studentEmail = email
       
     }
@@ -43,9 +42,7 @@ ngOnInit():void{
   })
 
   this.studentService.fetchStudentData(this.tenantId,this.studentEmail).subscribe({
-    next:(res=>{
-      console.log('res.classNum:',res.classNum);
-      
+    next:(res=>{      
       this.classNum = res.classNum
       this.fetchSubjects()
     })
@@ -54,11 +51,13 @@ ngOnInit():void{
   
 }
 fetchSubjects(){
-  console.log('classNum',this.classNum);
   this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId).subscribe({
     next:(res=>{
     this.classData = res     
     })
   })
+}
+openClass(){
+  this.router.navigate(['school/student/subjectLanding'])
 }
 }

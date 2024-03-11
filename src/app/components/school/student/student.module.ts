@@ -6,13 +6,15 @@ import { StudentLoginComponent } from './student-login/student-login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentSideNavComponent } from './studentDashboard/student-side-nav/student-side-nav.component';
 import { StudentDashboardComponent } from './studentDashboard/student-dashboard/student-dashboard.component';
+import { StudentSubjectDetailPageComponent } from './studentDashboard/student-subject-detail-page/student-subject-detail-page.component';
 
 
 @NgModule({
   declarations: [
     StudentLoginComponent,
     StudentSideNavComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    StudentSubjectDetailPageComponent
   ],
   imports: [
     ReactiveFormsModule,

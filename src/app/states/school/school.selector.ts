@@ -31,12 +31,14 @@ export const selectTeacherData = createSelector(
   }
 )
 
-export const selectStudentState = createFeatureSelector<TeacherState>('Teacher')
+export const selectStudentState = createFeatureSelector<StudentState>('Student')
 // Correctly define selectStudentEmail if it's missing
 export const selectStudentEmail = createSelector(
   selectStudentState,
   (state: StudentState) => {
-     return state.email;
+    console.log(state,'data state');
+
+     return state.studentEmail;
   }
  );
  
@@ -47,7 +49,7 @@ export const selectStudentDataState = createFeatureSelector<StudentDataState>('S
 export const selectStudentData = createSelector(
   selectStudentDataState,
   (state:StudentDataState)=>{
-    console.log(state,'data state');
+    console.log(state,'student data state');
     return state
   }
 )

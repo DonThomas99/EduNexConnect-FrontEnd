@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
+import { TeacherLandingPageComponent } from './teacher-landing-page/teacher-landing-page.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TopNavComponent } from './top-nav/top-nav.component';
     TeacherLoginComponent,
     TeacherDashboardComponent,
     SideNavComponent,
-    TopNavComponent
+    TopNavComponent,
+    TeacherLandingPageComponent
   ],
   imports: [
     ReactiveFormsModule,

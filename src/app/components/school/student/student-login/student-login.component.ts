@@ -10,7 +10,7 @@ import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 import { Res } from 'src/app/Models/common';
 import { IStudent } from 'src/app/Models/student';
-import { saveStudentData } from 'src/app/states/school/school.actions';
+import { saveStudentData, setStudentEmail } from 'src/app/states/school/school.actions';
 // import { setStudentEmail, setStudentEmail } from 'src/app/states/school/school.actions';
 
 
@@ -55,12 +55,13 @@ submit(){
     const data = this.form.getRawValue()    
     this.studentService.studentLogin(this.tenantId,data.email,data.password).subscribe({
       next:(res:Res )=>{ 
-// this.store.dispatch(setStudentEmail(this.studentEmail))
+this.store.dispatch(setStudentEmail({studentEmail:data.email}))
 
 this.studentService.fetchStudentData(this.tenantId, data.email).subscribe({
   next: (res:IStudent) => {
     console.log(res);
     this.store.dispatch(saveStudentData({studentData:res}))
+    
   }
 });
 
