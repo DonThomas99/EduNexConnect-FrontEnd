@@ -12,6 +12,18 @@ viewCreate=false
 
   }
 
+  quillConfig = {
+    toolbar:{
+      container:[
+        ['bold','italic','underline','strike'],
+        [{'size':['xsmall','small','medium','large','xlarge']}],
+        [{'align':[]}],
+        ['clean'],
+        ['link','image','video']
+      ]
+    }
+  }
+
   toggleCreateButton(){
     this.viewCreate = !this.viewCreate
   }

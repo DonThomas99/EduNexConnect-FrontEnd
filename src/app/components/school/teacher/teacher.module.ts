@@ -12,6 +12,7 @@ import { TeacherClassworkComponent } from './teacher-classwork/teacher-classwork
 import { TeacherPeopleComponent } from './teacher-people/teacher-people.component';
 import { TeacherGradesComponent } from './teacher-grades/teacher-grades.component';
 import { MatCardModule } from '@angular/material/card';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
     TeacherGradesComponent
   ],
   imports: [
+    QuillModule.forRoot(),
     MatCardModule,
     ReactiveFormsModule,
     CommonModule,
