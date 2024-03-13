@@ -36,9 +36,9 @@
   <ng-container *ngIf="viewCreate">
       <div class="card mx-60 mt-2 w-96 bg-base-100 shadow-xl">
           <div class="card-body flex flex-wrap">
-              <button onclick="assignments.showModal()" class="btn flex-auto">Assignments</button>
-              <button onclick="quizAssignments.showModal()" class="btn flex-auto">Quiz assignment</button>
-              <button onclick="materials.showModal()" class="btn flex-auto">Material</button>
+              <button (click)="toggleCreateButton()" onclick="assignments.showModal()" class="btn flex-auto">Assignments</button>
+              <button (click)="toggleCreateButton()" onclick="quizAssignments.showModal()" class="btn flex-auto">Quiz assignment</button>
+              <button (click)="toggleCreateButton()" onclick="materials.showModal()" class="btn flex-auto">Material</button>
           </div>
         </div>
   </ng-container>
@@ -78,29 +78,37 @@
 
 <!-- Upload Material Modal -->
 <dialog id="materials" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl h-full bg-slate-100 ">
-    <form method="dialog"> 
+  <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100 ">
+    <form enctype="multipart/form-data" [formGroup]="materialForm" (ngSubmit)="uploadMaterial()" method="dialog"> 
     <div class=" shadow-xl bg-slate-50 rounded-2xl ">
-      <h3 class="font-bold text-lg text- "> <i class="fa-solid fa-file-lines"></i>  Material</h3>
+      <h3 class="font-bold text-lg  "> <i class="fa-solid fa-file-lines"></i>  Material</h3>
     </div> 
     <div class="titleNdescription relative z-0 w-full mb-5 group">
-      <input formControlName="" type="text" name="floating_title" id="floating_title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Title" required />
+      <input formControlName="materialTitle" type="text" name="materialTitle" id="materialTitle" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Title" required />
     <br>
      
     </div>
-    <div class="mx-40">
+    <div class="text-slate-600">
+        Choose Files(Image,Youtube Link or Video)
+    </div>
+    <div class="mx-40 mt-6">
       <quill-editor 
+      placeholder="Enter Description...."
+      formControlName="content"
         class="quill-editor"
         [modules]="quillConfig"
-        
-      >
-
-      </quill-editor>
+      ></quill-editor>
     </div>
-    <p class="py-4">Click the button below to close</p>
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF </label>
+<input formControlName="pdf" class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">
+
+</div>
+    
     <div class="modal-action">
         <!-- if there is a button, it will close the modal -->
-        <button class="btn">Upload</button>
+        <button type="submit" class="btn">Upload</button>
         <button class="btn">Close</button>
       </div>
     </form>

@@ -34,3 +34,33 @@ export const passwordMatchValidator: ValidatorFn = (control:AbstractControl): Va
 
 }
 
+// export const validatePdf:ValidatorFn = (control:AbstractControl):ValidationErrors|null =>{
+    
+//     const file = control.value;
+//     console.log(file,'heee');
+//     if(file){
+//         const fileName = file.name.toLowerCase();
+//         console.log(fileName);
+        
+//         if(!fileName.endsWith('.pdf')){
+//             return { 'invalidPdf':true}
+//         }
+//     }
+//     return null
+// }
+
+export const validatePdf: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const file = control.value;
+    console.log(file, 'heee');
+
+    if (file) {
+        const filePathParts = file.split('\\'); // Split the path string by backslashes
+        const fileName = filePathParts[filePathParts.length - 1]; // Get the last part, which should be the file name
+
+        if (!fileName.toLowerCase().endsWith('.pdf')) {
+            return { 'invalidPdf': true };
+        }
+    }
+    return null;
+};
+

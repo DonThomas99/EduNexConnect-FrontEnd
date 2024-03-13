@@ -1,4 +1,4 @@
-import { Validators } from "@angular/forms";
+import { Validators,AbstractControl } from "@angular/forms";
 import { userNameMaxLength,userNameMinLength,nameRegex,emailRegex,OTPRegex,passwordLength,ZipRegex,charRegex,passwordRegex,mobileRegex, classNumber } from "./constants";
 
 export const nameValidators =[
