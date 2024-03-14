@@ -3,17 +3,18 @@ import { repeat } from "rxjs";
 
 const formBuilder = new FormBuilder();
 
-export function validateBytrimming(validators:ValidatorFn[]):ValidatorFn{
-    return (control:AbstractControl)=>{
-        const trimmedValue = control.value.trim()
+export function validateBytrimming(validators: ValidatorFn[]): ValidatorFn {
+    return (control: AbstractControl) => {
+        // Check if control value is null or undefined before trimming
+        const trimmedValue = control.value ? control.value.trim() : '';
 
-        //create a new control with same trimmed value 
-        const trimmedControl = formBuilder.control(trimmedValue)
-        
-        //Apply the provided validators to the trimmed value
-        return validators.reduce<ValidationErrors | null>((error: ValidationErrors | null, validator) => error ?? validator(trimmedControl),null)
-        
-    }
+        // Create a new control with the trimmed value
+        const formBuilder = new FormBuilder(); // Assuming formBuilder is accessible here
+        const trimmedControl = formBuilder.control(trimmedValue);
+
+        // Apply the provided validators to the trimmed value
+        return validators.reduce<ValidationErrors | null>((error: ValidationErrors | null, validator) => error ?? validator(trimmedControl), null);
+    };
 }
 
 export const passwordMatchValidator: ValidatorFn = (control:AbstractControl): ValidationErrors | null => {

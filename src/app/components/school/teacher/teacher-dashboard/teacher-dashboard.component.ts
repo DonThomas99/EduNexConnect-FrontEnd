@@ -6,7 +6,7 @@ import { pipe } from 'rxjs';
 import { selectTeacherData, selectTeacherEmail, selectTeacherState, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IteacherData, subjectsNclass } from 'src/app/Models/teacher';
-import { SaveTeacherData } from 'src/app/states/school/school.actions';
+import { SaveTeacherData, saveSubjectId } from 'src/app/states/school/school.actions';
 import { SubjectsDoc, classSubjects } from 'src/app/Models/subject';
  
 @Component({
@@ -51,7 +51,7 @@ if(data){
    
    this.subjects = this.classNsubjects.flatMap(subjectsI =>
     subjectsI.subjects.map(subject => ({
-      _id: subject._id,
+      _id: subject.Id,
       name: subject.name,
       classNum: subjectsI.class // Assuming classNum is obtained from subjectsI
     }))
@@ -60,7 +60,10 @@ if(data){
   })
   }
 
-  Openclass(subjectId:string,classNum:string){
+  Openclass(subjectId:string){
+    console.log('hee');
+    
+this.store.dispatch(saveSubjectId({subjectId:subjectId}))
 
     
     this.router.navigate(['school/teacher/stream'])

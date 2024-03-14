@@ -27,7 +27,7 @@ export  interface Subject {
   }
   
   export interface SubjectsDoc{
-    _id:string,
+    Id:string,
     name:string
   }
   

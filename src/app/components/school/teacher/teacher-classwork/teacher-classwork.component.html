@@ -1,30 +1,5 @@
 <app-top-nav></app-top-nav>
 
-<div class="mt-16 flex flex-wrap items-center justify-between shadow-xl">
-   
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="">
-        </div>
-        <div class="items-center justify-between " id="navbar-sticky">
-          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 dark:border-gray-700">
-            <li>
-                <a routerLink="/school/teacher/stream" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Stream</a>
-            </li>
-            <li>
-              <a routerLink="/school/teacher/classwork" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Classwork</a>
-            </li>
-            <li>
-              <a routerLink="/school/teacher/people"  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">People</a>
-            </li>
-            <li>
-              <a routerLink="/school/teacher/grades" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Grades</a>
-            </li>
-          </ul>
-        </div>
-        </div>
-</div>
-
-
 <div class="sliding-navbar mt-8 ">
 
   <button (click)="toggleCreateButton()"  class="ml-48 py-2 px-5 rounded-full text-sm text-white bg-black hover:bg-gray-700 duration-300 shadow-2xl">
@@ -47,16 +22,41 @@
 <!-- Create Assignment Modal -->
 
 <dialog id="assignments" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl h-96">
-    <h3 class="font-bold text-lg">Hello!</h3>
-    <p class="py-4">Click the button below to close</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
+  <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100 ">
+    <form enctype="multipart/form-data" [formGroup]="assignmentForm" (ngSubmit)="uploadAssignment()" method="dialog"> 
+    <div class=" shadow-xl bg-slate-50 rounded-2xl ">
+      <h3 class="font-bold text-lg  "> <i class="fa-solid fa-file-lines"></i>  Assignment</h3>
+    </div> 
+    <div class="titleNdescription relative z-0 w-full mb-5 group">
+      <input formControlName="assignmentTitle" type="text" name="assignmentTitle" id="assignmentTitle" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Title" required />
+    <br>
+     
     </div>
-  </div>
+    <div class="text-slate-600">
+        Choose Files(Image,Youtube Link or Video)
+    </div>
+    <div class="mx-40 mt-6">
+      <quill-editor 
+      placeholder="Enter Description...."
+      formControlName="content"
+        class="quill-editor"
+        [modules]="quillConfig"
+      ></quill-editor>
+    </div>
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF </label>
+<input formControlName="pdf" class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">
+
+</div>
+    
+    <div class="modal-action">
+        <!-- if there is a button, it will close the modal -->
+        <button type="submit" class="btn">Upload</button>
+        <button (click)="resetMaterialForms()" class="btn">Close</button>
+      </div>
+    </form>
+    </div>
 </dialog>
 
 <!-- Create Assignment Modal -->
@@ -64,15 +64,15 @@
 <!-- Create Quiz Assignments Modal -->
 <dialog id="quizAssignments" class="modal">
   <div class="modal-box w-11/12 max-w-5xl h-96">
+    <form enctype="multipart/form-data" [formGroup]="materialForm" (ngSubmit)="uploadAssignment()"  method="dialog">
     <h3 class="font-bold text-lg">Hello!</h3>
     <p class="py-4">Quiz Assignment</p>
     <div class="modal-action">
-      <form method="dialog">
         <!-- if there is a button, it will close the modal -->
         <button class="btn">Close</button>
-      </form>
+      </div>
+    </form>
     </div>
-  </div>
 </dialog>
 <!-- Create Quiz Assignments Modal-->
 
@@ -109,7 +109,7 @@
     <div class="modal-action">
         <!-- if there is a button, it will close the modal -->
         <button type="submit" class="btn">Upload</button>
-        <button class="btn">Close</button>
+        <button (click)="resetMaterialForms()" class="btn">Close</button>
       </div>
     </form>
     </div>

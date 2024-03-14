@@ -21,9 +21,9 @@ export class SchoolhomeComponent {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe({
+    this.route.paramMap.subscribe({
       next: (res: any) => {
-        this.schoolName = res['schoolName'];
+        this.schoolName = res.get['schoolName'];
       }
     });
   }

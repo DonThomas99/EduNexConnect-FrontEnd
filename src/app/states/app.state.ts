@@ -12,10 +12,6 @@ export const reducers={
     Teacher:fromSchool.teacherReducer,
     TeacherData:fromSchool.teacherDataReducer,
     Student:fromSchool.studentReducer,
-    StudentData:fromSchool.studentDataReducer
+    StudentData:fromSchool.studentDataReducer,
+    SubjectId:fromSchool.subjectIdReducer
 }
-
-
-// const red = {
-//    SelcetorName: ReducerFunction 
-// }
