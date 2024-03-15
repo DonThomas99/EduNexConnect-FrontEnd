@@ -2,7 +2,3 @@
     padding-left: 0; /* Adjust this value based on your layout */
     transition: padding-left 0.3s ease; /* Add transition for smooth animation */
 }
-.active{
-    color: rgb(0, 84, 180);
-    /* font-weight: bold; */
-}
