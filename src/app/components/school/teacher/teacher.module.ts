@@ -13,6 +13,12 @@ import { TeacherPeopleComponent } from './teacher-people/teacher-people.componen
 import { TeacherGradesComponent } from './teacher-grades/teacher-grades.component';
 import { MatCardModule } from '@angular/material/card';
 import { QuillModule } from 'ngx-quill';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+// import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 
 @NgModule({
@@ -27,6 +33,11 @@ import { QuillModule } from 'ngx-quill';
     TeacherGradesComponent
   ],
   imports: [
+    // MatMomentDateModule,
+    MatNativeDateModule,
+  MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
     QuillModule.forRoot(),
     MatCardModule,
     ReactiveFormsModule,

@@ -1,5 +1,6 @@
 import { FormBuilder,type AbstractControl, type ValidationErrors, type ValidatorFn } from "@angular/forms";
 import { repeat } from "rxjs";
+import * as moment from 'moment'
 
 const formBuilder = new FormBuilder();
 
@@ -64,4 +65,19 @@ export const validatePdf: ValidatorFn = (control: AbstractControl): ValidationEr
     }
     return null;
 };
+
+export function futureDateValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+       const selectedDate = moment(control.value);
+       const currentDate = moment();
+       console.log('hee');
+       
+       if (selectedDate.isBefore(currentDate)) {
+        console.log('heedreth');
+         
+        return { 'futureDate': true };
+       }
+       return null;
+    };
+   }
 

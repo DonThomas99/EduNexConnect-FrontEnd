@@ -6,3 +6,10 @@ textarea{
     font-weight:bold;
     
 }
+.mat-datepicker-content {
+    z-index: 100; /* Adjust the value as needed */
+}
+
+.assignments{
+    z-index:000;
+}
