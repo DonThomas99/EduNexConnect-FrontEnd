@@ -31,6 +31,7 @@ isSubmitted=false
 materialTitle!:string
 editorForm!:FormGroup
 html!:string
+materials!:IMaterials[]
 selectedImage!:File
 quillConfig = {
   toolbar:{
@@ -90,7 +91,7 @@ constructor(
 
       this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,this.teacherId).subscribe({
         next:(res:IMaterials[])=>{
-          console.log('hweos:',res);
+          this.materials= res.reverse()
           
         }
       })
