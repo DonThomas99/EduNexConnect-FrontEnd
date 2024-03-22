@@ -13,5 +13,6 @@ export const reducers={
     TeacherData:fromSchool.teacherDataReducer,
     Student:fromSchool.studentReducer,
     StudentData:fromSchool.studentDataReducer,
-    SubjectId:fromSchool.subjectIdReducer
+    SubjectId:fromSchool.subjectIdReducer,
+    ClassNum:fromSchool.classNumReducer
 }

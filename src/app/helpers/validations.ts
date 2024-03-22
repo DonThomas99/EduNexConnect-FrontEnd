@@ -36,20 +36,6 @@ export const passwordMatchValidator: ValidatorFn = (control:AbstractControl): Va
 
 }
 
-// export const validatePdf:ValidatorFn = (control:AbstractControl):ValidationErrors|null =>{
-    
-//     const file = control.value;
-//     console.log(file,'heee');
-//     if(file){
-//         const fileName = file.name.toLowerCase();
-//         console.log(fileName);
-        
-//         if(!fileName.endsWith('.pdf')){
-//             return { 'invalidPdf':true}
-//         }
-//     }
-//     return null
-// }
 
 export const validatePdf: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const file = control.value;

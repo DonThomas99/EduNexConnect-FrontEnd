@@ -1,10 +1,15 @@
 import { createReducer,on } from "@ngrx/store";
 import { type ITenantRes } from "src/app/Models/tenants";
-import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData, saveSubjectId } from "./school.actions";
+import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData, saveSubjectId, saveClassNum, deleteSubjectId, deleteClassNum, deleteTeacherEmail } from "./school.actions";
 import { SubjectsDoc } from "src/app/Models/subject";
+// import { state } from "@angular/animations";
 
 export interface IdState{
     tenantId: string|null;
+}
+
+export interface classNumState{
+    classNum:string|null
 }
 
 export interface subjectIdState{
@@ -40,6 +45,10 @@ export interface StudentDataState{
     mobile: string;
     classNum: string;
     password:string;
+}
+
+export const classNumInitialState:classNumState={
+    classNum:''
 }
 
 export const initialTeacherDataState:TeacherDataState ={
@@ -97,8 +106,22 @@ initialSubjectIdState,
 on(saveSubjectId,(state,{subjectId})=>{
     console.log(subjectId,'subjectId');
     return {...state,subjectId}
+}),
+on(deleteSubjectId,(state)=>{
+    return {...state,subjectId:null}
 })
 )
+
+export const classNumReducer = createReducer(
+    classNumInitialState,
+    on(saveClassNum,(state,{classNum})=>{
+        console.log(classNum,'classNum reducer reached');
+        return {...state,classNum:classNum}
+    }),
+    on(deleteClassNum,(state)=>{
+        return {...state,classNum:null}
+    })
+) 
 
 export const teacherReducer = createReducer(
     initialTeacherState,
@@ -106,6 +129,9 @@ export const teacherReducer = createReducer(
         console.log(teacherEmail,'teacherEmail');
         
         return {...state,email:teacherEmail}
+    }),
+    on(deleteTeacherEmail,(state)=>{
+        return {...state,teacherEmail:null}
     })
 )
 
@@ -115,6 +141,9 @@ export const studentReducer = createReducer(
         console.log(studentEmail,'studentEmail');
         
         return {...state,studentEmail:studentEmail}
+    }),
+    on(deleteStudentData,(state)=>{
+        return {...state,studentEmail:null}
     })
 )
 

@@ -1,2 +1,11 @@
 <app-top-nav></app-top-nav>
 <app-side-nav></app-side-nav>
+<div class="flex flex-col justify-center items-center mt-10">
+    <span class=""></span>
+    <ng-container *ngFor="let student of studentData">
+        <div class="flex w-1/2 h-20 justify-center mt-2 flex-row border  hover:bg-slate-200">
+            <p class="mt-6">{{student.name}}</p>
+            
+        </div>
+    </ng-container>
+</div>

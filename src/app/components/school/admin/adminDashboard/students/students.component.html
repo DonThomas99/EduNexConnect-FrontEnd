@@ -11,6 +11,11 @@
    </div>
 </div>
 </div>
+<div>
+  <button   data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" z-20 fixed btn  top-3 right-2 mr-4" type="button">
+    Add Student
+  </button>
+</div>
 
 <!-- Student List Button and  Modal Begins  -->
 
@@ -20,9 +25,9 @@
     <div *ngIf="filteredStudents.length ==0">
       <h3 class="font-mono text-red-800 text-3xl"> Please Add Students !!!</h3>
     </div>
-    <div *ngFor="let student of filteredStudents let j = index">
-
-        <div class="overflow-x-auto">
+    
+    <ng-container *ngIf="filteredStudents.length>0">
+    <div class="overflow-x-auto">
             <table class="table table-zebra">
               <!-- head -->
               <thead>
@@ -37,7 +42,8 @@
               </thead>
               <tbody>
                 <!-- row 1 -->
-                <tr>
+                <tr  *ngFor="let student of filteredStudents let j = index">
+
                   <th>{{j+1}}</th>
                   <td>{{student.name}}</td>
                   <td>{{student.email}}</td>
@@ -47,8 +53,9 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-    </div>   
+    </div>
+    </ng-container>
+      
     <div class="modal-action">
       <form method="dialog">
         <!-- if there is a button in form, it will close the modal -->
@@ -62,11 +69,7 @@
 <!-- Enroll Form Button and Modal Begins -->
 
 <!-- Modal toggle -->
- <div>
-  <button   data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" z-20 fixed btn  top-3 right-2 mr-4" type="button">
-    Add Student
-  </button>
-</div>
+
   
   <!-- Main modal -->
   <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

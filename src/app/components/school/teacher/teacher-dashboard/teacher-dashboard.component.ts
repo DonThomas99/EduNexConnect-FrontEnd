@@ -6,7 +6,7 @@ import { pipe } from 'rxjs';
 import { selectTeacherData, selectTeacherEmail, selectTeacherState, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IteacherData, subjectsNclass } from 'src/app/Models/teacher';
-import { SaveTeacherData, saveSubjectId } from 'src/app/states/school/school.actions';
+import { SaveTeacherData, saveClassNum, saveSubjectId } from 'src/app/states/school/school.actions';
 import { SubjectsDoc, classSubjects } from 'src/app/Models/subject';
  
 @Component({
@@ -30,7 +30,8 @@ tenantId$ = this.store.select(pipe(selectTenantId))
     private readonly router:Router,
     private readonly store:Store, 
   ){}
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.TeacherService.fetchMaterials
     this.store.select(selectTeacherEmail).subscribe(email => {
       if(email){        
         this.teacherEmail = email;
@@ -60,11 +61,11 @@ if(data){
   })
   }
 
-  Openclass(subjectId:string){
-    console.log('hee');
+  Openclass(subjectId:string,classNum:string){
+
     
 this.store.dispatch(saveSubjectId({subjectId:subjectId}))
-
+this.store.dispatch(saveClassNum({classNum:classNum}))
     
     this.router.navigate(['school/teacher/stream'])
 
