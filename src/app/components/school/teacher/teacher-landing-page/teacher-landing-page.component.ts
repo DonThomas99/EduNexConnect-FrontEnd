@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { IMaterials } from 'src/app/Models/material';
+import { IAssignmentData, IMaterials } from 'src/app/Models/material';
 import { selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
+import { IAssignments } from 'src/app/Models/assignments';
 
 @Component({
   selector: 'app-teacher-landing-page',
@@ -14,6 +15,7 @@ export class TeacherLandingPageComponent implements OnInit {
   tenantId!: string
   subjectId!: string
   subjectId$ = this.store.select(pipe(selectSubjectId))
+  assignments!:IAssignments[]
   teacherId!: string
   teacherName!: string
   materials!: IMaterials[]
@@ -51,8 +53,13 @@ export class TeacherLandingPageComponent implements OnInit {
         this.materials = res.reverse()
 
       }
-    })
 
+    })
+this.TeacherService.fetchAssignments(this.tenantId,this.subjectId,this.teacherId).subscribe({
+  next:(res:IAssignments[])=>{
+    this.assignments = res.reverse()
+  }
+})
 
   }
 

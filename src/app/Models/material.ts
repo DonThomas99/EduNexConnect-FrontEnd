@@ -8,8 +8,7 @@ export interface IMaterialData {
     content:string;
     assignmentTitle:string;
     pdf:string;
-    date:string;
-    time:string;
+   dateTime:Date
     
   }
 

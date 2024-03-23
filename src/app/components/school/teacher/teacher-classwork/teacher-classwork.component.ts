@@ -18,6 +18,7 @@ import { IMaterials } from 'src/app/Models/material';
   styleUrls: ['./teacher-classwork.component.css']
 })
 export class TeacherClassworkComponent implements OnInit {
+  dateTime: Date | undefined;
 tenantId$= this.store.select(pipe(selectTenantId));
 teacherData$= this.store.select(pipe(selectTeacherData))
 subjectId$ = this.store.select(pipe(selectSubjectId))
@@ -59,8 +60,7 @@ constructor(
       assignmentTitle:['',validateBytrimming(addressValidators)],
       content:['',Validators.required],
       pdf:['',validatePdf],
-      date:['',[Validators.required,futureDateValidator()]],
-      time:['',Validators.required]
+      dateTime:['',Validators.required]
     })
 
     this.materialForm = this.formBuilder.group({

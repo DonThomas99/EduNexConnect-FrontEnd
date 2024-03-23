@@ -5,6 +5,7 @@ import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
 import {IAssignmentData, IMaterialData, IMaterials} from 'src/app/Models/material'
 import { StudentInfo } from 'src/app/Models/student';
+import { IAssignments } from 'src/app/Models/assignments';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,13 @@ fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
   .set('subjectId',subjectId)
   .append('teacherId', teacherId)
   return this.http.get<IMaterials[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
+}
+
+fetchAssignments(tenantId:string,subjectId:string,teacherId:string){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('teacherId',teacherId)
+  return this.http.get<IAssignments[]>(`${this.backendURL}/tenantId/fetchAssignments`,{params})
 }
 
 fetchStudents(tenantId:string,classNum:string){
