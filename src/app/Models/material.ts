@@ -19,3 +19,13 @@ export interface IMaterialData {
     pdf:string;
     content:string;
   }
+  export interface IMatAsmnt{
+    subjectId:string;
+    teacherId:string;
+    materialTitle:string;
+    assignmentTitle:string;
+    content:string;
+    pdf:string;
+    createdAt:Date
+    submissionDate:Date
+  }

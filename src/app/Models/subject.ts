@@ -30,4 +30,7 @@ export  interface Subject {
     Id:string,
     name:string
   }
-  
+  export interface subj{
+    _id:string,
+    name:string
+  }

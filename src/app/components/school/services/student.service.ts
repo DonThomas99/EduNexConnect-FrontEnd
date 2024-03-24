@@ -3,8 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
 import { Res } from 'src/app/Models/common';
 import { IStudent } from 'src/app/Models/student';
-import { SubjectName, SubjectsDoc } from 'src/app/Models/subject';
+import { SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
 import { map } from 'rxjs';
+import { IMatAsmnt } from 'src/app/Models/material';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,13 @@ fetchSubjects(classNum:string,email:string,tenantId:string){
     .append('classNum', classNum);
 
 
-  return this.http.get<SubjectsDoc[]>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
+  return this.http.get<subj[]>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
+}
+
+fetchMatAsnmt(tenantId:string,subjectId:string){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/student/fetchAsnmtMat`,{params})
 }
 
 }

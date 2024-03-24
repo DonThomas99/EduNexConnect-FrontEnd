@@ -7,6 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StudentSideNavComponent } from './studentDashboard/student-side-nav/student-side-nav.component';
 import { StudentDashboardComponent } from './studentDashboard/student-dashboard/student-dashboard.component';
 import { StudentSubjectDetailPageComponent } from './studentDashboard/student-subject-detail-page/student-subject-detail-page.component';
+import { NavComponent } from './studentDashboard/nav/nav.component';
+import { StudentClassworkComponent } from './studentDashboard/student-classwork/student-classwork.component';
+import { StudentPeopleComponent } from './studentDashboard/student-people/student-people.component';
+import { StudentAssignmentDetailComponent } from './studentDashboard/student-assignment-detail/student-assignment-detail.component';
+import { StudentMaterialDetailComponent } from './studentDashboard/student-material-detail/student-material-detail.component';
 
 
 @NgModule({
@@ -14,7 +19,12 @@ import { StudentSubjectDetailPageComponent } from './studentDashboard/student-su
     StudentLoginComponent,
     StudentSideNavComponent,
     StudentDashboardComponent,
-    StudentSubjectDetailPageComponent
+    StudentSubjectDetailPageComponent,
+    NavComponent,
+    StudentClassworkComponent,
+    StudentPeopleComponent,
+    StudentAssignmentDetailComponent,
+    StudentMaterialDetailComponent
   ],
   imports: [
     ReactiveFormsModule,

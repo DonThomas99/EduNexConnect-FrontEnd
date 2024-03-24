@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 import { FormBuilder } from '@angular/forms';
 import { selectStudentData, selectStudentEmail, selectTenantId } from 'src/app/states/school/school.selector';
 import { pipe } from 'rxjs';
-import { SubjectName, SubjectsDoc, classes } from 'src/app/Models/subject';
+import { SubjectName, SubjectsDoc, classes, subj } from 'src/app/Models/subject';
+import { saveSubjectId } from 'src/app/states/school/school.actions';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -18,7 +19,7 @@ studentData!:IStudent
 studentEmail!:string
 tenantId!:string
 classNum!:string
-classData!:SubjectsDoc[]
+classData!:subj[]
 // studentEmail$ = this.store.select(pipe(selectStudentEmail))
 tenantId$=this.store.select(pipe(selectTenantId))
 
@@ -42,7 +43,8 @@ ngOnInit():void{
   })
 
   this.studentService.fetchStudentData(this.tenantId,this.studentEmail).subscribe({
-    next:(res=>{      
+    next:(res=>{  
+          
       this.classNum = res.classNum
       this.fetchSubjects()
     })
@@ -53,11 +55,15 @@ ngOnInit():void{
 fetchSubjects(){
   this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId).subscribe({
     next:(res=>{
+      console.log(res[0],'response form service');
+      
     this.classData = res     
     })
   })
 }
-openClass(){
-  this.router.navigate(['school/student/subjectLanding'])
+openClass(subjectId:string){
+  console.log(subjectId,'hewownso');
+  this.store.dispatch(saveSubjectId({subjectId:subjectId}))
+  this.router.navigate(['school/student/stream'])
 }
 }
