@@ -4,6 +4,7 @@ import { pipe } from 'rxjs';
 import { selectSubjectId, selectTenantId } from 'src/app/states/school/school.selector';
 import { StudentService } from '../../../services/student.service';
 import { IMatAsmnt } from 'src/app/Models/material';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-student-subject-detail-page',
@@ -15,6 +16,7 @@ tenantId!:string
 subjectId!:string
 uploadsArray!:IMatAsmnt[]
   constructor(
+    private datePipe:DatePipe,
     private readonly store : Store,
     private readonly studentService:StudentService
   ){
