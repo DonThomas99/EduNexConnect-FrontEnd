@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { IAssignmentData, IMaterials } from 'src/app/Models/material';
+import { IAssignmentData, IMatAsmnt, IMaterials } from 'src/app/Models/material';
 import { selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IAssignments } from 'src/app/Models/assignments';
@@ -18,7 +18,7 @@ export class TeacherLandingPageComponent implements OnInit {
   assignments!:IAssignments[]
   teacherId!: string
   teacherName!: string
-  materials!: IMaterials[]
+  materials!: IMatAsmnt[]
   teacherData$ = this.store.select(pipe(selectTeacherData))
 
 
@@ -49,18 +49,17 @@ export class TeacherLandingPageComponent implements OnInit {
     })
 
     this.TeacherService.fetchMaterials(this.tenantId, this.subjectId, this.teacherId).subscribe({
-      next: (res: IMaterials[]) => {
-        this.materials = res.reverse()
+      next: (res: IMatAsmnt[]) => {
+        this.materials = res
 
       }
 
     })
-this.TeacherService.fetchAssignments(this.tenantId,this.subjectId,this.teacherId).subscribe({
-  next:(res:IAssignments[])=>{
-    this.assignments = res.reverse()
-  }
-})
 
   }
 
+  deleteItem(){
+
+  }
+  editItem(){}
 }

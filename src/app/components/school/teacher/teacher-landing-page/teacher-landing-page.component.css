@@ -1,0 +1,16 @@
+.hoverboy {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* This makes the div circular */
+    transition: background-color 0.3s ease; /* Optional: Add a smooth transition for the background color */
+}
+.submission-date {
+    font-size: 0.875rem; /* Smaller font size */
+    color: #606c76; /* Example color for the date text */
+   }
+   .hover:bg-slate-200:hover {
+    background-color: #d1d5db; /* Adjust the hover background color as needed */
+}

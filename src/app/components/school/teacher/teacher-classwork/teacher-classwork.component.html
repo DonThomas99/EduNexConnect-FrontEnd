@@ -3,13 +3,21 @@
 
 <div class="sliding-navbar mt-8 ">
 
-  <button (click)="toggleCreateButton()"
-    class="ml-48 py-2 px-5 rounded-full text-sm text-white bg-black hover:bg-gray-700 duration-300 shadow-2xl">
-    Create
-  </button>
+  <button 
+  class="ml-48 py-2 px-5 rounded-full text-sm text-white bg-black hover:bg-gray-700 duration-300 shadow-2xl " [matMenuTriggerFor]="menu">
+  Create
+</button>
+<div class>
+  <mat-menu #menu="matMenu" xPosition="after" yPosition="below">
+    <button mat-menu-item onclick="assignments.showModal()">Assignments</button>
+    <button mat-menu-item onclick="materials.showModal()">Materials</button>
+  </mat-menu>
+</div>
+
+
   <div class="mx-96">
 
-    <ng-container *ngIf="viewCreate">
+    <!-- <ng-container *ngIf="viewCreate">
       <div class="card mx-28 mt-2 w-96 bg-base-100 shadow-xl -z-0">
         <div class="card-body flex flex-wrap">
           <button (click)="toggleCreateButton()" onclick="assignments.showModal()"
@@ -17,7 +25,7 @@
           <button (click)="toggleCreateButton()" onclick="materials.showModal()" class="btn flex-auto">Material</button>
         </div>
       </div>
-    </ng-container>
+    </ng-container> -->
 
 
     <ng-container *ngFor="let material of materials">

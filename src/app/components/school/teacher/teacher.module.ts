@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherLoginComponent } from './teacher-login/teacher-login.component';
@@ -19,11 +19,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {CalendarModule} from 'primeng/calendar'
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 
 @NgModule({
+  providers:[DatePipe],
+
   declarations: [
     TeacherLoginComponent,
     TeacherDashboardComponent,
@@ -35,7 +40,9 @@ import {CalendarModule} from 'primeng/calendar'
     TeacherGradesComponent
   ],
   imports: [
+    MatMenuModule,
     // BrowserModule,
+    MatIconModule,
     FormsModule,
     CalendarModule,
     // MatMomentDateModule,

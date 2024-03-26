@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Res } from 'src/app/Models/common';
 import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
-import {IAssignmentData, IMaterialData, IMaterials} from 'src/app/Models/material'
+import {IAssignmentData, IMatAsmnt, IMaterialData, IMaterials} from 'src/app/Models/material'
 import { StudentInfo } from 'src/app/Models/student';
 import { IAssignments } from 'src/app/Models/assignments';
 
@@ -34,14 +34,7 @@ fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
   const params = new HttpParams()
   .set('subjectId',subjectId)
   .append('teacherId', teacherId)
-  return this.http.get<IMaterials[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
-}
-
-fetchAssignments(tenantId:string,subjectId:string,teacherId:string){
-  const params = new HttpParams()
-  .set('subjectId',subjectId)
-  .append('teacherId',teacherId)
-  return this.http.get<IAssignments[]>(`${this.backendURL}/tenantId/fetchAssignments`,{params})
+  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
 }
 
 fetchStudents(tenantId:string,classNum:string){
