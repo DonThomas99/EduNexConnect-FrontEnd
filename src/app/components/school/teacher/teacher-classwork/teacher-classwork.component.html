@@ -17,15 +17,6 @@
 
   <div class="mx-96">
 
-    <!-- <ng-container *ngIf="viewCreate">
-      <div class="card mx-28 mt-2 w-96 bg-base-100 shadow-xl -z-0">
-        <div class="card-body flex flex-wrap">
-          <button (click)="toggleCreateButton()" onclick="assignments.showModal()"
-            class="btn flex-auto">Assignments</button>
-          <button (click)="toggleCreateButton()" onclick="materials.showModal()" class="btn flex-auto">Material</button>
-        </div>
-      </div>
-    </ng-container> -->
 
 
     <ng-container *ngFor="let material of materials">
@@ -40,19 +31,7 @@
             </div>
       </div>
   </ng-container>
-    <!-- <ng-container *ngIf="materials.length>0">
-      <ng-container *ngFor="let material of materials">
-        <div class="bg-slate-100 my-5 card card-side w-full shadow-xl z-0">
-          <div class="card-body">
-            <span class="card-title font-medium">{{material.materialTitle}}</span>
-            <div class="prose prose-lg max-w-none">
-              <quill-view-html [content]="material.content"></quill-view-html>
-            </div>
 
-          </div>
-        </div>
-      </ng-container>
-    </ng-container> -->
   </div>
 
 
