@@ -16,7 +16,7 @@
             <!-- Display the item's title with a label -->
             <div class="ml-3 flex flex-col flex-grow">
                 <!-- Conditional title based on whether the item is a material or an assignment -->
-                <p class="title">{{ item.materialTitle ? 'The teacher posted a material: ' : 'The teacher posted an assignment: ' }} {{ item.materialTitle || item.assignmentTitle }}</p>
+                <p class="title">{{ item.materialTitle ? 'You posted a material: ' : 'You posted an assignment: ' }} {{ item.materialTitle || item.assignmentTitle }}</p>
                 <!-- Display the due date if it exists -->
                 <div class="flex justify-between items-center">
                     <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>

@@ -10,7 +10,7 @@ import { Observable, map, pipe } from 'rxjs';
 import { selectTenantId,selectSubjectId, selectTeacherData } from 'src/app/states/school/school.selector';
 import { Res } from 'src/app/Models/common';
 import { ToastrService } from 'ngx-toastr';
-import { IMaterials } from 'src/app/Models/material';
+import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
 
 @Component({
   selector: 'app-teacher-classwork',
@@ -18,6 +18,7 @@ import { IMaterials } from 'src/app/Models/material';
   styleUrls: ['./teacher-classwork.component.css']
 })
 export class TeacherClassworkComponent implements OnInit {
+  selectedItem!:IMatAsmnt
   dateTime: Date | undefined;
 tenantId$= this.store.select(pipe(selectTenantId));
 teacherData$= this.store.select(pipe(selectTeacherData))
@@ -32,7 +33,7 @@ isSubmitted=false
 materialTitle!:string
 editorForm!:FormGroup
 html!:string
-materials!:IMaterials[]
+materials!:IMatAsmnt[]
 selectedImage!:File
 quillConfig = {
   toolbar:{
@@ -90,12 +91,10 @@ constructor(
       })
 
       this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,this.teacherId).subscribe({
-        next:(res:IMaterials[])=>{
-          this.materials= res.reverse()
-          
+        next:(res:IMatAsmnt[])=>{
+          this.materials= res
         }
       })
-
   }
 
   toggleCreateButton(){
@@ -147,5 +146,31 @@ if(this.assignmentForm.valid){
   
 }
   }
+
+
+
+  openModal(item:IMatAsmnt){
+
+    this.selectedItem = item
+        
+        if('materialTitle' in item){
+          const materialModal = document.getElementById('materials-view') as  HTMLDialogElement;
+          materialModal.showModal();
+        } else{
+          const assignmentModal = document.getElementById('assignments-view') as HTMLDialogElement;
+          assignmentModal.showModal();
+        }
+      }
+      openMenu(event:MouseEvent){
+        event.stopPropagation();
+      }
+
+      deleteItem(){
+
+      }
+
+      editItem(){
+        
+      }
 
 }
