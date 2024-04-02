@@ -14,3 +14,7 @@
    .hover:bg-slate-200:hover {
     background-color: #d1d5db; /* Adjust the hover background color as needed */
 }
+.created-date{
+    margin-left:auto;
+color:#606c76
+}

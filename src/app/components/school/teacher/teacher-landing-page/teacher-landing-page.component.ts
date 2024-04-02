@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { IAssignmentData, IMatAsmnt, IMaterials } from 'src/app/Models/material';
+import { Assignment, IAssignmentData, IMatAsmnt, IMaterials, Material } from 'src/app/Models/material';
 import { selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IAssignments } from 'src/app/Models/assignments';
@@ -12,6 +12,7 @@ import { IAssignments } from 'src/app/Models/assignments';
   styleUrls: ['./teacher-landing-page.component.css']
 })
 export class TeacherLandingPageComponent implements OnInit {
+  // type Item = Material|Assignment;
   tenantId!: string
   subjectId!: string
   subjectId$ = this.store.select(pipe(selectSubjectId))
@@ -20,6 +21,7 @@ export class TeacherLandingPageComponent implements OnInit {
   teacherName!: string
   materials!: IMatAsmnt[]
   teacherData$ = this.store.select(pipe(selectTeacherData))
+  selectedItem!:IMatAsmnt | null
 
 
   tenantId$ = this.store.select(pipe(selectTenantId))
@@ -62,4 +64,22 @@ export class TeacherLandingPageComponent implements OnInit {
 
   }
   editItem(){}
+
+
+  openModal(item:IMatAsmnt){
+
+this.selectedItem = item
+    
+    if('materialTitle' in item){
+      const materialModal = document.getElementById('materials') as  HTMLDialogElement;
+      materialModal.showModal();
+    } else{
+      const assignmentModal = document.getElementById('assignments') as HTMLDialogElement;
+      assignmentModal.showModal();
+    }
+  }
+  openMenu(event:MouseEvent){
+    event.stopPropagation();
+  }
+
 }

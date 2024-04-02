@@ -1,35 +1,89 @@
 <app-top-nav></app-top-nav>
 <app-side-nav></app-side-nav>
 
-<div class="flex flex-col mx-36 ">
-    <div *ngFor="let item of materials" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer">
-       <!-- Icon and Title Section -->
-       <div class="flex flex-row items-center">
-           <!-- Check if the item is a material -->
-           <mat-icon *ngIf="item.materialTitle; else assignmentIcon">book</mat-icon>
-          
-           <!-- Check if the item is an assignment -->
-           <ng-template #assignmentIcon>
-               <mat-icon>assignment</mat-icon>
-           </ng-template>
-          
-           <!-- Display the item's title with a label -->
-           <div class="ml-3 flex flex-col">
-            <!-- Conditional title based on whether the item is a material or an assignment -->
-            <p class="title">{{ item.materialTitle ? 'The teacher posted a material: ' : 'The teacher posted an assignment: ' }} {{ item.materialTitle || item.assignmentTitle }}</p>
-            <!-- Display the due date if it exists -->
-            <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>
+<div class="flex flex-col mx-36">
+    <div *ngFor="let item of materials" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer" (click)="openModal(item)">
+        <!-- Icon and Title Section -->
+        <div class="flex flex-row items-center flex-grow">
+            <!-- Check if the item is a material -->
+            <mat-icon *ngIf="item.materialTitle; else assignmentIcon">book</mat-icon>
+
+            <!-- Check if the item is an assignment -->
+            <ng-template #assignmentIcon>
+                <mat-icon>assignment</mat-icon>
+            </ng-template>
+
+            <!-- Display the item's title with a label -->
+            <div class="ml-3 flex flex-col flex-grow">
+                <!-- Conditional title based on whether the item is a material or an assignment -->
+                <p class="title">{{ item.materialTitle ? 'The teacher posted a material: ' : 'The teacher posted an assignment: ' }} {{ item.materialTitle || item.assignmentTitle }}</p>
+                <!-- Display the due date if it exists -->
+                <div class="flex justify-between items-center">
+                    <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>
+                    <p class="created-date">posted on {{ item.createdAt | date:'dd MMMM yyyy' }}</p>
+                </div>
+            </div>
         </div>
-        
-       </div>
-       <!-- Ellipsis Icon Section -->
-       <div class="hoverboy p-3 hover:bg-slate-200 rounded-full" [matMenuTriggerFor]="menu">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-    </div>
-    <!-- Dropdown Menu -->
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editItem()">Edit</button>
-        <button mat-menu-item (click)="deleteItem()">Delete</button>
-    </mat-menu>
     </div>
 </div>
+
+<dialog id="materials" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100">
+        <div class="shadow-xl bg-slate-50 rounded-2xl">
+            <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Material</h3>
+        </div>
+        <div class="titleNdescription relative z-0 w-full mb-5">
+            <h4 class="font-bold text-lg">Title: <span>{{selectedItem?.materialTitle}}</span></h4>
+            <!-- <p class="text-slate-600">Description: <span>{{}}</span></p> -->
+        </div>
+        <div class="text-slate-600">
+            Content:
+        </div>
+        <div class="mx-40 mt-6">
+            <div class="prose prose-lg max-w-none">
+                <quill-view-html [content]="selectedItem?.content||'No Description'"></quill-view-html>
+              </div>
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
+            <a id="pdfLink">View PDF</a>
+        </div>
+        <div class="modal-action">
+            <!-- Close button -->
+            <form method="dialog">
+                <button  class="btn">Close</button>
+            </form>
+        </div>
+    </div>
+  </dialog>
+
+  <dialog id="assignments" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100">
+        <div class="shadow-xl bg-slate-50 rounded-2xl">
+            <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Assignment</h3>
+        </div>
+        <div class="titleNdescription relative z-0 w-full mb-5">
+            <h4 class="font-bold text-lg">Title: <span>{{selectedItem?.assignmentTitle}}</span></h4>
+            <p class="text-slate-600">Submission Date: <span>{{selectedItem?.submissionDate | date:'dd MMMM yyyy'}}</span></p>
+        </div>
+        <div class="text-slate-600">
+            Content:
+        </div>
+        <div class="mx-40 mt-6">
+            <div class="prose prose-lg max-w-none">
+                <quill-view-html [content]="selectedItem?.content||'No Description'"></quill-view-html>
+              </div>
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
+            <a id="pdfLink">View PDF</a>
+        </div>
+        <div class="modal-action">
+            <!-- Close button -->
+            <form method="dialog">
+                <button  class="btn">Close</button>
+            </form>
+        </div>
+    </div>
+  </dialog>
+  

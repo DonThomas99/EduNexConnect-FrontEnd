@@ -29,3 +29,14 @@ export interface IMaterialData {
     createdAt:Date
     submissionDate:Date
   }
+
+  export interface Material{
+    materialTitle:string;
+  }
+
+  export interface Assignment{
+    assignmentTitle:string;
+    submissionDate:string;
+  }
+
+  // export type Item = IMaterials | IMA
