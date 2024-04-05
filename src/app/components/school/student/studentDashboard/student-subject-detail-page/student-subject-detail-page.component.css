@@ -20,3 +20,26 @@
 .hover:bg-slate-200:hover {
     background-color: #d1d5db; /* Adjust the hover background color as needed */
 }
+
+.postedOn{
+    color:#606c76
+    
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Fill the entire viewport height */
+}
+
+
+.flex.flex-col.mx-36 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center children vertically */
+    flex-grow: 1; /* Allow this div to grow and take up available space */
+}
+
+.pagination {
+    align-self: center; /* Center the pagination div horizontally */
+}
