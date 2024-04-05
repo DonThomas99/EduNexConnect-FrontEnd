@@ -60,7 +60,7 @@
           <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Material</h3>
       </div>
       <div class="titleNdescription relative z-0 w-full mb-5">
-          <h4 class="font-bold text-lg">Title: <span>{{selectedItem?.materialTitle}}</span></h4>
+          <h4 class="font-bold text-lg">Title: <span>{{selectedItem.materialTitle}}</span></h4>
           <!-- <p class="text-slate-600">Description: <span>{{}}</span></p> -->
       </div>
       <div class="text-slate-600">
@@ -68,7 +68,7 @@
       </div>
       <div class="mx-40 mt-6">
           <div class="prose prose-lg max-w-none">
-              <quill-view-html [content]="selectedItem?.content||'No Description'"></quill-view-html>
+              <quill-view-html [content]="selectedItem.content||'No Description'"></quill-view-html>
             </div>
       </div>
       <div>
@@ -90,15 +90,15 @@
           <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Assignment</h3>
       </div>
       <div class="titleNdescription relative z-0 w-full mb-5">
-          <h4 class="font-bold text-lg">Title: <span>{{selectedItem?.assignmentTitle}}</span></h4>
-          <p class="text-slate-600">Submission Date: <span>{{selectedItem?.submissionDate | date:'dd MMMM yyyy'}}</span></p>
+          <h4 class="font-bold text-lg">Title: <span>{{selectedItem.assignmentTitle}}</span></h4>
+          <p class="text-slate-600">Submission Date: <span>{{selectedItem.submissionDate | date:'dd MMMM yyyy'}}</span></p>
       </div>
       <div class="text-slate-600">
           Content:
       </div>
       <div class="mx-40 mt-6">
           <div class="prose prose-lg max-w-none">
-              <quill-view-html [content]="selectedItem?.content||'No Description'"></quill-view-html>
+              <quill-view-html [content]="selectedItem.content||'No Description'"></quill-view-html>
             </div>
       </div>
       <div>
