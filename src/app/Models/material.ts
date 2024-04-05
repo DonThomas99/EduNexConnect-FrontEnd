@@ -38,5 +38,9 @@ export interface IMaterialData {
     assignmentTitle:string;
     submissionDate:string;
   }
+  export interface IMat{
+Mat:IMatAsmnt[],
+count:number
+  }
 
   // export type Item = IMaterials | IMA
