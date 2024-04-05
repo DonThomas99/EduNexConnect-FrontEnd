@@ -5,7 +5,7 @@ import { Res } from 'src/app/Models/common';
 import { IStudent } from 'src/app/Models/student';
 import { SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
 import { map } from 'rxjs';
-import { IMatAsmnt } from 'src/app/Models/material';
+import { IMat, IMatAsmnt } from 'src/app/Models/material';
 
 @Injectable({
   providedIn: 'root'
@@ -50,10 +50,29 @@ fetchSubjects(classNum:string,email:string,tenantId:string){
   return this.http.get<subj[]>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
 }
 
-fetchMatAsnmt(tenantId:string,subjectId:string){
+fetchMaterials(tenantId:string,subjectId:string){
   const params = new HttpParams()
   .set('subjectId',subjectId)
-  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/student/fetchAsnmtMat`,{params})
+  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/student/fetchMaterials`,{params})
 }
+
+fetchAssignments(tenantId:string,subjectId:string,page:number,limit:number){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('page',page)
+  .append('limit',limit)
+  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAssignments`,{params})
+}
+
+fetchMatAsnmt(tenantId:string,subjectId:string,page:number,limit:number){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('page',page)
+  .append('limit',limit)
+  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAsnmtMat`,{params})
+}
+
+
+
 
 }
