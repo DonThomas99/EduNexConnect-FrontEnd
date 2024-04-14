@@ -10,3 +10,15 @@ export interface Res {
     status:number,
     message:string
 }
+
+export interface Asnmt_url{
+    status:number,
+    message:string,
+    url:string[]
+}
+
+export interface summary{
+    status:number,
+    teacherCount:number,
+    studentsCount:number
+}

@@ -27,10 +27,15 @@ export  interface Subject {
   }
   
   export interface SubjectsDoc{
-    Id:string,
+  Id:string,
     name:string
   }
   export interface subj{
     _id:string,
     name:string
+  }
+
+  export interface IclassSubjects{
+    class:string
+    subjects:subj[]
   }

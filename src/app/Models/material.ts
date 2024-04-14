@@ -43,4 +43,15 @@ Mat:IMatAsmnt[],
 count:number
   }
 
+  export interface UAsmnt{
+    id:string,
+    studentEmail:string,
+    assignmentId:string,
+    file:File
+  }
+
+  export interface Isubmission{
+    file_url:string[]
+  }
+
   // export type Item = IMaterials | IMA
