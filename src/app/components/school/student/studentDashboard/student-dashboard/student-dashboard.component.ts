@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { selectStudentData, selectStudentEmail, selectTenantId } from 'src/app/states/school/school.selector';
 import { pipe } from 'rxjs';
 import { SubjectName, SubjectsDoc, classes, subj } from 'src/app/Models/subject';
-import { saveSubjectId } from 'src/app/states/school/school.actions';
+import { saveClassNum, saveSubjectId } from 'src/app/states/school/school.actions';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -46,11 +46,10 @@ ngOnInit():void{
     next:(res=>{  
           
       this.classNum = res.classNum
+      this.store.dispatch(saveClassNum({classNum:this.classNum}))
       this.fetchSubjects()
     })
   })
-  
-  
 }
 fetchSubjects(){
   this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId).subscribe({
