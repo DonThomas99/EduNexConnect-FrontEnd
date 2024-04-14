@@ -1,1 +1,87 @@
-<p>student-assignment-detail works!</p>
+<div class="page-container">
+    <app-nav></app-nav>
+<app-student-side-nav></app-student-side-nav>
+<div class="flex flex-row justify-between">
+<div class="w-full">
+    <div class="flex justify-center  mt-3 ">
+        <h1 class="text-3xl font-bold ">{{assignmentItem.assignmentTitle}}</h1>
+                   
+    </div>
+    <div class="flex justify-around mt-3">
+        <div>
+            <h2 class="text-s" >Posted on: {{assignmentItem.createdAt| date: 'dd MMM yyyy'}}</h2>
+        </div>
+        <div class="flex justify-end">
+                <h2 class="text-s" >Due on: {{assignmentItem.submissionDate | date: 'dd MMM yyyy'}}</h2>
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <quill-view-html [content]="assignmentItem.content||'No Description'"></quill-view-html> 
+    </div
+    > 
+    
+    <div>
+        <div *ngIf="sanitizedUrls && sanitizedUrls.length > 0">
+            <div class="flex ">
+                <div class="flex" *ngFor="let url of sanitizedUrls; let i = index" class="ifram-container">
+                    <iframe [src]="url" width="100%" height="100px" style="margin: 15px;"></iframe>
+                    <button class="btn bg-red-500 mx-28" (click)="deleteFile(i)">X</button>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
+<div>
+
+<div class="mt-3 mr-7">
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">Your Work</h2>
+          <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+              <div class="card-actions justify-center">
+                  <div class="flex border w-full justify-center rounded hover:cursor-pointer">
+                    <!-- <input type="file"> -->
+                    <div class="input-div">
+                        <input (change)="onFileChange($event)" class="input" name="file" type="file" id="fileInput" style="display: none;">
+                        <label for="fileInput" class="p-3 hover:cursor-pointer  custom-file-upload">
+                           <!-- <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor" class="icon"><polyline points="16 16 12 12 8 16"></polyline><line y2="21" x2="12" y1="12" x1="12"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg> -->
+                           Create or upload
+                        </label>
+                    </div>
+                </div> 
+               
+                     <div  class="flex btn bg-black border w-full justify-center text-white rounded hover:text-black font-normal hover:cursor-pointer">
+                    <button type="submit">Mark as done</button>     
+                     </div>
+                </div>
+            </form>
+        </div>
+      </div>
+</div>
+
+
+
+<div class="mt-3 mr-7">
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title">private Comments</h2>
+          
+              <div class="card-actions justify-center">
+                  <div class="flex border w-full justify-center rounded hover:cursor-pointer">
+                     </div>
+                     <div type="submit" class="flex btn bg-black border w-full justify-center text-white rounded hover:text-black font-normal hover:cursor-pointer" onclick="">
+                        start Conversation
+                     </div>
+                     <div class="overflow ">
+
+                     </div>
+                </div>
+          
+        </div>
+      </div>
+</div>
+
+</div>
+
+</div>
+</div>
