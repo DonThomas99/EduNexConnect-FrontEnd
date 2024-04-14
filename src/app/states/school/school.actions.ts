@@ -1,6 +1,7 @@
 import {createAction, props } from '@ngrx/store';
 import { IteacherData } from 'src/app/Models/teacher';
 import { IStudent } from 'src/app/Models/student';
+import { IMatAsmnt } from 'src/app/Models/material';
 
 export const saveTenantIdOnStore = createAction('[Tenant] Save Tenant Data On Store',props<{tenantId:string}>())
 export const deleteTenantFromStore = createAction('[Tenant] Delete Tenant Data From Store')
@@ -16,3 +17,5 @@ export const saveSubjectId = createAction('[SubjectId] Save subjectId on Store',
 export const deleteSubjectId = createAction('[SubjectId] delete subjectId from Store')
 export const saveClassNum = createAction('[classNum] Set classNum on Store',props<{classNum:string}>())
 export const deleteClassNum = createAction('[classNum] delete classNum from Store')
+export const saveAsnmt = createAction('[Asnmt] Save Assignment details on Store',props<{upload:IMatAsmnt}>())
+export const deleteAsnmt = createAction('[Asnmt] delete Assignment details on Store')

@@ -1,8 +1,20 @@
 import { createReducer,on } from "@ngrx/store";
 import { type ITenantRes } from "src/app/Models/tenants";
-import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData, saveSubjectId, saveClassNum, deleteSubjectId, deleteClassNum, deleteTeacherEmail } from "./school.actions";
+import { SaveTeacherData, deleteTeacherData, deleteTenantFromStore,saveTenantIdOnStore, setTeacherEmail, saveStudentData,setStudentEmail, deleteStudentData, saveSubjectId, saveClassNum, deleteSubjectId, deleteClassNum, deleteTeacherEmail, saveAsnmt, deleteAsnmt } from "./school.actions";
 import { SubjectsDoc } from "src/app/Models/subject";
 // import { state } from "@angular/animations";
+
+export interface IMatAsmntState{
+    _id:string;
+    subjectId:string;
+    teacherId:string;
+    materialTitle:string;
+    assignmentTitle:string;
+    content:string;
+    pdf:string;
+    createdAt:Date
+    submissionDate:Date
+}
 
 export interface IdState{
     tenantId: string|null;
@@ -45,6 +57,18 @@ export interface StudentDataState{
     mobile: string;
     classNum: string;
     password:string;
+}
+
+export const IMatAsmntInitialState:IMatAsmntState ={
+    _id:'',
+    subjectId:'',
+    teacherId:'',
+    materialTitle:'',
+    assignmentTitle:'',
+    content:'',
+    pdf:'',
+    createdAt:new Date(0),
+    submissionDate:new Date(0)
 }
 
 export const classNumInitialState:classNumState={
@@ -173,3 +197,14 @@ export const studentDataReducer = createReducer(
         return { ...state, studentData: null };
     })
 );
+
+export const assignmentReducer = createReducer(
+    IMatAsmntInitialState,
+    on(saveAsnmt,(state,{upload})=>{
+        console.log('reducer AssignmentData',{...state,...upload});
+        return {...state, ...upload}
+    }),
+    on(deleteAsnmt, (state)=>{
+        return {...state, upload:null}
+    })
+) 
