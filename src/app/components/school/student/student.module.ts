@@ -13,6 +13,7 @@ import { StudentPeopleComponent } from './studentDashboard/student-people/studen
 import { StudentAssignmentDetailComponent } from './studentDashboard/student-assignment-detail/student-assignment-detail.component';
 import { StudentMaterialDetailComponent } from './studentDashboard/student-material-detail/student-material-detail.component';
 import {MatIconModule} from '@angular/material/icon'
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatIconModule} from '@angular/material/icon'
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    QuillModule.forRoot()
   ]
 })
 export class StudentModule { }
