@@ -27,7 +27,8 @@ export class StudentAssignmentDetailComponent implements OnInit {
     'image/webp',
     'application/pdf'
  ];
- url!:string[]
+hasError:boolean = false
+  url!:string[]
   uploadForm!:FormGroup;
   assignmentItem!:IMatAsmnt;
   assignmentId!:string;
@@ -66,10 +67,11 @@ export class StudentAssignmentDetailComponent implements OnInit {
 
     this.studentService.fetchSubmissions(this.tenantId,this.studentEmail,this.assignmentId).subscribe({
       next:(res:Asnmt_url)=>{
-    console.log(res.url);
-    
+    if(res)
         this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
-
+      },
+      error:(error)=>{
+          this.hasError = true
       }
     })
 
