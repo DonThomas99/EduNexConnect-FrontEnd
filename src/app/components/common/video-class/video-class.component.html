@@ -1,0 +1,30 @@
+<!-- <app-top-nav></app-top-nav>
+<app-side-nav></app-side-nav> -->
+
+<!-- <div class="mt-8 flex justify-center">
+
+    <div #root>
+        
+    </div>
+    
+</div> -->
+
+<section>
+    <div class="participants">
+        <ng-container *ngFor="let participant of participants(); trackBy:trackBySessionId">
+            <app-participant [participant]="participant"></app-participant>
+        </ng-container>
+    </div>
+    <div class="call-controls flex justify-center">
+        <button class="btn mic" (click)="toggleMicrophone()">Mic</button>
+        <button class="btn cam" (click)="toggleCamera()">camera</button>
+        <button class="btn leave-button" (click)="leaveCall()">Leave Call</button>
+    </div>
+</section>
+
+<div class="flex mx-56 rounded p-5 hover:cursor-pointer hover:bg-red-600 mt-5 bg-red-800 justify-center tooltip-open tooltiptext" data-tooltip="End Class" (click)="endClass()">
+    <div class="tooltip">
+        <i class="fa-solid fa-phone-slash"></i>
+        <!-- <span class="" ></span> -->
+    </div>
+</div>

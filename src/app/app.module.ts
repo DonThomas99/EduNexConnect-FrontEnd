@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ClassNumValidationComponent } from './components/common/class-num-validation/class-num-validation.component';
 import { ConfirmationDialogComponent } from './components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ParticipantComponent } from './components/common/participant/participant.component';
 // import { QuillModule } from 'ngx-quill';
 
 
@@ -33,7 +34,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     ConfirmationDialogComponent,
     
     
-    
+        
   ],
   imports: [
     // QuillModule,
