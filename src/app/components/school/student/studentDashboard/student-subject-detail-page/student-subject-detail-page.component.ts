@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { selectSubjectId, selectTenantId } from 'src/app/states/school/school.selector';
+import { selectClassNum, selectSubjectId, selectTenantId } from 'src/app/states/school/school.selector';
 import { StudentService } from '../../../services/student.service';
 import { IMat, IMatAsmnt } from 'src/app/Models/material';
 import { DatePipe } from '@angular/common';
+import { Res } from 'src/app/Models/common';
+import { Router } from '@angular/router';
+import { saveAsnmt } from 'src/app/states/school/school.actions';
 
 @Component({
   selector: 'app-student-subject-detail-page',
@@ -13,6 +16,8 @@ import { DatePipe } from '@angular/common';
 })
 export class StudentSubjectDetailPageComponent implements OnInit {
 currentPage:number = 1
+roomId!:string
+classNum!:string
 itemsPerPage:number = 4
 totalPages:number =0
 totalItems:number =0
@@ -20,8 +25,9 @@ selectedOption:string = 'Materials';
 tenantId!:string
 subjectId!:string
 uploadsArray!:IMatAsmnt[]
+classNum$ = this.store.select(pipe(selectClassNum))
   constructor(
-    private datePipe:DatePipe,
+    private readonly router:Router,
     private readonly store : Store,
     private readonly studentService:StudentService
   ){}
@@ -39,12 +45,12 @@ uploadsArray!:IMatAsmnt[]
        next: (res: IMat) => {
          // console.log(res);
          this.uploadsArray = res.Mat;
-         console.log('heow',this.uploadsArray);
+      
          
         }
       });
     } else {
-      console.log('vannthitta',page,limit);
+     
       this.studentService.fetchAssignments(this.tenantId, this.subjectId, page, limit).subscribe({
         next: (res: IMat) => {
           console.log(res);
@@ -53,7 +59,7 @@ uploadsArray!:IMatAsmnt[]
       });
     }
     this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) + 1 ;
-    console.log(this.totalPages);
+
     
  }
 
@@ -62,6 +68,11 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
 
 
   ngOnInit(): void {
+    this.classNum$.subscribe((classNum)=>{
+      this.classNum = classNum.classNum as unknown as string
+    console.log('classNum:',this.classNum);
+    
+    })
     this.tenantId$.subscribe((id)=>{    
       if(id)
         this.tenantId = id
@@ -71,13 +82,18 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
         this.subjectId = id.subjectId as unknown as string
       
       })
+      this.studentService.fetchRoomId(this.tenantId,this.subjectId,this.classNum).subscribe({
+        next:(res:Res)=>{         
+          this.roomId = res as unknown as  string      
+        }
+      })
       this.studentService.fetchMatAsnmt(this.tenantId,this.subjectId,this.currentPage,this.itemsPerPage).subscribe({
         next:(res:IMat)=>{
           console.log();
           
           this.uploadsArray = res.Mat
           this.totalItems = res.count
-          console.log('eee',this.totalItems);
+         
           
         }
       })
@@ -99,6 +115,18 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
     }
    }
    
-   
+ joinClass(){
+  this.router.navigateByUrl(`/school/v-class/${this.roomId}`)
+  
+ }  
+
+ detailViewPage(item:IMatAsmnt){
+      if(item.assignmentTitle){
+        this.store.dispatch(saveAsnmt({upload:item}))
+        this.router.navigate(['/school/student/assignment-view'])
+      } else if(item.materialTitle){
+                
+      }
+ }
 
 }

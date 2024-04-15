@@ -5,6 +5,9 @@
     <app-student-side-nav></app-student-side-nav>
     
     <div class="flex flex-col mx-36">
+        <div class="flex p-12 justify-center">
+            <button class="btn bg-red-700 hover:bg-red-500" (click)="joinClass()">Join Class</button>
+        </div>
         <div class="dropdown dropdown-bottom">
             <!-- Dropdown button with dynamic label -->
             <div tabindex="0" role="button" class="btn m-1" >{{selectedOption}}</div>
@@ -16,7 +19,7 @@
         
 
 
-        <div *ngFor="let item of uploadsArray" class="flex flex-row justify-between mt-4 border mx-14 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer w-3/4">
+        <div *ngFor="let item of uploadsArray" class="flex flex-row justify-between mt-4 border mx-14 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer w-3/4" (click)="detailViewPage(item)" >
         <!-- Icon and Title Section -->
         <div class="flex flex-row items-center">
             <!-- Check if the item is a material -->
@@ -52,7 +55,6 @@
     <button (click)="nextPage()">Next</button>
 </div>
    
-
 
 
 
