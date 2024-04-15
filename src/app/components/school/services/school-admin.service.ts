@@ -3,7 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, tap } from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs';
-import { IApiRes, Res } from 'src/app/Models/common';
+import { IApiRes, Res, summary } from 'src/app/Models/common';
 import { IApiadminList } from 'src/app/Models/schoolAdmin';
 import { classSubjects, classes, subjects } from 'src/app/Models/subject';
 import { selectTenantId } from 'src/app/states/school/school.selector';
@@ -82,6 +82,11 @@ toggleBlock(email:string,tenantId:string){
   console.log('email:',email);  
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/admin/toggleBlock`,{email})
 }
+
+fetchSummary(tenantId:string){
+return this.http.get<summary>(`${this.backendURL}/${tenantId}/admin/fetchSummary`)
+}
+
 }
 
 

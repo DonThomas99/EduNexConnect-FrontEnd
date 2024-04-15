@@ -41,5 +41,11 @@ fetchStudents(tenantId:string,classNum:string){
   const params = new HttpParams().set('classNum',classNum)
   return this.http.get<StudentInfo[]>(`${this.backendURL}/${tenantId}/teacher/getStudentsByClass`,{params})
 }
+startVideoClass(tenantId:string,classNum:string,subjectId:string,roomId:string){
+  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/startClass`,{classNum,subjectId,roomId})
+}
+endClass(tenantId:string,classNum:string,subjectId:string){
+  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/endClass`,{classNum,subjectId})
+}
 
 }

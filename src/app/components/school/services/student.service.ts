@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
-import { Res } from 'src/app/Models/common';
+import { Asnmt_url, Res } from 'src/app/Models/common';
 import { IStudent } from 'src/app/Models/student';
 import { SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
 import { map } from 'rxjs';
-import { IMat, IMatAsmnt } from 'src/app/Models/material';
+import { IMat, IMatAsmnt, UAsmnt } from 'src/app/Models/material';
+import { faLaptopHouse } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +73,39 @@ fetchMatAsnmt(tenantId:string,subjectId:string,page:number,limit:number){
   return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAsnmtMat`,{params})
 }
 
+fetchRoomId(tenantId:string,subjectId:string,classNum:string){
+console.log('ufyufttyg',classNum);
 
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('classNum',classNum)
+  return this.http.get<Res>(`${this.backendURL}/${tenantId}/student/fetchRoomId`,{params})
+}
 
+uploadAssignment(tenantId:string,data:UAsmnt){
+  console.log(data);
+  const params = new HttpParams ()
+  .append('assignmentId',data.assignmentId)
+  .append('studentEmail',data.studentEmail)
+  .append('id',tenantId)
+    const formData = new FormData()
+    for (const key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const value = data[key as keyof UAsmnt]; // Type assertion here
+          formData.append(key, value);
+      }
+  }
+  formData.forEach((value, key) => {
+    console.log(key, value);
+});
+    return this.http.post<Asnmt_url>(`${this.backendURL}/${tenantId}/student/uploadAssignment`,formData,{params})
+} 
+
+fetchSubmissions(tenantId:string,studentEmail:string,assignmentId:string){
+  const params = new HttpParams()
+  .append('assignmentId',assignmentId)
+  .append('studentEmail',studentEmail)
+  return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/student/fetchSubmissions`,{params})
+}
 
 }
