@@ -1,2 +1,35 @@
-<app-side-nav></app-side-nav>
-<app-header></app-header>
+<div class="page-container">
+
+  <app-side-nav></app-side-nav>
+  <app-header></app-header>
+  <div
+  class="m-20 pt-12 flex flex-row justify-around">
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="flex flex-row justify-between">
+        <h2 class="card-title">Teachers</h2>
+        <i class="fa-solid fa-user-group"></i>
+      </div>
+      <p>{{teacherCount}}</p>
+      <div class="card-actions justify-end">
+        
+        <button (click)="teachers()" class="btn bg-white border"> view Details</button>
+      </div>
+    </div>
+  </div>
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="flex flex-row justify-between">
+        <h2 class="card-title">Students</h2>
+        <i class="fa-solid fa-user-group"></i>
+      </div>
+      <p>{{studentCount}}</p>
+      <div class="card-actions justify-end">
+        
+        <button (click)="students()" class="btn bg-white border"> View Details</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
