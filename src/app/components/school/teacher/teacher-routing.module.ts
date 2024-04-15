@@ -6,6 +6,7 @@ import { TeacherLandingPageComponent } from './teacher-landing-page/teacher-land
 import { TeacherClassworkComponent } from './teacher-classwork/teacher-classwork.component';
 import { TeacherPeopleComponent } from './teacher-people/teacher-people.component';
 import { TeacherGradesComponent } from './teacher-grades/teacher-grades.component';
+import { VideoClassComponent } from '../../common/video-class/video-class.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'stream',component:TeacherLandingPageComponent},
   {path:'classwork',component:TeacherClassworkComponent},
   {path:'people',component:TeacherPeopleComponent},
-  {path:'grades',component:TeacherGradesComponent}
+  {path:'grades',component:TeacherGradesComponent},
+  {path:'Vclass/:roomId',component:VideoClassComponent}
 ];
 
 @NgModule({
