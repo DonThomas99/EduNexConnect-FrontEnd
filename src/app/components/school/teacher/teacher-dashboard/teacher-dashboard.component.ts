@@ -49,6 +49,7 @@ if(data){
     class: classData.classNum,
     subjects: classData.subject
    }));
+ 
    
    this.subjects = this.classNsubjects.flatMap(subjectsI =>
     subjectsI.subjects.map(subject => ({
@@ -56,14 +57,13 @@ if(data){
       name: subject.name,
       classNum: subjectsI.class // Assuming classNum is obtained from subjectsI
     }))
-  );   
-}
-  })
-  }
-
-  Openclass(subjectId:string,classNum:string){
-
     
+    );   
+  }
+})
+}
+
+Openclass(subjectId:string,classNum:string){    
 this.store.dispatch(saveSubjectId({subjectId:subjectId}))
 this.store.dispatch(saveClassNum({classNum:classNum}))
     
