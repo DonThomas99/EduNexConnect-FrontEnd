@@ -59,7 +59,6 @@ this.store.dispatch(setStudentEmail({studentEmail:data.email}))
 
 this.studentService.fetchStudentData(this.tenantId, data.email).subscribe({
   next: (res:IStudent) => {
-    console.log(res);
     this.store.dispatch(saveStudentData({studentData:res}))
     
   }
