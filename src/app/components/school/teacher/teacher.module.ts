@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { VideoClassComponent } from '../../common/video-class/video-class.component';
 import { ZoomCallComponent } from './zoom-call/zoom-call.component';
+import { AssignmentValuationComponent } from './assignment-valuation/assignment-valuation.component';
 
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -40,7 +41,8 @@ import { ZoomCallComponent } from './zoom-call/zoom-call.component';
     TeacherClassworkComponent,
     TeacherPeopleComponent,
     TeacherGradesComponent,
-    ZoomCallComponent
+    ZoomCallComponent,
+    AssignmentValuationComponent
   ],
   imports: [
     MatMenuModule,

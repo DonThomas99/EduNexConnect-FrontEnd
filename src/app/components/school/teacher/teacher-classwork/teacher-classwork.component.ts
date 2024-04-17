@@ -11,6 +11,7 @@ import { selectTenantId,selectSubjectId, selectTeacherData } from 'src/app/state
 import { Res } from 'src/app/Models/common';
 import { ToastrService } from 'ngx-toastr';
 import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-teacher-classwork',
@@ -18,6 +19,18 @@ import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
   styleUrls: ['./teacher-classwork.component.css']
 })
 export class TeacherClassworkComponent implements OnInit {
+
+  imageMimeTypes = [
+    'image/apng',
+    'image/avif',
+    'image/gif',
+    'image/jpeg',
+    'image/png',
+    'image/svg+xml',
+    'image/webp',
+    'application/pdf'
+ ];
+ pdfArray!:string[]
   selectedItem!:IMatAsmnt
   dateTime: Date | undefined;
 tenantId$= this.store.select(pipe(selectTenantId));
@@ -35,6 +48,7 @@ editorForm!:FormGroup
 html!:string
 materials!:IMatAsmnt[]
 selectedImage!:File
+sanitizedUrls!: SafeResourceUrl[];
 quillConfig = {
   toolbar:{
     container:[
@@ -49,6 +63,7 @@ quillConfig = {
 }
 constructor(
   private readonly formBuilder:FormBuilder,
+  private santitizer:DomSanitizer,
   private TeacherService:TeacherServiceService,
   private Toastr:ToastrService,
   private readonly router:Router,
@@ -58,16 +73,16 @@ constructor(
 }
   ngOnInit(): void {
     this.assignmentForm = this.formBuilder.group({
-      assignmentTitle:['',validateBytrimming(addressValidators)],
+      assignmentTitle:['',Validators.required],
       content:['',Validators.required],
-      pdf:['',validatePdf],
+      pdf:[null,[Validators.required]],
       dateTime:['',Validators.required]
     })
 
     this.materialForm = this.formBuilder.group({
-      materialTitle :['',validateBytrimming(addressValidators)],
+      materialTitle :['',Validators.required],
       content:['',Validators.required],
-      pdf:['',validatePdf]
+      pdf:[null,[Validators.required]]
     })
 
     this.tenantId$.subscribe((id)=>{    
@@ -79,7 +94,7 @@ constructor(
         if(id){
 
           this.teacherId = id._id
-          console.log(this.teacherId);
+          // console.log(this.teacherId);
         }
         
         
@@ -100,13 +115,17 @@ constructor(
   toggleCreateButton(){
     this.viewCreate = !this.viewCreate
   }
-  uploadMaterial(){   
-    this.isSubmitted=true 
 
+  uploadMaterial(){   
+    this.isSubmitted=true     
+    console.log('sivniwobviw:',this.materialForm);
     if(this.materialForm.valid){
-      
+      this.materialForm.get('subjectId')?.setValue(this.subjectId)
+      this.materialForm.get('tenantId')?.setValue(this.tenantId)
+      this.materialForm.get('teacherId')?.setValue(this.teacherId)        
       const data = this.materialForm.getRawValue()
       console.log(data);
+      
       this.TeacherService.uploadMaterial(this.tenantId,this.subjectId,this.teacherId,data).subscribe({
         next:(res:Res)=>{
           const msg = res as unknown as string
@@ -116,6 +135,11 @@ constructor(
           this.Toastr.error(msg)
         }
       })
+    this.materialForm.reset()
+
+    } else {
+      const msg = 'Error sending from frontend'
+      this.Toastr.error(msg)
     }
     this.materialForm.reset()
   }
@@ -170,6 +194,26 @@ if(this.assignmentForm.valid){
       }
 
       editItem(){
+        
+      }
+
+      onFileChange(event:any){
+        console.log(this.materialForm);
+        
+        if(event.target.files && event.target.files.length > 0){
+          const file = event.target.files[0]   
+          if (this.imageMimeTypes.includes(file.type)) {
+            this.materialForm.get('pdf')?.setValue(file)
+            this.pdfArray.push(file.name)         
+            //  this.materialForm.get('id')?.setValue(this.tenantId)
+         }    
+        }
+      }
+
+      viewSubmissions(){
+        console.log(this.selectedItem._id);
+        // this.router.navigateByUrl(`school/teacher/valuation/${this.selectedItem._id}`)
+        this.router.navigate(['school/teacher/valuation',this.selectedItem._id])
         
       }
 

@@ -1,7 +1,8 @@
 export interface IMaterialData {
     content: string;
     materialTitle: string;
-    pdf: string;
+    pdf: File;
+    
   }
   
   export interface IAssignmentData{
@@ -20,6 +21,7 @@ export interface IMaterialData {
     content:string;
   }
   export interface IMatAsmnt{
+    _id:string
     subjectId:string;
     teacherId:string;
     materialTitle:string;

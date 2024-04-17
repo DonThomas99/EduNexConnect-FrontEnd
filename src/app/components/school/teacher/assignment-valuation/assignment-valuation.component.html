@@ -1,0 +1,23 @@
+<div class="page-container">
+    <app-top-nav></app-top-nav>
+    <app-side-nav></app-side-nav>
+    <div class="mt-20">
+            <div class="flex flex-col justify-around">
+                    <div class="ml-2">
+                        <ng-container *ngFor="let student of studentData">
+                            <div class="flex w-96 h-20 justify-center flex-row mt-2 border hover:cursor-pointer  hover:bg-slate-200" (click)="openAssignment(student.email)">
+                                <p class="mt-6">{{student.name}}</p> 
+                            </div>
+                        </ng-container>
+                        
+                    </div>
+    
+                    <div>
+                      <ng-container *ngIf="">
+
+                      </ng-container>
+                    </div>
+            </div>
+    </div>
+</div>
+

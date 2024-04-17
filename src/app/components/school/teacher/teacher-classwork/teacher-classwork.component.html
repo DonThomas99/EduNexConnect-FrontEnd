@@ -21,7 +21,7 @@
        <!-- Icon and Title Section -->
        <div class="flex flex-row items-center flex-grow">
            <!-- Check if the item is a material -->
-           <mat-icon *ngIf="item.materialTitle; else assignmentIcon">book</mat-icon>
+           <mat-icon *ngIf="item?.materialTitle; else assignmentIcon">book</mat-icon>
  
            <!-- Check if the item is an assignment -->
            <ng-template #assignmentIcon>
@@ -31,7 +31,7 @@
            <!-- Display the item's title with a label -->
            <div class="ml-3 flex flex-col flex-grow">
                <!-- Conditional title based on whether the item is a material or an assignment -->
-               <p class="title">{{ item.materialTitle ? 'You posted a material: ' : 'You posted an assignment: ' }} {{ item.materialTitle || item.assignmentTitle }}</p>
+               <p class="title">{{ item.materialTitle ? 'You posted a material: ' : 'You posted an assignment: ' }} {{ item?.materialTitle || item?.assignmentTitle }}</p>
                <!-- Display the due date if it exists -->
                <div class="flex justify-between items-center">
                   <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>
@@ -104,6 +104,10 @@
       <div>
           <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
           <a id="pdfLink">View PDF</a>
+      </div>
+      <div class="flex justify-center">
+        <!-- <a [routerLink]=""></a> -->
+        <button (click)="viewSubmissions()" class="btn bg-blue-600 text-white hover:bg-blue-700">View Submissions</button>
       </div>
       <div class="modal-action">
           <!-- Close button -->
@@ -208,12 +212,22 @@
       </div>
 
       <div>
-        <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF </label>
-        <input formControlName="pdf"
-          class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-          id="large_size" type="file">
-
+        <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF</label>
+        <div class="flex border w-full justify-center rounded hover:cursor-pointer">
+        <div class="input-div">
+          <input (change)="onFileChange($event)" class="input" name="file" type="file" id="fileInput" style="display: none;">
+          <label for="fileInput" class="p-3 hover:cursor-pointer  custom-file-upload">
+             Create or upload
+          </label>
       </div>
+      </div>
+    </div>
+
+<!--     
+        <div *ngIf="pdfArray.length">
+          <p>{{pdfArray[0]}}</p>
+        </div> -->
+  
 
       <div class="modal-action">
         <!-- if there is a button, it will close the modal -->

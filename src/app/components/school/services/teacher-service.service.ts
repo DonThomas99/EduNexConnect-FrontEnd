@@ -24,8 +24,29 @@ fetchTeacherData(tenantId:string,email:string){
   return this.http.get<IteacherData>(`${this.backendURL}/${tenantId}/teacher/fetchTeacherData`,{params})
 }
 
-uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialData){
-return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,{subjectId,teacherId,data})
+uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialData){  
+
+  // const params = new HttpParams()
+  // .append('teacherId',teacherId)
+  // .append('subjectId',subjectId)
+  // .append('id',tenantId)
+  // .append('materialTitle',data.materialTitle)
+  // .append('content',data.content)
+  const formData = new FormData();
+   for (const key in data) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      const value = data[key as keyof IMaterialData];
+      formData.append(key, value instanceof Blob ? value : value.toString());
+    }
+    formData.append('tenantId',tenantId)
+    formData.append('subjectId',subjectId)
+    formData.append('teacherId',teacherId)
+  }
+  formData.forEach((value, key) => {
+    console.log(key, value);
+});
+
+return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,formData)
 }
 uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadAssignment`,{subjectId,teacherId,data})

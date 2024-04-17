@@ -7,6 +7,7 @@ import { TeacherClassworkComponent } from './teacher-classwork/teacher-classwork
 import { TeacherPeopleComponent } from './teacher-people/teacher-people.component';
 import { TeacherGradesComponent } from './teacher-grades/teacher-grades.component';
 import { VideoClassComponent } from '../../common/video-class/video-class.component';
+import { AssignmentValuationComponent } from './assignment-valuation/assignment-valuation.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'classwork',component:TeacherClassworkComponent},
   {path:'people',component:TeacherPeopleComponent},
   {path:'grades',component:TeacherGradesComponent},
-  {path:'Vclass/:roomId',component:VideoClassComponent}
+  {path:'Vclass/:roomId',component:VideoClassComponent},
+  {path:'valuation/:assignmentId',component:AssignmentValuationComponent}
 ];
 
 @NgModule({

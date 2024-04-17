@@ -61,7 +61,7 @@ export class SideNavComponent {
     console.log('subjectId');
     
     if(this.roomId){
-      this.videoCallService.setCallId(this.roomId)
+      // this.videoCallService.setCallId(this.roomId)
       this.teacherService.startVideoClass(this.tenantId,this.classNum,this.subjectId,this.roomId).subscribe({
         next:(res:Res)=>{
           this.store.dispatch(saveTenantIdOnStore({tenantId:this.tenantId}))
