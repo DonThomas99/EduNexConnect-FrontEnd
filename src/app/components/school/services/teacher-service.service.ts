@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Res } from 'src/app/Models/common';
+import { Asnmt_url, Res } from 'src/app/Models/common';
 import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
-import {IAssignmentData, IMatAsmnt, IMaterialData, IMaterials} from 'src/app/Models/material'
+import {IAssignmentData, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
 import { StudentInfo } from 'src/app/Models/student';
 import { IAssignments } from 'src/app/Models/assignments';
 
@@ -67,6 +67,12 @@ startVideoClass(tenantId:string,classNum:string,subjectId:string,roomId:string){
 }
 endClass(tenantId:string,classNum:string,subjectId:string){
   return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/endClass`,{classNum,subjectId})
+}
+
+fetchSubmissions(email:string,tenantId:string){
+  const params = new HttpParams()
+  .append('email',email)
+  return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
 }
 
 }

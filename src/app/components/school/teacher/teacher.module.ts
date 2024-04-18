@@ -46,6 +46,8 @@ import { AssignmentValuationComponent } from './assignment-valuation/assignment-
   ],
   imports: [
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
     // BrowserModule,
     MatIconModule,
     FormsModule,

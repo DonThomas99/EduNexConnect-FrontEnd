@@ -12,6 +12,8 @@ import { Res } from 'src/app/Models/common';
 import { ToastrService } from 'ngx-toastr';
 import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-teacher-classwork',
@@ -62,6 +64,7 @@ quillConfig = {
   
 }
 constructor(
+  private dialog:MatDialog,
   private readonly formBuilder:FormBuilder,
   private santitizer:DomSanitizer,
   private TeacherService:TeacherServiceService,
@@ -189,11 +192,31 @@ if(this.assignmentForm.valid){
         event.stopPropagation();
       }
 
-      deleteItem(){
+      deleteItem(item:IMatAsmnt){
+        let name=''
+        let assignmentId =''
+        let materialId = ''
+
+        if(item.materialTitle){
+            name = item.materialTitle
+            assignmentId = item._id
+          } else{
+          name = item.assignmentTitle
+          materialId = item._id
+        }
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
+          data:{message:`Are you sure you want to delete the ${name}`}
+        })
+
+        dialogRef.afterClosed().subscribe(result =>{
+          if(result){
+                        
+          }
+        })
 
       }
 
-      editItem(){
+      editItem(item:IMatAsmnt){
         
       }
 

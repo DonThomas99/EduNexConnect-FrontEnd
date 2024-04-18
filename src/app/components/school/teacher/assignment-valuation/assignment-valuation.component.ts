@@ -5,6 +5,9 @@ import { pipe } from 'rxjs';
 import { selectClassNum, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { StudentInfo } from 'src/app/Models/student';
+import { Isubmission } from 'src/app/Models/material';
+import { Asnmt_url } from 'src/app/Models/common';
+import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -19,15 +22,20 @@ export class AssignmentValuationComponent implements OnInit {
   classNum!:string
   tenantId!:string
   studentData!:StudentInfo[]
-  open:boolean = false 
+  open!:boolean  
+  sanitizedUrls!: SafeResourceUrl[];
+  hasError:boolean = false
+  grade!:string
 
   constructor(
+    private sanitizer: DomSanitizer,
     private readonly ActivatedRoute:ActivatedRoute,
     private readonly store:Store,
     private readonly teacherService:TeacherServiceService
-  ){
-  }
+  ){  }
+  
   ngOnInit() {
+    this.open =false
     this.ActivatedRoute.params.subscribe((param)=>{
       this.assignmentId = param['assignmentId']
     })
@@ -49,9 +57,26 @@ this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
 
  openAssignment(email:string){
   this.open= !this.open
-  this.teacherService.fetchSubmissions()
+  this.teacherService.fetchSubmissions(email,this.tenantId).subscribe({
+    next:(res:Asnmt_url)=>{
+      if(res){
+        this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+        const assignmentModal = document.getElementById('view-assignment') as HTMLDialogElement;
+        assignmentModal.showModal();
+
+      }
+    },
+      error:(error)=>{
+          this.hasError = true
+      }      
+  })
   
   console.log('hee',email);
+  
+ }
+
+ onGradeChange(){
+  console.log(this.grade);
   
  }
 
