@@ -210,7 +210,15 @@ if(this.assignmentForm.valid){
 
         dialogRef.afterClosed().subscribe(result =>{
           if(result){
-                        
+                        this.TeacherService.deleteAssignments(this.tenantId,assignmentId).subscribe({
+                          next:(res:Res)=>{
+                            const message = res.message
+                            this.Toastr.success(message)
+                          },error:(res:Res)=>{
+                            const message = res.message
+                            this.Toastr.error(message)
+                          }
+                        })
           }
         })
 

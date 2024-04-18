@@ -75,4 +75,11 @@ fetchSubmissions(email:string,tenantId:string){
   return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
 }
 
+deleteAssignments(tenantId:string,assignmentId:string){
+  const params = new HttpParams()
+  .append('assignmentId',assignmentId)
+return this.http.delete<Res>(`${this.backendURL}/${tenantId}/teacher/deleteAssignment`,{params})
+
+}
+
 }
