@@ -6,8 +6,12 @@ import { selectClassNum, selectTenantId } from 'src/app/states/school/school.sel
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { StudentInfo } from 'src/app/Models/student';
 import { Isubmission } from 'src/app/Models/material';
-import { Asnmt_url } from 'src/app/Models/common';
+import { Asnmt_url, Res } from 'src/app/Models/common';
 import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validateBytrimming } from 'src/app/helpers/validations';
+import { emailValidators } from 'src/app/shared/validators';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,26 +20,34 @@ import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./assignment-valuation.component.css']
 })
 export class AssignmentValuationComponent implements OnInit {
+  form!:FormGroup
   assignmentId!:string
   tenantId$ = this.store.select(pipe(selectTenantId))
   classNum$ = this.store.select(pipe(selectClassNum))
   classNum!:string
   tenantId!:string
   studentData!:StudentInfo[]
-  open!:boolean  
+  email!:string  
   sanitizedUrls!: SafeResourceUrl[];
   hasError:boolean = false
   grade!:string
 
   constructor(
     private sanitizer: DomSanitizer,
+    private readonly formBuilder:FormBuilder,
     private readonly ActivatedRoute:ActivatedRoute,
     private readonly store:Store,
-    private readonly teacherService:TeacherServiceService
+    private readonly teacherService:TeacherServiceService,
+    private readonly toastr:ToastrService
   ){  }
   
   ngOnInit() {
-    this.open =false
+    this.form =this.formBuilder.group({
+      grade:[this.grade,Validators.required],
+      studentEmail:['',validateBytrimming(emailValidators)],
+      assignmentId:['',Validators.required]
+    })
+
     this.ActivatedRoute.params.subscribe((param)=>{
       this.assignmentId = param['assignmentId']
     })
@@ -52,12 +64,14 @@ this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
 }
 })
 
+
+
  }
 
 
  openAssignment(email:string){
-  this.open= !this.open
-  this.teacherService.fetchSubmissions(email,this.tenantId).subscribe({
+  this.email = email
+  this.teacherService.fetchSubmissions(email,this.assignmentId,this.tenantId).subscribe({
     next:(res:Asnmt_url)=>{
       if(res){
         this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
@@ -76,7 +90,28 @@ this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
  }
 
  onGradeChange(){
-  console.log(this.grade);
+  this.form.get('assignmentId')?.setValue(this.assignmentId)
+  this.form.get('studentEmail')?.setValue(this.email)
+if(this.form.valid){
+  const data = this.form.getRawValue()
+  this.teacherService.gradeAssignment(this.tenantId,data).subscribe({
+    next:(res:Res)=>{
+      const message =  res.message
+      this.toastr.success(message)
+      this.grade=''
+      this.email=''
+      this.form.reset()
+    },
+    error:(res:Res)=>{
+      const msg = res.message
+      this.toastr.error(msg)
+      this.grade=''
+      this.email=''
+      this.form.reset()
+    }
+  })
+
+}
   
  }
 

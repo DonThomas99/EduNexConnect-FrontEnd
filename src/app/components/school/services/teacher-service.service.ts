@@ -5,7 +5,7 @@ import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
 import {IAssignmentData, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
 import { StudentInfo } from 'src/app/Models/student';
-import { IAssignments } from 'src/app/Models/assignments';
+import { IAssignments, OGrade } from 'src/app/Models/assignments';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialD
 
 return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,formData)
 }
-uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){
+uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){  
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadAssignment`,{subjectId,teacherId,data})
 }
 fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
@@ -69,9 +69,10 @@ endClass(tenantId:string,classNum:string,subjectId:string){
   return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/endClass`,{classNum,subjectId})
 }
 
-fetchSubmissions(email:string,tenantId:string){
+fetchSubmissions(email:string,assignmentId:string,tenantId:string){
   const params = new HttpParams()
   .append('email',email)
+  .append('assignmentId',assignmentId)
   return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
 }
 
@@ -79,7 +80,10 @@ deleteAssignments(tenantId:string,assignmentId:string){
   const params = new HttpParams()
   .append('assignmentId',assignmentId)
 return this.http.delete<Res>(`${this.backendURL}/${tenantId}/teacher/deleteAssignment`,{params})
+}
 
+gradeAssignment(tenantId:string,data:OGrade){
+  return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/gradeAssignment`,data)
 }
 
 }
