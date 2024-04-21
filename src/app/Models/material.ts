@@ -27,7 +27,7 @@ export interface IMaterialData {
     materialTitle:string;
     assignmentTitle:string;
     content:string;
-    pdf:string;
+    pdf:string[];
     createdAt:Date
     submissionDate:Date
   }

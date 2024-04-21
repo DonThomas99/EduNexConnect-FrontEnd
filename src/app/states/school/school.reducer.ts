@@ -11,7 +11,7 @@ export interface IMatAsmntState{
     materialTitle:string;
     assignmentTitle:string;
     content:string;
-    pdf:string;
+    pdf:string[];
     createdAt:Date
     submissionDate:Date
 }
@@ -66,7 +66,7 @@ export const IMatAsmntInitialState:IMatAsmntState ={
     materialTitle:'',
     assignmentTitle:'',
     content:'',
-    pdf:'',
+    pdf:[],
     createdAt:new Date(0),
     submissionDate:new Date(0)
 }

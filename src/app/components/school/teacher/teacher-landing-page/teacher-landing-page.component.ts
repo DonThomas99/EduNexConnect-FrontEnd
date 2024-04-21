@@ -5,6 +5,7 @@ import { Assignment, IAssignmentData, IMatAsmnt, IMaterials, Material } from 'sr
 import { selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IAssignments } from 'src/app/Models/assignments';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-teacher-landing-page',
@@ -22,10 +23,12 @@ export class TeacherLandingPageComponent implements OnInit {
   materials!: IMatAsmnt[]
   teacherData$ = this.store.select(pipe(selectTeacherData))
   selectedItem!:IMatAsmnt | null
+sanitizedUrls!: SafeResourceUrl[];
 
 
   tenantId$ = this.store.select(pipe(selectTenantId))
   constructor(
+    private sanitizer: DomSanitizer,
     private TeacherService: TeacherServiceService,
     private store: Store
   ) {
@@ -72,14 +75,26 @@ this.selectedItem = item
     
     if('materialTitle' in item){
       const materialModal = document.getElementById('materials') as  HTMLDialogElement;
+      this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
       materialModal.showModal();
+
     } else{
       const assignmentModal = document.getElementById('assignments') as HTMLDialogElement;
+      // this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+
       assignmentModal.showModal();
     }
   }
   openMenu(event:MouseEvent){
     event.stopPropagation();
+  }
+
+  viewPdf(){
+    const pdfModal = document.getElementById('view-pdf') as  HTMLDialogElement;
+    pdfModal.showModal()
+  }
+  closePdf(){
+    this.sanitizedUrls=[]
   }
 
 }
