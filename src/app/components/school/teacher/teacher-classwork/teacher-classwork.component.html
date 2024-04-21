@@ -73,12 +73,13 @@
       </div>
       <div>
           <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
-          <a id="pdfLink">View PDF</a>
+          <button class="btn " (click)="viewPdf()">View PDF</button>
+
       </div>
       <div class="modal-action">
           <!-- Close button -->
           <form method="dialog">
-              <button  class="btn">Close</button>
+              <button (click)="closePdf()"  class="btn">Close</button>
           </form>
       </div>
   </div>
@@ -103,7 +104,8 @@
       </div>
       <div>
           <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
-          <a id="pdfLink">View PDF</a>
+          <button class="btn " (click)="viewPdf()">View PDF</button>
+
       </div>
       <div class="flex justify-center">
         <!-- <a [routerLink]=""></a> -->
@@ -238,3 +240,24 @@
   </div>
 </dialog>
 <!-- Upload Material Modal -->
+
+<!-- view pdf -->
+<dialog id="view-pdf" class="modal" style=" min-height: 100vh;">
+  <div class=" modal-box custom-modal-size">
+
+    
+    <div *ngIf="sanitizedUrls && sanitizedUrls.length > 0" class="url-container mt-10">
+      <div *ngFor="let url of sanitizedUrls; let i = index">
+        <iframe [src]="url" width="100%" height="100%" style="margin: 15px; height: 80vh;"></iframe>
+      </div> 
+    </div>
+
+    <div>
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+    </div>
+
+  </div>
+</dialog>
+<!-- view pdf -->

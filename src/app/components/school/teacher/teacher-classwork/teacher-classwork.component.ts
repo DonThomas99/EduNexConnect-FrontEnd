@@ -66,7 +66,7 @@ quillConfig = {
 constructor(
   private dialog:MatDialog,
   private readonly formBuilder:FormBuilder,
-  private santitizer:DomSanitizer,
+  private sanitizer:DomSanitizer,
   private TeacherService:TeacherServiceService,
   private Toastr:ToastrService,
   private readonly router:Router,
@@ -182,6 +182,8 @@ if(this.assignmentForm.valid){
         
         if('materialTitle' in item){
           const materialModal = document.getElementById('materials-view') as  HTMLDialogElement;
+      this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+
           materialModal.showModal();
         } else{
           const assignmentModal = document.getElementById('assignments-view') as HTMLDialogElement;
@@ -247,5 +249,14 @@ if(this.assignmentForm.valid){
         this.router.navigate(['school/teacher/valuation',this.selectedItem._id])
         
       }
+
+
+viewPdf(){
+  const pdfModal = document.getElementById('view-pdf') as  HTMLDialogElement;
+  pdfModal.showModal()
+}
+closePdf(){
+  this.sanitizedUrls=[]
+}
 
 }
