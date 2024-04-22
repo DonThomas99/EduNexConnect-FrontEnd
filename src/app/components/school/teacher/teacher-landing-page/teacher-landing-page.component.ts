@@ -73,15 +73,13 @@ sanitizedUrls!: SafeResourceUrl[];
 
 this.selectedItem = item
     
+this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
     if('materialTitle' in item){
       const materialModal = document.getElementById('materials') as  HTMLDialogElement;
-      this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
       materialModal.showModal();
 
     } else{
       const assignmentModal = document.getElementById('assignments') as HTMLDialogElement;
-      // this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
-
       assignmentModal.showModal();
     }
   }

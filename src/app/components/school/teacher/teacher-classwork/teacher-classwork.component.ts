@@ -38,7 +38,9 @@ export class TeacherClassworkComponent implements OnInit {
 tenantId$= this.store.select(pipe(selectTenantId));
 teacherData$= this.store.select(pipe(selectTeacherData))
 subjectId$ = this.store.select(pipe(selectSubjectId))
-subjectId!:string
+subjectId!:string;
+assignmentTitle!:string
+content!:string
 teacherId!:string;
 tenantId!:string;
 materialForm!:FormGroup;
@@ -46,6 +48,10 @@ assignmentForm!:FormGroup;
 viewCreate=false
 isSubmitted=false
 materialTitle!:string
+isAssignment:boolean = false
+isMaterial:boolean =false
+// dateTime!:string
+
 editorForm!:FormGroup
 html!:string
 materials!:IMatAsmnt[]
@@ -115,13 +121,10 @@ constructor(
       })
   }
 
-  toggleCreateButton(){
-    this.viewCreate = !this.viewCreate
-  }
+
 
   uploadMaterial(){   
     this.isSubmitted=true     
-    console.log('sivniwobviw:',this.materialForm);
     if(this.materialForm.valid){
       this.materialForm.get('subjectId')?.setValue(this.subjectId)
       this.materialForm.get('tenantId')?.setValue(this.tenantId)
@@ -153,41 +156,48 @@ constructor(
     this.assignmentForm.reset()
   }
   uploadAssignment(){
-    console.log(this.assignmentForm)
-if(this.assignmentForm.valid){
-  
-  const data = this.assignmentForm.getRawValue()
-  console.log(data);
-  
+    this.isSubmitted =true
+// this.assignmentForm.get('content')
+    if(this.assignmentForm.valid){
+  const data = this.assignmentForm.getRawValue()  
   this.TeacherService.uploadAssignment(this.tenantId,this.subjectId,this.teacherId,data).subscribe({
     next:(res:Res)=>{
-      const msg = res as unknown as string
+      const msg = res.message
       this.Toastr.success(msg)
+      this.assignmentForm.reset()
     },error:(err:Res)=>{
-      const msg = err as unknown as string 
+      const msg = err.message
       this.Toastr.error(msg)
+    this.assignmentForm.reset()
     }
   })
-}else{
-  console.log(this.assignmentForm.invalid);
-  
 }
   }
 
-
+toggleAssignment(){ 
+  this.isAssignment = true
+  const assignments = document.getElementById('assignments') as HTMLDialogElement
+  assignments.showModal(); 
+}
+toggleMaterial(){
+  this.isMaterial = true
+const materials = document.getElementById('materials') as HTMLDialogElement
+materials.showModal();
+  
+}
 
   openModal(item:IMatAsmnt){
 
     this.selectedItem = item
         
+    this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
         if('materialTitle' in item){
           const materialModal = document.getElementById('materials-view') as  HTMLDialogElement;
-      this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
 
           materialModal.showModal();
         } else{
           const assignmentModal = document.getElementById('assignments-view') as HTMLDialogElement;
-          assignmentModal.showModal();
+            assignmentModal.showModal();
         }
       }
       openMenu(event:MouseEvent){
@@ -236,8 +246,12 @@ if(this.assignmentForm.valid){
         if(event.target.files && event.target.files.length > 0){
           const file = event.target.files[0]   
           if (this.imageMimeTypes.includes(file.type)) {
-            this.materialForm.get('pdf')?.setValue(file)
-            this.pdfArray.push(file.name)         
+            if(this.isMaterial){
+              this.materialForm.get('pdf')?.setValue(file)
+            } else if(this.isAssignment){
+              this.assignmentForm.get('pdf')?.setValue(file)
+            }
+            // this.pdfArray.push(file.name)         
             //  this.materialForm.get('id')?.setValue(this.tenantId)
          }    
         }

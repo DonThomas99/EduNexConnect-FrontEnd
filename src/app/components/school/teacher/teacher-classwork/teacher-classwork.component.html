@@ -9,8 +9,8 @@
 </button>
 <div class>
   <mat-menu #menu="matMenu" xPosition="after" yPosition="below">
-    <button mat-menu-item onclick="assignments.showModal()">Assignments</button>
-    <button mat-menu-item onclick="materials.showModal()">Materials</button>
+    <button mat-menu-item (click)="toggleAssignment();">Assignments</button>
+    <button mat-menu-item  (click)="toggleMaterial()">Materials</button>
   </mat-menu>
 </div>
 
@@ -144,12 +144,16 @@
       </div>
 
       <div>
-        <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF </label>
-        <input formControlName="pdf"
-          class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-          id="large_size" type="file">
-
+        <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">Upload PDF</label>
+        <div class="flex border w-full justify-center rounded hover:cursor-pointer">
+        <div class="input-div">
+          <input (change)="onFileChange($event)" class="input" name="file" type="file" id="fileInput" style="display: none;">
+          <label for="fileInput" class="p-3 hover:cursor-pointer  custom-file-upload">
+             Create or upload
+          </label>
       </div>
+      </div>
+    </div>
       <div class="mt-3 justify-center">
         <p class="text-sm font-medium text-gray-700">Select Submission Date and Time:</p>
         <div class="flex justify-end">
