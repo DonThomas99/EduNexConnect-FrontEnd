@@ -14,6 +14,7 @@ import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EditMaterialsComponent } from 'src/app/components/common/edit-materials/edit-materials.component';
 
 @Component({
   selector: 'app-teacher-classwork',
@@ -103,7 +104,7 @@ constructor(
         if(id){
 
           this.teacherId = id._id
-          // console.log(this.teacherId);
+         
         }
         
         
@@ -112,6 +113,8 @@ constructor(
       this.subjectId$.subscribe((id)=>{
         if(id)
         this.subjectId = id.subjectId as unknown as string       
+        
+            
       })
 
       this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,this.teacherId).subscribe({
@@ -236,8 +239,15 @@ materials.showModal();
 
       }
 
-      editItem(item:IMatAsmnt){
-        
+      editItem(item:IMatAsmnt){ 
+        const dialogRef = this.dialog.open(EditMaterialsComponent,{
+          data:{material:item}
+        } )
+        dialogRef.afterClosed().subscribe(result =>{
+          if(result){
+            window.location.reload();
+          }
+        })
       }
 
       onFileChange(event:any){

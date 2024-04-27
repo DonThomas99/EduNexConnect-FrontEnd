@@ -19,6 +19,15 @@ import { ClassNumValidationComponent } from './components/common/class-num-valid
 import { ConfirmationDialogComponent } from './components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ParticipantComponent } from './components/common/participant/participant.component';
+import { EditMaterialsComponent } from './components/common/edit-materials/edit-materials.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
 // import { QuillModule } from 'ngx-quill';
 
 
@@ -32,12 +41,20 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     ForgotPasswordComponent,
     ClassNumValidationComponent,
     ConfirmationDialogComponent,
+    EditMaterialsComponent,
+    FileUploadComponent,
     
     
         
   ],
   imports: [
-    // QuillModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    QuillModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
     MatDialogModule,
     ToastrModule.forRoot(),
     MatTooltipModule,

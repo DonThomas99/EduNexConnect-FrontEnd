@@ -1,0 +1,5 @@
+.url-container {
+    overflow: auto; /* Adds scrolling to iframe container if necessary */
+    height: calc(100% - 50px);
+    width: calc(100%)
+}

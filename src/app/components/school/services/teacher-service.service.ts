@@ -19,11 +19,25 @@ export class TeacherServiceService {
 teacherLogin(id:string,email:string,password:string){
 return this.http.post<Res>(`${this.backendURL}/${id}/teacher/login`,{email,password})
 }
+
 fetchTeacherData(tenantId:string,email:string){
   const params = new HttpParams().set('email',email)
   return this.http.get<IteacherData>(`${this.backendURL}/${tenantId}/teacher/fetchTeacherData`,{params})
 }
 
+fetchStudents(tenantId:string,classNum:string){
+  const params = new HttpParams().set('classNum',classNum)
+  return this.http.get<StudentInfo[]>(`${this.backendURL}/${tenantId}/teacher/getStudentsByClass`,{params})
+}
+
+fetchSubmissions(email:string,assignmentId:string,tenantId:string){
+  const params = new HttpParams()
+  .append('email',email)
+  .append('assignmentId',assignmentId)
+  return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
+}
+
+//Material Services
 uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialData){  
 
   const formData = new FormData();
@@ -38,10 +52,23 @@ uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialD
   }
   formData.forEach((value, key) => {
     console.log(key, value);
-});
-
-return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,formData)
+  });
+  
+  return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,formData)
 }
+
+fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('teacherId', teacherId)
+  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
+}
+
+updateMaterial(tenantId:string,materialId:string,data:Partial<IMatAsmnt>){
+  return this.http.patch<Res>(`${this.backendURL}/${tenantId}/teacher/updateMaterial`,{data,materialId})
+ }
+
+//  Assignment Services 
 uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){  
   const formData = new FormData();
    for (const key in data) {
@@ -55,30 +82,6 @@ uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignm
   }
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadAssignment`,formData)
 }
-fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
-  const params = new HttpParams()
-  .set('subjectId',subjectId)
-  .append('teacherId', teacherId)
-  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
-}
-
-fetchStudents(tenantId:string,classNum:string){
-  const params = new HttpParams().set('classNum',classNum)
-  return this.http.get<StudentInfo[]>(`${this.backendURL}/${tenantId}/teacher/getStudentsByClass`,{params})
-}
-startVideoClass(tenantId:string,classNum:string,subjectId:string,roomId:string){
-  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/startClass`,{classNum,subjectId,roomId})
-}
-endClass(tenantId:string,classNum:string,subjectId:string){
-  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/endClass`,{classNum,subjectId})
-}
-
-fetchSubmissions(email:string,assignmentId:string,tenantId:string){
-  const params = new HttpParams()
-  .append('email',email)
-  .append('assignmentId',assignmentId)
-  return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
-}
 
 deleteAssignments(tenantId:string,assignmentId:string){
   const params = new HttpParams()
@@ -88,6 +91,19 @@ return this.http.delete<Res>(`${this.backendURL}/${tenantId}/teacher/deleteAssig
 
 gradeAssignment(tenantId:string,data:OGrade){
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/gradeAssignment`,data)
+}
+
+updateAssignment(tenantId: string, assignmentId: string, data: Partial<IMatAsmnt>) {
+  return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/updateAssignment`,{data,assignmentId});
+ }
+
+//Video Class Services
+
+startVideoClass(tenantId:string,classNum:string,subjectId:string,roomId:string){
+  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/startClass`,{classNum,subjectId,roomId})
+}
+endClass(tenantId:string,classNum:string,subjectId:string){
+  return this.http.put<Res>(`${this.backendURL}/${tenantId}/teacher/endClass`,{classNum,subjectId})
 }
 
 }

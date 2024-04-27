@@ -1,0 +1,82 @@
+
+ <div>
+  <div>
+    <div *ngIf="!isAssignment" class="flex justify-center">
+      <div class="mt-5"><mat-icon>book</mat-icon> </div>
+      <div class="flex justify-start">
+        <h1 mat-dialog-title>Edit Material</h1>
+      </div>
+    </div>
+
+    <div *ngIf="isAssignment" class="flex justify-center">
+      <div class="mt-5"><mat-icon>assignment</mat-icon> </div>
+      <div class="flex justify-start">
+        <h1 mat-dialog-title>Edit Assignment</h1>
+      </div>
+    </div>
+
+      <mat-dialog-content>
+          <form [formGroup]="editMaterialForm">
+            <div *ngIf="!isAssignment">
+              <mat-form-field>
+                <mat-label>Material Title</mat-label>
+                <input matInput formControlName="materialTitle" placeholder="Enter Material Title">
+              </mat-form-field>
+            </div>
+
+              <!-- Assignment Title Field (Conditional) -->
+              <div *ngIf="isAssignment">
+                <mat-form-field>
+                     <mat-label>Assignment Title</mat-label>
+                     <input matInput formControlName="assignmentTitle" placeholder="Enter Assignment Title">
+                </mat-form-field>
+             </div>
+
+              <div class="text-slate-600">
+                Choose Files(Image,Youtube Link or Video)
+              </div>
+              <div class="mx-40 mt-6">
+                <quill-editor placeholder="Enter Description...." formControlName="content" class="quill-editor"
+                [modules]="quillConfig"></quill-editor>
+              </div>
+              
+             <!-- <app-file-upload></app-file-upload> -->
+
+              <!-- Conditional Date of Submission Field -->
+              <div *ngIf="isAssignment" class="mt-4">
+                  <mat-form-field>
+                      <mat-label>Date of Submission</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="submissionDate" placeholder="Choose a date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              </div>
+
+              <div class="flex justify-center mt-3">
+                  <button (click)="viewPdf()" class="btn">View Pdf</button>
+              </div>
+
+              <div class="flex justify-between mt-3">
+                <button mat-dialog-close class="btn">Close</button>
+                <button class="btn" (click)="onUpdate()">Submit</button>
+              </div>
+              
+          </form>
+      </mat-dialog-content>
+  </div>
+</div>
+
+<dialog id="view-pdf" class="modal" style=" min-height: 100vh;">
+  <div class="modal-box custom-modal-size">
+      <div *ngIf="sanitizedUrls && sanitizedUrls.length > 0" class="url-container mt-10">
+          <div *ngFor="let url of sanitizedUrls; let i = index">
+              <iframe [src]="url" width="100%" height="100%" style="margin: 15px; height: 80vh;"></iframe>
+          </div>
+      </div>
+      <div>
+          <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+      </div>
+  </div>
+</dialog>
