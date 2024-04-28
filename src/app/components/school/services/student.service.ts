@@ -51,19 +51,16 @@ fetchSubjects(classNum:string,email:string,tenantId:string){
   return this.http.get<subj[]>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
 }
 
+
+//Materials CRUD operations 
+
 fetchMaterials(tenantId:string,subjectId:string){
   const params = new HttpParams()
   .set('subjectId',subjectId)
   return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/student/fetchMaterials`,{params})
 }
 
-fetchAssignments(tenantId:string,subjectId:string,page:number,limit:number){
-  const params = new HttpParams()
-  .set('subjectId',subjectId)
-  .append('page',page)
-  .append('limit',limit)
-  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAssignments`,{params})
-}
+
 
 fetchMatAsnmt(tenantId:string,subjectId:string,page:number,limit:number){
   const params = new HttpParams()
@@ -73,6 +70,8 @@ fetchMatAsnmt(tenantId:string,subjectId:string,page:number,limit:number){
   return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAsnmtMat`,{params})
 }
 
+//Online Class
+
 fetchRoomId(tenantId:string,subjectId:string,classNum:string){
 console.log('ufyufttyg',classNum);
 
@@ -80,6 +79,17 @@ console.log('ufyufttyg',classNum);
   .set('subjectId',subjectId)
   .append('classNum',classNum)
   return this.http.get<Res>(`${this.backendURL}/${tenantId}/student/fetchRoomId`,{params})
+}
+
+
+//assignments CRUD operations
+
+fetchAssignments(tenantId:string,subjectId:string,page:number,limit:number){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('page',page)
+  .append('limit',limit)
+  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/student/fetchAssignments`,{params})
 }
 
 uploadAssignment(tenantId:string,data:UAsmnt){
@@ -100,6 +110,8 @@ uploadAssignment(tenantId:string,data:UAsmnt){
 });
     return this.http.post<Asnmt_url>(`${this.backendURL}/${tenantId}/student/uploadAssignment`,formData,{params})
 } 
+
+//submissions CRUD operations
 
 fetchSubmissions(tenantId:string,studentEmail:string,assignmentId:string){
   const params = new HttpParams()

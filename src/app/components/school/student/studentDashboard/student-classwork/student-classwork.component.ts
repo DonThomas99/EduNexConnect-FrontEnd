@@ -40,8 +40,7 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
     next:(res:IMat)=>{
       this.AssignmentArray = res.Mat
       this.totalItems = res.count
-    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage)  ;
-      
+      this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
     }
    })
  }

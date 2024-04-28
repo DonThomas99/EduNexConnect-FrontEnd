@@ -22,3 +22,17 @@ export interface summary{
     teacherCount:number,
     studentsCount:number
 }
+
+export interface submissions{
+id: any
+email: string
+assignmentId:string,
+studentEmail:string,
+grade:string
+}
+
+export interface AllSubmissions{
+    status:number,
+    message:string,
+    submissions:submissions[]
+}

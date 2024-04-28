@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Asnmt_url, Res } from 'src/app/Models/common';
+import { AllSubmissions, Asnmt_url, Res } from 'src/app/Models/common';
 import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
-import {IAssignmentData, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
+import {IAssignmentData, IMat, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
 import { StudentInfo } from 'src/app/Models/student';
 import { IAssignments, OGrade } from 'src/app/Models/assignments';
 
@@ -35,6 +35,14 @@ fetchSubmissions(email:string,assignmentId:string,tenantId:string){
   .append('email',email)
   .append('assignmentId',assignmentId)
   return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
+}
+
+fetchAllSubmissions(tenantId:string,subjectId:string){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  console.log('The call is being sent ');
+  
+  return this.http.get<AllSubmissions>(`${this.backendURL}/${tenantId}/teacher/fetchAllSubmissions`,{params})
 }
 
 //Material Services
@@ -69,6 +77,14 @@ updateMaterial(tenantId:string,materialId:string,data:Partial<IMatAsmnt>){
  }
 
 //  Assignment Services 
+
+fetchAssignment(tenantId:string,subjectId:string,page:number){
+  const params = new HttpParams()
+  .set('subjectId',subjectId)
+  .append('page',page)
+  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/teacher/fetchAssignments`,{params})
+}
+
 uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){  
   const formData = new FormData();
    for (const key in data) {

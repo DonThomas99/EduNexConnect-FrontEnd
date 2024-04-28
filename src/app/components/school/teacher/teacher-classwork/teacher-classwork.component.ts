@@ -112,9 +112,7 @@ constructor(
 
       this.subjectId$.subscribe((id)=>{
         if(id)
-        this.subjectId = id.subjectId as unknown as string       
-        
-            
+        this.subjectId = id.subjectId as unknown as string                   
       })
 
       this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,this.teacherId).subscribe({

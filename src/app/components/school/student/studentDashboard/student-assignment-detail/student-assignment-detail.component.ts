@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
 import { IMatAsmnt, Isubmission } from 'src/app/Models/material';
-import { selectAssignment, selectStudentData, selectTenantId } from 'src/app/states/school/school.selector';
+import { selectAssignment, selectStudentData, selectSubjectId, selectTenantId } from 'src/app/states/school/school.selector';
 import { StudentService } from '../../../services/student.service';
 import { Asnmt_url, Res } from 'src/app/Models/common';
 import { ToastrService } from 'ngx-toastr';
@@ -37,6 +37,8 @@ hasError:boolean = false
   tenantId$ = this.store.select(pipe(selectTenantId))
   student$ = this.store.select(pipe(selectStudentData))
   assignmentItem$ = this.store.select(pipe(selectAssignment))
+  subjectId$ = this.store.select(pipe(selectSubjectId))
+  subjectId!:string
   sanitizedUrls!: SafeResourceUrl[];
   constructor(
     private sanitizer: DomSanitizer,
@@ -58,10 +60,15 @@ hasError:boolean = false
       this.assignmentItem = assignment
       this.assignmentId = assignment._id
     })
+    this.subjectId$.subscribe((subjectId)=>{
+      this.subjectId =subjectId.subjectId as string
+    })
+
     this.uploadForm = this.formBuilder.group({
       id:['',Validators.required],
       studentEmail:['',Validators.required],
       assignmentId:['',[Validators.required]],
+      subjectId:['',[Validators.required]],
       file:[null,[Validators.required]]
     })
 
@@ -86,6 +93,7 @@ hasError:boolean = false
          this.uploadForm.get('file')?.setValue(file)
          this.uploadForm.get('assignmentId')?.setValue(this.assignmentId)
          this.uploadForm.get('studentEmail')?.setValue(this.studentEmail)
+         this.uploadForm.get('subjectId')?.setValue(this.subjectId)
          this.uploadForm.get('id')?.setValue(this.tenantId)
      }    
     }

@@ -1,2 +1,31 @@
-<app-top-nav></app-top-nav>
-<app-side-nav></app-side-nav>
+<div class="page-container">
+    <app-top-nav></app-top-nav>
+    <app-side-nav></app-side-nav>
+   
+    <div class="overflow-x-auto">
+       <table class="table table-zebra">
+         <thead>
+           <tr>
+             <th>Student Name</th>
+             <ng-container *ngFor="let item of AssignmentArray">
+               <th>{{item.assignmentTitle}}</th>
+             </ng-container>
+           </tr>
+         </thead>
+         <tbody>
+           <ng-container *ngFor="let student of studentData">
+             <tr>
+               <th>{{student.name}}</th>
+               <ng-container *ngFor="let assignment of AssignmentArray">
+                 <td>
+                    
+                   {{gradesByAssignment[assignment._id] && gradesByAssignment[assignment._id][student.email]}}
+                 </td>
+               </ng-container>
+             </tr>
+           </ng-container>
+         </tbody>
+       </table>
+    </div>
+   </div>
+   
