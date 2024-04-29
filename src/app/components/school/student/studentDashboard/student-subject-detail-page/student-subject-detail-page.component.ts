@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
 import { selectClassNum, selectSubjectId, selectTenantId } from 'src/app/states/school/school.selector';
@@ -8,6 +8,9 @@ import { DatePipe } from '@angular/common';
 import { Res } from 'src/app/Models/common';
 import { Router } from '@angular/router';
 import { saveAsnmt } from 'src/app/states/school/school.actions';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { MaterialViewComponent } from '../material-view/material-view.component';
 
 @Component({
   selector: 'app-student-subject-detail-page',
@@ -15,6 +18,10 @@ import { saveAsnmt } from 'src/app/states/school/school.actions';
   styleUrls: ['./student-subject-detail-page.component.css']
 })
 export class StudentSubjectDetailPageComponent implements OnInit {
+
+  @ViewChild('materialsView') materialsView!: ElementRef;
+// @ViewChild('assignmentsView') assignmentsView!: ElementRef;
+
 currentPage:number = 1
 roomId!:string
 classNum!:string
@@ -25,43 +32,46 @@ selectedOption:string = 'Materials';
 tenantId!:string
 subjectId!:string
 uploadsArray!:IMatAsmnt[]
+
+
 classNum$ = this.store.select(pipe(selectClassNum))
   constructor(
     private readonly router:Router,
     private readonly store : Store,
-    private readonly studentService:StudentService
+    private readonly studentService:StudentService,
+    private dialog:MatDialog
   ){}
 
   onSelectionChange(option: string): void {
     this.uploadsArray = [];
     this.selectedOption = option;
-    this.fetchMaterialsOrAssignments(this.currentPage, this.itemsPerPage);
+    const currentPage =1
+    this.totalPages=0
+    this.fetchMaterialsOrAssignments(currentPage, this.itemsPerPage);
  }
 
  fetchMaterialsOrAssignments(page: number, limit: number): void {
-   
-   if (this.selectedOption === 'Materials') {
+  if (this.selectedOption === 'Materials') {
      this.studentService.fetchMatAsnmt(this.tenantId, this.subjectId, page, limit).subscribe({
        next: (res: IMat) => {
-         // console.log(res);
          this.uploadsArray = res.Mat;
-      
+         this.totalItems = res.count; // Ensure you have a count property in your response
+         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) -1 ;
+         console.log('total Pages:',this.totalPages);
          
-        }
-      });
-    } else {
-     
-      this.studentService.fetchAssignments(this.tenantId, this.subjectId, page, limit).subscribe({
-        next: (res: IMat) => {
-          console.log(res);
-          this.uploadsArray = res.Mat;
-        }
-      });
-    }
-    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) + 1 ;
-
-    
+       }
+     });
+  } else {
+     this.studentService.fetchAssignments(this.tenantId, this.subjectId, page, limit).subscribe({
+       next: (res: IMat) => {
+         this.uploadsArray = res.Mat;
+         this.totalItems = res.count; // Ensure you have a count property in your response
+         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+       }
+     });
+  }
  }
+ 
 
   tenantId$ = this.store.select(pipe(selectTenantId))
 subjectId$ = this.store.select(pipe(selectSubjectId))
@@ -93,6 +103,7 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
           
           this.uploadsArray = res.Mat
           this.totalItems = res.count
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) -1 ;
          
           
         }
@@ -125,7 +136,16 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
         this.store.dispatch(saveAsnmt({upload:item}))
         this.router.navigate(['/school/student/assignment-view'])
       } else if(item.materialTitle){
-                
+        const dialogRef = this.dialog.open(MaterialViewComponent,{
+          data:{material:item},
+          width:'80%',
+          height:'70%'
+        } )
+        dialogRef.afterClosed().subscribe(result =>{
+          if(result){
+          
+          }
+        })  
       }
  }
 

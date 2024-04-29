@@ -14,6 +14,7 @@ import { StudentAssignmentDetailComponent } from './studentDashboard/student-ass
 import { StudentMaterialDetailComponent } from './studentDashboard/student-material-detail/student-material-detail.component';
 import {MatIconModule} from '@angular/material/icon'
 import { QuillModule } from 'ngx-quill';
+import { MaterialViewComponent } from './studentDashboard/material-view/material-view.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { QuillModule } from 'ngx-quill';
     StudentClassworkComponent,
     StudentPeopleComponent,
     StudentAssignmentDetailComponent,
-    StudentMaterialDetailComponent
+    StudentMaterialDetailComponent,
+    MaterialViewComponent
   ],
   imports: [
     MatIconModule,

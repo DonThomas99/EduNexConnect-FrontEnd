@@ -1,0 +1,58 @@
+ 
+    <div class="max-w-5xl ">
+<div class="mt-5 shadow-xl">
+    <div class="mx-10">
+    <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Material</h3>
+</div>
+</div>
+ <div class=" relative z-0 w-full mb-5 mt-10">
+    <div class="flex justify-center">
+        <h4 class="font-bold text-lg"> <span>{{selectedItem.materialTitle}}</span></h4>
+    </div>
+
+    <div class="text-slate-600 mx-10">
+        <div>
+            Content:
+        </div>
+        
+    </div>
+
+    <div class="mx-40 mt-3">
+        <div class="prose prose-lg max-w-none">
+            <quill-view-html [content]="selectedItem.content||'No Description'"></quill-view-html>
+          </div>
+    </div>
+    <div class="mx-10">
+        <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
+        <div class="mx-40">
+            <button class="btn " (click)="viewPdf()">View PDF</button>
+        </div>
+
+    </div>
+ </div>
+ <div class="flex justify-end mx-10">
+<button (click)="onClose()" class="btn">Close</button>
+ </div>
+    </div>
+  
+  
+  <!-- view pdf -->
+<dialog id="view-pdf" class="modal" style=" min-height: 100vh;">
+    <div class=" modal-box custom-modal-size">
+  
+      
+      <div *ngIf="sanitizedUrls && sanitizedUrls.length > 0" class="url-container mt-10">
+        <div *ngFor="let url of sanitizedUrls; let i = index">
+          <iframe [src]="url" width="100%" height="100%" style="margin: 15px; height: 80vh;"></iframe>
+        </div> 
+      </div>
+  
+      <div>
+        <form method="dialog">
+          <button  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+      </div>
+  
+    </div>
+  </dialog>
+  <!-- view pdf -->

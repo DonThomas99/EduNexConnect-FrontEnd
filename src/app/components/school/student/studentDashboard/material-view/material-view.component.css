@@ -1,0 +1,15 @@
+.url-container {
+    overflow: auto; /* Adds scrolling to iframe container if necessary */
+    height: calc(100% - 50px);
+    width: calc(100%)
+}
+
+.custom-modal-size {
+    width: 90vw; /* Increase width to 90% of the viewport width */
+    max-width: 90vw; /* Max width limited to 90vw */
+    height: 90vh; /* Increase height to 90% of the viewport height */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    align-items: center;
+}
