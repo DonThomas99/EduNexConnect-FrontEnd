@@ -15,6 +15,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { EditMaterialsComponent } from 'src/app/components/common/edit-materials/edit-materials.component';
+import { AssignmentViewComponent } from '../assignment-view/assignment-view.component';
+import { MaterialViewComponent } from '../material-view/material-view.component';
 
 @Component({
   selector: 'app-teacher-classwork',
@@ -193,12 +195,17 @@ materials.showModal();
         
     this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
         if('materialTitle' in item){
-          const materialModal = document.getElementById('materials-view') as  HTMLDialogElement;
-
-          materialModal.showModal();
+          const dialogRef = this.dialog.open(MaterialViewComponent,{
+            data:{material:item},
+            width:'80%',
+            height:'70%'
+          } )
         } else{
-          const assignmentModal = document.getElementById('assignments-view') as HTMLDialogElement;
-            assignmentModal.showModal();
+          const dialogRef = this.dialog.open(AssignmentViewComponent,{
+            data:{material:item},
+            width:'80%',
+            height:'85%'
+          } )
         }
       }
       openMenu(event:MouseEvent){

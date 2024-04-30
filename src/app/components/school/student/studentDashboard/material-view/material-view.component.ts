@@ -44,7 +44,7 @@ constructor(
         this.sanitizedUrls=[]
       }
       onClose(){
-        console.log('jhww');
+        
         
         this.dialogRef.close(true)
       }

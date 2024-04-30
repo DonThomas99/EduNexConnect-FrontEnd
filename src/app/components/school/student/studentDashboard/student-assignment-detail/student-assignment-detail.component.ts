@@ -117,7 +117,12 @@ hasError:boolean = false
   }
 
   deleteFile(i:number){
-
+    this.studentService.deleteSubmissions(this.tenantId,this.studentEmail,this.assignmentId,i).subscribe({
+      next:(res:Res)=>{
+        const message = res.message
+        this.toastr.success(message)
+      }
+    })
   }
 
     

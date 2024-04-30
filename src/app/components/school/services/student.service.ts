@@ -73,7 +73,6 @@ fetchMatAsnmt(tenantId:string,subjectId:string,page:number,limit:number){
 //Online Class
 
 fetchRoomId(tenantId:string,subjectId:string,classNum:string){
-console.log('ufyufttyg',classNum);
 
   const params = new HttpParams()
   .set('subjectId',subjectId)
@@ -118,6 +117,14 @@ fetchSubmissions(tenantId:string,studentEmail:string,assignmentId:string){
   .append('assignmentId',assignmentId)
   .append('studentEmail',studentEmail)
   return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/student/fetchSubmissions`,{params})
+}
+
+deleteSubmissions(tenantId:string,studentEmail:string,assignmentId:string,number:number){
+  const params = new HttpParams()
+  .set('studentEmail',studentEmail)
+  .append('assignmentId',assignmentId)
+  .append('number',number)
+  return this.http.delete<Res>(`${this.backendURL}/${tenantId}/student/deleteSubmissions`,{params})
 }
 
 }

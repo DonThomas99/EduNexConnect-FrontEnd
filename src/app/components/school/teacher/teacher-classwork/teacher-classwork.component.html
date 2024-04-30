@@ -54,72 +54,6 @@
  </div>
  
 
-<dialog id="materials-view" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100">
-      <div class="shadow-xl bg-slate-50 rounded-2xl">
-          <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Material</h3>
-      </div>
-      <div class="titleNdescription relative z-0 w-full mb-5">
-          <h4 class="font-bold text-lg">Title: <span>{{selectedItem.materialTitle}}</span></h4>
-          <!-- <p class="text-slate-600">Description: <span>{{}}</span></p> -->
-      </div>
-      <div class="text-slate-600">
-          Content:
-      </div>
-      <div class="mx-40 mt-6">
-          <div class="prose prose-lg max-w-none">
-              <quill-view-html [content]="selectedItem.content||'No Description'"></quill-view-html>
-            </div>
-      </div>
-      <div>
-          <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
-          <button class="btn " (click)="viewPdf()">View PDF</button>
-
-      </div>
-      <div class="modal-action">
-          <!-- Close button -->
-          <form method="dialog">
-              <button (click)="closePdf()"  class="btn">Close</button>
-          </form>
-      </div>
-  </div>
-</dialog>
-
-<dialog id="assignments-view" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100">
-      <div class="shadow-xl bg-slate-50 rounded-2xl">
-          <h3 class="font-bold text-lg"><i class="fa-solid fa-file-lines"></i> Assignment</h3>
-      </div>
-      <div class="titleNdescription relative z-0 w-full mb-5">
-          <h4 class="font-bold text-lg">Title: <span>{{selectedItem.assignmentTitle}}</span></h4>
-          <p class="text-slate-600">Submission Date: <span>{{selectedItem.submissionDate | date:'dd MMMM yyyy'}}</span></p>
-      </div>
-      <div class="text-slate-600">
-          Content:
-      </div>
-      <div class="mx-40 mt-6">
-          <div class="prose prose-lg max-w-none">
-              <quill-view-html [content]="selectedItem.content||'No Description'"></quill-view-html>
-            </div>
-      </div>
-      <div>
-          <label class="block mb-2 text-sm font-medium text-slate-600" for="large_size">PDF: </label>
-          <button class="btn " (click)="viewPdf()">View PDF</button>
-
-      </div>
-      <div class="flex justify-center">
-        <!-- <a [routerLink]=""></a> -->
-        <button (click)="viewSubmissions()" class="btn bg-blue-600 text-white hover:bg-blue-700">View Submissions</button>
-      </div>
-      <div class="modal-action">
-          <!-- Close button -->
-          <form method="dialog">
-              <button  class="btn">Close</button>
-          </form>
-      </div>
-  </div>
-</dialog>
-
 <!-- Create Assignment Modal -->
 
 <dialog id="assignments" class="modal">
@@ -180,23 +114,11 @@
 
 <!-- Create Assignment Modal -->
 
-<!-- Create Quiz Assignments Modal -->
-<dialog id="quizAssignments" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl h-96">
-    <form enctype="multipart/form-data" [formGroup]="materialForm" (ngSubmit)="uploadAssignment()" method="dialog">
-      <h3 class="font-bold text-lg">Hello!</h3>
-      <p class="py-4">Quiz Assignment</p>
-      <div class="modal-action">
-        <!-- if there is a button, it will close the modal -->
-        <button class="btn">Close</button>
-      </div>
-    </form>
-  </div>
-</dialog>
-<!-- Create Quiz Assignments Modal-->
+
 
 <!-- Upload Material Modal -->
-<dialog id="materials" class="modal">
+
+ <dialog id="materials" class="modal">
   <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100 ">
     <form enctype="multipart/form-data" [formGroup]="materialForm" (ngSubmit)="uploadMaterial()" method="dialog">
       <div class=" shadow-xl bg-slate-50 rounded-2xl ">
@@ -229,13 +151,9 @@
       </div>
     </div>
 
-<!--     
-        <div *ngIf="pdfArray.length">
-          <p>{{pdfArray[0]}}</p>
-        </div> -->
   
 
-      <div class="modal-action">
+      <div class="modal-action"> 
         <!-- if there is a button, it will close the modal -->
         <button type="submit" class="btn">Upload</button>
         <button (click)="resetMaterialForms()" class="btn">Close</button>
@@ -244,24 +162,3 @@
   </div>
 </dialog>
 <!-- Upload Material Modal -->
-
-<!-- view pdf -->
-<dialog id="view-pdf" class="modal" style=" min-height: 100vh;">
-  <div class=" modal-box custom-modal-size">
-
-    
-    <div *ngIf="sanitizedUrls && sanitizedUrls.length > 0" class="url-container mt-10">
-      <div *ngFor="let url of sanitizedUrls; let i = index">
-        <iframe [src]="url" width="100%" height="100%" style="margin: 15px; height: 80vh;"></iframe>
-      </div> 
-    </div>
-
-    <div>
-      <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-      </form>
-    </div>
-
-  </div>
-</dialog>
-<!-- view pdf -->
