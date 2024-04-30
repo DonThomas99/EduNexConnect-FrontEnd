@@ -124,7 +124,7 @@ deleteSubmissions(tenantId:string,studentEmail:string,assignmentId:string,number
   .set('studentEmail',studentEmail)
   .append('assignmentId',assignmentId)
   .append('number',number)
-  return this.http.delete<Res>(`${this.backendURL}/${tenantId}/student/deleteSubmissions`,{params})
+  return this.http.delete<Asnmt_url>(`${this.backendURL}/${tenantId}/student/deleteSubmissions`,{params})
 }
 
 }

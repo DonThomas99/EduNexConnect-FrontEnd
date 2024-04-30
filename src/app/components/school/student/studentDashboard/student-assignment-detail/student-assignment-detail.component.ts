@@ -74,8 +74,10 @@ hasError:boolean = false
 
     this.studentService.fetchSubmissions(this.tenantId,this.studentEmail,this.assignmentId).subscribe({
       next:(res:Asnmt_url)=>{
-    if(res)
-        this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+    if(res){
+
+      this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))      
+    }
       },
       error:(error)=>{
           this.hasError = true
@@ -107,9 +109,7 @@ hasError:boolean = false
         next:(res:Asnmt_url)=>{
           const message = res.message as unknown as string
           this.toastr.success(message)
-          // this.url = res.url
-    this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
-
+          this.ngOnInit()
         }
       })
     
@@ -118,9 +118,13 @@ hasError:boolean = false
 
   deleteFile(i:number){
     this.studentService.deleteSubmissions(this.tenantId,this.studentEmail,this.assignmentId,i).subscribe({
-      next:(res:Res)=>{
+      next:(res:Asnmt_url)=>{
         const message = res.message
         this.toastr.success(message)
+        this.ngOnInit()
+      }, error:(res:Asnmt_url)=>{
+          const message = res.message
+          this.toastr.error(message)
       }
     })
   }
