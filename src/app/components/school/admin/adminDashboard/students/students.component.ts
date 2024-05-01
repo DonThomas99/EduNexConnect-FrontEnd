@@ -9,6 +9,8 @@ import { pipe } from 'rxjs';
 import { selectTenantId } from 'src/app/states/school/school.selector';
 import { IStudent, StudentInfo } from 'src/app/Models/student';
 import { classSubjects, classes } from 'src/app/Models/subject';
+import { ClassComponent } from '../class/class.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-students',
@@ -33,6 +35,7 @@ classNumber!:string;
 selectedOption: string ='Select Class' ;
 
 constructor(
+  private dialog:MatDialog,
   private readonly formBuilder:FormBuilder,
   private schoolAdminService:SchoolAdminService,
   private readonly router:Router,
@@ -107,7 +110,16 @@ this.form=this.formBuilder.group({
     this.classNumber = classNumber
     this.filteredStudents =  this.students.filter(student => student.classNum === classNumber)
     
-    this.showModal('my_modal_1')
+    const dialogRef = this.dialog.open(ClassComponent,{
+      data:{material:this.filteredStudents,
+        classNumber:this.classNumber
+
+      },
+      width:'80%',
+      height:'70%'
+    } )
+
+    // this.showModal('my_modal_1')
 }
 showModal(id:string){
   const modal = document.getElementById(id) as HTMLDialogElement  ;

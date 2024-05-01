@@ -33,6 +33,7 @@ onClose(){
 }
 
   viewSubmissions(){
+  this.dialogRef.close()
    
     // this.router.navigateByUrl(`school/teacher/valuation/${this.selectedItem._id}`)
     this.router.navigate(['school/teacher/valuation',this.selectedItem._id])

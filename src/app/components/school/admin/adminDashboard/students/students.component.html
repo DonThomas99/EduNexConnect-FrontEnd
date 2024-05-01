@@ -17,54 +17,6 @@
   </button>
 </div>
 
-<!-- Student List Button and  Modal Begins  -->
-
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box w-11/12 max-w-5xl">
-    <h3 class="font-bold text-lg"> Class: {{classNumber}}</h3>
-    <div *ngIf="filteredStudents.length ==0">
-      <h3 class="font-mono text-red-800 text-3xl"> Please Add Students !!!</h3>
-    </div>
-    
-    <ng-container *ngIf="filteredStudents.length>0">
-    <div class="overflow-x-auto">
-            <table class="table table-zebra">
-              <!-- head -->
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>email</th>
-                  <th>Gaurdian Name</th>
-                  <th>Mobile</th>
-                  <th>Password</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <tr  *ngFor="let student of filteredStudents let j = index">
-
-                  <th>{{j+1}}</th>
-                  <td>{{student.name}}</td>
-                  <td>{{student.email}}</td>
-                  <td>{{student.gaurdianName}}</td>
-                  <td>{{student.mobile}}</td>
-                  <td>{{student.password}}</td>
-                </tr>
-              </tbody>
-            </table>
-    </div>
-    </ng-container>
-      
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
-<!-- Student List Button and Modal Ends -->
 
 <!-- Enroll Form Button and Modal Begins -->
 
