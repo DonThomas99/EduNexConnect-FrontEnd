@@ -4,35 +4,39 @@
         <nav class="flex items-center justify-between">
             <ul class="flex space-x-2">
                 <li>
-                    <a href="#" routerLink="/about">About Us</a>
+                    <a>About Us</a>
                 </li>
                 <li>
-                    <a href="#" routerLink="/services">Services</a>
+                    <a routerLink="/services">Services</a>
                 </li>
                 <li>
-                    <a href="#" routerLink="/contactus">Contact Us</a>
+                    <a routerLink="/contactus">Contact Us</a>
                 </li>
                 <ng-container *ngIf="!tenantName">
 
                     <li>
-                        <a href="#" routerLink="/tenant/signup">Sign-up</a>
+                        <a routerLink="/tenant/signup">Sign-up</a>
                     </li>
                     <li>
-                        <a href="#" routerLink="/tenant/signin">Sign-in</a>
+                        <a routerLink="/tenant/signin">Sign-in</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="tenantName">
 
                         <li>
-                            <a href="#" routerLink="/tenant/dashboard">{{tenantName}}</a>
+                            <a routerLink="/tenant/dashboard">{{tenantName}}</a>
                         </li>
                     <li>
-                        <a href="#" (click)="signOut()">Sign-out</a>
+                        <a (click)="signOut()">Sign-out</a>
                     </li>
                 </ng-container>
             </ul>
         </nav>
     </div>
 </header>
+
+
+
+
 
 

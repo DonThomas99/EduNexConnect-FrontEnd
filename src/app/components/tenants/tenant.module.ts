@@ -34,7 +34,8 @@ import {MatCardModule } from '@angular/material/card';
 import { ChangePasswordComponent } from './dashboard/change-password/change-password.component'
 import {MatTable, MatTableModule} from '@angular/material/table';
 import { ManageAdminComponent } from './dashboard/manage-admin/manage-admin.component';
-import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component'
+import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component';
+import { ServicesComponent } from './pages/services/services.component'
 
 
 
@@ -59,7 +60,8 @@ import { CreateAdminComponent } from './dashboard/create-admin/create-admin.comp
           ChangePasswordComponent,
           ManageAdminComponent,
           CreateAdminComponent,
-
+          ServicesComponent,
+            
 
 
     ],
