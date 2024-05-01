@@ -1,0 +1,54 @@
+
+          
+          <div class="card-body">
+            <h2 class="card-title">Class:{{classSubject.class}}</h2>
+                        
+              <ng-container *ngIf=" classSubject.subjects.length>0">
+                <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                          <!-- head -->
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Subject</th>
+                              <th>Delete</th>
+                              <th>Edit</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- row 1 -->
+                            <tr  *ngFor="let subject of classSubject.subjects let j = index">
+            
+                              <th>{{j+1}}</th>
+                              <td>{{subject.name}}</td>
+                              <td>  <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.class, subject.name)"></i> </td>
+                              <td><i class="fa-solid fa-pen-to-square"></i></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                </div>
+                </ng-container>
+                <div class="flex justify-end">
+                    <button (click)="onClose()" class="btn">Close</button>
+                </div>
+          </div>
+
+
+      
+
+
+        <!-- Confirmation Modal -->
+<dialog id="confirmation_modal" class="modal">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">Confirm Deletion</h3>
+      <!-- Display the confirmation message -->
+      <p class="py-4">Are you sure you want to delete {{ selectedSubject }} from class {{ selectedClass }}?</p>
+      <div class="modal-action">
+        <!-- Use ngIf to display the submit button only if a subject is selected -->
+        <button *ngIf="selectedClass && selectedSubject" class="btn" (click)="deleteSubject()">Submit</button>
+        <!-- Close the modal without deletion -->
+        <button class="btn" (click)="closeConfirmationModal()">Cancel</button>
+      </div>
+    </div>
+  </dialog>

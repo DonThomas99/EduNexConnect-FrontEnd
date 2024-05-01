@@ -9,6 +9,8 @@ import { validateBytrimming } from 'src/app/helpers/validations';
 import { classValidators, nameValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 import { classSubjects } from 'src/app/Models/subject';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewSubjectsComponent } from '../view-subjects/view-subjects.component';
 
 @Component({
   selector: 'app-subjects',
@@ -23,10 +25,12 @@ export class SubjectsComponent implements OnInit {
   isModalOpen: boolean = false;
   selectedClass: string = '';
   selectedSubject: string = '';
+  noSubjects:boolean =false
 
   tenantId$ = this.store.select(pipe(selectTenantId));
 
   constructor(
+    private dialog:MatDialog,
     private readonly formBuilder: FormBuilder,
     private schoolAdminService: SchoolAdminService,
     private readonly router: Router,
@@ -46,6 +50,8 @@ export class SubjectsComponent implements OnInit {
     this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
       next: (res: classSubjects[]) => {
         this.classNsubjects = res;
+        if(this.classNsubjects.length ==0)
+            this.noSubjects = true
       }
     });
   }
@@ -59,22 +65,18 @@ export class SubjectsComponent implements OnInit {
     modal.showModal();
   }
 
-  deleteSubject() {
-  
-    this.schoolAdminService.deleteSubject(this.tenantId,this.selectedClass,this.selectedSubject).subscribe({
-      next:(res)=>{
-        this.closeConfirmationModal()
-        void Swal.fire({
-          icon: 'success',
-          title: res,
-        }).then(() => {
-          window.location.reload();
-        });
-
-
-      }
-    })
+  viewSubjects(subjects:classSubjects){
+       
+    const dialogRef = this.dialog.open(ViewSubjectsComponent,{
+      data:{subject:subjects,
+        classNumber:subjects.class,
+        tenantId:this.tenantId
+      },
+      width:'80%',
+      height:'70%'
+    } )
   }
+
 
   closeConfirmationModal(): void {
     

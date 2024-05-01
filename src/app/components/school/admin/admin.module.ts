@@ -17,6 +17,7 @@ import { EmailValidationComponent } from '../../common/email-validation/email-va
 import { NameValidationComponent } from '../../common/name-validation/name-validation.component';
 import { MobileValidationComponent } from '../../common/mobile-validation/mobile-validation.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ViewSubjectsComponent } from './adminDashboard/view-subjects/view-subjects.component';
 
 
 
@@ -31,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     SubjectsComponent,
     ClassComponent,
     StudentsComponent,
+    ViewSubjectsComponent,
    
   ],
   imports: [
