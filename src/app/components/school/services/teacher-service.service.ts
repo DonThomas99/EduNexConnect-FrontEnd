@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AllSubmissions, Asnmt_url, Res } from 'src/app/Models/common';
+import { AllSubmissions, Asnmt, Asnmt_url, Res } from 'src/app/Models/common';
 import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
 import {IAssignmentData, IMat, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
@@ -34,7 +34,7 @@ fetchSubmissions(email:string,assignmentId:string,tenantId:string){
   const params = new HttpParams()
   .append('email',email)
   .append('assignmentId',assignmentId)
-  return this.http.get<Asnmt_url>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
+  return this.http.get<Asnmt>(`${this.backendURL}/${tenantId}/teacher/fetchSubmissions`,{params})
 }
 
 fetchAllSubmissions(tenantId:string,subjectId:string){

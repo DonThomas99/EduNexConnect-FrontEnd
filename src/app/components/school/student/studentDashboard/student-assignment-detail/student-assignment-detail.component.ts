@@ -29,6 +29,7 @@ export class StudentAssignmentDetailComponent implements OnInit {
  ];
 hasError:boolean = false
   url!:string[]
+  grade!:string
   uploadForm!:FormGroup;
   assignmentItem!:IMatAsmnt;
   assignmentId!:string;
@@ -74,10 +75,18 @@ hasError:boolean = false
 
     this.studentService.fetchSubmissions(this.tenantId,this.studentEmail,this.assignmentId).subscribe({
       next:(res:Asnmt_url)=>{
-    if(res){
+               
+      this.grade = res.url.grade
+   
+        
+        console.log(res.url);
+    if(res.url.file_url){
 
-      this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))      
+      this.sanitizedUrls = res.url.file_url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url)) 
+      
+           
     }
+    this.grade = res.url.grade
       },
       error:(error)=>{
           this.hasError = true

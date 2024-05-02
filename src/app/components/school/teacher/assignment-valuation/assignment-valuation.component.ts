@@ -6,7 +6,7 @@ import { selectClassNum, selectTenantId } from 'src/app/states/school/school.sel
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { StudentInfo } from 'src/app/Models/student';
 import { Isubmission } from 'src/app/Models/material';
-import { Asnmt_url, Res } from 'src/app/Models/common';
+import { Asnmt, Asnmt_url, Res } from 'src/app/Models/common';
 import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { validateBytrimming } from 'src/app/helpers/validations';
@@ -72,9 +72,11 @@ this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
  openAssignment(email:string){
   this.email = email
   this.teacherService.fetchSubmissions(email,this.assignmentId,this.tenantId).subscribe({
-    next:(res:Asnmt_url)=>{
+    next:(res:Asnmt)=>{
+      console.log(res.url.file_url);
+      
       if(res){
-        this.sanitizedUrls = res.url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
+        this.sanitizedUrls = res.url.file_url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
         const assignmentModal = document.getElementById('view-assignment') as HTMLDialogElement;
         assignmentModal.showModal();
 

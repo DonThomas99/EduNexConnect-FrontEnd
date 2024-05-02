@@ -14,7 +14,12 @@ export interface Res {
 export interface Asnmt_url{
     status:number,
     message:string,
-    url:string[]
+    url:sub
+}
+export interface Asnmt{
+    status:number,
+    message:string,
+    url:dub
 }
 
 export interface summary{
@@ -35,4 +40,15 @@ export interface AllSubmissions{
     status:number,
     message:string,
     submissions:submissions[]
+}
+
+export interface sub{
+grade:string
+file_url:string[]
+}
+
+export interface dub{
+    _id:string,
+    file_url:string[],
+    grade:string |null
 }

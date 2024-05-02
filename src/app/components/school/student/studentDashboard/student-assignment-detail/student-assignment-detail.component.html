@@ -36,7 +36,12 @@
 <div class="mt-3 mr-7">
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-          <h2 class="card-title">Your Work</h2>
+            <div class="flex flex-row justify-between">
+                <h2 class="card-title">Your Work</h2>
+                <div *ngIf="grade">
+                    <h2>Grade:{{grade}}</h2>
+                </div>
+            </div>
           <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
               <div class="card-actions justify-center">
                   <div class="flex border w-full justify-center rounded hover:cursor-pointer">
