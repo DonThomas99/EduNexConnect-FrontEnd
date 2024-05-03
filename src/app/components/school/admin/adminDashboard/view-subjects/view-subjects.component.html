@@ -23,7 +23,7 @@
                               <th>{{j+1}}</th>
                               <td>{{subject.name}}</td>
                               <td>  <i class="fa-solid fa-square-minus" (click)="openConfirmationModal(classSubject.class, subject.name)"></i> </td>
-                              <td><i class="fa-solid fa-pen-to-square"></i></td>
+                              <td><i class="fa-solid fa-pen-to-square" (click)="editSubject(subject)" ></i></td>
                             </tr>
                           </tbody>
                         </table>
@@ -52,3 +52,22 @@
       </div>
     </div>
   </dialog>
+
+  <!-- Edit The Subjects Modal -->
+  
+<dialog id="editSubjectModal" class="modal">
+  <form method="dialog" [formGroup]="editSubjectForm" (ngSubmit)="onSubmit()" >
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Edit Subject</h3>
+    <div class="py-4">
+        <input type="text" formControlName="subjectName" placeholder="Enter Subject Name" value="{{subjectName}}" class="input input-bordered w-full max-w-xs" />
+    </div>
+    <div class="modal-action flex justify-between">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+        <button type="submit" class="btn"> Submit </button>
+      </div>
+    </div>
+  </form>
+</dialog>
+  <!-- Edit The Subjects Modal -->

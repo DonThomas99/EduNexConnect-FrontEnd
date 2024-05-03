@@ -49,6 +49,10 @@ return this.http.post<IApiadminList>(`${this.backendURL}/${tenantId}/admin/login
     deleteSubject(tenantId:string,classNum:string,subject:string){
       return this.http.put<Res>(`${this.backendURL}/${tenantId}/admin/deleteSubject`,{classNum,subject})
     }
+
+    editSubject(tenantId:string,classNum:string,subjectName:string,subjectId:string){
+      return this.http.patch<Res>(`${this.backendURL}/${tenantId}/admin/updateSubjects`,{classNum,subjectName,subjectId})
+    }
     
     
     //Teacher CRUD operations 
