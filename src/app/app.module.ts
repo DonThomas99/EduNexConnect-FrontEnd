@@ -18,7 +18,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ClassNumValidationComponent } from './components/common/class-num-validation/class-num-validation.component';
 import { ConfirmationDialogComponent } from './components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ParticipantComponent } from './components/common/participant/participant.component';
 import { EditMaterialsComponent } from './components/common/edit-materials/edit-materials.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

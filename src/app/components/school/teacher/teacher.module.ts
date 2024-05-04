@@ -21,7 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {CalendarModule} from 'primeng/calendar'
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { VideoClassComponent } from '../../common/video-class/video-class.component';
+
 import { ZoomCallComponent } from './zoom-call/zoom-call.component';
 import { AssignmentValuationComponent } from './assignment-valuation/assignment-valuation.component';
 import { AssignmentViewComponent } from './assignment-view/assignment-view.component';

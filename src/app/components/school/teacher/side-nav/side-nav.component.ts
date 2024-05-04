@@ -8,7 +8,7 @@ import {Sidenav,initTE} from 'tw-elements';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { pipe } from 'rxjs';
 import { Res } from 'src/app/Models/common';
-import { VideoCallService } from '../../services/video-call.service';
+
 import { saveClassNum, saveSubjectId, saveTenantIdOnStore } from 'src/app/states/school/school.actions';
 
 @Component({
@@ -31,7 +31,7 @@ export class SideNavComponent {
     private readonly router:Router,
     private readonly route:ActivatedRoute,
     private readonly teacherService:TeacherServiceService,
-    private readonly videoCallService:VideoCallService
+    
   ) { }
 
   ngOnInit(): void {
@@ -55,28 +55,6 @@ export class SideNavComponent {
             this.subjectId = id.subjectId as unknown as string
           
           })
-  }
-
-  enterRoom(){
-    console.log('subjectId');
-    
-    if(this.roomId){
-      // this.videoCallService.setCallId(this.roomId)
-      this.teacherService.startVideoClass(this.tenantId,this.classNum,this.subjectId,this.roomId).subscribe({
-        next:(res:Res)=>{
-          this.store.dispatch(saveTenantIdOnStore({tenantId:this.tenantId}))
-          this.store.dispatch(saveClassNum({classNum:this.classNum}))
-          this.store.dispatch(saveSubjectId({subjectId:this.subjectId}))
-          this.router.navigateByUrl(`/school/v-class/${this.roomId}`)
-        }
-      }) 
-    }
-    else{
-      this.errorId = !this.errorId
-  }  
-}
-  inVclass(){
-    return this.route.snapshot.url.length === 2 && this.route.snapshot.url[0].path === 'Vclass';
   }
 
 }
