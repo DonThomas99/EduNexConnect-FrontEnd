@@ -14,6 +14,7 @@ import { Res } from 'src/app/Models/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { EditTeacherComponent } from '../edit-teacher/edit-teacher.component';
 
 @Component({
   selector: 'app-teachers',
@@ -75,7 +76,7 @@ export class TeachersComponent implements OnInit {
   fetchTeacherData(){
     this.schoolAdminService.fetchTeacherData(this.tenantId).subscribe({
       next:(res:IteacherData[])=>{
-        console.log(res);
+   
         
         this.teacherData = res
         this.teacherDataLength= this.teacherData.length
@@ -129,7 +130,7 @@ viewDetails(index: number) {
       
       this.schoolAdminService.addTeachers(dataToSave, this.tenantId).subscribe({
         next: (res) => {
-          console.log(res);
+         
           void Swal.fire({
             icon:'success',
             title:res,
@@ -160,10 +161,10 @@ viewDetails(index: number) {
     window.location.reload();
   }
 
-  deleteSubject(email:string,subject:string){
-console.log(email,subject);
+//   deleteSubject(email:string,subject:string){
+// console.log(email,subject);
 
-  }
+//   }
 
   openAddSubjectModal() {
     const modal = document.getElementById('add-subject-modal') as HTMLDialogElement;
@@ -283,6 +284,27 @@ dialogRef.afterClosed().subscribe(result =>{
         window.location.reload()
       })
     })
+ }
+
+ editTeacher(teacher:IteacherData){  
+  const dialog = this.dialog.open(EditTeacherComponent,{
+    data:{ tenantId:this.tenantId,teacher:teacher},
+    width:'60%',
+    height:'45%'
+  })
+  dialog.afterClosed().subscribe(result =>{
+    if(result){
+      this.ngOnInit()
+    }
+  })
+ }
+
+ deleteSubject(subjectId:string,teacherId:string,classNum:string){
+this.schoolAdminService.removeSubject(this.tenantId,classNum,subjectId,teacherId).subscribe({
+next:(res:Res)=>{
+
+}
+})
  }
 
 }

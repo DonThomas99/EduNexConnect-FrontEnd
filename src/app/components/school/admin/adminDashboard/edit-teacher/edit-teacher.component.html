@@ -1,0 +1,36 @@
+<div>
+   <div class="flex justify-center">
+      <h1 mat-dialog-title><strong>Edit Teacher Details</strong></h1>
+   </div>
+   <div class="flex justify-center">
+   <!-- <div> -->
+
+      <mat-dialog-content class=" flex flex-row justify-between">
+         <form [formGroup]="editTeacherForm" (ngSubmit)="onSubmit()">
+            <!-- <div > -->
+             
+                  <mat-form-field class="mx-20" >
+                     <mat-label>Teacher Name</mat-label>
+                     <input matInput formControlName="name" placeholder="Enter Teacher Name">
+                  </mat-form-field>
+               
+               
+                  
+                  <mat-form-field >
+                     <mat-label>Email</mat-label>
+                     <input matInput formControlName="email" placeholder="Enter Email">
+                  </mat-form-field>
+               
+            <!-- </div> -->
+          
+    
+            <div class="flex justify-between mt-3">
+               <button mat-dialog-close class="btn">Close</button>
+               <button class="btn">Submit</button>
+            </div>
+         </form>
+      </mat-dialog-content>
+   <!-- </div> -->
+   </div>
+   </div>
+  

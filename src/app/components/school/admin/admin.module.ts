@@ -18,6 +18,11 @@ import { NameValidationComponent } from '../../common/name-validation/name-valid
 import { MobileValidationComponent } from '../../common/mobile-validation/mobile-validation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ViewSubjectsComponent } from './adminDashboard/view-subjects/view-subjects.component';
+import { EditTeacherComponent } from './adminDashboard/edit-teacher/edit-teacher.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -33,9 +38,14 @@ import { ViewSubjectsComponent } from './adminDashboard/view-subjects/view-subje
     ClassComponent,
     StudentsComponent,
     ViewSubjectsComponent,
+    EditTeacherComponent,
    
   ],
   imports: [
+    MatDialogModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right'
     }),

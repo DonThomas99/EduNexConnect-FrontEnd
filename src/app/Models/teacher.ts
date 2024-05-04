@@ -16,6 +16,7 @@ export interface TeacherData {
       subject:SubjectsDoc[];
     }];
     isBlocked:boolean;
+    _id:string
   }
 
   export interface subjectsNclass{

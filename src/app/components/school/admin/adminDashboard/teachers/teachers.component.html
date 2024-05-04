@@ -79,13 +79,13 @@
   <div  class="py-20 grid grid-cols-1">
 
         
-    <table class="table">
+    <table class="table table-zebra">
       <thead>
         <tr>
           <th></th>
           <th>Name</th>
           <th>Email</th>
-          <th>Password</th>
+          <th>Edit Details</th>
           <th>view subjects</th>
           <th>Action</th>
         </tr>
@@ -96,9 +96,9 @@
             <td>{{j+1}}</td>
             <td>{{ teacher.name}}</td>
             <td>{{teacher.email}}</td>
-            <td>{{teacher.password}}</td>
+            <td><button class="btn bg-yellow-400 hover:bg-yellow-300" (click)="editTeacher(teacher)" >Edit</button></td>
             <td>
-              <button class="btn" (click)="viewDetails(j)">view Details</button>
+              <button class="btn" (click)="viewDetails(j)"> Subjects</button>
 
       </td>
       <td>
@@ -129,31 +129,47 @@
 
 <dialog id="my_modal_2" class="modal">
   <div class="modal-box">
-     <h3 class="font-bold text-lg">Teacher Details</h3>
-     <div *ngIf="currentTeacherDetails">
-       <p>Name: {{currentTeacherDetails.name}}</p>
-
-       <ul>
-         <li *ngFor="let classDetail of currentTeacherDetails.classNsub">
-           <strong>Class:</strong> {{classDetail.classNum}}
-           <ul>
-             <li *ngFor="let subject of classDetail.subject">
-               {{subject.name}}
-             </li>
-           </ul>
-         </li>
-       </ul>
-     </div>
-     <div class="modal-action">
-      <button class="btn" (click)="openAddClassModal()">Add New Class</button>
-    
-
+      <h3 class="font-bold text-lg">Teacher Details</h3>
+      <div *ngIf="currentTeacherDetails">
+        <p>Name: {{currentTeacherDetails.name}}</p>
+ 
+        <!-- Updated table with delete button for each subject -->
+        <table class="table-auto">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Class</th>
+              <th class="px-4 py-2">Subjects</th>
+              <th class="px-4 py-2">Action</th> <!-- New column for delete action -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let classDetail of currentTeacherDetails.classNsub">
+              <td class="border px-4 py-2">{{classDetail.classNum}}</td>
+              <td class="border px-4 py-2">
+                <ul>
+                  <li *ngFor="let subject of classDetail.subject">
+                    {{subject.name}}
+                  </li>
+                </ul>
+              </td>
+              <td class="border px-4 py-2 flex flex-col">
+                <button *ngFor="let subject of classDetail.subject" (click)="deleteSubject(subject.Id,currentTeacherDetails._id,classDetail.classNum)"><i class="fa-solid fa-square-minus"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-action">
+       <button class="btn" (click)="openAddClassModal()">Add New Class</button>
+ 
        <form method="dialog">
-         <button class="btn">Close</button>
+          <button class="btn">Close</button>
        </form>
-     </div>
+      </div>
   </div>
  </dialog>
+ 
+ 
 
 
  <!-- Add Class Modal -->
