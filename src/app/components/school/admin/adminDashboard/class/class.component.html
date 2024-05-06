@@ -14,10 +14,19 @@
                   <tr>
                     <th></th>
                     <th>Name</th>
-                    <th>email</th>
+                    <th>Email</th>
                     <th>Gaurdian Name</th>
-                    <th>Mobile</th>
-                    <th>Password</th>
+                    <th>
+                      Mobile
+                    </th>
+                    <th class="flex justify-center">
+                      <div>
+                        Remove Student
+                      </div>
+                    </th>
+                    <th>
+                      Edit
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,7 +38,16 @@
                     <td>{{student.email}}</td>
                     <td>{{student.gaurdianName}}</td>
                     <td>{{student.mobile}}</td>
-                    <td>{{student.password}}</td>
+                    <td class="flex justify-center">
+                        <button (click)="removeStudent(student._id,student.name)">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                    <td>
+                      <button (click)="editStudent(student)">
+                        <i class="fa-solid fa-user-pen"></i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>

@@ -23,6 +23,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditStudentsComponent } from './adminDashboard/edit-students/edit-students.component';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select' 
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 
 
@@ -39,9 +44,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     StudentsComponent,
     ViewSubjectsComponent,
     EditTeacherComponent,
+    EditStudentsComponent,
    
   ],
   imports: [
+    // MatOptionModule,
+    MatSelectModule,
     MatDialogModule,
     MatMenuModule,
     MatFormFieldModule,

@@ -275,7 +275,7 @@ dialogRef.afterClosed().subscribe(result =>{
 
 }
  toggleBlock(email:string){
-    console.log('block action confirmed');
+ 
     this.schoolAdminService.toggleBlock(email,this.tenantId).subscribe({
       next:(res=>{
         const mes = res as unknown as string

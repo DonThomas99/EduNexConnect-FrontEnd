@@ -11,6 +11,9 @@ import { IStudent, StudentInfo } from 'src/app/Models/student';
 import { classSubjects, classes } from 'src/app/Models/subject';
 import { ClassComponent } from '../class/class.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Res } from 'src/app/Models/common';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-students',
@@ -36,6 +39,7 @@ selectedOption: string ='Select Class' ;
 
 constructor(
   private dialog:MatDialog,
+  private toastr:ToastrService,
   private readonly formBuilder:FormBuilder,
   private schoolAdminService:SchoolAdminService,
   private readonly router:Router,
@@ -53,7 +57,7 @@ constructor(
 
   this.schoolAdminService.fetchClasses(this.tenantId).subscribe({
     next: (res: classSubjects[]) => {
-      console.log(res);
+    
       const sortedRes = res.sort((a:classSubjects, b:classSubjects) => +a.class - +b.class);
 
       this.classNsubjects = sortedRes;
@@ -63,8 +67,6 @@ constructor(
 this.schoolAdminService.fetchStudents(this.tenantId).subscribe({
  next: (res: IStudent[]) => {
 this.students = res
-console.log(this.students[0].password);
-
  }
 })
 
@@ -77,26 +79,27 @@ this.form=this.formBuilder.group({
     })
   }
   submit(){
-    console.log(this.form);
-    
+        
     this.isSubmitted = true
     if(this.form.valid){
-      const student = this.form.getRawValue()
-      console.log('hee:',student);
-      
+      const student = this.form.getRawValue()      
       this.schoolAdminService.addStudent(student,this.tenantId).subscribe({
-        next:(res)=>{
-          console.log('kindi');
-          
+        next:(res:Res)=>{
+          // window.location.reload()
+          const message = res.message
+          void Swal.fire({
+            icon:'success',
+            title:message
+          }).then(
+            window.location.reload
+          )
         }
       })
       this.closeModal()
     }
   }
 
-  closeModal(): void {
-    console.log('hee');
-    
+  closeModal(): void {   
     // const modal = this.modalElement.nativeElement;
     const modal = this.el.nativeElement.querySelector('#authentication-modal');
     modal.classList.add('hidden');
@@ -112,14 +115,14 @@ this.form=this.formBuilder.group({
     
     const dialogRef = this.dialog.open(ClassComponent,{
       data:{material:this.filteredStudents,
-        classNumber:this.classNumber
+        classNumber:this.classNumber,
+        tenantId:this.tenantId,
+        classNsub:this.classNsubjects
 
       },
-      width:'80%',
+      width:'100%',
       height:'70%'
-    } )
-
-    // this.showModal('my_modal_1')
+    } ) 
 }
 showModal(id:string){
   const modal = document.getElementById(id) as HTMLDialogElement  ;

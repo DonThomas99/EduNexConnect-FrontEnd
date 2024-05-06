@@ -96,13 +96,23 @@ export class SchoolAdminService implements OnInit {
     return this.http.get<typeof array>(`${this.backendURL}/${tenantId}/admin/fetchStudents`)
   }
   toggleBlock(email: string, tenantId: string) {
-    console.log('tenantId:', tenantId);
-    console.log('email:', email);
+
     return this.http.post<Res>(`${this.backendURL}/${tenantId}/admin/toggleBlock`, { email })
   }
 
   fetchSummary(tenantId: string) {
     return this.http.get<summary>(`${this.backendURL}/${tenantId}/admin/fetchSummary`)
+  }
+
+  updateStudent(tenantId:string,studentId:string,data:Partial<IStudent>){
+    console.log(data);
+    
+    return this.http.patch<Res>(`${this.backendURL}/${tenantId}/admin/updateStudentData`,{studentId,data})
+  }
+
+  removeStudent(tenantId:string,studentId:string){
+    const params = new HttpParams().set('studentId',studentId)
+    return this.http.delete<Res>(`${this.backendURL}/${tenantId}/admin/deleteStudent`,{params})
   }
 
 }

@@ -7,6 +7,7 @@ export interface StudentInfo {
    }
 
    export interface IStudent {
+    _id:string;
     name: string;
     gaurdianName: string;
     email: string;

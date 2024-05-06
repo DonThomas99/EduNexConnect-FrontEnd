@@ -1,0 +1,67 @@
+<!-- <h2>Edit Student Details</h2>
+<form [formGroup]="editStudentForm" (ngSubmit)="onSubmit()">
+
+ <div class="form-group">
+    <button type="submit" class="btn " [disabled]="editStudentForm.invalid">Submit</button>
+    <button type="button" class="btn " (click)="onClose()">Close</button>
+ </div>
+</form> -->
+
+
+<div>
+    <div class="flex justify-center">
+        <h1 mat-dialog-title><strong>Edit Student Details</strong></h1>
+    </div>
+    <div>
+        <mat-dialog-content >
+            <form [formGroup]="editStudentForm" (ngSubmit)="onSubmit()">
+               <div class=" flex flex-row justify-between mx-20">
+                
+                     <mat-form-field class="mx-10" >
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Enter Student Name">
+                     </mat-form-field>
+                  
+                  
+                     
+                     <mat-form-field class="ml-5 mr-14" style="width:40%;">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="Enter Email">
+                     </mat-form-field>
+                  
+                     
+                       <mat-form-field class="mr-20">
+                         <mat-label>gaurdianName</mat-label>
+                         <input matInput formControlName="gaurdianName" placeholder="Enter Gaurdian Name">
+                        </mat-form-field>
+                        
+                    </div>
+                    <div class="flex flex-row mt-9  mx-44">
+                        <mat-form-field class="mx-10">
+                            <mat-label>Mobile</mat-label>
+                            <input matInput formControlName="mobile" placeholder="Enter Mobile Number">
+                        </mat-form-field>
+
+                        <mat-form-field >
+                            <mat-label>Class</mat-label>
+                            
+                              <mat-select formControlName="classNum">
+                                <mat-option *ngFor="let class of classNsubjects" [value]="class.class">
+                                    {{class.class}}
+                                </mat-option>
+                              </mat-select>  
+                            
+                            
+                        </mat-form-field>
+
+               </div>
+             
+       
+               <div class="flex justify-between mt-3">
+                  <button mat-dialog-close class="btn">Close</button>
+                  <button class="btn">Submit</button>
+               </div>
+            </form>
+         </mat-dialog-content>
+    </div>
+</div>
