@@ -45,7 +45,7 @@ ngOnInit():void{
   this.studentService.fetchStudentData(this.tenantId,this.studentEmail).subscribe({
     next:(res=>{  
           
-      this.classNum = res.classNum
+      this.classNum = res.data.classNum
       this.store.dispatch(saveClassNum({classNum:this.classNum}))
       this.fetchSubjects()
     })

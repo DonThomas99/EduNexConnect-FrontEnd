@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { Assignment, IAssignmentData, IMatAsmnt, IMaterials, Material } from 'src/app/Models/material';
+import { Assignment, IAssignmentData, IMat, IMatAsmnt, IMaterials, Material } from 'src/app/Models/material';
 import { selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { IAssignments } from 'src/app/Models/assignments';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-teacher-landing-page',
@@ -23,14 +24,21 @@ export class TeacherLandingPageComponent implements OnInit {
   materials!: IMatAsmnt[]
   teacherData$ = this.store.select(pipe(selectTeacherData))
   selectedItem!:IMatAsmnt | null
-sanitizedUrls!: SafeResourceUrl[];
+  sanitizedUrls!: SafeResourceUrl[];
+  selectedOption:string = 'Materials';
+uploadsArray!:IMatAsmnt[]
+  totalPages:number =0
+  currentPage:number = 1
+  totalItems:number =0
+  itemsPerPage:number =4
 
 
   tenantId$ = this.store.select(pipe(selectTenantId))
   constructor(
     private sanitizer: DomSanitizer,
     private TeacherService: TeacherServiceService,
-    private store: Store
+    private store: Store,
+    private toastr:ToastrService
   ) {
 
   }
@@ -53,21 +61,17 @@ sanitizedUrls!: SafeResourceUrl[];
       }
     })
 
-    this.TeacherService.fetchMaterials(this.tenantId, this.subjectId, this.teacherId).subscribe({
-      next: (res: IMatAsmnt[]) => {
-        this.materials = res
-
+    this.TeacherService.fetchMaterials(this.tenantId, this.subjectId,this.currentPage).subscribe({
+      next: (res: IMat) => {
+        this.uploadsArray = res.Mat
+        this.totalItems = res.count; // Ensure you have a count property in your response        
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
+        console.log('total Pages:',this.totalPages);
       }
 
     })
 
   }
-
-  deleteItem(){
-
-  }
-  editItem(){}
-
 
   openModal(item:IMatAsmnt){
 
@@ -94,5 +98,48 @@ this.sanitizedUrls = item.pdf.map(url => this.sanitizer.bypassSecurityTrustResou
   closePdf(){
     this.sanitizedUrls=[]
   }
+  onSelectionChange(option: string): void {
+    this.uploadsArray = [];
+    this.selectedOption = option;
+    const currentPage =1
+    this.currentPage = 1
+    this.totalPages=0
+    this.fetchMaterialsOrAssignments(currentPage);
+ }
+ fetchMaterialsOrAssignments(page:number)
+{ 
+  if (this.selectedOption === 'Materials') {
+    this.TeacherService.fetchMaterials(this.tenantId, this.subjectId, page).subscribe({
+      next: (res: IMat) => {
+        this.uploadsArray = res.Mat;
+        this.totalItems = res.count; // Ensure you have a count property in your response
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
+            
+      }
+    });
+ } else {
+    this.TeacherService.fetchAssignments(this.tenantId, this.subjectId, page).subscribe({
+      next: (res: IMat) => {
+        this.uploadsArray = res.Mat;        
+        this.totalItems = res.count; // Ensure you have a count property in your response
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+      }
+    });
+ }
+}
+
+previousPage(){  
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.fetchMaterialsOrAssignments(this.currentPage);
+ }
+}
+
+nextPage(){  
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.fetchMaterialsOrAssignments(this.currentPage)
+ }
+}
 
 }

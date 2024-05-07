@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
 import { Asnmt_url, Res } from 'src/app/Models/common';
-import { IStudent, StudentInfo } from 'src/app/Models/student';
+import { IStudent, Istudent, StudentInfo } from 'src/app/Models/student';
 import { SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
 import { map } from 'rxjs';
 import { IMat, IMatAsmnt, UAsmnt } from 'src/app/Models/material';
@@ -30,7 +30,7 @@ fetchStudents(tenantId:string,classNum:string){
 
 fetchStudentData(tenantId:string,email:string){
   const params = new HttpParams().set('email',email)
-  return this.http.get<IStudent>(`${this.backendURL}/${tenantId}/student/fetchStudentData`, { params })
+  return this.http.get<Istudent>(`${this.backendURL}/${tenantId}/student/fetchStudentData`, { params })
 }
 
 //Assignments CRUD Operations

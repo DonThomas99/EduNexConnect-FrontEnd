@@ -46,24 +46,24 @@ classNum$ = this.store.select(pipe(selectClassNum))
     this.uploadsArray = [];
     this.selectedOption = option;
     const currentPage =1
+    this.currentPage =1
     this.totalPages=0
     this.fetchMaterialsOrAssignments(currentPage, this.itemsPerPage);
  }
 
  fetchMaterialsOrAssignments(page: number, limit: number): void {
+
   if (this.selectedOption === 'Materials') {
      this.studentService.fetchMatAsnmt(this.tenantId, this.subjectId, page, limit).subscribe({
-       next: (res: IMat) => {
+       next: (res: IMat) => {        
          this.uploadsArray = res.Mat;
          this.totalItems = res.count; // Ensure you have a count property in your response
-         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) -1 ;
-         console.log('total Pages:',this.totalPages);
-         
+         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
        }
      });
   } else {
      this.studentService.fetchAssignments(this.tenantId, this.subjectId, page, limit).subscribe({
-       next: (res: IMat) => {
+       next: (res: IMat) => {       
          this.uploadsArray = res.Mat;
          this.totalItems = res.count; // Ensure you have a count property in your response
          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
@@ -98,14 +98,11 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
         }
       })
       this.studentService.fetchMatAsnmt(this.tenantId,this.subjectId,this.currentPage,this.itemsPerPage).subscribe({
-        next:(res:IMat)=>{
-          console.log();
-          
+        next:(res:IMat)=>{          
           this.uploadsArray = res.Mat
           this.totalItems = res.count
-          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) -1 ;
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
          
-          
         }
       })
   }
@@ -119,6 +116,7 @@ subjectId$ = this.store.select(pipe(selectSubjectId))
    
    nextPage(): void {
     console.log('vaiee');
+    console.log(this.currentPage,'<',this.totalPages);
     
     if (this.currentPage < this.totalPages) {
        this.currentPage++;

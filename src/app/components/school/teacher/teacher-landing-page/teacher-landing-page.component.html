@@ -1,8 +1,17 @@
-<app-top-nav></app-top-nav>
-<app-side-nav></app-side-nav>
-
+<div class="page-container">
+    <app-top-nav></app-top-nav>
+    <app-side-nav></app-side-nav>    
 <div class="flex flex-col mx-36">
-    <div *ngFor="let item of materials" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer" (click)="openModal(item)">
+
+    <div class="dropdown dropdown-bottom">
+        <div tabindex="0" role="button" class="btn m-1">{{selectedOption}}</div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a (click)="onSelectionChange('Assignments')">Assignments</a></li>
+            <li><a (click)="onSelectionChange('Materials')">Materials</a></li>
+        </ul>
+    </div>
+
+    <div *ngFor="let item of uploadsArray" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer" (click)="openModal(item)">
         <!-- Icon and Title Section -->
         <div class="flex flex-row items-center flex-grow">
             <!-- Check if the item is a material -->
@@ -25,7 +34,18 @@
             </div>
         </div>
     </div>
+
 </div>
+
+    <div class="pagination">
+        <button class="mx-1" (click)="previousPage()" [disabled]="currentPage === 1"><i class="fa-solid fa-backward"></i></button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button class="mx-1" (click)="nextPage()"><i class="fa-solid fa-forward"></i></button>
+    </div>    
+
+
+</div>
+
 
 <dialog id="materials" class="modal">
     <div class="modal-box w-11/12 max-w-5xl max-h-full bg-slate-100">
@@ -86,9 +106,6 @@
         </div>
     </div>
   </dialog>
-  
-
-
 
   <dialog id="view-pdf" class="modal" style=" min-height: 100vh;">
     <div class=" modal-box custom-modal-size">

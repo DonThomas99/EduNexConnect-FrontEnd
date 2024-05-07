@@ -59,7 +59,7 @@ export class TeacherGradesComponent implements OnInit {
       }
     });
 
-    this.teacherService.fetchAssignment(this.tenantId, this.subjectId, this.currentPage).subscribe({
+    this.teacherService.fetchAssignments(this.tenantId, this.subjectId, this.currentPage).subscribe({
       next: (res: IMat) => {
         this.AssignmentArray = res.Mat;
         this.totalItems = res.count;
@@ -92,7 +92,7 @@ export class TeacherGradesComponent implements OnInit {
  }
 
  fetchAssignments(page: number) {
-    this.teacherService.fetchAssignment(this.tenantId, this.subjectId, page).subscribe({
+    this.teacherService.fetchAssignments(this.tenantId, this.subjectId, page).subscribe({
       next: (res: IMat) => {
         this.AssignmentArray = [];
         this.AssignmentArray = res.Mat;

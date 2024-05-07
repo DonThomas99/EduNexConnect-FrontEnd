@@ -1,59 +1,74 @@
-<app-top-nav></app-top-nav>
-<app-side-nav></app-side-nav>
+<div class="page-container">
 
-<div class="sliding-navbar mt-8 ">
-
-  <button 
-  class="ml-48 py-2 px-5 rounded-full text-sm text-white bg-black hover:bg-gray-700 duration-300 shadow-2xl " [matMenuTriggerFor]="menu">
-  Create
-</button>
-<div class>
-  <mat-menu #menu="matMenu" xPosition="after" yPosition="below">
-    <button mat-menu-item (click)="toggleAssignment();">Assignments</button>
-    <button mat-menu-item  (click)="toggleMaterial()">Materials</button>
-  </mat-menu>
+  <app-top-nav></app-top-nav>
+  <app-side-nav></app-side-nav>
+  
+  <div class="sliding-navbar mt-8 flex flex-row justify-around ">
+    
+    <button 
+    class="ml-4 py-2 px-5 rounded-full text-sm text-white bg-black hover:bg-gray-700 duration-300 shadow-2xl " [matMenuTriggerFor]="menu">
+    Create
+  </button>
+  
+  <div class>
+    <mat-menu #menu="matMenu" xPosition="after" yPosition="below">
+      <button mat-menu-item (click)="toggleAssignment();">Assignments</button>
+      <button mat-menu-item  (click)="toggleMaterial()">Materials</button>
+    </mat-menu>
+  </div>
+  <div class="dropdown dropdown-bottom">
+    <div tabindex="0" role="button" class="btn m-1">{{selectedOption}}</div>
+    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a (click)="onSelectionChange('Assignments')">Assignments</a></li>
+        <li><a (click)="onSelectionChange('Materials')">Materials</a></li>
+    </ul>
+</div>
+  
 </div>
 
-</div>
-
-<div class="flex flex-col mx-36">
-  <div *ngFor="let item of materials" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer" (click)="openModal(item)">
-       <!-- Icon and Title Section -->
-       <div class="flex flex-row items-center flex-grow">
-           <!-- Check if the item is a material -->
-           <mat-icon *ngIf="item?.materialTitle; else assignmentIcon">book</mat-icon>
- 
-           <!-- Check if the item is an assignment -->
-           <ng-template #assignmentIcon>
-               <mat-icon>assignment</mat-icon>
-           </ng-template>
- 
-           <!-- Display the item's title with a label -->
-           <div class="ml-3 flex flex-col flex-grow">
-               <!-- Conditional title based on whether the item is a material or an assignment -->
-               <p class="title">{{ item.materialTitle ? 'You posted a material: ' : 'You posted an assignment: ' }} {{ item?.materialTitle || item?.assignmentTitle }}</p>
-               <!-- Display the due date if it exists -->
-               <div class="flex justify-between items-center">
-                  <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>
-                  <p class="created-date">posted on {{ item.createdAt | date:'dd MMMM yyyy' }}</p>
-               </div>
-           </div>
-       </div>
-       <!-- Ellipsis Icon Section -->
-       <div class="hoverboy p-3 hover:bg-slate-200 rounded-full" [matMenuTriggerFor]="menu" (click)="openMenu($event)">
-           <i class="fa-solid fa-ellipsis-vertical"></i>
-       </div>
-
+<div class="flex flex-col mt-0 mx-36">
+  <div *ngFor="let item of uploadsArray" class="flex flex-row justify-between mt-4 border mx-44 hover:bg-slate-50 h-16 p-3 rounded hover:cursor-pointer" (click)="openModal(item)">
+    <!-- Icon and Title Section -->
+    <div class="flex flex-row items-center flex-grow">
+      <!-- Check if the item is a material -->
+      <mat-icon *ngIf="item?.materialTitle; else assignmentIcon">book</mat-icon>
+      
+      <!-- Check if the item is an assignment -->
+      <ng-template #assignmentIcon>
+        <mat-icon>assignment</mat-icon>
+      </ng-template>
+      
+      <!-- Display the item's title with a label -->
+      <div class="ml-3 flex flex-col flex-grow">
+        <!-- Conditional title based on whether the item is a material or an assignment -->
+        <p class="title">{{ item.materialTitle ? 'You posted a material: ' : 'You posted an assignment: ' }} {{ item?.materialTitle || item?.assignmentTitle }}</p>
+        <!-- Display the due date if it exists -->
+        <div class="flex justify-between items-center">
+          <p *ngIf="item.submissionDate" class="submission-date">Due on {{ item.submissionDate | date:'dd MMMM yyyy' }}</p>
+          <p class="created-date">posted on {{ item.createdAt | date:'dd MMMM yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Ellipsis Icon Section -->
+    <div class="hoverboy p-3 hover:bg-slate-200 rounded-full" [matMenuTriggerFor]="menu" (click)="openMenu($event)">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+    </div>
+    
          <!-- Dropdown Menu  -->
          <mat-menu #menu = "matMenu">
           <button mat-menu-item (click)="editItem(item)">Edit</button>
           <button mat-menu-item (click)="deleteItem(item)">Delete</button>
         </mat-menu>
-
+        
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <button class="mx-1" (click)="previousPage()" [disabled]="currentPage === 1"><i class="fa-solid fa-backward"></i></button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="mx-1" (click)="nextPage()"><i class="fa-solid fa-forward"></i></button>
   </div>
- </div>
- 
-
+  </div>
 <!-- Create Assignment Modal -->
 
 <dialog id="assignments" class="modal">

@@ -65,11 +65,11 @@ uploadMaterial(tenantId:string,subjectId:string,teacherId:string,data:IMaterialD
   return this.http.post<Res>(`${this.backendURL}/${tenantId}/teacher/uploadMaterial`,formData)
 }
 
-fetchMaterials(tenantId:string,subjectId:string,teacherId:string){
+fetchMaterials(tenantId:string,subjectId:string,page:number){
   const params = new HttpParams()
   .set('subjectId',subjectId)
-  .append('teacherId', teacherId)
-  return this.http.get<IMatAsmnt[]>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
+  .append('page',page)
+  return this.http.get<IMat>(`${this.backendURL}/${tenantId}/teacher/fetchMaterials`,{params})
 }
 
 updateMaterial(tenantId:string,materialId:string,data:Partial<IMatAsmnt>){
@@ -78,7 +78,7 @@ updateMaterial(tenantId:string,materialId:string,data:Partial<IMatAsmnt>){
 
 //  Assignment Services 
 
-fetchAssignment(tenantId:string,subjectId:string,page:number){
+fetchAssignments(tenantId:string,subjectId:string,page:number){
   const params = new HttpParams()
   .set('subjectId',subjectId)
   .append('page',page)

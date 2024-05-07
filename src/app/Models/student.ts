@@ -16,3 +16,7 @@ export interface StudentInfo {
     password:string;
    }
    
+   export interface Istudent{
+    data:IStudent,
+    message:string
+   }

@@ -35,3 +35,20 @@ color:#606c76
     height: calc(100% - 50px);
     width: calc(100%)
 }
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Fill the entire viewport height */
+}
+
+.pagination {
+    align-self: center; /* Center the pagination div horizontally */
+}
+
+.flex.flex-col.mx-36 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center children vertically */
+    flex-grow: 1; /* Allow this div to grow and take up available space */
+}

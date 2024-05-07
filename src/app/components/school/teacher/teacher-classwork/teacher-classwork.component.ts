@@ -10,7 +10,7 @@ import { Observable, map, pipe } from 'rxjs';
 import { selectTenantId,selectSubjectId, selectTeacherData } from 'src/app/states/school/school.selector';
 import { Res } from 'src/app/Models/common';
 import { ToastrService } from 'ngx-toastr';
-import { IMatAsmnt, IMaterials } from 'src/app/Models/material';
+import { IMat, IMatAsmnt, IMaterials } from 'src/app/Models/material';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ConfirmationDialogComponent } from 'src/app/components/common/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -35,6 +35,9 @@ export class TeacherClassworkComponent implements OnInit {
     'image/webp',
     'application/pdf'
  ];
+ uploadsArray!:IMatAsmnt[];
+ totalPages!:number
+ selectedOption:string = 'Materials';
  pdfArray!:string[]
   selectedItem!:IMatAsmnt
   dateTime: Date | undefined;
@@ -53,11 +56,14 @@ isSubmitted=false
 materialTitle!:string
 isAssignment:boolean = false
 isMaterial:boolean =false
+currentPage:number =1
+totalItems:number =0
+itemsPerPage:number =4;
 // dateTime!:string
 
 editorForm!:FormGroup
 html!:string
-materials!:IMatAsmnt[]
+
 selectedImage!:File
 sanitizedUrls!: SafeResourceUrl[];
 quillConfig = {
@@ -81,7 +87,6 @@ constructor(
   private readonly router:Router,
   private readonly store:Store,
 ){
- 
 }
   ngOnInit(): void {
     this.assignmentForm = this.formBuilder.group({
@@ -117,14 +122,50 @@ constructor(
         this.subjectId = id.subjectId as unknown as string                   
       })
 
-      this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,this.teacherId).subscribe({
-        next:(res:IMatAsmnt[])=>{
-          this.materials= res
+      this.TeacherService.fetchMaterials(this.tenantId,this.subjectId,1).subscribe({
+        next:(res:IMat)=>{
+          this.uploadsArray= res.Mat
+          this.totalItems = res.count; // Ensure you have a count property in your response
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
         }
       })
   }
 
 
+onSelectionChange(option:string){
+  this.uploadsArray = [];
+  this.selectedOption = option;
+  const currentPage =1
+  this.currentPage = 1
+  this.totalPages=0
+  this.fetchMaterialsOrAssignments(currentPage);
+}
+
+fetchMaterialsOrAssignments(page:number){
+
+  this.totalPages =0
+  this.totalItems =0
+
+  if (this.selectedOption === 'Materials') {
+    this.TeacherService.fetchMaterials(this.tenantId, this.subjectId, page).subscribe({
+      next: (res: IMat) => {
+        this.uploadsArray = res.Mat;
+        this.totalItems = res.count; // Ensure you have a count property in your response
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
+      
+        
+      }
+    });
+ } else {
+    this.TeacherService.fetchAssignments(this.tenantId, this.subjectId, page).subscribe({
+      next: (res: IMat) => {
+        this.uploadsArray = res.Mat;
+        this.totalItems = res.count; // Ensure you have a count property in your response
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+      }
+    });
+ }
+}
 
   uploadMaterial(){   
     this.isSubmitted=true     
@@ -219,10 +260,10 @@ materials.showModal();
 
         if(item.materialTitle){
             name = item.materialTitle
-            assignmentId = item._id
+            materialId = item._id
           } else{
           name = item.assignmentTitle
-          materialId = item._id
+          assignmentId = item._id
         }
         const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
           data:{message:`Are you sure you want to delete the ${name}`}
@@ -286,6 +327,20 @@ viewPdf(){
 }
 closePdf(){
   this.sanitizedUrls=[]
+}
+
+previousPage(){  
+  if (this.currentPage > 1) {
+    this.currentPage--;
+    this.fetchMaterialsOrAssignments(this.currentPage);
+ }
+}
+
+nextPage(){  
+  if (this.currentPage < this.totalPages) {
+    this.currentPage++;
+    this.fetchMaterialsOrAssignments(this.currentPage)
+ }
 }
 
 }

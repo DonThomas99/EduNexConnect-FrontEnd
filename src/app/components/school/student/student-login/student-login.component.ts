@@ -9,7 +9,7 @@ import { validateBytrimming } from 'src/app/helpers/validations';
 import { emailValidators, passwordValidators } from 'src/app/shared/validators';
 import Swal from 'sweetalert2';
 import { Res } from 'src/app/Models/common';
-import { IStudent } from 'src/app/Models/student';
+import { IStudent, Istudent } from 'src/app/Models/student';
 import { saveStudentData, setStudentEmail } from 'src/app/states/school/school.actions';
 // import { setStudentEmail, setStudentEmail } from 'src/app/states/school/school.actions';
 
@@ -58,8 +58,8 @@ submit(){
 this.store.dispatch(setStudentEmail({studentEmail:data.email}))
 
 this.studentService.fetchStudentData(this.tenantId, data.email).subscribe({
-  next: (res:IStudent) => {
-    this.store.dispatch(saveStudentData({studentData:res}))
+  next: (res:Istudent) => {    
+    this.store.dispatch(saveStudentData({studentData:res.data}))
     
   }
 });

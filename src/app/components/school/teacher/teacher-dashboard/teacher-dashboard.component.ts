@@ -49,7 +49,7 @@ if(data){
     class: classData.classNum,
     subjects: classData.subject
    }));
- 
+
    
    this.subjects = this.classNsubjects.flatMap(subjectsI =>
     subjectsI.subjects.map(subject => ({
@@ -58,7 +58,7 @@ if(data){
       classNum: subjectsI.class // Assuming classNum is obtained from subjectsI
     }))
     
-    );   
+    );           
   }
 })
 }
