@@ -103,8 +103,8 @@ hasError:boolean = false
 
 this.chatService.reciverNotification(this.studentId).subscribe({
   next:(message)=>{
-    
     this.messages.push(message)
+    this.generateChatHTML()
   }, error:(error)=>{
     console.log('error:',error);
     
@@ -171,6 +171,8 @@ this.chatService.reciverNotification(this.studentId).subscribe({
             this.chatService.recieveMessages(this.conversationId).subscribe({
               next:(res:message[])=>{
                 this.messages = res
+                console.log(this.messages);
+                
               this.generateChatHTML()
               }
             })

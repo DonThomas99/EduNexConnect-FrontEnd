@@ -81,25 +81,21 @@
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-    <!-- <div class="bg-white overflow-y-auto h-52">
-      <div class="chat chat-start">
-        <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">You underestimate my power!</div>
-      </div>
-      <div class="chat chat-start">
-        <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">You underestimate my power!</div>
-      </div>
-    </div> -->
-  <div id="chatContainer" class="messageContainer"></div>
-
-
   
-    <form class="w-full form-container" (click)="messageSubmit($event)">
+  <div id="chatContainer" class="messageContainer"></div>
+<div class="p-3">
+
+  <label for="msg"><b>Message</b></label>
+  
+  <div class="form-container flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+    <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-0 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+  </div>
+  
+  <button type="button" class="btn sendButton" (click)="messageSubmit()">Send</button>
+</div>
+  
+  
+    <!-- <form class="w-full form-container" (click)="messageSubmit($event)">
         <label for="msg"><b>Message</b></label>
      
         <label for="chat" class="sr-only">Your message</label>
@@ -110,7 +106,7 @@
       <div class="justify-center">
           <button type="submit" class="btn">Send</button>
         </div>
-    </form>
+    </form> -->
   </div>
   
   
