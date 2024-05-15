@@ -51,6 +51,7 @@ export interface StudentState{
 
 
 export interface StudentDataState{
+    _id:string;
     name: string;
     gaurdianName: string;
     email: string;
@@ -88,6 +89,7 @@ export const initialTeacherDataState:TeacherDataState ={
 }
 
 export const initialStudentDataState:StudentDataState={
+    _id:'',
     name: '',
     gaurdianName:'',
     email:'',

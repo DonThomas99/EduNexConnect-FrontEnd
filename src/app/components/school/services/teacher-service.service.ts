@@ -4,7 +4,7 @@ import { AllSubmissions, Asnmt, Asnmt_url, Res } from 'src/app/Models/common';
 import { IteacherData } from 'src/app/Models/teacher';
 import { environments } from 'src/environments/environment';
 import {IAssignmentData, IMat, IMatAsmnt, IMaterialData, IMaterials, Isubmission} from 'src/app/Models/material'
-import { StudentInfo } from 'src/app/Models/student';
+import { IStudent, StudentInfo } from 'src/app/Models/student';
 import { IAssignments, OGrade } from 'src/app/Models/assignments';
 
 @Injectable({
@@ -27,7 +27,7 @@ fetchTeacherData(tenantId:string,email:string){
 
 fetchStudents(tenantId:string,classNum:string){
   const params = new HttpParams().set('classNum',classNum)
-  return this.http.get<StudentInfo[]>(`${this.backendURL}/${tenantId}/teacher/getStudentsByClass`,{params})
+  return this.http.get<IStudent[]>(`${this.backendURL}/${tenantId}/teacher/getStudentsByClass`,{params})
 }
 
 fetchSubmissions(email:string,assignmentId:string,tenantId:string){
@@ -86,7 +86,7 @@ fetchAssignments(tenantId:string,subjectId:string,page:number){
 }
 
 uploadAssignment(tenantId:string,subjectId:string,teacherId:string,data:IAssignmentData){  
-  const formData = new FormData();
+    const formData = new FormData();
    for (const key in data) {
     if (Object.prototype.hasOwnProperty.call(data, key)) {
       const value = data[key as keyof IAssignmentData];

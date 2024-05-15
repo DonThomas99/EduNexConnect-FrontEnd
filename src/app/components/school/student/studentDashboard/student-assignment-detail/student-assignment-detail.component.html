@@ -64,29 +64,53 @@
       </div>
 </div>
 
+<button class="open-button" *ngIf="!isOpen" (click)="openForm()">Start Conversation</button>
 
 
-<div class="mt-3 mr-7">
-    <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="card-title">private Comments</h2>
-          
-              <div class="card-actions justify-center">
-                  <div class="flex border w-full justify-center rounded hover:cursor-pointer">
-                     </div>
-                     <div type="submit" class="flex btn bg-black border w-full justify-center text-white rounded hover:text-black font-normal hover:cursor-pointer" onclick="">
-                        start Conversation
-                     </div>
-                     <div class="overflow ">
 
-                     </div>
-                </div>
-          
-        </div>
+</div>
+
+</div>
+</div>
+
+
+<div class="border-2 border-b-slate-400 rounded shadow-2xl chat-popup" [style.display]="isOpen ? 'block' : 'none'">
+    <div class="px-5 bg-white border shadow-2xl flex justify-between">
+      <h1>Private comments</h1>
+      <button type="button" class="cancel" (click)="closeForm()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- <div class="bg-white overflow-y-auto h-52">
+      <div class="chat chat-start">
+        <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
       </div>
-</div>
+      <div class="chat chat-end">
+        <div class="chat-bubble">You underestimate my power!</div>
+      </div>
+      <div class="chat chat-start">
+        <div class="chat-bubble">It's over Anakin, <br/>I have the high ground.</div>
+      </div>
+      <div class="chat chat-end">
+        <div class="chat-bubble">You underestimate my power!</div>
+      </div>
+    </div> -->
+  <div id="chatContainer" class="messageContainer"></div>
 
-</div>
 
-</div>
-</div>
+  
+    <form class="w-full form-container" (click)="messageSubmit($event)">
+        <label for="msg"><b>Message</b></label>
+     
+        <label for="chat" class="sr-only">Your message</label>
+        <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+            <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-0 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+      
+        </div>
+      <div class="justify-center">
+          <button type="submit" class="btn">Send</button>
+        </div>
+    </form>
+  </div>
+  
+  

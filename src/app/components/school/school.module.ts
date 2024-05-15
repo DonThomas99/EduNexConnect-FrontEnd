@@ -7,9 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { environments } from 'src/environments/environment';
+
 // import { StoreModule } from '@ngrx/store';
 
 
+const config:SocketIoConfig = {url:`${environments.backendURL}`}
 
 
 @NgModule({
@@ -18,6 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   ],
   imports: [
+    SocketIoModule.forRoot(config),
+
     ToastrModule.forRoot(),
     // BrowserAnimationsModule,
     FontAwesomeModule,

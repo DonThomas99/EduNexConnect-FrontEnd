@@ -14,3 +14,19 @@ a{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); /* Add a box shadow for a stylish look */
+    background-color: #F5F5F5; /* Change the background color of the track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #000000; /* Change the background color of the thumb */
+    border-radius: 10px; /* Add a border radius for a smoother appearance */
+}

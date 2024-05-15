@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
-import { selectClassNum, selectTenantId } from 'src/app/states/school/school.selector';
+import { selectClassNum, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import { TeacherServiceService } from '../../services/teacher-service.service';
-import { StudentInfo } from 'src/app/Models/student';
+import { IStudent, Istudent, StudentInfo } from 'src/app/Models/student';
 import { Isubmission } from 'src/app/Models/material';
-import { Asnmt, Asnmt_url, Res } from 'src/app/Models/common';
+import { Asnmt, Asnmt_url, Res, addUsers, convo } from 'src/app/Models/common';
 import { DomSanitizer,SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { validateBytrimming } from 'src/app/helpers/validations';
 import { emailValidators } from 'src/app/shared/validators';
 import { ToastrService } from 'ngx-toastr';
+import { ChatServiceService } from '../../services/chat-service.service';
+import { message } from 'src/app/Models/assignments';
+import { generateAndScrollChatHTML } from 'src/app/shared/generateChatHTML';
+// import { Message } from 'primeng/api';
 
 
 @Component({
@@ -20,17 +24,27 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./assignment-valuation.component.css']
 })
 export class AssignmentValuationComponent implements OnInit {
+@ViewChild("messageContainer") mContainer:ElementRef|undefined;
+  isOpen =false
   form!:FormGroup
   assignmentId!:string
   tenantId$ = this.store.select(pipe(selectTenantId))
   classNum$ = this.store.select(pipe(selectClassNum))
+  teacherId$ = this.store.select(pipe(selectTeacherData))
   classNum!:string
   tenantId!:string
-  studentData!:StudentInfo[]
+  studentData!:IStudent[]
   email!:string  
   sanitizedUrls!: SafeResourceUrl[];
   hasError:boolean = false
   grade!:string
+  teacherId!:string
+  conversationId!:string
+  studentId!:string
+  messages!:message[]
+   chatContainer = document.getElementById('chatContainer')
+
+  
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -38,7 +52,9 @@ export class AssignmentValuationComponent implements OnInit {
     private readonly ActivatedRoute:ActivatedRoute,
     private readonly store:Store,
     private readonly teacherService:TeacherServiceService,
-    private readonly toastr:ToastrService
+    private readonly toastr:ToastrService,
+    private readonly chatService:ChatServiceService
+
   ){  }
   
   ngOnInit() {
@@ -59,12 +75,25 @@ this.classNum$.subscribe((classNum)=>{
 })
 
 this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
-  next:(res:StudentInfo[])=>{
-  this.studentData= res                      
+  next:(res:IStudent[])=>{
+  this.studentData= res                        
 }
 })
 
+this.teacherId$.subscribe((id)=>{
+  if(id){
+    this.teacherId = id._id  
+  }
+ 
+})
 
+this.chatService.reciverNotification(this.teacherId).subscribe({
+  next:(message)=>{
+console.log('You have a message:',message);
+this.messages.push(message)
+this.generateChatHTML()
+  }
+})
 
  }
 
@@ -73,8 +102,8 @@ this.teacherService.fetchStudents(this.tenantId,this.classNum).subscribe({
   this.email = email
   this.teacherService.fetchSubmissions(email,this.assignmentId,this.tenantId).subscribe({
     next:(res:Asnmt)=>{
-      console.log(res.url.file_url);
-      
+      console.log(res.url);
+      this.grade = res.url.grade as string
       if(res){
         this.sanitizedUrls = res.url.file_url.map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url))
         const assignmentModal = document.getElementById('view-assignment') as HTMLDialogElement;
@@ -116,5 +145,97 @@ if(this.form.valid){
 }
   
  }
+ openForm(studentId:string){
+  // console.log(studentId,this.teacherId);
+  this.studentId = studentId
+  const members ={
+    studentId:studentId,
+    teacherId:this.teacherId
+  }
+
+  
+this.chatService.createConversation(this.tenantId,members,this.assignmentId).subscribe({
+  next:(res:convo)=>{
+        
+    this.conversationId= res.data._id
+   if(this.conversationId){
+    this.chatService.getMessages(this.tenantId,this.conversationId)
+    this.chatService.recieveMessages(this.conversationId).subscribe({
+      next:(res:message[])=>{
+        this.messages = res
+        this.generateChatHTML()
+        // generateAndScrollChatHTML(this.chatContainer,this.messages,this.teacherId)
+      }
+    })
+    const users:addUsers ={
+      recieverId:studentId,
+      senderId:this.teacherId
+    }
+    this.chatService.addUser(users)
+   }
+    
+  }
+})  
+this.isOpen = true
+ }
+
+ closeForm(){
+
+this.isOpen = false
+ }
+
+ messageSubmit(){
+  const messageText = (document.getElementById('chat') as HTMLTextAreaElement)?.value;
+  if(!messageText){
+    const message = 'Type something'
+    this.toastr.error(message)
+    return
+  }
+  if(this.teacherId){
+
+    const newMessage:message={
+      conversationId:this.conversationId,
+      sender:this.teacherId,
+      text:messageText
+    }
+      const recieverId = this.studentId
+    this.chatService.newMessage(this.tenantId,newMessage,recieverId)
+    this.messages.push(newMessage)
+    this.generateChatHTML()
+
+   const chatElement = (document.getElementById('chat') as HTMLTextAreaElement)
+    if(chatElement){
+      chatElement.value =''
+    }
+  }else{
+    console.log("error");
+    
+  }
+
+ }
+
+
+ generateChatHTML(){  
+   const chatContainer = document.getElementById('chatContainer')
+  let chatHTML = '<div class="messageConatiner">'
+  this.messages.forEach((message)=>{
+    const isTeacherMessage = message.sender !== this.teacherId
+    const chatClass = isTeacherMessage? 'chat chat-start': 'chat chat-end';
+    chatHTML +=`  <div class="${chatClass}">
+    <div class="chat-bubble">${message.text}</div>
+  </div> `
+  })
+  chatHTML+='</div>'
+  
+  if(chatContainer){
+    chatContainer.innerHTML = chatHTML
+   
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+  } else{
+    console.log('chat Container element not found');
+  }
+ }
+
+
 
 }

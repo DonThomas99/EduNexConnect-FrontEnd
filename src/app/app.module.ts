@@ -27,11 +27,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
+import { environments } from 'src/environments/environment';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // import { QuillModule } from 'ngx-quill';
 
 
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
+const config:SocketIoConfig = {url:`${environments.backendURL}`}
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     
         
   ],
-  imports: [
+  imports: [    
+    SocketIoModule.forRoot(config),
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -63,7 +67,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer]
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TenantInterceptorInterceptor, multi: true}

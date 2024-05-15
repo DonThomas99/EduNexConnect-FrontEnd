@@ -4,3 +4,101 @@
     min-height: 100vh; /* Fill the entire viewport height */
 }
 
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+ background-color: #555;
+ color: white;
+ padding: 16px 20px;
+ border: none;
+ cursor: pointer;
+ opacity: 0.8;
+ position: fixed;
+ bottom: 120px;
+ right: 80px;
+ width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+ display: none;
+ position: fixed;
+ overflow: auto;
+ bottom: 10px;
+ right: 10px;
+ /* border: 5px solid #ffffff00; */
+ z-index: 9;
+ width: 35%;
+}
+
+/* Add styles to the form container */
+.form-container {
+ /* max-width: auto; */
+ padding: 10px;
+ background-color: white;
+ overflow: auto;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+ width: 100%;
+ padding: 15px;
+ margin: 5px 0 22px 0;
+ border: none;
+ background: #f1f1f1;
+ resize: none;
+ min-height: 50px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+ background-color: #ddd;
+ outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+ background-color: #04AA6D;
+ color: white;
+ padding: 16px 20px;
+ border: none;
+ cursor: pointer;
+ width: 100%;
+ margin-bottom:10px;
+ opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+ opacity: 1;
+}
+
+
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Adjust the width as needed */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); /* Add a box shadow for a stylish look */
+    background-color: #F5F5F5; /* Change the background color of the track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #000000; /* Change the background color of the thumb */
+    border-radius: 10px; /* Add a border radius for a smoother appearance */
+}
+
+
+.messageContainer{
+    --tw-bg-opacity: 1;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    overflow-y: auto;
+    height:13rem;
+   }
+
+

@@ -16,3 +16,10 @@ export interface OGrade{
     studentEmail:string,
     grade:string
 }
+
+export interface message{
+    // _id: string;
+    conversationId: string;
+    sender: string;
+    text: string;
+}

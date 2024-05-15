@@ -52,3 +52,23 @@ export interface dub{
     file_url:string[],
     grade:string |null
 }
+
+export interface convo{
+    data:{
+
+        _id:string,
+        members:string[],
+    }
+    }
+
+    export interface messages{
+        _id:string,
+        conversationId:string,
+        sender:string,
+        text:string
+    }
+
+    export interface addUsers{
+senderId:string,
+recieverId:string
+    }
