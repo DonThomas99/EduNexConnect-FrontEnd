@@ -69,6 +69,28 @@ export interface IApiTenantList{
     token: string
     // refreshToken: string 
 }
+
+export interface addPlan{
+    planName:string,
+    durationUnit:string,
+    durationValue:number,
+    amount:number
+}
+
+export interface planResponse{
+status:number,
+message:string,
+data:IPlan[]
+}
+
+export interface IPlan{
+    _id:string,
+    planName:string,
+    durationUnit:string,
+    durationValue:number,
+    amount:number
+}
+
 export interface  IApiTenantRes extends IApiRes<ITenantRes>{}
 export interface IApiTenantsRes extends IApiRes<ITenantRes[]>{}
 

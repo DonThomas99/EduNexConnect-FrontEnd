@@ -8,6 +8,11 @@ export const nameValidators =[
     Validators.pattern(nameRegex)
 ]
 
+export const amountValidators =[
+    Validators.required,
+    
+]
+
 export const emailValidators = [
     Validators.required,
     Validators.pattern(emailRegex)

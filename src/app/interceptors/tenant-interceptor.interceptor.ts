@@ -21,7 +21,7 @@ console.log("tenanttoken:",tenantToken);
     const newRequest = request.clone({
       headers: request.headers.set('Authorization','Bearer ' + tenantToken)
     })
-    console.log(newRequest.url);
+    console.log('url in interceptor:',newRequest.url);
     
     return next.handle(newRequest)
    }

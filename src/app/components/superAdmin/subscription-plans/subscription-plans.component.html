@@ -1,13 +1,61 @@
-<app-admin-sidebar></app-admin-sidebar>
-<div class="subscription my-16">
-    <mat-card class=" p-8">
-        <mat-card-title class=" p-8">
-<div>
-                   
+<div class="page-container">
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="mt-24 flex justify-between mx-9">
+<h1> Subscription Plans</h1>
+        <button class="btn" onclick="addPlan.showModal()">
+            Add Plan
+        </button>
+    </div>
+    <div *ngIf="plans.length>0" class="flex flex-row justify-evenly">
+        <ng-container *ngFor="let plan of plans" >
+
+
+    <div class="card w-96 bg-base-100 shadow-xl my-5 ">       
+        <div class="card-body">
+            <h2 class="card-title">{{plan.planName}}</h2>
+            <p>{{plan.amount}} / {{plan.durationValue}} {{plan.durationUnit}}</p>
+            <div class="card-actions justify-evenly">
+                <button class="btn">Edit</button>
+                <button class="btn ">Delete</button>
+                
+            </div>
+        </div>
+    </div>
+
+        </ng-container>
+
+    </div>
 </div>
-        </mat-card-title>
-        <mat-card-content class="px-4 pt-2">
-                Existing Plans:
-        </mat-card-content>
-    </mat-card>
-</div>
+
+<dialog id="addPlan" class="modal">
+    <div class="modal-box max-h-max">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <form [formGroup]="form" (ngSubmit)="addPlan()" method="dialog" >
+          <h3 class="font-bold text-lg">Add New Plan</h3>
+          <p class="py-4">Enter the plan details below:</p>
+
+          <label for="planName" class="block mb-2 mt-2">Plan Name:</label>
+          <input type="text" id="planName" formControlName="planName" name="planName" required class="border border-gray-300 p-2 rounded-md">
+
+          <label for="amount" class="block mb-2">Amount:</label>
+          <input type="number" formControlName="amount" id="amount" name="amount" min="0" required class="border border-gray-300 p-2 rounded-md">
+          
+          <label for="durationUnit" class="block mb-2 mt-4">Duration:</label>
+          <select id="durationUnit" formControlName="durationUnit" name="durationUnit" required class="border border-gray-300 p-2 rounded-md">
+              <option value="">Select Duration Unit</option>
+              <option value="weeks">Weeks</option>
+              <option value="months">Months</option>
+              <option value="years">Years</option>
+            </select>
+            
+            <label for="durationValue" class="block mb-2 mt-4">Number:</label>
+            <input type="number" id="durationValue" formControlName="durationValue" name="durationValue" min="0" required class="border border-gray-300 p-2 rounded-md">
+            <div class="mr-5 flex justify-end">
+                <button type="submit" class="mt-4 mr-5 px-4 py-2 bg-blue-500 text-white rounded-md">Submit</button>
+            </div>
+        </form>
+        </div>
+  </dialog>
+  
