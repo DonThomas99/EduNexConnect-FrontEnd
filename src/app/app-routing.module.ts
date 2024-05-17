@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SubscribedComponent } from './components/common/subscribed/subscribed.component';
 
 const routes: Routes = [
 
@@ -14,7 +15,8 @@ const routes: Routes = [
   {
     path:'school',loadChildren:()=>import('./components/school/school.module').then(s=>s.SchoolModule)
 
-  }
+  },
+  {path:'subscribed',component:SubscribedComponent}
 
 ];
 

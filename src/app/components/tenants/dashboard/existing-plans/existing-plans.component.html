@@ -1,34 +1,32 @@
-<div class="total-container">
+<div class="page-container">
     
     <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
-    <div class="main-container">
-        <div class="sidebar"><app-dashboard-sidebar></app-dashboard-sidebar></div>
-      
-      
-        <div class="existing-plans w-full p-8">
-          
-            <mat-card>
-                <mat-card-content>
-                    <div class="w-full p-8">
-                        <div class="py-14">
-                            <div class="text-right text-emerald-50">
-                                    <button>
-                                        Cancel
-                                    </button>
-                            </div>
-                            <div class="text-center p-4 text-2xl">
-                                <p>existing-plans</p>
-                            </div>
-                            <div class="flex justify-around">
-                                <p>Start Date:</p>
-                                <p>End Date</p>
+    <div class="mt-24 flex justify-between mx-9">
+        <h1> Subscription Plans</h1>      
+            </div>
+            <div class="flex flex-row justify-evenly">
+                <ng-container *ngFor="let plan of plans" >
+        
+        
+                    <div class="card w-96 bg-base-100 shadow-xl my-5 ">       
+                        <div class="card-body">
+                            <h2 class="card-title">{{plan.planName}}</h2>
+                            <p>{{plan.amount}} / {{plan.durationValue}} {{plan.durationUnit}}</p>
+                            <div class="card-actions justify-end">
+                                
+                                <button (click)="confirmSubscription(plan)"  class="btn">Subscribe</button>
+                                
                             </div>
                         </div>
-
                     </div>
-                </mat-card-content>
-              </mat-card>
-              
-        </div>
+                    </ng-container>
             </div>
+
+     
 </div>
+       <!-- <div *ngIf="plans.length>0" class="flex flex-row justify-evenly">
+                
+        
+                </ng-container>
+        
+            </div> -->

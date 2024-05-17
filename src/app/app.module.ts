@@ -29,6 +29,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
 import { environments } from 'src/environments/environment';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SubscribedComponent } from './components/common/subscribed/subscribed.component';
+import { CancelledComponent } from './components/common/cancelled/cancelled.component';
 // import { QuillModule } from 'ngx-quill';
 
 
@@ -45,6 +47,8 @@ const config:SocketIoConfig = {url:`${environments.backendURL}`}
     ConfirmationDialogComponent,
     EditMaterialsComponent,
     FileUploadComponent,
+    SubscribedComponent,
+    CancelledComponent,
     
     
         

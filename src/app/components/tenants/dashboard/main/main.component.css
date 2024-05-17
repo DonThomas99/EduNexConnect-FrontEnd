@@ -1,14 +1,34 @@
-/* tenant-dashboard.component.scss */
-
-mat-card-title{
-    justify-items:stretch;
-    justify-content: space-between;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-mat-card-content{
-    /* display:; */
-    justify-content: space-around;
-    padding: 16px; /* Adjust the padding as needed */
-    white-space: pre-line; /* Preserve line breaks */
-  }
-  
+.top-section,
+.middle-section,
+.bottom-section {
+    width: 100%;
+    max-width: 1200px; /* Adjust based on your design */
+    margin: auto;
+}
+
+.card-style {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header-style {
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333; /* Dark text for contrast */
+}
+
+.content-style p {
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}

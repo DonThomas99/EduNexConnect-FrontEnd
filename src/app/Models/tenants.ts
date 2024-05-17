@@ -41,7 +41,7 @@ export interface ITenantRes{
     address:string
     isBlocked:boolean
     schoolAdmins:IschoolAdminRes[]
-    transactions: ITenantTransaction[]
+    transactions: ITransaction[]
     
 }
 
@@ -89,6 +89,16 @@ export interface IPlan{
     durationUnit:string,
     durationValue:number,
     amount:number
+}
+
+export interface ITransaction{
+    _id:string,
+    planId:string,
+    amount:number,
+    transactionType:string,
+    transactionId:string,
+    date:Date,
+    expiryDate:Date
 }
 
 export interface  IApiTenantRes extends IApiRes<ITenantRes>{}

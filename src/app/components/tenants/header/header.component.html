@@ -1,6 +1,6 @@
 <header>
-    <div class="flex justify-between px-4 text-blue-800 ">
-        <a href="#" routerLink="" class="logo">EduNexConnect</a>
+    <div class="flex justify-between px-4 text-blue-800 shadow-2xl ">
+        <a  routerLink="" class="logo">EduNexConnect</a>
         <nav class="flex items-center justify-between">
             <ul class="flex space-x-2">
                 <li>
@@ -10,7 +10,7 @@
                     <a routerLink="/services">Services</a>
                 </li>
                 <li>
-                    <a routerLink="/contactus">Contact Us</a>
+                    <a routerLink="/contactus" >Contact Us</a>
                 </li>
                 <ng-container *ngIf="!tenantName">
 
@@ -18,7 +18,7 @@
                         <a routerLink="/tenant/signup">Sign-up</a>
                     </li>
                     <li>
-                        <a routerLink="/tenant/signin">Sign-in</a>
+                        <a routerLink="/tenant/signin" >Sign-in</a>
                     </li>
                 </ng-container>
                 <ng-container *ngIf="tenantName">

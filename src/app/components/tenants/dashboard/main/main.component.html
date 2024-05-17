@@ -1,34 +1,21 @@
-<div class="top-section">
-    <app-top-widgets></app-top-widgets>
-</div>
-<div class="middle-section">
-        <mat-card>
-            <mat-card-title>
-                <div class="flex justify-between pb-0 px-5 py-5">
-
-                    <div class="title pb-0" >
-                    Tenant Details
-                    </div>
-                    
+<div class="container">
+   
+    <div class="middle-section">
+        <mat-card class="card-style">
+            <mat-card-header class="header-style">
+                <div class="flex justify-between items-center pb-0 px-5 py-3">
+                    <h2 class="title">Tenant Details</h2>
                 </div>
-
-
-            </mat-card-title>
-            <mat-card-content class="whitespace-pre-line px-4 pt-2" >
-        Name : {{name}}
-        <br> 
-        School: {{school}}
-        <br>
-        Address:{{address}}
-        <br>
-        City: {{city}}
-        <br>
-        State: {{state}}
-        <br>
-        PIN: {{zip}}
-
+            </mat-card-header>
+            <mat-card-content class="content-style whitespace-pre-line px-4 pt-2">
+                <p>Name: <span>{{name}}</span></p>
+                <p>School: <span>{{school}}</span></p>
+                <p>Address: <span>{{address}}</span></p>
+                <p>City: <span>{{city}}</span></p>
+                <p>State: <span>{{state}}</span></p>
+                <p>PIN: <span>{{zip}}</span></p>
             </mat-card-content>
-          </mat-card>
-         
+        </mat-card>
+    </div>
+    <div class="bottom-section"></div>
 </div>
-<div class="bottom-section"></div>

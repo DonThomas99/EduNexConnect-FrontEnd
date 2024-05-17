@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { TenantService } from 'src/app/services/tenant.service';
+import { deleteTenantFromStore } from 'src/app/states/tenant/tenant.actions';
 import { selectTenantDetails } from 'src/app/states/tenant/tenant.selector';
 
 
@@ -36,4 +37,9 @@ export class DashboardNavbarComponent {
   }
 
 
+  signOut(){
+    localStorage.removeItem('tenantJwt')
+    this.store.dispatch(deleteTenantFromStore())
+    void this.router.navigate([''])
+  }
 }

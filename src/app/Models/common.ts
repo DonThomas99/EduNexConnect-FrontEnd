@@ -72,3 +72,9 @@ export interface convo{
 senderId:string,
 recieverId:string
     }
+
+    export interface subscriptionSuccess{
+        status:number,
+        url:string,
+        message:string
+    }

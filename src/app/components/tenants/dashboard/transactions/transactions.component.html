@@ -1,42 +1,31 @@
-<div class="total-container">
+<div class="page-container">
     
     <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
     <div class="main-container">
-        <div class="sidebar"><app-dashboard-sidebar></app-dashboard-sidebar></div>
-        <div class="transactions px-16 m-8">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> Transaction Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Payment Method </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Amount </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-
+       
+        <div class="transactions px-16 m-8 flex justify-center">
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+      <thead>
+        <tr>
+          <th>Sl.No.</th>
+          <th>Transaction Type</th>
+          <th>Amount</th>
+          <th>Transaction Date</th>
+          <th>Expiry Date</th>
+      </tr>
+      </thead>
+        <ng-container *ngFor="let transaction of tenantTransactions; let i = index">
+          <tbody>
+            <th>{{i+1}}</th>
+            <th>{{transaction.transactionType}}</th>
+            <th>{{transaction.amount}}</th>
+            <th>{{transaction.date | date:'dd MMMM yyyy'}}</th>
+            <th>{{transaction.expiryDate | date:'dd MMMM yyyy'}}</th>
+          </tbody>
+        </ng-container>
+    </table>
+      </div>
         </div>
     </div>
 </div>
