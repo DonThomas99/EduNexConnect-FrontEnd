@@ -1,4 +1,4 @@
 export const environments ={
     production:false,
-    backendURL: 'https://edunexconnect.online'
+    backendURL: 'http://localhost:3000'
 }
