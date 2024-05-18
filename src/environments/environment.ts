@@ -1,4 +1,4 @@
 export const environments ={
     production:false,
-    backendURL: 'http://localhost:3000'
+    backendURL: process.env["BACKENDURL"]
 }
