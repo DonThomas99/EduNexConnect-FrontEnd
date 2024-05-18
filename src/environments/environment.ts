@@ -1,4 +1,4 @@
 export const environments ={
     production:false,
-    backendURL: process.env["BACKENDURL"]
+    backendURL: 'https://edunexconnect.online'
 }
