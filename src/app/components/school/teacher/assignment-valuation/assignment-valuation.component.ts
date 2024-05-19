@@ -199,8 +199,8 @@ this.isOpen = false
       text:messageText
     }
       const recieverId = this.studentId
+      this.messages.push(newMessage)
     this.chatService.newMessage(this.tenantId,newMessage,recieverId)
-    this.messages.push(newMessage)
     this.generateChatHTML()
 
    const chatElement = (document.getElementById('chat') as HTMLTextAreaElement)
