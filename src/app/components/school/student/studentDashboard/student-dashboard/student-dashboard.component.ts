@@ -20,6 +20,10 @@ studentEmail!:string
 tenantId!:string
 classNum!:string
 classData!:subj[]
+totalPages:number =0
+currentPage:number = 1
+itemsPerPage:number = 3
+totalItems:number =0
 // studentEmail$ = this.store.select(pipe(selectStudentEmail))
 tenantId$=this.store.select(pipe(selectTenantId))
 
@@ -47,16 +51,23 @@ ngOnInit():void{
           
       this.classNum = res.data.classNum
       this.store.dispatch(saveClassNum({classNum:this.classNum}))
-      this.fetchSubjects()
+      // this.fetchSubjects(this.currentPage)
+      this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId,this.currentPage).subscribe({
+        next:(res=>{
+        this.classData = res.subjects
+          this.totalItems = res.count
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage) ;
+
+        })
+      })
     })
   })
 }
-fetchSubjects(){
-  this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId).subscribe({
+fetchSubjects(currentPage:number){
+  this.studentService.fetchSubjects(this.classNum,this.studentEmail,this.tenantId,currentPage).subscribe({
     next:(res=>{
-      console.log(res[0],'response form service');
-      
-    this.classData = res     
+    this.classData = res.subjects
+
     })
   })
 }
@@ -65,4 +76,18 @@ openClass(subjectId:string){
   this.store.dispatch(saveSubjectId({subjectId:subjectId}))
   this.router.navigate(['school/student/stream'])
 }
+
+previousPage(){
+if(this.currentPage > 1){
+  this.currentPage --;
+  this.fetchSubjects(this.currentPage)
+}
+}
+nextPage(){
+if(this.currentPage < this.totalPages){
+  this.currentPage ++;
+  this.fetchSubjects(this.currentPage)
+}
+}
+
 }

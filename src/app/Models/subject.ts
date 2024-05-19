@@ -35,7 +35,10 @@ export  interface Subject {
     _id:string,
     name:string
   }
-
+export interface Isubj{
+  count:number,
+  subjects:subj[]
+}
   export interface IclassSubjects{
     class:string
     subjects:subj[]

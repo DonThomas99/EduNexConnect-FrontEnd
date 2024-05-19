@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
 import { Asnmt_url, Res } from 'src/app/Models/common';
 import { IStudent, Istudent, StudentInfo } from 'src/app/Models/student';
-import { SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
+import { Isubj, SubjectName, SubjectsDoc, subj } from 'src/app/Models/subject';
 import { map } from 'rxjs';
 import { IMat, IMatAsmnt, UAsmnt } from 'src/app/Models/material';
 import { faLaptopHouse } from '@fortawesome/free-solid-svg-icons';
@@ -35,15 +35,16 @@ fetchStudentData(tenantId:string,email:string){
 
 //Assignments CRUD Operations
 
-fetchSubjects(classNum:string,email:string,tenantId:string){
+fetchSubjects(classNum:string,email:string,tenantId:string,page:number){
   console.log();
   
   const params = new HttpParams()
     .set('email', email)
-    .append('classNum', classNum);
+    .append('classNum', classNum)
+    .append('page',page)
 
 
-  return this.http.get<subj[]>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
+  return this.http.get<Isubj>(`${this.backendURL}/${tenantId}/student/fetchSubjects`,{params})
 }
 
 
