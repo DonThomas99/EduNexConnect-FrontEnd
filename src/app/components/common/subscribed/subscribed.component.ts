@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { pipe } from 'rxjs';
 import { TenantService } from 'src/app/services/tenant.service';
@@ -15,7 +16,8 @@ tenantId!:string
 
   constructor(
     private readonly store:Store,
-    private readonly tenantService:TenantService
+    private readonly tenantService:TenantService,
+    private readonly router:Router
   ){
     
   }
@@ -27,6 +29,10 @@ tenantId!:string
 
     })
 
+  }
+
+  toDashboard(){
+this.router.navigateByUrl("/tenant/dashboard")
   }
 
 
