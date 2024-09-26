@@ -1,42 +1,20 @@
 <header>
-    <div class="flex justify-between px-4 text-blue-800 shadow-2xl ">
-        <a  routerLink="" class="logo">EduNexConnect</a>
-        <nav class="flex items-center justify-between">
-            <ul class="flex space-x-2">
-                <li>
-                    <a>About Us</a>
-                </li>
-                <li>
-                    <a routerLink="/services">Services</a>
-                </li>
-                <li>
-                    <a routerLink="/contactus" >Contact Us</a>
-                </li>
-                <ng-container *ngIf="!tenantName">
-
-                    <li>
-                        <a routerLink="/tenant/signup">Sign-up</a>
-                    </li>
-                    <li>
-                        <a routerLink="/tenant/signin" >Sign-in</a>
-                    </li>
-                </ng-container>
-                <ng-container *ngIf="tenantName">
-
-                        <li>
-                            <a routerLink="/tenant/dashboard">{{tenantName}}</a>
-                        </li>
-                    <li>
-                        <a (click)="signOut()">Sign-out</a>
-                    </li>
-                </ng-container>
-            </ul>
-        </nav>
+  <div class="navbar  bg-base-100 shadow-2xl">
+    <div class="navbar-start">
+      
+      <a class="btn btn-ghost text-xl" routerLink="">EduNexConnect</a>
     </div>
+  
+    <div class="navbar-end menu-horizontal">     
+      <button class="btn btn-outline btn-success" routerLink="/tenant/services">Plans</button>
+        <ng-container *ngIf="!tenantName">
+          <a class="btn ml-2 btn-outline btn-info" routerLink="/tenant/signup">Sign-up</a>
+          <a class="btn ml-2 btn-primary" routerLink="/tenant/signin">Login</a>
+      </ng-container>
+      <ng-container *ngIf="tenantName">
+        <a class="btn btn-outline btn-success ml-2" routerLink="/tenant/dashboard">{{tenantName}}</a>
+        <a class="btn ml-2 btn-outline btn-error" (click)="signOut()">signOut</a>       
+      </ng-container>
+    </div>
+  </div>
 </header>
-
-
-
-
-
-

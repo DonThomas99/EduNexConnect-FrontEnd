@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environments } from 'src/environments/environment';
-import { IApiTenantAuthRes, IApiTenantList, IApiTenantRes, IApiTenantsRes, IPlan, ITenantSocialAuth, addPlan, planResponse } from '../Models/tenants';
+import { Banner, IApiTenantAuthRes, IApiTenantList, IApiTenantRes, IApiTenantsRes, IPlan, ITenantSocialAuth, addPlan, bannerResponse, planResponse } from '../Models/tenants';
 import { Observable } from 'rxjs';
 import { Res } from '../Models/common';
 @Injectable({
@@ -42,6 +42,21 @@ return this.http.post<Res>(`${this.backendURL}/super-admin/addPlan`,{planData})
 }
 fetchPlans(){
   return this.http.get<planResponse>(`${this.backendURL}/super-admin/fetchPlans`)
+}
+
+//-------------------Banner CRUD Operations---------------
+addBanner(bannerData:Banner):Observable<Res>{
+console.log(bannerData)
+return this.http.post<Res>(`${this.backendURL}/super-admin/Banner`,{bannerData})
+}
+
+deleteBanner(id:string){
+  const params  = new HttpParams().set('bannerId',id)
+return this.http.delete<Res>(`${this.backendURL}/super-admin/Banner`,{params})
+}
+
+fetchBanner(){
+  return this.http.get<bannerResponse>(`${this.backendURL}/super-admin/Banner`)
 }
 
 }

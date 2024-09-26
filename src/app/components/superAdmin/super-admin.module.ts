@@ -11,6 +11,8 @@ import {MatTooltipModule } from '@angular/material/tooltip';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component'
 import { MatCardModule } from '@angular/material/card';
 import { SubscriptionPlansComponent } from './subscription-plans/subscription-plans.component';
+import { BannerComponent } from './banner/banner.component';
+
 
 
 
@@ -24,6 +26,8 @@ import { SubscriptionPlansComponent } from './subscription-plans/subscription-pl
     AdminUserListComponent,
     TenantDetailsComponent,
     SubscriptionPlansComponent,
+    BannerComponent,
+
 
 
     ],

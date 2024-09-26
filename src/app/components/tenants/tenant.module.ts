@@ -5,7 +5,7 @@ import { TenantRoutingModule } from './tenant-routing.module';
 import { TenantSignUpComponent } from './pages/tenant-sign-up/tenant-sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
 import { NameValidationComponent } from "./../common/name-validation/name-validation.component";
@@ -72,7 +72,7 @@ import { ServicesComponent } from './pages/services/services.component'
         CommonModule,
         TenantRoutingModule,
         HttpClientModule,
-        // FormsModule,
+        FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild([]),
         NameValidationComponent,

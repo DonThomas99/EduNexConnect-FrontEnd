@@ -6,7 +6,7 @@
             Add Plan
         </button>
     </div>
-    <div *ngIf="plans.length>0" class="flex flex-row justify-evenly">
+    <div *ngIf="planStatus" class="flex flex-row justify-evenly">
         <ng-container *ngFor="let plan of plans" >
 
 

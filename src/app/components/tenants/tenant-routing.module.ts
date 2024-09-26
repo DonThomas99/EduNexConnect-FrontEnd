@@ -12,6 +12,7 @@ import { ChangePasswordComponent } from './dashboard/change-password/change-pass
 import { ManageAdminComponent } from './dashboard/manage-admin/manage-admin.component';
 import { CreateAdminComponent } from './dashboard/create-admin/create-admin.component';
 import { SchoolhomeComponent } from '../school/schoolhome/schoolhome.component';
+import { ServicesComponent } from './pages/services/services.component';
 
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'changePassword',component:ChangePasswordComponent},
   {path:'manageAdmins',component:ManageAdminComponent},
   {path:'createAdmin',component:CreateAdminComponent},
+  {path:'services',component:ServicesComponent}
   // {path:':schoolName',component:SchoolhomeComponent}
 ];
 

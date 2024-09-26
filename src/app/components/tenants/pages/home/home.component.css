@@ -1,0 +1,31 @@
+
+.fadein{
+    animation: fadein 6s ease-out infinite ;
+    animation-delay: 6s; 
+}
+
+.fadeinsec{
+    animation: fadein 6s ease-out infinite ;
+    animation-delay: 3s; 
+}
+
+
+@keyframes fadein {
+    0%{transform:  translateX( 100%);}
+    50%{transform:  translateX( 0);}
+    100%{transform:  translateX( -100%);}
+}
+
+.letterFade{
+    animation: makeFade 4s ease-out infinite;
+}
+@keyframes makeFade {
+    0%{opacity: .1;;}
+    50%{opacity: 1;;}
+    100%{opacity: .1;;}
+}
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Fill the entire viewport height */
+}

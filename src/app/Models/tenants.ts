@@ -83,6 +83,12 @@ message:string,
 data:IPlan[]
 }
 
+export interface bannerResponse{
+    status:number,
+    message:string,
+    data:IBanner[]
+}
+
 export interface IPlan{
     _id:string,
     planName:string,
@@ -99,6 +105,16 @@ export interface ITransaction{
     transactionId:string,
     date:Date,
     expiryDate:Date
+}
+
+export interface Banner{
+    bannerLink:string,
+    bannerText:string
+}
+export interface IBanner{
+    _id:string,
+    bannerLink:string,
+    bannerText:string
 }
 
 export interface  IApiTenantRes extends IApiRes<ITenantRes>{}
