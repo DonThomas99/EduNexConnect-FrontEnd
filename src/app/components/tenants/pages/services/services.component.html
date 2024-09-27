@@ -1,1 +1,17 @@
-<app-header></app-header>
+<div class="pag-container">
+    <app-header></app-header>
+    <div class="mt-24 flex justify between mx-8">
+        <h1>Subscription Plans</h1>
+    </div>
+    <div *ngIf="planStatus" class="flex flex-row justify-evenly">
+        <ng-container *ngFor="let plan of plans">
+            <div class="card w-96 bg-base-100 shadow-xl border-2 hover:scale-105 my-5">
+                <div class="card-body">
+                    <h2 class="card-title">{{plan.planName}}</h2>
+                    <p>{{plan.amount}} / {{plan.durationValue}} {{plan.durationUnit}}</p>
+
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
