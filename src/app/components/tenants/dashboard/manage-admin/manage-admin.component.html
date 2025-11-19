@@ -1,52 +1,82 @@
 <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
 <div class="main-container">
-    
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header Section -->
+      <div class="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">Manage School Admins</h1>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">View and manage all school administrator accounts</p>
+        </div>
+        <button 
+          routerLink="/tenant/createAdmin" 
+          class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg transition-all duration-200 shadow-sm"
+        >
+          <i class="fa-solid fa-plus mr-2"></i>Add School Admin
+        </button>
+      </div>
 
-    <div class="p-4 sm:ml-64">
-
-        <button class="m-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" routerLink="/tenant/createAdmin">Add School Admin</button>
-
-        <table class="table-zebra">
-           <thead>
+      <!-- Admins Table -->
+      <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-indigo-600 to-purple-600">
               <tr>
-                <th class="w-1/4 px-4 py-2">Admin</th>
-                <th class="w-1/4 px-4 py-2">Password</th>
-                <th class="w-1/4 px-4 py-2">Actions</th>
-                <th class="w-1/4 px-4 py-2">Status</th>
-                
+                <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                  Admin ID
+                </th>
+                <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                  Password
+                </th>
+                <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                  Actions
+                </th>
+                <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">
+                  Status
+                </th>
               </tr>
             </thead>
-           <tbody>
-              <ng-container *ngFor="let admins of schoolAdminList"> 
-     
-                 <tr>
-                   <td class="border px-4 py-2">{{admins.adminId}}</td>
-                   <td class="border px-4 py-2">{{admins.password}}</td>     
-                   <td class="border px-4 py-2"><button class="px-7"><i class="fa-solid fa-pen-to-square"></i></button>
-                  <br>
-                Edit Details
-                </td>     
-                   
-
-                   <td class="border px-4 py-2">
-                     
-                    <button (click)="toggleStatus(admins)">
-                      <div *ngIf="admins.isBlocked">
-                       <i class="fa-regular fa-eye-slash"></i>
-                      </div>
-                      <div *ngIf="!admins.isBlocked">
-                        <i class="fa-regular fa-eye"></i>
-                       </div>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <ng-container *ngFor="let admins of schoolAdminList">
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <div class="text-sm font-medium text-gray-900">{{admins.adminId}}</div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <div class="text-sm text-gray-600 font-mono">{{admins.password}}</div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors duration-200">
+                      <i class="fa-solid fa-pen-to-square mr-2"></i>
+                      Edit Details
+                    </button>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-center">
+                    <button 
+                      (click)="toggleStatus(admins)"
+                      [class]="admins.isBlocked ? 'inline-flex items-center px-3 py-2 text-sm font-medium text-red-600 hover:text-red-800 transition-colors duration-200' : 'inline-flex items-center px-3 py-2 text-sm font-medium text-green-600 hover:text-green-800 transition-colors duration-200'"
+                    >
+                      <i [class]="admins.isBlocked ? 'fa-regular fa-eye-slash mr-2' : 'fa-regular fa-eye mr-2'"></i>
                       {{ admins.isBlocked ? 'Unblock' : 'Block' }}
                     </button>
-                    
-                     
-                   </td>
-                 </tr>
+                  </td>
+                </tr>
               </ng-container>
-              
-           
-           </tbody>
-         </table>
-     </div>
+              <tr *ngIf="!schoolAdminList || schoolAdminList.length === 0">
+                <td colspan="4" class="px-6 py-12 text-center">
+                  <div class="text-gray-500">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <p class="mt-4 text-sm font-medium">No administrators found</p>
+                    <p class="mt-1 text-sm text-gray-500">Click "Add School Admin" to create your first administrator account.</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

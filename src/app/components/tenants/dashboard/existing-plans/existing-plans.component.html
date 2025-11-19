@@ -1,28 +1,56 @@
 <div class="page-container">
-    
-    <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
-    <div class="mt-24 flex justify-between mx-9">
-        <h1> Subscription Plans</h1>      
-            </div>
-            <div class="flex flex-row justify-evenly">
-                <ng-container *ngFor="let plan of plans" >
-        
-        
-                    <div class="card w-96 bg-base-100 shadow-xl my-5 ">       
-                        <div class="card-body">
-                            <h2 class="card-title">{{plan.planName}}</h2>
-                            <p>{{plan.amount}} / {{plan.durationValue}} {{plan.durationUnit}}</p>
-                            <div class="card-actions justify-end">
-                                
-                                <button (click)="confirmSubscription(plan)"  class="btn">Subscribe</button>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    </ng-container>
-            </div>
+  <div class="navbar"><app-dashboard-navbar></app-dashboard-navbar></div>
+  <div class="main-container">
+    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header Section -->
+        <div class="mb-10 text-center">
+          <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">Subscription Plans</h1>
+          <p class="mt-2 text-sm sm:text-base text-gray-600">Choose the perfect plan for your school</p>
+        </div>
 
-     
+        <!-- Plans Grid -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ng-container *ngFor="let plan of plans">
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2">
+              <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-8">
+                <h2 class="text-2xl font-bold text-white text-center">{{plan.planName}}</h2>
+              </div>
+              <div class="p-6">
+                <div class="mb-6 text-center">
+                  <div class="flex items-baseline justify-center">
+                    <span class="text-4xl font-bold text-gray-900">₹{{plan.amount}}</span>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-600">
+                    per {{plan.durationValue}} {{plan.durationUnit}}
+                  </p>
+                </div>
+                <div class="mt-8">
+                  <button 
+                    (click)="confirmSubscription(plan)" 
+                    class="w-full rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200"
+                  >
+                    Subscribe Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!plans || plans.length === 0" class="text-center py-12">
+          <div class="text-gray-500">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="mt-4 text-sm font-medium">No plans available</p>
+            <p class="mt-1 text-sm text-gray-500">Please check back later for subscription plans.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
        <!-- <div *ngIf="plans.length>0" class="flex flex-row justify-evenly">
                 

@@ -1,4 +1,12 @@
-.active{
-    color: rgb(0, 84, 180);
-    /* font-weight: bold; */
+.active {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  font-weight: 600;
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
 }

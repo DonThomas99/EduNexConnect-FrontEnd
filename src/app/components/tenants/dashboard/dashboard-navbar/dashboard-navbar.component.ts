@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -13,10 +13,12 @@ import { selectTenantDetails } from 'src/app/states/tenant/tenant.selector';
   templateUrl: './dashboard-navbar.component.html',
   styleUrls: ['./dashboard-navbar.component.css']
 })
-export class DashboardNavbarComponent {
+export class DashboardNavbarComponent implements OnInit {
   tenantData$=this.store.pipe(select(selectTenantDetails))
 
   name!:string
+  isMobileMenuOpen = false
+
   constructor(
     @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
@@ -26,16 +28,20 @@ export class DashboardNavbarComponent {
   ){}
 
   ngOnInit(): void {
-    
     this.tenantData$.subscribe((tenant)=>{
-    if(tenant){
-
-      this.name = tenant.name 
-      
-    }
+      if(tenant){
+        this.name = tenant.name 
+      }
     })
   }
 
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false
+  }
 
   signOut(){
     localStorage.removeItem('tenantJwt')

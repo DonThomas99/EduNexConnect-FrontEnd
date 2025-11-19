@@ -1,131 +1,271 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-4xl">
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 px-6 py-8 sm:px-10 sm:py-10">
+        <h1 class="text-3xl font-bold text-white text-center sm:text-4xl">Tenant Registration</h1>
+        <p class="mt-2 text-sm sm:text-base text-indigo-100 text-center">Create your school administrator account</p>
+      </div>
 
-<div class="">
-
-    <form [formGroup]="form" (ngSubmit)="onsubmit()" class="p-6">
-        <div class="space-y-12">
-         
-      
-          <div class="border-b border-gray-900/10 pb-12 mt-8">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Tenant School Administrator Information</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-      
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="sm:col-span-3">
-                <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                <div class="mt-2">
-                  <input type="text" formControlName="name" name="full-name" id="full-name" autocomplete="full-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter your full name">
-                  <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"> </app-name-validation>
-                </div>
-              </div>
-      
+      <form [formGroup]="form" (ngSubmit)="onsubmit()" class="px-6 py-8 sm:px-10 sm:py-10">
+        <div class="space-y-10">
           
-
-              <div  *ngIf="!showOtpField" class="sm:col-span-4">
-                <label for="mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
-                <div class="mt-2">
-                    <input
-                      formControlName="mobile"
-                        type="tel"
-                        name="mobile"
-                        id="mobile"
-                        autocomplete="tel"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Enter your mobile number"
-                    >
-                    <app-mobile-validation [mobileControl]="form.get('mobile')" [isSubmitted]="isSubmitted"></app-mobile-validation>
-                </div>
+          <!-- Tenant School Administrator Information Section -->
+          <div class="border-b border-gray-200 pb-10">
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold leading-7 text-gray-900 sm:text-2xl">Administrator Information</h2>
+              <p class="mt-2 text-sm leading-6 text-gray-600 sm:text-base">Please provide your personal and school details</p>
             </div>
-            
       
-              <div class="sm:col-span-4">
-                <label for="school" class="block text-sm font-medium leading-6 text-gray-900">Name of the school</label>
-                <div class="mt-2">
-                  <input id="school" formControlName="school" name="school" type="school"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter name of the school">
+            <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <!-- Name Field -->
+              <div class="sm:col-span-1">
+                <label for="full-name" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  Full Name <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    type="text" 
+                    formControlName="name" 
+                    name="full-name" 
+                    id="full-name" 
+                    autocomplete="name" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200" 
+                    placeholder="Enter your full name"
+                  >
                   <app-name-validation [nameControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-name-validation>
                 </div>
               </div>
+      
+              <!-- Mobile Number Field -->
+              <div *ngIf="!showOtpField" class="sm:col-span-1">
+                <label for="mobile" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  Mobile Number <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input
+                    formControlName="mobile"
+                    type="tel"
+                    name="mobile"
+                    id="mobile"
+                    autocomplete="tel"
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                    placeholder="Enter your mobile number"
+                  >
+                  <app-mobile-validation [mobileControl]="form.get('mobile')" [isSubmitted]="isSubmitted"></app-mobile-validation>
+                </div>
+              </div>
+      
+              <!-- School Name Field -->
+              <div class="sm:col-span-1">
+                <label for="school" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  School Name <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    id="school" 
+                    formControlName="school" 
+                    name="school" 
+                    type="text"  
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200" 
+                    placeholder="Enter school name"
+                  >
+                  <app-name-validation [nameControl]="form.get('school')" [isSubmitted]="isSubmitted"></app-name-validation>
+                </div>
+              </div>
 
-              <div class="sm:col-span-4">
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-                <div class="mt-2">
-                  <input placeholder="Email" formControlName="email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <!-- Email Field -->
+              <div class="sm:col-span-1">
+                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  Email Address <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    placeholder="Enter your email" 
+                    formControlName="email" 
+                    id="email" 
+                    name="email" 
+                    type="email" 
+                    autocomplete="email" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
                   <app-email-validation [emailControl]="form.get('email')" [isSubmitted]="isSubmitted"></app-email-validation>
                 </div>
               </div>
       
-         
-      
-              <div  *ngIf="!showOtpField" class="col-span-full">
-                <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">School address</label>
-                <div class="mt-2">
-                  <input type="text" formControlName="address" name="street-address" id="street-address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Make sure the address is limited to 20 characters">
-                  <app-address-validation [addressControl]="form.get('name')" [isSubmitted]="isSubmitted"></app-address-validation>
+              <!-- School Address Field -->
+              <div *ngIf="!showOtpField" class="sm:col-span-full">
+                <label for="street-address" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  School Address <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    type="text" 
+                    formControlName="address" 
+                    name="street-address" 
+                    id="street-address" 
+                    autocomplete="street-address" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200" 
+                    placeholder="Enter school address (max 20 characters)"
+                  >
+                  <app-address-validation [addressControl]="form.get('address')" [isSubmitted]="isSubmitted"></app-address-validation>
                 </div>
               </div>
       
-              <div  *ngIf="!showOtpField" class="sm:col-span-2 sm:col-start-1">
-                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
-                <div class="mt-2">
-                  <input placeholder="city" type="text" name="city" id="city" formControlName="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-               <app-city-validation [cityControl]="form.get('city')" [isSubmitted]="isSubmitted"></app-city-validation>
+              <!-- City Field -->
+              <div *ngIf="!showOtpField" class="sm:col-span-1">
+                <label for="city" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  City <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    placeholder="Enter city" 
+                    type="text" 
+                    name="city" 
+                    id="city" 
+                    formControlName="city" 
+                    autocomplete="address-level2" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
+                  <app-city-validation [cityControl]="form.get('city')" [isSubmitted]="isSubmitted"></app-city-validation>
                 </div>
               </div>
       
-              <div  *ngIf="!showOtpField" class="sm:col-span-2">
-                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
-                <div class="mt-2">
-                  <input type="text" placeholder="State" formControlName="state" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <app-state-validation [stateControl]="form.get('state')" [isSubmitted]="isSubmitted"></app-state-validation>
+              <!-- State Field -->
+              <div *ngIf="!showOtpField" class="sm:col-span-1">
+                <label for="region" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  State / Province <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    type="text" 
+                    placeholder="Enter state" 
+                    formControlName="state" 
+                    name="region" 
+                    id="region" 
+                    autocomplete="address-level1" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
+                  <app-state-validation [stateControl]="form.get('state')" [isSubmitted]="isSubmitted"></app-state-validation>
                 </div>
               </div>
       
-              <div  *ngIf="!showOtpField" class="sm:col-span-2">
-                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP / Postal code</label>
-                <div class="mt-2">
-                  <input placeholder="PIN CODE" type="text" formControlName="zip" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation>
+              <!-- ZIP Code Field -->
+              <div *ngIf="!showOtpField" class="sm:col-span-1">
+                <label for="postal-code" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  ZIP / Postal Code <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    placeholder="Enter postal code" 
+                    type="text" 
+                    formControlName="zip" 
+                    name="postal-code" 
+                    id="postal-code" 
+                    autocomplete="postal-code" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
+                  <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation>
                 </div>
               </div>
             </div>
           </div>
       
-          <div *ngIf="!showOtpField" class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <!-- Password Section -->
+          <div *ngIf="!showOtpField" class="border-b border-gray-200 pb-10">
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold leading-7 text-gray-900 sm:text-2xl">Security</h2>
+              <p class="mt-2 text-sm leading-6 text-gray-600 sm:text-base">Create a strong password for your account</p>
+            </div>
 
-              <div class="sm:col-span-3">
-                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                <div class="mt-2">
-                  <input  type="password" placeholder="Password should contain one uppercase letter, one lowercase letter and one digit" formControlName="password" name="password" id="password" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                  <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted" ></app-password-validation>
+            <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <!-- Password Field -->
+              <div>
+                <label for="password" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  Password <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input  
+                    type="password" 
+                    placeholder="Enter password" 
+                    formControlName="password" 
+                    name="password" 
+                    id="password" 
+                    autocomplete="new-password" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
+                  <p class="mt-1 text-xs text-gray-500">Must contain uppercase, lowercase, and one digit</p>
+                  <app-password-validation [passwordControl]="form.get('password')" [isSubmitted]="isSubmitted"></app-password-validation>
                 </div>
               </div>
     
-              <div class="sm:col-span-3">
-                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
-                <div class="mt-2">
-                  <input type="password" placeholder="Please enter the password again" formControlName="confirmPassword" name="confirmPassword" id="confirmPassword" autocomplete="confirmPassword" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <app-confirm-password-validation [confirmPasswordControl]="form.get('confirmPassword')" [isSubmitted]="isSubmitted"></app-confirm-password-validation>
+              <!-- Confirm Password Field -->
+              <div>
+                <label for="confirmPassword" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                  Confirm Password <span class="text-red-500">*</span>
+                </label>
+                <div>
+                  <input 
+                    type="password" 
+                    placeholder="Re-enter password" 
+                    formControlName="confirmPassword" 
+                    name="confirmPassword" 
+                    id="confirmPassword" 
+                    autocomplete="new-password" 
+                    class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-all duration-200"
+                  >
+                  <app-confirm-password-validation [confirmPasswordControl]="form.get('confirmPassword')" [isSubmitted]="isSubmitted"></app-confirm-password-validation>
                 </div>
               </div>
-          </div>
-
-          <div *ngIf="showOtpField" class="sm:col-span-2">
-            <label for="otp" class="block text-sm font-medium leading-6 text-gray-900">ENTER OTP</label>
-            <div class="mt-2">
-              <input placeholder="Enter 6 digit OTP" type="text" formControlName="otp" name="otp" id="otp" autocomplete="otp" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-              <!-- <app-zip-validation [zipControl]="form.get('zip')" [isSubmitted]="isSubmitted"></app-zip-validation> -->
-              <p>{{message}}</p>
-              <app-otp-validation [otpControl]="form.get('otp')" [showOTPResend]="showOTPResend" [timerStr]="formattedTime" (OTPResend)="resendOTP()" [isSubmitted]="isSubmitted"></app-otp-validation>
             </div>
           </div>
-          
-      
+
+          <!-- OTP Section -->
+          <div *ngIf="showOtpField" class="border-b border-gray-200 pb-10">
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold leading-7 text-gray-900 sm:text-2xl">Email Verification</h2>
+              <p class="mt-2 text-sm leading-6 text-gray-600 sm:text-base">Please enter the OTP sent to your email address</p>
+            </div>
+
+            <div class="mt-8 max-w-md">
+              <label for="otp" class="block text-sm font-semibold leading-6 text-gray-900 mb-2">
+                Enter OTP <span class="text-red-500">*</span>
+              </label>
+              <div>
+                <input 
+                  placeholder="Enter 6-digit OTP" 
+                  type="text" 
+                  formControlName="otp" 
+                  name="otp" 
+                  id="otp" 
+                  autocomplete="one-time-code" 
+                  maxlength="6"
+                  class="block w-full rounded-lg border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center text-2xl tracking-widest transition-all duration-200"
+                >
+                <p *ngIf="message" class="mt-2 text-sm text-gray-600">{{message}}</p>
+                <app-otp-validation [otpControl]="form.get('otp')" [showOTPResend]="showOTPResend" [timerStr]="formattedTime" (OTPResend)="resendOTP()" [isSubmitted]="isSubmitted"></app-otp-validation>
+              </div>
+            </div>
+          </div>
         </div>
               
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" (click)="BackHome()" class="text-sm font-semibold leading-6 text-gray-900 hover:bg-black hover:text-white px-4 py-2 transition duration-300 ease-in-out">Back</button>
-            <button *ngIf="resendOtp" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ showOtpField ? 'Verify' : "Save" }}</button>
+        <!-- Action Buttons -->
+        <div class="mt-10 flex flex-col-reverse sm:flex-row items-center justify-between gap-4 sm:gap-6 pt-6 border-t border-gray-200">
+          <button 
+            type="button" 
+            (click)="BackHome()" 
+            class="w-full sm:w-auto text-sm font-semibold leading-6 text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400 px-6 py-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            Back
+          </button>
+          <button 
+            *ngIf="resendOtp" 
+            type="submit" 
+            class="w-full sm:w-auto rounded-lg bg-indigo-600 px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {{ showOtpField ? 'Verify OTP' : 'Create Account' }}
+          </button>
         </div>
-        
       </form>
+    </div>
+  </div>
 </div>
-  
