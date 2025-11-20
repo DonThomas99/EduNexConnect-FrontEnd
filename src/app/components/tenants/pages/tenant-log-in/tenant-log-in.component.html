@@ -1,7 +1,17 @@
 <div class="min-h-screen bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 flex justify-center items-center py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
   <div class="w-full max-w-md">
     <div class="bg-white shadow-2xl rounded-2xl overflow-hidden">
-      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-8 sm:px-10 sm:py-10">
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-8 sm:px-10 sm:py-10 relative">
+        <button 
+          type="button"
+          (click)="goBack()" 
+          class="absolute top-4 left-4 sm:top-6 sm:left-6 text-white hover:text-indigo-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 rounded-lg p-2"
+          aria-label="Go back to homepage"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+        </button>
         <h1 class="text-3xl sm:text-4xl font-bold text-white text-center">Welcome Back</h1>
         <p class="mt-2 text-sm sm:text-base text-indigo-100 text-center">Sign in to your account</p>
       </div>
@@ -44,12 +54,6 @@
 
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <a 
-              routerLink="/tenant/signup" 
-              class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
-            >
-              Create an Account?
-            </a>
-            <a 
               routerLink="/tenant/enter-email" 
               class="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
             >
@@ -57,12 +61,19 @@
             </a>
           </div>
 
-          <div class="pt-4">
+          <div class="pt-4 space-y-3">
             <button 
               type="submit" 
               class="w-full rounded-lg bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200"
             >
               Sign In
+            </button>
+            <button 
+              type="button"
+              routerLink="/tenant/signup"
+              class="w-full rounded-lg bg-white border-2 border-indigo-600 px-4 py-3 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200"
+            >
+              Create New Account
             </button>
           </div>
         </div>

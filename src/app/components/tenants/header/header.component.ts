@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   tenantData$= this.store.pipe(select(selectTenantDetails))
   // tenantId =''
   tenantName=''
+  isMobileMenuOpen = false
 
 constructor(
   private readonly store:Store,
@@ -25,15 +26,33 @@ constructor(
     this.tenantData$.subscribe(tenant =>{
     // this.tenantId=tenant._id
     if(tenant){
-
       this.tenantName = tenant.name
+      console.log('Tenant name set:', this.tenantName) // Debug log
+    } else {
+      this.tenantName = '' // Clear when no tenant
+      console.log('No tenant data') // Debug log
     }
   })
   }
 
-  signOut(){
-    localStorage.removeItem('tenantJwt')
-    this.store.dispatch(deleteTenantFromStore())
-    void this.router.navigate([''])
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false
+  }
+
+  signOut(): void {
+    console.log('SignOut called') // Debug log
+    try {
+      localStorage.removeItem('tenantJwt')
+      this.store.dispatch(deleteTenantFromStore())
+      this.tenantName = '' // Clear tenant name
+      console.log('Cleared JWT and store, navigating...') // Debug log
+      void this.router.navigate([''])
+    } catch (error) {
+      console.error('Error in signOut:', error)
+    }
   }
 }

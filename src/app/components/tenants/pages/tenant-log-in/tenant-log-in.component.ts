@@ -49,5 +49,9 @@ export class TenantLogInComponent implements OnInit{
           }          
     })
   }
-}
+  }
+
+  goBack(): void {
+    void this.router.navigate(['/tenant'])
+  }
 }
