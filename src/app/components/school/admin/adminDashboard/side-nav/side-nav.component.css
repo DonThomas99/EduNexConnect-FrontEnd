@@ -1,0 +1,26 @@
+ :host {
+   display: block;
+ }
+ 
+ .admin-nav-link {
+   display: inline-flex;
+   align-items: center;
+   padding: 0.5rem 1rem;
+   border-radius: 9999px;
+   transition: all 0.2s ease;
+   border: 1px solid transparent;
+ }
+ 
+ .admin-nav-link:hover {
+   color: #312e81;
+   border-color: #e0e7ff;
+   background-color: #eef2ff;
+ }
+ 
+ .admin-nav-active {
+   color: #312e81 !important;
+   background-color: #ffffff;
+   border-color: #c7d2fe;
+   box-shadow: 0 8px 30px -12px rgba(79, 70, 229, 0.7);
+ }
+
