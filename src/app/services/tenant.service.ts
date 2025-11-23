@@ -34,7 +34,11 @@ export class TenantService {
    return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/verifyOtp`,{otp})
   }
   login(email:string,password:string){
-return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,password})
+    return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,password}, {withCredentials: true})
+  }
+  
+  logout(){
+    return this.http.post<any>(`${this.backendURL}/tenant/signout`, {}, {withCredentials: true})
   }
 //----------------------Tenant Profile Management--------------------------------
 

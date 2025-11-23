@@ -14,7 +14,11 @@ export class SuperAdminService {
   ) { }
 
   superAdminLogin(email: string, password: string): any {
-    return this.http.post<any>(`${this.backendURL}/super-admin/login`,{email,password})
+    return this.http.post<any>(`${this.backendURL}/super-admin/login`,{email,password}, {withCredentials: true})
+  }
+  
+  superAdminLogout(): any {
+    return this.http.post<any>(`${this.backendURL}/super-admin/logout`, {}, {withCredentials: true})
   }
 
   //-----------------Tenant Management-----------------------
