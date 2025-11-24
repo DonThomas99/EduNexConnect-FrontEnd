@@ -9,9 +9,10 @@
       </div>
 
       <!-- Plans Grid -->
-      <div *ngIf="planStatus" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+       
+      <div *ngIf="planStatus" class="flex flex-wrap justify-center gap-8">
         <ng-container *ngFor="let plan of plans">
-          <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2">
+          <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 w-full sm:w-[45%] lg:w-[30%] xl:w-[22%]">
             <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-8">
               <h2 class="text-2xl font-bold text-white text-center">{{plan.planName}}</h2>
             </div>
@@ -28,6 +29,7 @@
           </div>
         </ng-container>
       </div>
+
 
       <!-- Empty State -->
       <div *ngIf="!planStatus" class="text-center py-12">
