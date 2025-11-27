@@ -1,6 +1,17 @@
-.dashboard{
-    margin-left :256px;
+.dashboard {
+    margin-left: 256px;
 }
-.body{
+
+/* Disable scroll in desktop */
+.dashboard {
+    overflow: hidden;
     min-height: 100vh;
+}
+
+/* Enable scroll in small screens */
+@media (max-width: 768px) {
+    .dashboard {
+        overflow-y: auto;
+        margin-left: 0; /* if your sidebar collapses on mobile */
+    }
 }

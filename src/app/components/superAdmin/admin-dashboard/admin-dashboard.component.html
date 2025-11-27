@@ -1,49 +1,56 @@
 <app-admin-sidebar></app-admin-sidebar>
 
 
-<div class="flex flex-wrap justify-center m-auto mt-64 gap-14 cursor-pointer">
+
+  <div class="flex flex-wrap min-h-screen overflow-y-auto sm:overflow-hidden items-start sm:items-center justify-center gap-14 cursor-pointer pt-28 sm:pt-0">
 
     <!-- Subscription Details -->
     <div
-      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 w-full sm:w-[45%] lg:w-[50%] xl:w-[22%]"
+      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden
+             border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 
+             w-full sm:w-[0%] lg:w-[50%] xl:w-[22%]"
       routerLink="/super-admin/plans"
       [routerLinkActive]="'active'"
     >
-      <div class="card bg-base-100 w-96 shadow-xl flex flex-wrap">
+      <div class="card w-96 shadow-xl flex flex-wrap bg-[#b22eff]">
         <div class="card-body mx-5">
-          <h2 class="card-title">Subscription Details</h2>
-          <p>Manage subscription plans, pricing, validity, and features for the platform.</p>
+          <h2 class="card-title"> Subscription Plans</h2>
+          <p>View and manage all tenants registered on the system, including account status and details.</p>
         </div>
       </div>
     </div>
-  
+
     <!-- Tenant List -->
     <div
-      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 w-full sm:w-[45%] lg:w-[50%] xl:w-[22%]"
+      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden 
+             border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 
+             w-full sm:w-[45%] lg:w-[50%] xl:w-[22%]"
       routerLink="/super-admin/tenantList"
       [routerLinkActive]="'active'"
     >
-      <div class="card bg-base-100 w-96 shadow-xl flex flex-wrap">
+      <div class="card w-96 shadow-xl flex flex-wrap bg-[#f13232]">
         <div class="card-body mx-5">
           <h2 class="card-title">Tenant List</h2>
           <p>View and manage all tenants registered on the system, including account status and details.</p>
         </div>
       </div>
     </div>
-  
+
     <!-- Banner Section -->
     <div
-      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 w-full sm:w-[45%] lg:w-[50%] xl:w-[22%]"
+      class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden 
+             border border-gray-200 hover:border-indigo-500 transform hover:-translate-y-2 
+             w-full sm:w-[45%] lg:w-[50%] xl:w-[22%]"
       routerLink="/super-admin/banner"
       [routerLinkActive]="'active'"
     >
-      <div class="card bg-base-100 w-96 shadow-xl flex flex-wrap">
+      <div class="card w-96 shadow-xl flex flex-wrap bg-[#57f064]">
         <div class="card-body mx-5">
-          <h2 class="card-title">Banner Section</h2>
-          <p>Upload, edit, and manage banners displayed across the application.</p>
+          <h2 class="card-title">Banners</h2>
+          <p>View and manage all tenants registered on the system, including account status and details.</p>
         </div>
       </div>
     </div>
-  
+
   </div>
-  
+
