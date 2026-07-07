@@ -1,11 +1,8 @@
 import { Component,Inject,OnDestroy,OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { passwordMatchValidator, validateBytrimming } from 'src/app/helpers/validations';
 import { emailValidators, nameValidators, otpValidators, passwordValidators,addressValidators, zipValidators, mobileValidators } from 'src/app/shared/validators';
-import {Store}  from '@ngrx/store';
-import { IApiTenantAuthRes, ITenantAuth } from 'src/app/Models/tenants';
 import { MAX_OTP_LIMIT, OTP_RESEND_MAX_TIME, OTP_TIMER } from 'src/app/shared/constants';
 import { formatTime } from 'src/app/helpers/timer';
 import Swal from 'sweetalert2';
@@ -29,12 +26,9 @@ export class TenantSignUpComponent implements OnInit, OnDestroy {
   showOTPResend: boolean = true
   timer = setTimeout(()=>{},0)
   constructor(
-    @Inject(HttpClient) private readonly http:HttpClient,
     @Inject(Router) private readonly router:Router,
     @Inject(FormBuilder) private readonly formBuilder:FormBuilder,
-    @Inject(Store) private readonly store:Store,
     @Inject(TenantService) private readonly tenantService:TenantService,
-    
     ){
     }
     ngOnDestroy(): void {
@@ -80,7 +74,8 @@ startTimer():void{
 resendOTP():void{
 this.resendOtp = false
   if(this.otpResendCount < MAX_OTP_LIMIT){
-    this.tenantService.resendOtp().subscribe({
+    const email = this.form.get('email')?.value
+    this.tenantService.resendOtp(email).subscribe({
       next:()=>{
         this.resendOtp =true
         console.log('otp successfully resent');
@@ -132,7 +127,7 @@ if(!this.form.invalid && !this.showOtpField){
   console.log(tenant);
   console.log(tenant.otp);
   const otp = tenant.otp
-this.tenantService.verifyOtp(otp).subscribe({
+this.tenantService.verifyOtp(otp,tenant.email).subscribe({
   next:(res:any)=>{
     localStorage.removeItem('tenantAuthToken')
     console.log("idhisd");

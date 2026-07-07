@@ -13,20 +13,10 @@ export class TenantInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-   const tenantToken = localStorage.getItem('tenantJwt')
-   
-   if(tenantToken){
-console.log("tenanttoken:",tenantToken);
-
-    const newRequest = request.clone({
-      headers: request.headers.set('Authorization','Bearer ' + tenantToken)
-    })
-    console.log('url in interceptor:',newRequest.url);
-    
-    return next.handle(newRequest)
-   }
-   return next.handle(request);
-   
-   
+    // The JWT lives in an httpOnly cookie set by the backend, so the browser
+    // attaches it automatically - this just needs to allow credentials
+    // (cookies) to be sent on cross-origin requests to the backend.
+    const withCredentials = request.clone({withCredentials:true})
+    return next.handle(withCredentials)
   }
 }

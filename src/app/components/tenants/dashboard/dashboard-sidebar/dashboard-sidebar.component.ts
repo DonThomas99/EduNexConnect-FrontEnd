@@ -3,6 +3,7 @@ import { deleteTenantFromStore } from 'src/app/states/tenant/tenant.actions';
 import {faDashboard} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { TenantService } from 'src/app/services/tenant.service';
 
 @Component({
   selector: 'app-dashboard-sidebar',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 export class DashboardSidebarComponent implements OnInit {
   constructor(
     private readonly store:Store,
-    private readonly router:Router
+    private readonly router:Router,
+    private readonly tenantService:TenantService
   ){
 
   }
@@ -23,9 +25,12 @@ faDashboard = faDashboard
   }
 
   signOut(){
-    localStorage.removeItem('tenantJwt')
-    this.store.dispatch(deleteTenantFromStore())
-    void this.router.navigate([''])
+    this.tenantService.signOut().subscribe({
+      next:()=>{
+        this.store.dispatch(deleteTenantFromStore())
+        void this.router.navigate([''])
+      }
+    })
   }
 
 

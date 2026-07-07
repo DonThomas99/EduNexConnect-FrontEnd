@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { deleteTenantFromStore, fetchTenantData } from 'src/app/states/tenant/tenant.actions';
 import { selectTenantDetails } from 'src/app/states/tenant/tenant.selector';
 import { Router } from '@angular/router';
+import { TenantService } from 'src/app/services/tenant.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
 
 constructor(
   private readonly store:Store,
-  private readonly router:Router
+  private readonly router:Router,
+  private readonly tenantService:TenantService
 ){
 
 }
@@ -32,8 +34,11 @@ constructor(
   }
 
   signOut(){
-    localStorage.removeItem('tenantJwt')
-    this.store.dispatch(deleteTenantFromStore())
-    void this.router.navigate([''])
+    this.tenantService.signOut().subscribe({
+      next:()=>{
+        this.store.dispatch(deleteTenantFromStore())
+        void this.router.navigate([''])
+      }
+    })
   }
 }

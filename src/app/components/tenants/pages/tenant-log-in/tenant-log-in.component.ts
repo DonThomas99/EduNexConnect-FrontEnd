@@ -39,7 +39,6 @@ export class TenantLogInComponent implements OnInit{
         next:(res:any)=>{
           console.log(res, 'res from login');
           this.store.dispatch(saveTenantOnStore({tenantDetails: res.data.emailDb}))
-          localStorage.setItem('tenantJwt',res.data.accessToken)
             this.toastr.success('Login Successfully')
             void this.router.navigate(['/tenant'])
           },

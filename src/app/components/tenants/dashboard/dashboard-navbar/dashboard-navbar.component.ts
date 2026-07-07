@@ -38,8 +38,11 @@ export class DashboardNavbarComponent {
 
 
   signOut(){
-    localStorage.removeItem('tenantJwt')
-    this.store.dispatch(deleteTenantFromStore())
-    void this.router.navigate([''])
+    this.tenantService.signOut().subscribe({
+      next:()=>{
+        this.store.dispatch(deleteTenantFromStore())
+        void this.router.navigate([''])
+      }
+    })
   }
 }

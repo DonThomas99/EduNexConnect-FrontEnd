@@ -26,15 +26,18 @@ export class TenantService {
   saveTenantTemp(tenantData: any){
     return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signup`,{tenantData})
   }
-  resendOtp(){
-    return this.http.get<Isample>(`${this.backendURL}/tenant/resendOtp`)
+  resendOtp(email:string){
+    return this.http.get<Isample>(`${this.backendURL}/tenant/resendOtp?email=${encodeURIComponent(email)}`)
   }
 
-  verifyOtp(otp:number){
-   return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/verifyOtp`,{otp})
+  verifyOtp(otp:number,email:string){
+   return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/verifyOtp`,{otp,email})
   }
   login(email:string,password:string){
 return this.http.post<IApiTenantRes>(`${this.backendURL}/tenant/signin`,{email,password})
+  }
+  signOut(){
+    return this.http.post(`${this.backendURL}/tenant/signout`,{})
   }
 //----------------------Tenant Profile Management--------------------------------
 
