@@ -1,14 +1,23 @@
-<div class="page-container ">
-    <app-header></app-header>
-    <div class="w-full h-[100%]">
-      <ng-container *ngFor="let image of images">
-        <div class=" h-[300px] relative flex  justify-start items-center w-full transition-transform hover:scale-95 shadow-2xl  hover:shadow-purple-700 ">
-          <img class="absolute w-full h-[100%] " [src]="image.bannerLink" alt="#">
-          <div class=" absolute justify-start items-center h-[100%]  w-3/4 p-3 flex letterFade ">
-            <h1 class=" text-6xl   font-bold text-white">{{image.bannerText}}</h1>
+<div class="page-container">
+  <app-header></app-header>
+  <div class="w-full">
+    <ng-container *ngFor="let image of images">
+      <div class="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full overflow-hidden group">
+        <img 
+          class="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+          [src]="image.bannerLink" 
+          [alt]="image.bannerText"
+        >
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center justify-start px-4 sm:px-8 lg:px-16">
+          <div class="max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl animate-fade-in">
+              {{image.bannerText}}
+            </h1>
           </div>
         </div>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </div>
+</div>
   

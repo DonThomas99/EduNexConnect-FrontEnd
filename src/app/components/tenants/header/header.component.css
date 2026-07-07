@@ -1,17 +1,21 @@
-/* Add this CSS to ensure proper styling */
-.navbar-end ul {
-    list-style-type: none;
-    padding-left: 0;
+/* Professional header styling */
+a.active {
+    color: #4f46e5;
+    background-color: #eef2ff;
 }
 
-.navbar-end li {
-    margin-right: 10px;
+/* Smooth transitions for all interactive elements */
+a, button {
+    transition: all 0.2s ease-in-out;
 }
 
-.btn {
+/* Ensure proper cursor for interactive elements */
+a, button {
     cursor: pointer;
 }
 
-/* .btn:hover { */
-    /* background-color: #e0e0e0;  */
-/* } */
+/* Sticky header enhancement */
+header {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95);
+}

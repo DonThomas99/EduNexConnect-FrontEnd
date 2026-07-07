@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   tenantData$= this.store.pipe(select(selectTenantDetails))
   // tenantId =''
   tenantName=''
+  isMobileMenuOpen = false
 
 constructor(
   private readonly store:Store,
@@ -27,16 +28,28 @@ constructor(
     this.tenantData$.subscribe(tenant =>{
     // this.tenantId=tenant._id
     if(tenant){
-
       this.tenantName = tenant.name
+      console.log('Tenant name set:', this.tenantName) // Debug log
+    } else {
+      this.tenantName = '' // Clear when no tenant
+      console.log('No tenant data') // Debug log
     }
   })
   }
 
-  signOut(){
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false
+  }
+
+  signOut(): void {
     this.tenantService.signOut().subscribe({
       next:()=>{
         this.store.dispatch(deleteTenantFromStore())
+        this.tenantName = ''
         void this.router.navigate([''])
       }
     })
