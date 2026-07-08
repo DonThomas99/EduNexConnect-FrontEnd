@@ -44,8 +44,8 @@ constructor(
       }
     })
   }
-  toggleStatus(admins:IschoolAdminRes){
-    
+  toggleStatus(_admins:IschoolAdminRes){
+
 
   }
 

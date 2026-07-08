@@ -48,7 +48,7 @@ tenantId$= this.store.select(pipe(selectTenantId))
     if(this.form.valid){
       const data = this.form.getRawValue()
       this.TeacherService.teacherLogin(this.tenantId,data.email,data.password).subscribe({
-        next:(res)=>{
+        next:(_res)=>{
           this.store.dispatch(setTeacherEmail({teacherEmail:data.email}))          
     void Swal.fire({
       icon:'success',

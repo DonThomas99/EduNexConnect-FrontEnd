@@ -98,18 +98,18 @@ getChangedValues():Partial<IStudent>{
   return changedValues
 }
 
-updateSelectedOption(option:string){
+updateSelectedOption(_option:string){
 
 }
 
 onSubmit(){
   const changes = this.getChangedValues()
   this.adminService.updateStudent(this.tenantId,this.studentId,changes).subscribe({
-    next:(res:Res)=>{
-      
+    next:(_res:Res)=>{
+
     }
   })
-  
+
 }
 onClose(){
   this.dialogRef.close()

@@ -10,6 +10,9 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -23,7 +26,8 @@
       "ES2022",
       "dom"
     ],
-    "types": ["node"]
+    "types": ["node"],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
