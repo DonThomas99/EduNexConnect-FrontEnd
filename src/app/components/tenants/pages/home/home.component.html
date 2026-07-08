@@ -1,23 +1,228 @@
 <div class="page-container">
   <app-header></app-header>
-  <div class="w-full">
-    <ng-container *ngFor="let image of images">
-      <div class="relative h-[400px] sm:h-[500px] lg:h-[600px] w-full overflow-hidden group">
-        <img 
-          class="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-          [src]="image.bannerLink" 
-          [alt]="image.bannerText"
-        >
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center justify-start px-4 sm:px-8 lg:px-16">
-          <div class="max-w-3xl">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl animate-fade-in">
-              {{image.bannerText}}
-            </h1>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-indigo-700 via-indigo-600 to-purple-600">
+    <div class="absolute inset-0 opacity-10" aria-hidden="true">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-32 -left-16 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
+      <span class="inline-block px-4 py-1 rounded-full bg-white/10 text-indigo-100 text-sm font-semibold tracking-wide mb-6">
+        One platform. Every role in your school.
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-4xl mx-auto">
+        School management, without the spreadsheets and group chats
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-indigo-100 max-w-2xl mx-auto">
+        EduNexConnect gives your school its own private workspace to run admins, teachers, and students
+        from one place &mdash; classes, assignments, course materials, grading, and messaging, all in sync.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a routerLink="/tenant/signup"
+          class="w-full sm:w-auto px-8 py-3 rounded-lg bg-white text-indigo-700 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+          Register Your School
+        </a>
+        <a routerLink="/tenant/services"
+          class="w-full sm:w-auto px-8 py-3 rounded-lg border border-white/40 text-white font-semibold hover:bg-white/10 transition-all duration-200">
+          View Plans
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements carousel (admin-managed banners) -->
+  <section *ngIf="images && images.length > 0" class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="relative h-56 sm:h-72 rounded-2xl overflow-hidden shadow-lg group">
+        <ng-container *ngFor="let image of images; let i = index">
+          <div class="absolute inset-0 transition-opacity duration-700"
+            [class.opacity-100]="i === currentSlide" [class.opacity-0]="i !== currentSlide"
+            [class.pointer-events-none]="i !== currentSlide">
+            <img class="w-full h-full object-cover" [src]="image.bannerLink" [alt]="image.bannerText">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center px-6 sm:px-10">
+              <h2 class="text-xl sm:text-3xl font-bold text-white max-w-xl drop-shadow-lg">
+                {{image.bannerText}}
+              </h2>
+            </div>
+          </div>
+        </ng-container>
+
+        <button *ngIf="images.length > 1" (click)="prevSlide()" aria-label="Previous announcement"
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center hover:bg-black/50">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button *ngIf="images.length > 1" (click)="nextSlide()" aria-label="Next announcement"
+          class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center hover:bg-black/50">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+
+        <div *ngIf="images.length > 1" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+          <button *ngFor="let image of images; let i = index" (click)="goToSlide(i)"
+            [attr.aria-label]="'Go to announcement ' + (i + 1)"
+            class="h-2.5 rounded-full transition-all duration-200"
+            [ngClass]="i === currentSlide ? 'bg-white w-6' : 'bg-white/50 w-2.5'">
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Everything your school needs, built in</h2>
+        <p class="mt-4 text-gray-600">
+          Every school that signs up gets its own isolated workspace &mdash; your data never mixes with another school's.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-4-4"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">A dashboard for every role</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Purpose-built portals for school admins, teachers, and students &mdash; each one shows exactly what that role needs, nothing else.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Assignments &amp; grading</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Teachers post assignments with due dates, students submit their work, and grading happens right in the same workflow.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Course material library</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Teachers upload notes and resources once; students can find and download everything for their class in one place.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Real-time messaging</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Built-in chat keeps teacher-student conversations about coursework in one thread instead of scattered across apps.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Your school's data, isolated</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Every school runs in its own separate workspace &mdash; there's no shared database where another school's records could ever mix with yours.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-200 border border-gray-100">
+          <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Simple, transparent billing</h3>
+          <p class="mt-2 text-gray-600 text-sm">
+            Pick a plan that fits your school's size, pay per period, and manage your subscription right from your dashboard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Up and running in three steps</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-xl font-bold flex items-center justify-center shadow-md">1</div>
+          <h3 class="mt-5 text-lg font-semibold text-gray-900">Register your school</h3>
+          <p class="mt-2 text-gray-600 text-sm">Create your school's account and choose a subscription plan that fits.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-xl font-bold flex items-center justify-center shadow-md">2</div>
+          <h3 class="mt-5 text-lg font-semibold text-gray-900">Add admins, teachers &amp; students</h3>
+          <p class="mt-2 text-gray-600 text-sm">Set up school admins, who then bring in teachers and enroll students by class.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-xl font-bold flex items-center justify-center shadow-md">3</div>
+          <h3 class="mt-5 text-lg font-semibold text-gray-900">Teach, assign, and track progress</h3>
+          <p class="mt-2 text-gray-600 text-sm">Share materials, post assignments, grade submissions, and message students &mdash; all in one workspace.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section *ngIf="plans && plans.length > 0" class="bg-gray-50 py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Plans for schools of every size</h2>
+        <p class="mt-4 text-gray-600">Straightforward pricing, no hidden fees.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div *ngFor="let plan of plans"
+          class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-200 border border-gray-200 hover:border-indigo-400 overflow-hidden">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-6">
+            <h3 class="text-xl font-bold text-white text-center">{{plan.planName}}</h3>
+          </div>
+          <div class="p-6 text-center">
+            <span class="text-3xl font-bold text-gray-900">&#8377;{{plan.amount}}</span>
+            <p class="mt-1 text-sm text-gray-600">per {{plan.durationValue}} {{plan.durationUnit}}</p>
           </div>
         </div>
       </div>
-    </ng-container>
-  </div>
+      <div class="text-center mt-10">
+        <a routerLink="/tenant/services" class="inline-block px-6 py-2.5 rounded-lg border border-indigo-600 text-indigo-600 font-semibold hover:bg-indigo-50 transition-all duration-200">
+          Compare all plans
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-gradient-to-br from-indigo-700 via-indigo-600 to-purple-600 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white">Ready to bring your school onto one platform?</h2>
+      <p class="mt-4 text-indigo-100">Set up your school's workspace in minutes.</p>
+      <a routerLink="/tenant/signup"
+        class="mt-8 inline-block px-8 py-3 rounded-lg bg-white text-indigo-700 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+        Register Your School
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-10 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold">E</span>
+        </div>
+        <span class="text-white font-semibold">EduNexConnect</span>
+      </div>
+      <div class="flex items-center space-x-6 text-sm">
+        <a routerLink="/tenant/services" class="hover:text-white transition-colors duration-200">Plans</a>
+        <a routerLink="/tenant/signup" class="hover:text-white transition-colors duration-200">Sign up</a>
+        <a routerLink="/tenant/signin" class="hover:text-white transition-colors duration-200">Login</a>
+      </div>
+      <p class="text-sm">&copy; {{currentYear}} EduNexConnect. All rights reserved.</p>
+    </div>
+  </footer>
 </div>
-  
