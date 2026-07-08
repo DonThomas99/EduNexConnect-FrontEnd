@@ -1,4 +1,3 @@
-import { Value } from "@stream-io/video-client/dist/src/gen/google/protobuf/struct";
 import { IMatAsmnt } from "./material";
 
 export interface IAssignments{
