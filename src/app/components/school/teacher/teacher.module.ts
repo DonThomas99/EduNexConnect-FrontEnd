@@ -21,7 +21,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { ZoomCallComponent } from './zoom-call/zoom-call.component';
 import { AssignmentValuationComponent } from './assignment-valuation/assignment-valuation.component';
 import { AssignmentViewComponent } from './assignment-view/assignment-view.component';
 import { MaterialViewComponent } from './material-view/material-view.component';
@@ -42,7 +41,6 @@ import { MaterialViewComponent } from './material-view/material-view.component';
     TeacherClassworkComponent,
     TeacherPeopleComponent,
     TeacherGradesComponent,
-    ZoomCallComponent,
     AssignmentValuationComponent,
     AssignmentViewComponent,
     MaterialViewComponent

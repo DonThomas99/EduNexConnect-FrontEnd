@@ -84,18 +84,18 @@ export class TeachersComponent implements OnInit {
       }
     })
 
-    this.classNsubjects.map(subject =>{
-      
+    this.classNsubjects.map(_subject =>{
+
     })
 
 this.swapId(this.teacherData,this.classNsubjects)
   }
-swapId(teacher:IteacherData[],subjectsData:classSubjects[]){
+swapId(_teacher:IteacherData[],_subjectsData:classSubjects[]){
 
 }
 
 viewDetails(index: number) {
- this.currentTeacherDetails = this.teacherData[index];
+ this.currentTeacherDetails = this.teacherData[index] ?? null;
  // Assuming my_modal_2 is the ID of your modal element
  const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
  if (modal) {
@@ -151,7 +151,7 @@ viewDetails(index: number) {
     }
   }
 
-  sendId(id:string) {}
+  sendId(_id:string) {}
 
   hideIt() {
     this.hideRest=!this.hideRest
@@ -301,7 +301,7 @@ dialogRef.afterClosed().subscribe(result =>{
 
  deleteSubject(subjectId:string,teacherId:string,classNum:string){
 this.schoolAdminService.removeSubject(this.tenantId,classNum,subjectId,teacherId).subscribe({
-next:(res:Res)=>{
+next:(_res:Res)=>{
 
 }
 })

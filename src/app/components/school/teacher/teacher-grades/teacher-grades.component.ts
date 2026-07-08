@@ -82,13 +82,16 @@ export class TeacherGradesComponent implements OnInit {
  processSubmissions() {
   
     this.submissions.forEach(submission => {
-      if (!this.gradesByAssignment[submission.assignmentId]) {
-        this.gradesByAssignment[submission.assignmentId] = {};
-      }
-      this.gradesByAssignment[submission.assignmentId][submission.studentEmail] = submission.grade;
+      const existing = this.gradesByAssignment[submission.assignmentId] ?? {};
+      existing[submission.studentEmail] = submission.grade;
+      this.gradesByAssignment[submission.assignmentId] = existing;
     });
     console.log(this.gradesByAssignment);
-    
+
+ }
+
+ getGrade(assignmentId: string, studentEmail: string): string | undefined {
+    return this.gradesByAssignment[assignmentId]?.[studentEmail];
  }
 
  fetchAssignments(page: number) {

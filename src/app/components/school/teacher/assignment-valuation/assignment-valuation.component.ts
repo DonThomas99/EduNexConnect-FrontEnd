@@ -110,9 +110,9 @@ this.generateChatHTML()
 
       }
     },
-      error:(error)=>{
+      error:(_error)=>{
           this.hasError = true
-      }      
+      }
   })
   
   console.log('hee',email);

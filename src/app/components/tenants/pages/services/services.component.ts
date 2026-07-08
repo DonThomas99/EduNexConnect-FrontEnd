@@ -25,7 +25,7 @@ export class ServicesComponent implements OnInit {
           this.planStatus = true
         }
       },
-      error:(err)=>{
+      error:(_err)=>{
         console.log('Error Fetching Plans');
       }
     })

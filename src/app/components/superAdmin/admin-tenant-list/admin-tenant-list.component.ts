@@ -48,10 +48,11 @@ this.superAdminService.TenantList().subscribe({
           next: () => {
             // Update the status locally
             const tenantIdx = this.tenantList.findIndex((t) => t._id === tenant._id);
-            if (tenantIdx !== -1) {
+            const current = this.tenantList[tenantIdx];
+            if (tenantIdx !== -1 && current) {
               this.tenantList = [
                 ...this.tenantList.slice(0, tenantIdx),
-                { ...this.tenantList[tenantIdx], isBlocked: !this.tenantList[tenantIdx].isBlocked },
+                { ...current, isBlocked: !current.isBlocked },
                 ...this.tenantList.slice(tenantIdx + 1)
               ];
             }

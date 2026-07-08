@@ -96,7 +96,7 @@ hasError:boolean = false
       }
     }
       },
-      error:(error)=>{
+      error:(_error)=>{
           this.hasError = true
       }
     })

@@ -128,7 +128,7 @@ if(!this.form.invalid && !this.showOtpField){
   console.log(tenant.otp);
   const otp = tenant.otp
 this.tenantService.verifyOtp(otp,tenant.email).subscribe({
-  next:(res:any)=>{
+  next:(_res:any)=>{
     localStorage.removeItem('tenantAuthToken')
     console.log("idhisd");
     

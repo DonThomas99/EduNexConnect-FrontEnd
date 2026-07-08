@@ -19,7 +19,7 @@
                <ng-container *ngFor="let assignment of AssignmentArray">
                  <td>
                     
-                   {{gradesByAssignment[assignment._id] && gradesByAssignment[assignment._id][student.email]}}
+                   {{getGrade(assignment._id, student.email)}}
                  </td>
                </ng-container>
              </tr>
