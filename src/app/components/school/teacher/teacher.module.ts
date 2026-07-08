@@ -18,7 +18,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {CalendarModule} from 'primeng/calendar'
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -55,7 +54,6 @@ import { MaterialViewComponent } from './material-view/material-view.component';
     // BrowserModule,
     MatIconModule,
     FormsModule,
-    CalendarModule,
     // MatMomentDateModule,
     MatNativeDateModule,
   MatDatepickerModule,

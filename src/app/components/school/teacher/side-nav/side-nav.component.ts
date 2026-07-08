@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { IteacherData } from 'src/app/Models/teacher';
 import { selectClassNum, selectSubjectId, selectTeacherData, selectTenantId } from 'src/app/states/school/school.selector';
 import Swal from 'sweetalert2';
-import {Sidenav,initTE} from 'tw-elements';
 import { TeacherServiceService } from '../../services/teacher-service.service';
 import { pipe } from 'rxjs';
 import { Res } from 'src/app/Models/common';

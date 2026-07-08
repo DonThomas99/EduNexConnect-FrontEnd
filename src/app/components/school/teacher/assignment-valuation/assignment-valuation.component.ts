@@ -15,7 +15,6 @@ import { ToastrService } from 'ngx-toastr';
 import { ChatServiceService } from '../../services/chat-service.service';
 import { message } from 'src/app/Models/assignments';
 import { generateAndScrollChatHTML } from 'src/app/shared/generateChatHTML';
-// import { Message } from 'primeng/api';
 
 
 @Component({
